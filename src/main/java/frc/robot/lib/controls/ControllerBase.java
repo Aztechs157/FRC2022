@@ -38,7 +38,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * Get a proper WPI {@link Button} from the currently selected layout. This
      * allows you to setup commands to run.
      *
-     * @param buttonKey Which button to retreave
+     * @param buttonKey Which button to retrieve
      * @return A WPI {@link Button} representing the input
      */
     public Button button(final ButtonKey buttonKey) {
@@ -48,7 +48,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     /**
      * Get a button from the currently selected layout
      *
-     * @param buttonKey Which button to retreave
+     * @param buttonKey Which button to retrieve
      * @return The boolean representing the input
      */
     public boolean getButton(final ButtonKey buttonKey) {
@@ -64,7 +64,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     /**
      * Get a axis from the currently selected layout
      *
-     * @param axisKey Which axis to retreave
+     * @param axisKey Which axis to retrieve
      * @return The number representing the input
      */
     public double getAxis(final AxisKey axisKey) {
@@ -78,7 +78,8 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     }
 
     /**
-     * Convience class to avoid having to restate the `ButtonKey` and `AxisKey` type
+     * Convenience class to avoid having to restate the `ButtonKey` and `AxisKey`
+     * type
      * parameters for `LayoutBase`, as we can just use the ones passed to
      * `ControllerBase`
      *

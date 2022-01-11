@@ -39,10 +39,10 @@ public class LayoutBase<ButtonKey, AxisKey> {
     }
 
     /**
-     * Retreave the ButtonInput accosiated with a key
+     * Retrieve the ButtonInput associated with a key
      *
      * @param buttonKey They key a input was assigned with
-     * @return The accosiated input
+     * @return The associated input
      */
     public ButtonInput getButton(final ButtonKey buttonKey) {
         return buttons.get(buttonKey);
@@ -62,10 +62,10 @@ public class LayoutBase<ButtonKey, AxisKey> {
     }
 
     /**
-     * Retreave the AxisInput accosiated with a key
+     * Retrieve the AxisInput associated with a key
      *
      * @param axisKey They key a input was assigned with
-     * @return The accosiated input
+     * @return The associated input
      */
     public AxisInput getAxis(final AxisKey axisKey) {
         return axes.get(axisKey);
