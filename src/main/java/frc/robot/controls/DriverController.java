@@ -1,7 +1,6 @@
 package frc.robot.controls;
 
 import frc.robot.lib.controls.ControllerBase;
-import frc.robot.lib.controls.LayoutBase;
 import frc.robot.controls.models.LogitechModel;
 import frc.robot.controls.DriverController.ButtonKey;
 import frc.robot.controls.DriverController.AxisKey;
@@ -20,11 +19,5 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
     }
 
     public static enum AxisKey {
-    }
-
-    private static class Layout extends LayoutBase<ButtonKey, AxisKey> {
-        public Layout(final String name) {
-            super(name);
-        }
     }
 }

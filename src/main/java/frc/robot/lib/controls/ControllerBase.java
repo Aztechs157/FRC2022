@@ -76,4 +76,29 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
 
         return layout.getAxis(axisKey).get();
     }
+
+    /**
+     * Convience class to avoid having to restate the `ButtonKey` and `AxisKey` type
+     * parameters for `LayoutBase`, as we can just use the ones passed to
+     * `ControllerBase`
+     *
+     * Example:
+     *
+     * <pre>
+     *
+     * class Controller extends ControllerBase<ButtonKey, AxisKey> {
+     *     // Before
+     *     var layout = new LayoutBase<ButtonKey, AxisKey>("Layout");
+     *
+     *     // After
+     *     var layout = new Layout("Layout");
+     * }
+     *
+     * </pre>
+     */
+    public class Layout extends LayoutBase<ButtonKey, AxisKey> {
+        public Layout(final String name) {
+            super(name);
+        }
+    }
 }
