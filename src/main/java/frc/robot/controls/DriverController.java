@@ -2,17 +2,21 @@ package frc.robot.controls;
 
 import frc.robot.lib.controls.ControllerBase;
 import frc.robot.lib.controls.LayoutBase;
-import frc.robot.controls.models.FlightModel;
 import frc.robot.controls.models.LogitechModel;
-import frc.robot.controls.Controller.ButtonKey;
-import frc.robot.controls.Controller.AxisKey;
+import frc.robot.controls.DriverController.ButtonKey;
+import frc.robot.controls.DriverController.AxisKey;
 
-public class Controller extends ControllerBase<ButtonKey, AxisKey> {
+public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
 
-    public Controller() {
+    public DriverController() {
+        var defaultLayout = new Layout("Default");
+        var logitech = new LogitechModel(0);
+
+        defaultLayout.assign(ButtonKey.Hello, logitech.a);
     }
 
     public static enum ButtonKey {
+        Hello
     }
 
     public static enum AxisKey {
