@@ -52,4 +52,36 @@ public interface AxisInput {
             return value;
         };
     }
+
+    /**
+     * Create a artificial axis that will emit `value` either positive, negative, or
+     * zero depending on two respective button inputs. When neither or both buttons
+     * are active, the axis has a value of zero.
+     *
+     * @param value          The value to emit.
+     * @param positiveButton When this button is active, the axis becomes the value
+     *                       as is.
+     * @param negativeButton When this button is active, the axis becomes the value
+     *                       inverted.
+     * @return The value, made to be positive, negative, or zero.
+     */
+    public static AxisInput fromButtons(
+            final double value,
+            final ButtonInput positiveButton,
+            final ButtonInput negativeButton) {
+        return () -> {
+            var positivePressed = positiveButton.get();
+            var negativePressed = negativeButton.get();
+
+            if (positivePressed && negativePressed) {
+                return 0.0;
+            } else if (positivePressed) {
+                return value;
+            } else if (negativePressed) {
+                return -value;
+            } else {
+                return 0.0;
+            }
+        };
+    }
 }
