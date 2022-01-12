@@ -9,6 +9,8 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         var defaultLayout = new Layout("Default");
         var logitech = new LogitechModel(0);
 
-        defaultLayout.assign(ButtonKey.Hello, logitech.a);
+        defaultLayout.assign(AxisKey.DriveSpeedX, logitech.leftStickX);
+        defaultLayout.assign(AxisKey.DriveSpeedY, logitech.leftStickY);
+        defaultLayout.assign(AxisKey.DriveRotation, logitech.rightStickX);
     }
 }

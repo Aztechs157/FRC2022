@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
+import frc.robot.drive.DriveSubsystem;
+import frc.robot.drive.TeleopDrive;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -23,6 +25,8 @@ import frc.robot.controls.OperatorController;
 public class RobotContainer {
     private final DriverController driverController = new DriverController();
     private final OperatorController operatorController = new OperatorController();
+
+    private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -41,6 +45,8 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
+
         driverController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
