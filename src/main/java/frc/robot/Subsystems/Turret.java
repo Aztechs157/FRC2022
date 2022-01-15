@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TurretConstants;
 
 public class Turret extends SubsystemBase {
@@ -19,9 +20,9 @@ public class Turret extends SubsystemBase {
 
     /** Creates a new Turret. */
     public Turret() {
-        turretMotor = new CANSparkMax(TurretConstants.TURRETMOTOR_ID, MotorType.kBrushless);
-        positionSensor = new AnalogInput(TurretConstants.POSITIONSENSOR_ID);
-        aimerServo = new Servo(TurretConstants.AIMERSERVO_ID);
+        turretMotor = new CANSparkMax(TurretConstants.TURRET_MOTOR_ID, MotorType.kBrushless);
+        positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
+        aimerServo = new Servo(TurretConstants.AIMER_SERVO_ID);
         aimerServo.setBounds(2.0, 1.8, 1.5, 1.2, 1);
     }
 
@@ -34,14 +35,14 @@ public class Turret extends SubsystemBase {
      * This method turns the turret counterclockwise
      */
     public void turretLeft() {
-
+        turretTurn(-TurretConstants.TURRET_SPEED);
     }
 
     /**
      * This method turns the turret clockwise
      */
     public void turretRight() {
-
+        turretTurn(TurretConstants.TURRET_SPEED);
     }
 
     /**
@@ -52,7 +53,13 @@ public class Turret extends SubsystemBase {
      *              counterclockwise, 1 is clockwise.
      */
     public void turretTurn(double speed) {
-
+        if (speed > 0 && readPositionSensor() > TurretConstants.CLOCKWISE_BOUNDARY) {
+            turretMotor.set(0);
+        } else if (speed < 0 && readPositionSensor() < TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
+            turretMotor.set(0);
+        } else {
+            turretMotor.set(speed);
+        }
     }
 
     /**
@@ -60,8 +67,8 @@ public class Turret extends SubsystemBase {
      *
      * @return the position of the turret according to the sensor.
      */
-    public double readPositionSensor() {
-        return 0;
+    public int readPositionSensor() {
+        return positionSensor.getValue();
     }
 
     /**
@@ -70,6 +77,6 @@ public class Turret extends SubsystemBase {
      * @param position to set the aimer to. Must be between -1 and 1.
      */
     public void setAimerPosition(double position) {
-
+        aimerServo.setSpeed(position);
     }
 }

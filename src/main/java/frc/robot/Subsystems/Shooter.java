@@ -16,8 +16,8 @@ public class Shooter extends SubsystemBase {
 
     /** Creates a new Shooter. */
     public Shooter() {
-        ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTERMOTOR1_ID, MotorType.kBrushless);
-        ShootMotor2 = new CANSparkMax(ShooterConstants.SHOOTERMOTOR2_ID, MotorType.kBrushless);
+        ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
+        ShootMotor2 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID, MotorType.kBrushless);
         ShootMotor2.setInverted(true);
         ShootMotor2.follow(ShootMotor1);
     }
@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase {
      * reading.
      */
     public double measureVelocity() {
-        return 0.0;
+        return ShootMotor1.getEncoder().getVelocity();
     }
 
     /**
@@ -42,7 +42,7 @@ public class Shooter extends SubsystemBase {
      *              between -1 and 1.
      */
     public void setPower(double power) {
-
+        ShootMotor1.set(power);
     }
 
     /**
