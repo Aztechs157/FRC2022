@@ -9,8 +9,6 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
 
     public DriverController() {
         var defaultLayout = new Layout("Default");
-        addDefault(defaultLayout);
-
         var logitech = new LogitechModel(0);
 
         defaultLayout.assign(AxisKey.DriveSpeedX, logitech.leftStickX.scaled(0.3));
@@ -20,8 +18,6 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.Hello, logitech.a);
 
         var flightLayout = new Layout("Flight Stick");
-        add(flightLayout);
-
         var flight = new FlightModel(1);
 
         flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX);

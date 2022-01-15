@@ -15,26 +15,6 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     }
 
     /**
-     * Add a Layout to this Controller. This particular method sets the Layout to
-     * the Controller's default.
-     *
-     * @param layout The Layout to add
-     */
-    public void addDefault(final LayoutBase<ButtonKey, AxisKey> layout) {
-        layouts.setDefaultOption(layout.getName(), layout);
-    }
-
-    /**
-     * Add a Layout to this Controller. This allows the Controller to display and
-     * swap to it using Shuffleboard.
-     *
-     * @param layout The Layout to add
-     */
-    public void add(final LayoutBase<ButtonKey, AxisKey> layout) {
-        layouts.addOption(layout.getName(), layout);
-    }
-
-    /**
      * Get a proper WPI {@link Button} from the currently selected layout. This
      * allows you to setup commands to run.
      *
@@ -82,10 +62,34 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     }
 
     /**
+     * Add a Layout to this Controller. This particular method sets the Layout to
+     * the Controller's default.
+     *
+     * @param layout The Layout to add
+     */
+    public void addDefault(final LayoutBase<ButtonKey, AxisKey> layout) {
+        layouts.setDefaultOption(layout.getName(), layout);
+        hasDefault = true;
+    }
+
+    /**
+     * Add a Layout to this Controller. This allows the Controller to display and
+     * swap to it using Shuffleboard.
+     *
+     * @param layout The Layout to add
+     */
+    public void add(final LayoutBase<ButtonKey, AxisKey> layout) {
+        layouts.addOption(layout.getName(), layout);
+    }
+
+    private boolean hasDefault = false;
+
+    /**
      * Convenience class to avoid having to restate the `ButtonKey` and `AxisKey`
-     * type
-     * parameters for `LayoutBase`, as we can just use the ones passed to
-     * `ControllerBase`
+     * type parameters for `LayoutBase`, as we can just use the ones passed to
+     * `ControllerBase`. Additionally, this will automatically call
+     * {@link ControllerBase#add(LayoutBase)} or
+     * {@link ControllerBase#addDefault(LayoutBase)}.
      *
      * Example:
      *
@@ -94,6 +98,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * class Controller extends ControllerBase<ButtonKey, AxisKey> {
      *     // Before
      *     var layout = new LayoutBase<ButtonKey, AxisKey>("Layout");
+     *     addDefault(layout);
      *
      *     // After
      *     var layout = new Layout("Layout");
@@ -104,6 +109,12 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     public class Layout extends LayoutBase<ButtonKey, AxisKey> {
         public Layout(final String name) {
             super(name);
+
+            if (hasDefault) {
+                add(this);
+            } else {
+                addDefault(this);
+            }
         }
     }
 }
