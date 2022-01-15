@@ -45,7 +45,13 @@ public class LayoutBase<ButtonKey, AxisKey> {
      * @return The associated input
      */
     public ButtonInput getButton(final ButtonKey buttonKey) {
-        return buttons.get(buttonKey);
+        var button = buttons.get(buttonKey);
+
+        if (button == null) {
+            throw new InputNotAssignedException(name, buttonKey.toString());
+        }
+
+        return button;
     }
 
     private final Map<AxisKey, AxisInput> axes = new HashMap<>();
@@ -68,6 +74,18 @@ public class LayoutBase<ButtonKey, AxisKey> {
      * @return The associated input
      */
     public AxisInput getAxis(final AxisKey axisKey) {
-        return axes.get(axisKey);
+        var axis = axes.get(axisKey);
+
+        if (axis == null) {
+            throw new InputNotAssignedException(name, axisKey.toString());
+        }
+
+        return axis;
+    }
+
+    public static class InputNotAssignedException extends RuntimeException {
+        private InputNotAssignedException(final String layoutName, final String inputName) {
+            super("The input " + inputName + " has not been assigned for layout " + layoutName);
+        }
     }
 }

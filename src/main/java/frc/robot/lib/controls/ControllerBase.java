@@ -52,13 +52,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @return The boolean representing the input
      */
     public boolean getButton(final ButtonKey buttonKey) {
-        var layout = layouts.getSelected();
-
-        if (layout == null) {
-            return false;
-        }
-
-        return layout.getButton(buttonKey).get();
+        return getSelectedLayout().getButton(buttonKey).get();
     }
 
     /**
@@ -68,13 +62,23 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @return The number representing the input
      */
     public double getAxis(final AxisKey axisKey) {
+        return getSelectedLayout().getAxis(axisKey).get();
+    }
+
+    private LayoutBase<ButtonKey, AxisKey> getSelectedLayout() {
         var layout = layouts.getSelected();
 
         if (layout == null) {
-            return 0;
+            throw new NoLayoutsAddedException();
         }
 
-        return layout.getAxis(axisKey).get();
+        return layout;
+    }
+
+    public static class NoLayoutsAddedException extends RuntimeException {
+        private NoLayoutsAddedException() {
+            super("No layouts have been added to the controller");
+        }
     }
 
     /**
