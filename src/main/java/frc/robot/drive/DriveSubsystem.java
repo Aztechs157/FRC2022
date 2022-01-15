@@ -24,6 +24,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     /** Creates a new Drive. */
     public DriveSubsystem() {
+        frontLeftMotor.setInverted(true);
+        backLeftMotor.setInverted(true);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {
