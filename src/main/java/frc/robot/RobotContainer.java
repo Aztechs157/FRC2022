@@ -52,9 +52,6 @@ public class RobotContainer {
 
         operatorController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
-
-        operatorController.button(ButtonKey.HelloYourDadsGone)
-                .whenPressed(() -> System.out.println("Hello operator, your dad's gone"));
     }
 
     /**
