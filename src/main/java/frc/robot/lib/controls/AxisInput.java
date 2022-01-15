@@ -26,6 +26,10 @@ public interface AxisInput {
         return () -> -get();
     }
 
+    public default AxisInput scaled(final double scale) {
+        return () -> get() * scale;
+    }
+
     /**
      *
      * @param minimum
