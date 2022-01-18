@@ -2,7 +2,7 @@ package frc.robot.controls;
 
 import frc.robot.lib.controls.ControllerBase;
 import frc.robot.controls.models.LogitechModel;
-import frc.robot.controls.models.LogitechX3DModel;
+import frc.robot.controls.models.LogitechExtreme3D;
 
 public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
 
@@ -22,10 +22,10 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.Hello, logitech.a);
 
         final var flightLayout = new Layout("Flight Stick");
-        final var flight = new LogitechX3DModel(1);
+        final var flight = new LogitechExtreme3D(1);
 
         flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
         flightLayout.assign(AxisKey.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
-        flightLayout.assign(AxisKey.DriveRotation, flight.stickZ.scaled(driveInputScale));
+        flightLayout.assign(AxisKey.DriveRotation, flight.stickRotate.scaled(driveInputScale));
     }
 }
