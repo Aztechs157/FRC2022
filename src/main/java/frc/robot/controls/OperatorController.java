@@ -1,7 +1,7 @@
 package frc.robot.controls;
 
 import frc.robot.lib.controls.ControllerBase;
-import frc.robot.controls.models.LogitechGamepadF310;
+import frc.robot.lib.controls.models.LogitechGamepadF310;
 
 public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
 

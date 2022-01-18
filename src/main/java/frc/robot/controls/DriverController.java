@@ -1,8 +1,8 @@
 package frc.robot.controls;
 
 import frc.robot.lib.controls.ControllerBase;
-import frc.robot.controls.models.LogitechGamepadF310;
-import frc.robot.controls.models.LogitechExtreme3D;
+import frc.robot.lib.controls.models.LogitechExtreme3D;
+import frc.robot.lib.controls.models.LogitechGamepadF310;
 
 public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
 

@@ -1,4 +1,4 @@
-package frc.robot.controls.models;
+package frc.robot.lib.controls.models;
 
 import frc.robot.lib.controls.ButtonInput;
 import frc.robot.lib.controls.ModelBase;
