@@ -1,7 +1,7 @@
 package frc.robot.controls;
 
 import frc.robot.lib.controls.ControllerBase;
-import frc.robot.controls.models.LogitechModel;
+import frc.robot.controls.models.LogitechGamepadF310;
 import frc.robot.controls.models.LogitechExtreme3D;
 
 public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
@@ -10,7 +10,7 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         final var driveInputScale = 0.3;
 
         final var defaultLayout = new Layout("Default");
-        final var logitech = new LogitechModel(0);
+        final var logitech = new LogitechGamepadF310(0);
 
         defaultLayout.assign(AxisKey.DriveSpeedX,
                 logitech.leftStickX.scaled(driveInputScale));
