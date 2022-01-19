@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.Subsystems;
+package frc.robot.subsystems.intake;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
@@ -22,20 +22,20 @@ public class Intake extends SubsystemBase {
     }
 
     private ColorSensorV3 entryColor;
-    private CANSparkMax intConvMotor;
+    private CANSparkMax intakeConveyorMotor;
     private DoubleSolenoid intakeSolenoid;
     private final ColorMatch colorMatcher;
 
     /** Creates a new Intake. */
     public Intake() {
         colorMatcher = new ColorMatch();
-        entryColor = new ColorSensorV3(IntakeConstants.COLORSENSOR_ID);
-        intConvMotor = new CANSparkMax(IntakeConstants.INTAKE_CONVERYER_MOTOR_ID, MotorType.kBrushless);
-        intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.SOLENOIDFORWARD_ID,
-                IntakeConstants.SOLENOIDREVERSE_ID);
-        colorMatcher.addColorMatch(IntakeConstants.REDTARGET);
-        colorMatcher.addColorMatch(IntakeConstants.BLUETARGET);
-        colorMatcher.setConfidenceThreshold(IntakeConstants.COLORCONFIDENCE);
+        entryColor = new ColorSensorV3(IntakeConstants.COLOR_SENSOR_ID);
+        intakeConveyorMotor = new CANSparkMax(IntakeConstants.INTAKE_CONVEYOR_MOTOR_ID, MotorType.kBrushless);
+        intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.SOLENOID_FORWARD_ID,
+                IntakeConstants.SOLENOID_REVERSE_ID);
+        colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
+        colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
+        colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
     }
 
     @Override
@@ -61,14 +61,14 @@ public class Intake extends SubsystemBase {
      * This method rolls the rollers in the correct direction to intake a ball.
      */
     public void rollerFeed() {
-        intConvMotor.set(IntakeConstants.FEED_SPEED);
+        intakeConveyorMotor.set(IntakeConstants.FEED_SPEED);
     }
 
     /**
      * This method rolls the rollers in the correct direction to expel a ball.
      */
     public void rollerEject() {
-        intConvMotor.set(IntakeConstants.EJECT_SPEED);
+        intakeConveyorMotor.set(IntakeConstants.EJECT_SPEED);
     }
 
     /**
@@ -81,9 +81,9 @@ public class Intake extends SubsystemBase {
         final var detectedColor = entryColor.getColor();
         final var match = colorMatcher.matchClosestColor(detectedColor);
 
-        if (match.color == IntakeConstants.REDTARGET) {
+        if (match.color == IntakeConstants.RED_TARGET) {
             return colorResult.RED;
-        } else if (match.color == IntakeConstants.BLUETARGET) {
+        } else if (match.color == IntakeConstants.BLUE_TARGET) {
             return colorResult.BLUE;
         } else {
             return colorResult.NONE;

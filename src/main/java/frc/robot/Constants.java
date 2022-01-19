@@ -48,7 +48,8 @@ public final class Constants {
         public static final Color RED_TARGET = new Color(0, 0, 0);
         // The blue ball target color.
         public static final Color BLUE_TARGET = new Color(0, 0, 0);
-        // The minimum confidence to be read as the right color.
+        // The minimum confidence to be read as the right color. How much leeway the
+        // color sensor can have
         public static final double COLOR_CONFIDENCE = 0.9;
     }
 
@@ -84,8 +85,8 @@ public final class Constants {
         // The Digital Input ID for the Kicker Sensor.
         public static final int KICKER_SENSOR_ID = 0;
         // The speed at which the Kicker feeds a ball into the Shooter.
-        public static final double FEED_SPEED = 0;
+        public static final double FEED_SPEED = 0.2;
         // The speed at which the Kicker ejects a ball back to the Intake.
-        public static final double EJECT_SPEED = 0;
+        public static final double EJECT_SPEED = 0.1;
     }
 }

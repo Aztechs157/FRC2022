@@ -42,6 +42,7 @@
         "deadzone",
         "teleop",
         "teleoperated",
+        "uncomplete",
         "wpilib"
     ]
 }
