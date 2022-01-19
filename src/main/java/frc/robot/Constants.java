@@ -17,4 +17,10 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final class TurretConstants {
+        public static final int POTENTIOMETER_ID = 0;
+        public static final int TURRET_MOTOR_ID = 9;
+        public static final double TURRET_MIN = 1.3;
+        public static final double TURRET_MAX = 3.5;
+    }
 }

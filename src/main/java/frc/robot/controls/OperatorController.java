@@ -7,8 +7,9 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
 
     public OperatorController() {
         var defaultLayout = new Layout("Default");
-        var logitech = new LogitechModel(0);
+        var logitech = new LogitechModel(1);
 
         defaultLayout.assign(ButtonKey.Hello, logitech.a);
+        defaultLayout.assign(AxisKey.TurnTurret, logitech.rightStickX);
     }
 }
