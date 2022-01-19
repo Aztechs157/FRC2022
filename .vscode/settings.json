@@ -40,8 +40,10 @@
     "files.eol": "\n",
     "cSpell.words": [
         "deadzone",
+        "endregion",
         "teleop",
         "teleoperated",
+        "unsign",
         "wpilib"
     ]
 }
