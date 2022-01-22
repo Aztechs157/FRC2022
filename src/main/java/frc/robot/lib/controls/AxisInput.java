@@ -1,5 +1,6 @@
 package frc.robot.lib.controls;
 
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 
 /**
@@ -28,6 +29,10 @@ public interface AxisInput {
 
     public default AxisInput scaled(final double scale) {
         return () -> get() * scale;
+    }
+
+    public default AxisInput scaled(final DoubleSupplier scale) {
+        return () -> get() * scale.getAsDouble();
     }
 
     /**
