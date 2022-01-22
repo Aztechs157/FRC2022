@@ -3,7 +3,10 @@ package frc.robot.lib.controls;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LayoutBase<ButtonKey, AxisKey> {
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
+
+public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
 
     private final String name;
 
@@ -86,6 +89,26 @@ public class LayoutBase<ButtonKey, AxisKey> {
     public static class InputNotAssignedException extends RuntimeException {
         private InputNotAssignedException(final String layoutName, final String inputName) {
             super("The input " + inputName + " has not been assigned for layout " + layoutName);
+        }
+    }
+
+    @Override
+    public void initSendable(final SendableBuilder builder) {
+
+        for (var entry : buttons.entrySet()) {
+            builder.addBooleanProperty(
+                    entry.getKey().toString(),
+                    entry.getValue()::get,
+                    (_value) -> {
+                    });
+        }
+
+        for (var entry : axes.entrySet()) {
+            builder.addDoubleProperty(
+                    entry.getKey().toString(),
+                    entry.getValue()::get,
+                    (_value) -> {
+                    });
         }
     }
 }
