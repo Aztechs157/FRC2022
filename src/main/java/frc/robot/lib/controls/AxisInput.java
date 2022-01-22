@@ -1,6 +1,5 @@
 package frc.robot.lib.controls;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.MathUtil;
 
@@ -54,7 +53,7 @@ public interface AxisInput extends DoubleSupplier {
      * @param threshold
      * @return
      */
-    public default AxisInput deadzone(final double threshold) {
+    public default AxisInput simpleDeadzone(final double threshold) {
         return () -> {
             final var value = getAsDouble();
 
