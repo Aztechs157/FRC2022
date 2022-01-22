@@ -9,14 +9,17 @@ import edu.wpi.first.math.MathUtil;
  * {@link AxisInput}.
  */
 @FunctionalInterface
-public interface AxisInput {
+public interface AxisInput extends DoubleSupplier {
 
     /**
-     * Get an input from this {@link AxisInput}
+     * Create a {@link AxisInput} using a {@link DoubleSupplier}
      *
-     * @return The number representing the input
+     * @param supplier
+     * @return
      */
-    public double get();
+    public static AxisInput wrap(final DoubleSupplier supplier) {
+        return supplier::getAsDouble;
+    }
 
     /**
      * Inverts the input by negating the number's sign
@@ -24,15 +27,15 @@ public interface AxisInput {
      * @return A new inverted input
      */
     public default AxisInput inverted() {
-        return () -> -get();
+        return () -> -getAsDouble();
     }
 
     public default AxisInput scaled(final double scale) {
-        return () -> get() * scale;
+        return () -> getAsDouble() * scale;
     }
 
     public default AxisInput scaled(final DoubleSupplier scale) {
-        return () -> get() * scale.getAsDouble();
+        return () -> getAsDouble() * scale.getAsDouble();
     }
 
     /**
@@ -42,7 +45,7 @@ public interface AxisInput {
      * @return
      */
     public default AxisInput clamp(final double minimum, final double maximum) {
-        return () -> MathUtil.clamp(get(), minimum, minimum);
+        return () -> MathUtil.clamp(getAsDouble(), minimum, minimum);
     }
 
     /**
@@ -52,7 +55,7 @@ public interface AxisInput {
      */
     public default AxisInput deadzone(final double threshold) {
         return () -> {
-            final var value = get();
+            final var value = getAsDouble();
 
             if (Math.abs(value) < threshold) {
                 return 0;
@@ -79,8 +82,8 @@ public interface AxisInput {
             final ButtonInput positiveButton,
             final ButtonInput negativeButton) {
         return () -> {
-            var positivePressed = positiveButton.get();
-            var negativePressed = negativeButton.get();
+            var positivePressed = positiveButton.getAsBoolean();
+            var negativePressed = negativeButton.getAsBoolean();
 
             if (positivePressed && negativePressed) {
                 return 0.0;

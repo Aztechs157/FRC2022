@@ -98,7 +98,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
         for (var entry : buttons.entrySet()) {
             builder.addBooleanProperty(
                     entry.getKey().toString(),
-                    entry.getValue()::get,
+                    entry.getValue()::getAsBoolean,
                     (_value) -> {
                     });
         }
@@ -106,7 +106,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
         for (var entry : axes.entrySet()) {
             builder.addDoubleProperty(
                     entry.getKey().toString(),
-                    entry.getValue()::get,
+                    entry.getValue()::getAsDouble,
                     (_value) -> {
                     });
         }

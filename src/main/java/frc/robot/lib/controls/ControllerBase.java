@@ -32,7 +32,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @return The boolean representing the input
      */
     public boolean getButton(final ButtonKey buttonKey) {
-        return getSelectedLayout().getButton(buttonKey).get();
+        return getSelectedLayout().getButton(buttonKey).getAsBoolean();
     }
 
     /**
@@ -42,7 +42,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @return The number representing the input
      */
     public double getAxis(final AxisKey axisKey) {
-        return getSelectedLayout().getAxis(axisKey).get();
+        return getSelectedLayout().getAxis(axisKey).getAsDouble();
     }
 
     private LayoutBase<ButtonKey, AxisKey> getSelectedLayout() {
