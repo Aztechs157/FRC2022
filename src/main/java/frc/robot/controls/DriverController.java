@@ -32,7 +32,7 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
 
         flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
         flightLayout.assign(AxisKey.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
-        flightLayout.assign(AxisKey.DriveRotation, flight.stickRotate.deadzone(0.15).scaled(driveInputScale));
+        flightLayout.assign(AxisKey.DriveRotation, flight.stickRotate.simpleDeadzone(0.15).scaled(driveInputScale));
 
         flightLayout.assign(ButtonKey.Hello, flight.thumbButton);
 
