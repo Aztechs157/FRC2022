@@ -41,6 +41,13 @@ public class Kicker extends SubsystemBase {
     }
 
     /**
+     * This method Stops the Kicker System.
+     */
+    public void KickerStop() {
+        kickerMotor.set(0);
+    }
+
+    /**
      * This method senses the ball, currently uncomplete and return type may change.
      *
      * @return

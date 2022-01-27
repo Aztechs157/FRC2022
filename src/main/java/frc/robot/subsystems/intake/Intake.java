@@ -30,7 +30,7 @@ public class Intake extends SubsystemBase {
     public Intake() {
         colorMatcher = new ColorMatch();
         entryColor = new ColorSensorV3(IntakeConstants.COLOR_SENSOR_ID);
-        intakeConveyorMotor = new CANSparkMax(IntakeConstants.INTAKE_CONVEYOR_MOTOR_ID, MotorType.kBrushless);
+        intakeConveyorMotor = new CANSparkMax(IntakeConstants.INTAKE_MOTOR_ID, MotorType.kBrushless);
         intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, IntakeConstants.SOLENOID_FORWARD_ID,
                 IntakeConstants.SOLENOID_REVERSE_ID);
         colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
@@ -69,6 +69,13 @@ public class Intake extends SubsystemBase {
      */
     public void rollerEject() {
         intakeConveyorMotor.set(IntakeConstants.EJECT_SPEED);
+    }
+
+    /**
+     * This method Stops the Intake Rollers.
+     */
+    public void rollerStop() {
+        intakeConveyorMotor.set(0);
     }
 
     /**

@@ -31,7 +31,7 @@ public final class Constants {
 
     public static final class IntakeConstants {
         // the CAN ID for the motor controlling the intake motor and conveyor.
-        public static final int INTAKE_CONVEYOR_MOTOR_ID = 0;
+        public static final int INTAKE_MOTOR_ID = 61;
         // the I2C port that the color sensor is connected to.
         public static final Port COLOR_SENSOR_ID = Port.kMXP;
         // the rev pneumatics hub port that the forward channel of the solenoid is
@@ -81,12 +81,21 @@ public final class Constants {
 
     public static final class KickerConstants {
         // The CAN ID for the Kicker Motor.
-        public static final int KICKER_MOTOR_ID = 0;
+        public static final int KICKER_MOTOR_ID = 19;
         // The Digital Input ID for the Kicker Sensor.
         public static final int KICKER_SENSOR_ID = 0;
         // The speed at which the Kicker feeds a ball into the Shooter.
         public static final double FEED_SPEED = 0.2;
         // The speed at which the Kicker ejects a ball back to the Intake.
         public static final double EJECT_SPEED = 0.1;
+    }
+
+    public static final class UptakeConstants {
+        // The CAN ID for the Uptake Motor.
+        public static final int UPTAKE_MOTOR_ID = 18;
+        // The speed at which the Uptake feeds a ball into the Kicker.
+        public static final double FEED_SPEED = 0.2;
+        // The speed at which the Uptake ejects a ball back through the Intake.
+        public static final double EJECT_SPEED = 0.2;
     }
 }
