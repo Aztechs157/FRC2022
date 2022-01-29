@@ -71,9 +71,7 @@ public final class Constants {
 
     public static final class ShooterConstants {
         // The CAN ID for the 1st Shooter Motor.
-        public final static int SHOOTER_MOTOR1_ID = 0;
-        // The CAN ID for the 2nd Shooter Motor.
-        public final static int SHOOTER_MOTOR2_ID = 0;
+        public final static int SHOOTER_MOTOR1_ID = 19;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public final static double EJECT_SPEED = 0.2;
@@ -81,7 +79,7 @@ public final class Constants {
 
     public static final class KickerConstants {
         // The CAN ID for the Kicker Motor.
-        public static final int KICKER_MOTOR_ID = 19;
+        public static final int KICKER_MOTOR_ID = 9;
         // The Digital Input ID for the Kicker Sensor.
         public static final int KICKER_SENSOR_ID = 0;
         // The speed at which the Kicker feeds a ball into the Shooter.
@@ -92,7 +90,7 @@ public final class Constants {
 
     public static final class UptakeConstants {
         // The CAN ID for the Uptake Motor.
-        public static final int UPTAKE_MOTOR_ID = 18;
+        public static final int UPTAKE_MOTOR_ID = 10;
         // The speed at which the Uptake feeds a ball into the Kicker.
         public static final double FEED_SPEED = 0.2;
         // The speed at which the Uptake ejects a ball back through the Intake.

@@ -1,5 +1,5 @@
 package frc.robot.controls;
 
 public enum ButtonKey {
-    Hello, UptakeRun
+    Hello, UptakeRun, KickerRun, IntakeRun, ShooterRun
 }

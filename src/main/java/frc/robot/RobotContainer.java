@@ -15,6 +15,7 @@ import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.uptake.RunUptake;
 import frc.robot.subsystems.uptake.Uptake;
 
@@ -30,15 +31,12 @@ import frc.robot.subsystems.uptake.Uptake;
 public class RobotContainer {
     private final DriverController driverController = new DriverController();
     private final OperatorController operatorController = new OperatorController();
-    private final Joystick testController = new Joystick(0);
-    private final JoystickButton testUptake = new JoystickButton(testController, 3);
-    private final JoystickButton testKicker = new JoystickButton(testController, 4);
-    private final JoystickButton testIntake = new JoystickButton(testController, 2);
 
     // The robot's subsystems and commands are defined here...
     private final Uptake uptake = new Uptake();
     private final Kicker kicker = new Kicker();
     private final Intake intake = new Intake();
+    private final Shooter shooter = new Shooter();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -63,12 +61,29 @@ public class RobotContainer {
         operatorController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
 
-        testUptake.whenPressed(uptake::uptakeFeed);
-        testUptake.whenReleased(uptake::uptakeStop);
-        testKicker.whenPressed(kicker::KickerFeed);
-        testKicker.whenReleased(kicker::KickerStop);
-        testIntake.whenPressed(intake::rollerFeed);
-        testIntake.whenReleased(intake::rollerStop);
+        driverController.button(ButtonKey.UptakeRun)
+                .whenPressed(uptake::uptakeFeed);
+
+        driverController.button(ButtonKey.UptakeRun)
+                .whenReleased(uptake::uptakeStop);
+
+        driverController.button(ButtonKey.KickerRun)
+                .whenPressed(kicker::KickerFeed);
+
+        driverController.button(ButtonKey.KickerRun)
+                .whenReleased(kicker::KickerStop);
+
+        driverController.button(ButtonKey.IntakeRun)
+                .whenPressed(intake::rollerFeed);
+
+        driverController.button(ButtonKey.IntakeRun)
+                .whenReleased(intake::rollerStop);
+
+        driverController.button(ButtonKey.ShooterRun)
+                .whenPressed(shooter::ejectTop);
+
+        driverController.button(ButtonKey.ShooterRun)
+                .whenReleased(shooter::ejectStop);
     }
 
     /**

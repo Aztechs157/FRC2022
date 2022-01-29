@@ -12,14 +12,10 @@ import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
     private CANSparkMax ShootMotor1;
-    private CANSparkMax ShootMotor2;
 
     /** Creates a new Shooter. */
     public Shooter() {
         ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
-        ShootMotor2 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID, MotorType.kBrushless);
-        ShootMotor2.setInverted(true);
-        ShootMotor2.follow(ShootMotor1);
     }
 
     @Override
@@ -57,6 +53,13 @@ public class Shooter extends SubsystemBase {
      */
     public void ejectBottom() {
         ShootMotor1.set(-ShooterConstants.EJECT_SPEED);
+    }
+
+    /**
+     * This method will stop the Shooter Motor.
+     */
+    public void ejectStop() {
+        ShootMotor1.set(0);
     }
 
 }
