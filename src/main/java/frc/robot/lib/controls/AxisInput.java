@@ -15,8 +15,8 @@ public interface AxisInput extends DoubleSupplier {
     /**
      * Create a {@link AxisInput} using a {@link DoubleSupplier}
      *
-     * @param supplier
-     * @return
+     * @param supplier The input as a DoubleSupplier
+     * @return The input as a AxisInput
      */
     public static AxisInput wrap(final DoubleSupplier supplier) {
         return supplier::getAsDouble;

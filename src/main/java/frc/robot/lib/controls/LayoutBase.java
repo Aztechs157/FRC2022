@@ -11,7 +11,10 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
     private final String name;
 
     /**
-     * TODO
+     * A simple structure that stores the mapping between Button/AxisKeys and
+     * Button/AxisInputs respectively. These are meant to be used with
+     * {@link ControllerBase} to allow hot-swapping of various control
+     * configurations, otherwise known as "layouts."
      *
      * @param name The name this Layout will display as in Shuffleboard
      */

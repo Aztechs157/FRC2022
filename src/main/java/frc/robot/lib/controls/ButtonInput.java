@@ -13,8 +13,8 @@ public interface ButtonInput extends BooleanSupplier {
     /**
      * Create a {@link ButtonInput} using a {@link BooleanSupplier}
      *
-     * @param supplier
-     * @return
+     * @param supplier The input as a BooleanSupplier
+     * @return The input as a ButtonInput
      */
     public static ButtonInput wrap(final BooleanSupplier supplier) {
         return supplier::getAsBoolean;
