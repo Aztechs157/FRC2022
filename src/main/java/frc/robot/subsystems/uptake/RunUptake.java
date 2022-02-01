@@ -5,7 +5,6 @@
 package frc.robot.subsystems.uptake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.uptake.Uptake;
 
 public class RunUptake extends CommandBase {
     private Uptake uptake;

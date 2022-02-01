@@ -29,28 +29,28 @@ public class Kicker extends SubsystemBase {
     /**
      * This method feeds the ball into the shooter.
      */
-    public void KickerFeed() {
+    public void kickerFeed() {
         kickerMotor.set(KickerConstants.FEED_SPEED);
     }
 
     /**
      * This method ejects the ball from the Kicker system.
      */
-    public void KickerEject() {
+    public void kickerEject() {
         kickerMotor.set(KickerConstants.EJECT_SPEED);
     }
 
     /**
      * This method Stops the Kicker System.
      */
-    public void KickerStop() {
+    public void kickerStop() {
         kickerMotor.set(0);
     }
 
     /**
      * This method senses the ball, currently uncomplete and return type may change.
      *
-     * @return
+     * @return the digital input
      */
     public boolean ballSensor() {
         return ballSensor.get();

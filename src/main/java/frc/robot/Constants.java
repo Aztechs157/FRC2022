@@ -61,11 +61,11 @@ public final class Constants {
         public static final int POSITION_SENSOR_ID = 0;
         // The servo ID for the Aimer mechanism.
         public static final int AIMER_SERVO_ID = 0;
-
+        // The Counterclockwise Boundary for the turret
         public static final int COUNTERCLOCKWISE_BOUNDARY = 1;
-
+        // The Clockwise Boundary for the turret
         public static final int CLOCKWISE_BOUNDARY = 4;
-
+        // The rotational speed of the turret
         public static final double TURRET_SPEED = 0;
     }
 

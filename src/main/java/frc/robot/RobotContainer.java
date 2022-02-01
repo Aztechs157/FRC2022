@@ -55,33 +55,44 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        // Jame's button test code, prints out Hello when A is pressed
         driverController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
         operatorController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
 
+        // Jame's Button code but I, Eric, Used it for my own purposes.
+        // X Button runs Uptake and Kicker, this line specifically runs uptakeFeed when
+        // the x button is held
         driverController.button(ButtonKey.UptakeRun)
                 .whenPressed(uptake::uptakeFeed);
 
+        // runs uptakeStop when the x button is released
         driverController.button(ButtonKey.UptakeRun)
                 .whenReleased(uptake::uptakeStop);
 
+        // runs kickerFeed when the x button is held
         driverController.button(ButtonKey.KickerRun)
-                .whenPressed(kicker::KickerFeed);
+                .whenPressed(kicker::kickerFeed);
 
+        // runs kickerStop when the x button is released
         driverController.button(ButtonKey.KickerRun)
-                .whenReleased(kicker::KickerStop);
+                .whenReleased(kicker::kickerStop);
 
+        // Y Button runs the Intake, this line runs rollerFeed when the y button is held
         driverController.button(ButtonKey.IntakeRun)
                 .whenPressed(intake::rollerFeed);
 
+        // runs rollerStop when the y button is released
         driverController.button(ButtonKey.IntakeRun)
                 .whenReleased(intake::rollerStop);
 
+        // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
                 .whenPressed(shooter::ejectTop);
 
+        // runs ejectStop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
                 .whenReleased(shooter::ejectStop);
     }
