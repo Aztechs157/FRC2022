@@ -61,35 +61,42 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
         }
     }
 
+    private boolean hasDefault = false;
+
     /**
-     * Add a Layout to this Controller. This particular method sets the Layout to
-     * the Controller's default.
+     * Add a Layout to this Controller. This allows the Controller to display and
+     * swap to it using Shuffleboard. If no layouts have been added yet, this will
+     * implicitly also set the new one as the default. To manually overwrite the
+     * default later, use {@link ControllerBase#addAndSetDefault(LayoutBase)}.
      *
      * @param layout The Layout to add
      */
-    public void addDefault(final LayoutBase<ButtonKey, AxisKey> layout) {
+    public void add(final LayoutBase<ButtonKey, AxisKey> layout) {
+        if (hasDefault) {
+            layouts.addOption(layout.getName(), layout);
+        } else {
+            addAndSetDefault(layout);
+        }
+    }
+
+    /**
+     * Manually set a layout as the default. This will additionally add it if it
+     * wasn't added already. Normally this isn't necessary, as
+     * {@link ControllerBase#add(LayoutBase)} will automatically set the first
+     * layout as default.
+     *
+     * @param layout The Layout to add
+     */
+    public void addAndSetDefault(final LayoutBase<ButtonKey, AxisKey> layout) {
         layouts.setDefaultOption(layout.getName(), layout);
         hasDefault = true;
     }
 
     /**
-     * Add a Layout to this Controller. This allows the Controller to display and
-     * swap to it using Shuffleboard.
-     *
-     * @param layout The Layout to add
-     */
-    public void add(final LayoutBase<ButtonKey, AxisKey> layout) {
-        layouts.addOption(layout.getName(), layout);
-    }
-
-    private boolean hasDefault = false;
-
-    /**
      * Convenience class to avoid having to restate the `ButtonKey` and `AxisKey`
      * type parameters for `LayoutBase`, as we can just use the ones passed to
      * `ControllerBase`. Additionally, this will automatically call
-     * {@link ControllerBase#add(LayoutBase)} or
-     * {@link ControllerBase#addDefault(LayoutBase)}.
+     * {@link ControllerBase#add(LayoutBase)} with the newly created layout.
      *
      * Example:
      *
@@ -109,12 +116,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     public class Layout extends LayoutBase<ButtonKey, AxisKey> {
         public Layout(final String name) {
             super(name);
-
-            if (hasDefault) {
-                add(this);
-            } else {
-                addDefault(this);
-            }
+            add(this);
         }
     }
 }
