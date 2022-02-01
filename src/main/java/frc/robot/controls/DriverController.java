@@ -3,6 +3,7 @@ package frc.robot.controls;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import frc.robot.lib.DoubleRange;
 import frc.robot.lib.controls.ControllerBase;
 import frc.robot.lib.controls.models.LogitechExtreme3D;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
@@ -32,7 +33,8 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
 
         flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
         flightLayout.assign(AxisKey.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
-        flightLayout.assign(AxisKey.DriveRotation, flight.stickRotate.simpleDeadzone(0.15).scaled(driveInputScale));
+        flightLayout.assign(AxisKey.DriveRotation,
+                flight.stickRotate.deadzone(new DoubleRange(0, 0.15)).scaled(driveInputScale));
 
         flightLayout.assign(ButtonKey.Hello, flight.thumbButton);
 

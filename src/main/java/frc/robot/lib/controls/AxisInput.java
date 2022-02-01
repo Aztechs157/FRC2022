@@ -1,7 +1,6 @@
 package frc.robot.lib.controls;
 
 import java.util.function.DoubleSupplier;
-import edu.wpi.first.math.MathUtil;
 import frc.robot.lib.DoubleRange;
 import static frc.robot.lib.DoubleRange.scale;
 
@@ -32,42 +31,35 @@ public interface AxisInput extends DoubleSupplier {
         return () -> -getAsDouble();
     }
 
+    /**
+     * Scale the input with a scalar value.
+     *
+     * @param scale The value to scale by
+     * @return A new input with the scale applied
+     */
     public default AxisInput scaled(final double scale) {
         return () -> getAsDouble() * scale;
     }
 
+    /**
+     * Scale the input with another input.
+     *
+     * @param scale The input to retrieve the scale from
+     * @return A new input with the scale applied
+     */
     public default AxisInput scaled(final DoubleSupplier scale) {
         return () -> getAsDouble() * scale.getAsDouble();
     }
 
     /**
+     * Clamp the input to a number within the provided range.
      *
-     * @param minimum
-     * @param maximum
-     * @return
+     * @param range The range to clamp to
+     * @return A new input with clamp applied
      */
-    public default AxisInput clamp(final double minimum, final double maximum) {
-        return () -> MathUtil.clamp(getAsDouble(), minimum, minimum);
+    public default AxisInput clamp(final DoubleRange range) {
+        return () -> range.applyClamp(getAsDouble());
     }
-
-    /**
-     *
-     * @param threshold
-     * @return
-     */
-    public default AxisInput simpleDeadzone(final double threshold) {
-        return () -> {
-            final var value = getAsDouble();
-
-            if (Math.abs(value) < threshold) {
-                return 0;
-            }
-
-            return value;
-        };
-    }
-
-    public static final DoubleRange fullRange = new DoubleRange(-1, 1);
 
     /**
      * Create a deadzone on the current axis.
@@ -77,14 +69,15 @@ public interface AxisInput extends DoubleSupplier {
      * in range of -1 to 1, breaking this assumption results in an Error.
      *
      * @param deadzone The range of the deadzone
-     * @return
+     * @return A new input with the deadzone applied
      */
     public default AxisInput deadzone(final DoubleRange deadzone) {
-        var leftRange = new DoubleRange(fullRange.low, deadzone.low);
-        var rightRange = new DoubleRange(deadzone.high, fullRange.high);
+        final var fullRange = new DoubleRange(-1, 1);
+        final var leftRange = new DoubleRange(fullRange.low, deadzone.low);
+        final var rightRange = new DoubleRange(deadzone.high, fullRange.high);
 
         return () -> {
-            var value = getAsDouble();
+            final var value = getAsDouble();
 
             if (deadzone.contains(value)) {
                 return 0;
