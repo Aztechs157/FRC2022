@@ -30,8 +30,8 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        // the CAN ID for the motor controlling the intake motor and conveyor.
-        public static final int INTAKE_MOTOR_ID = 61;
+        // the CAN ID for the motor controlling the intake motor and conveyor. (TEMP)
+        public static final int INTAKE_MOTOR_ID = 30;
         // the I2C port that the color sensor is connected to.
         public static final Port COLOR_SENSOR_ID = Port.kMXP;
         // the rev pneumatics hub port that the forward channel of the solenoid is
@@ -54,8 +54,8 @@ public final class Constants {
     }
 
     public static final class TurretConstants {
-        // The CAN ID the turret motor is connected to.
-        public static final int TURRET_MOTOR_ID = 0;
+        // The CAN ID the turret motor is connected to. (TEMP)
+        public static final int TURRET_MOTOR_ID = 31;
         // The Analog Input ID that the position sensor for the turret is
         // connected to.
         public static final int POSITION_SENSOR_ID = 0;
@@ -70,8 +70,8 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        // The CAN ID for the 1st Shooter Motor.
-        public final static int SHOOTER_MOTOR1_ID = 19;
+        // The CAN ID for the 1st Shooter Motor. (TEMP)
+        public final static int SHOOTER_MOTOR1_ID = 32;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public final static double EJECT_SPEED = 0.2;
