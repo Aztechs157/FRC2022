@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TurretConstants;
@@ -24,6 +25,8 @@ public class Turret extends SubsystemBase {
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
         aimerServo = new Servo(TurretConstants.AIMER_SERVO_ID);
         aimerServo.setBounds(2.0, 1.8, 1.5, 1.2, 1);
+        // change to debug later
+        Shuffleboard.getTab("SmartDashboard").addNumber("Turret Position", this::readPositionSensor);
     }
 
     @Override
@@ -60,6 +63,13 @@ public class Turret extends SubsystemBase {
         } else {
             turretMotor.set(speed);
         }
+    }
+
+    /**
+     * This method stops the turret motor.
+     */
+    public void turretStop() {
+        turretMotor.set(0);
     }
 
     /**

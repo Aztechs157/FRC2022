@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase {
     }
 
     /**
-     * This method will set the power of the shooter motors.
+     * This method will set the power of the shooter motor.
      *
      * @param power the power the motors are set too. Accepted Values must be
      *              between -1 and 1.
