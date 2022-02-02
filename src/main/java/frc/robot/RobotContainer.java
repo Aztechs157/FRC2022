@@ -13,6 +13,7 @@ import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
@@ -35,6 +36,7 @@ public class RobotContainer {
     private final Kicker kicker = new Kicker();
     private final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
+    private final Turret turret = new Turret();
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     /**
