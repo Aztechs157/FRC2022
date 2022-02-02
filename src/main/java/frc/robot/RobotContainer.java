@@ -14,6 +14,8 @@ import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.uptake.Uptake;
+import frc.robot.drive.DriveSubsystem;
+import frc.robot.drive.TeleopDrive;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,6 +35,7 @@ public class RobotContainer {
     private final Kicker kicker = new Kicker();
     private final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
+    private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -51,6 +54,8 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
+
         // Jame's button test code, prints out Hello when A is pressed
         driverController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
