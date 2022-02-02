@@ -5,6 +5,11 @@ import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
+/**
+ * Object that manages layouts. A layout can be selected from Shuffleboard that
+ * can then be used by the robot. It maps the inputs of a controller to the
+ * desired functions of the robot.
+ */
 public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
 
     private SendableChooser<LayoutBase<ButtonKey, AxisKey>> layouts = new SendableChooser<>();
@@ -45,6 +50,11 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
         return getSelectedLayout().getAxis(axisKey).getAsDouble();
     }
 
+    /**
+     * Get the layout currently selected on Shuffleboard
+     *
+     * @return The selected layout
+     */
     private LayoutBase<ButtonKey, AxisKey> getSelectedLayout() {
         var layout = layouts.getSelected();
 
@@ -55,6 +65,9 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
         return layout;
     }
 
+    /**
+     * Thrown when no layouts have been added to a controller
+     */
     public static class NoLayoutsAddedException extends RuntimeException {
         private NoLayoutsAddedException() {
             super("No layouts have been added to the controller");

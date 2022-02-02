@@ -6,15 +6,18 @@ import java.util.Map;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 
+/**
+ * A simple structure that stores the mapping between Button/AxisKeys and
+ * Button/AxisInputs respectively. These are meant to be used with
+ * {@link ControllerBase} to allow hot-swapping of various control
+ * configurations, otherwise known as "layouts."
+ */
 public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
 
     private final String name;
 
     /**
-     * A simple structure that stores the mapping between Button/AxisKeys and
-     * Button/AxisInputs respectively. These are meant to be used with
-     * {@link ControllerBase} to allow hot-swapping of various control
-     * configurations, otherwise known as "layouts."
+     * Create a new layout with the specified name
      *
      * @param name The name this Layout will display as in Shuffleboard
      */
@@ -89,6 +92,9 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
         return axis;
     }
 
+    /**
+     * Thrown when an input hasn't been assigned for the layout in question
+     */
     public static class InputNotAssignedException extends RuntimeException {
         private InputNotAssignedException(final String layoutName, final String inputName) {
             super("The input " + inputName + " has not been assigned for layout " + layoutName);
