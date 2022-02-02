@@ -42,29 +42,37 @@ public class DoubleRange {
      * @return The clamped value
      */
     public double applyClamp(final double value) {
-        return Math.max(low, Math.min(value, high));
+        if (value > high) {
+            return high;
+        } else if (value < low) {
+            return low;
+        } else {
+            return value;
+        }
     }
 
-    /*
+    /**
      * Scale a number within `inputRange` to the corresponding number within
      * `outputRange`.
      *
-     * Example: Let input range be 0 to 2, and the output range be 0 to 10. The
-     * input 1 will result in an output 5, the input 2 will result in 10, etc.
+     * @param inputRange  The range of the input value
+     * @param inputValue  The input value
+     * @param outputRange The range of the output value
+     * @return The corresponding number in `outputRange`
      */
     public static double scale(final DoubleRange inputRange, final double inputValue, final DoubleRange outputRange) {
-        // scale
+        // Scale between output and input ranges
         var scale = outputRange.length() / inputRange.length();
 
-        // zero base the input
-        var outValue = inputValue - inputRange.low;
+        // Shift to zero based input range
+        var basedInput = inputValue - inputRange.low;
 
-        // apply scale to value
-        outValue = outValue * scale;
+        // Scale the zero based input
+        var scaled = basedInput * scale;
 
-        // shift output back
-        outValue = outValue + outputRange.low;
+        // Shift from zero based to output range
+        var outputValue = scaled + outputRange.low;
 
-        return outValue;
+        return outputValue;
     }
 }
