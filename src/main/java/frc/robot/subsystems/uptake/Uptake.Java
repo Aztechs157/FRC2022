@@ -8,10 +8,12 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MotorDirection;
 import frc.robot.Constants.UptakeConstants;
 
 public class Uptake extends SubsystemBase {
     private CANSparkMax uptakeMotor;
+    private MotorDirection direction;
 
     /** Creates a new Uptake. */
     public Uptake() {
@@ -28,6 +30,7 @@ public class Uptake extends SubsystemBase {
      */
     public void uptakeFeed() {
         uptakeMotor.set(UptakeConstants.FEED_SPEED);
+        direction = MotorDirection.FEEDING;
     }
 
     /**
@@ -35,6 +38,7 @@ public class Uptake extends SubsystemBase {
      */
     public void uptakeEject() {
         uptakeMotor.set(UptakeConstants.EJECT_SPEED);
+        direction = MotorDirection.EJECTING;
     }
 
     /**
@@ -42,5 +46,10 @@ public class Uptake extends SubsystemBase {
      */
     public void uptakeStop() {
         uptakeMotor.set(0);
+        direction = MotorDirection.STOPPED;
+    }
+
+    public MotorDirection getDirection() {
+        return direction;
     }
 }

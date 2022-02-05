@@ -13,7 +13,7 @@ import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
     private CANSparkMax ShootMotor1;
-    private PIDController pid = new PIDController(0, 0, 0);
+    private PIDController pid = new PIDController(0.01, 0, 0);
 
     /** Creates a new Shooter. */
     public Shooter() {

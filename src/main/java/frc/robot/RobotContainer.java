@@ -33,9 +33,9 @@ public class RobotContainer {
     private final OperatorController operatorController = new OperatorController();
 
     // The robot's subsystems and commands are defined here...
-    private final Uptake uptake = new Uptake();
-    private final Kicker kicker = new Kicker();
-    private final Intake intake = new Intake();
+    public final Uptake uptake = new Uptake();
+    public final Kicker kicker = new Kicker();
+    // public final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
     private final Turret turret = new Turret(operatorController);
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
@@ -85,20 +85,16 @@ public class RobotContainer {
                 .whenReleased(kicker::kickerStop);
 
         // Y Button runs the Intake, this line runs rollerFeed when the y button is held
-        driverController.button(ButtonKey.IntakeRun)
-                .whenPressed(intake::rollerFeed);
+        // driverController.button(ButtonKey.IntakeRun)
+        // .whenPressed(intake::rollerFeed);
 
         // runs rollerStop when the y button is released
-        driverController.button(ButtonKey.IntakeRun)
-                .whenReleased(intake::rollerStop);
+        // driverController.button(ButtonKey.IntakeRun)
+        // .whenReleased(intake::rollerStop);
 
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
-                .whenPressed(new ShootCargo(shooter, kicker, uptake, 1000));
-
-        // runs ejectStop when the b button is held
-        driverController.button(ButtonKey.ShooterRun)
-                .whenReleased(shooter::ejectStop);
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, 1000));
     }
 
     /**

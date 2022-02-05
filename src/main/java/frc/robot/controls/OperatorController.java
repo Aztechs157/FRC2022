@@ -10,7 +10,7 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
 
     public OperatorController() {
         var defaultLayout = new Layout("Default");
-        var logitech = new LogitechGamepadF310(0);
+        var logitech = new LogitechGamepadF310(1);
         final var tab = Shuffleboard.getTab("Debug");
 
         final var scaleEntry = tab.add("Turret Input Scale", 0).getEntry();

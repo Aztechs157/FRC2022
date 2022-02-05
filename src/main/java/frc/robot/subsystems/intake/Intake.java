@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase {
-    enum colorResult {
+    public enum ColorResult {
         RED, BLUE, NONE
     }
 
@@ -82,19 +82,19 @@ public class Intake extends SubsystemBase {
     /**
      * This method senses the current ball color and if there is a ball.
      *
-     * @return the color that the ball is or {@link colorResult#NONE} if there is no
+     * @return the color that the ball is or {@link ColorResult#NONE} if there is no
      *         ball.
      */
-    public colorResult currentColor() {
+    public ColorResult currentColor() {
         final var detectedColor = entryColor.getColor();
         final var match = colorMatcher.matchClosestColor(detectedColor);
 
         if (match.color == IntakeConstants.RED_TARGET) {
-            return colorResult.RED;
+            return ColorResult.RED;
         } else if (match.color == IntakeConstants.BLUE_TARGET) {
-            return colorResult.BLUE;
+            return ColorResult.BLUE;
         } else {
-            return colorResult.NONE;
+            return ColorResult.NONE;
         }
     }
 }
