@@ -97,4 +97,9 @@ public class Intake extends SubsystemBase {
             return colorResult.NONE;
         }
     }
+
+    public void rawColor() {
+        System.out.println(
+                "ed: " + entryColor.getRed() + "\ngreen: " + entryColor.getGreen() + "\nblue: " + entryColor.getBlue());
+    }
 }
