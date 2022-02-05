@@ -28,6 +28,7 @@ public class TurretSpin extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        // rotates the turret based on joystick input
         final var turretRotation = operatorController.getAxis(AxisKey.TurretSpeed);
         turret.turretTurn(turretRotation);
     }

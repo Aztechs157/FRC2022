@@ -17,6 +17,10 @@ public class ShootCargo extends CommandBase {
     /** Creates a new SetShooterSpeed. */
     public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, double targetSpeed) {
         // Use addRequirements() here to declare subsystem dependencies.
+        /**
+         * Adds Shooter, Kicker, and Uptake as requirements and stops other systems from
+         * using them while running. Also requires a targetSpeed to be set.
+         */
         this.shooter = shooter;
         this.kicker = kicker;
         this.uptake = uptake;
@@ -34,6 +38,11 @@ public class ShootCargo extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        /**
+         * Measures motor velocity then sets power. Adds in tolerance for targetSpeed.
+         * NOTE: tolerance not correct.
+         * Then it runs the uptake and kicker in order to shoot.
+         */
         var currSpeed = shooter.measureVelocity();
         shooter.setPower(shooter.pidCalculate(targetSpeed, currSpeed));
         if (currSpeed > targetSpeed - 0.05 && currSpeed < targetSpeed + 0.05) {
@@ -45,7 +54,7 @@ public class ShootCargo extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        // Stops the shooter from spinning
+        // Stops all the motors from spinning
         shooter.setPower(0);
         kicker.kickerStop();
         uptake.uptakeStop();

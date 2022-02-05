@@ -10,15 +10,18 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.KickerConstants;
+import frc.robot.subsystems.intake.Intake.ColorResult;
 
 public class Kicker extends SubsystemBase {
     private CANSparkMax kickerMotor;
     private DigitalInput ballSensor;
+    private ColorResult color;
 
     /** Creates a new Kicker. */
     public Kicker() {
         kickerMotor = new CANSparkMax(KickerConstants.KICKER_MOTOR_ID, MotorType.kBrushless);
         ballSensor = new DigitalInput(KickerConstants.KICKER_SENSOR_ID);
+        color = ColorResult.NONE;
     }
 
     @Override
@@ -54,5 +57,13 @@ public class Kicker extends SubsystemBase {
      */
     public boolean getBallSensor() {
         return ballSensor.get();
+    }
+
+    public ColorResult getBallColor() {
+        return color;
+    }
+
+    public void setBallColor(ColorResult color) {
+        this.color = color;
     }
 }

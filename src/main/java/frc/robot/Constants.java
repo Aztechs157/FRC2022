@@ -69,7 +69,7 @@ public final class Constants {
 
     public static final class ShooterConstants {
         // The CAN ID for the 1st Shooter Motor. (TEMP)
-        public final static int SHOOTER_MOTOR1_ID = 32;
+        public final static int SHOOTER_MOTOR1_ID = 8;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public final static double EJECT_SPEED = 0.2;
@@ -100,5 +100,9 @@ public final class Constants {
         public static final int BACK_LEFT_MOTOR_ID = 19;
         public static final int FRONT_RIGHT_MOTOR_ID = 61;
         public static final int BACK_RIGHT_MOTOR_ID = 60;
+    }
+
+    public enum MotorDirection {
+        FEEDING, EJECTING, STOPPED
     }
 }
