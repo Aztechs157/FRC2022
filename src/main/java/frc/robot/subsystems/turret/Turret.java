@@ -11,21 +11,24 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TurretConstants;
+import frc.robot.controls.OperatorController;
 
 public class Turret extends SubsystemBase {
     private CANSparkMax turretMotor;
     private AnalogInput positionSensor;
     private Servo aimerServo;
+    private OperatorController operatorController;
 
     /** Creates a new Turret. */
-    public Turret() {
+    public Turret(OperatorController operatorController) {
         turretMotor = new CANSparkMax(TurretConstants.TURRET_MOTOR_ID, MotorType.kBrushless);
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
         aimerServo = new Servo(TurretConstants.AIMER_SERVO_ID);
         aimerServo.setBounds(2.0, 1.8, 1.5, 1.2, 1);
         Shuffleboard.getTab("Debug").addNumber("Turret Position", this::readPositionSensor);
+        this.operatorController = operatorController;
+        this.setDefaultCommand(new TurretSpin(operatorController, this));
     }
 
     @Override

@@ -12,7 +12,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
@@ -44,14 +43,16 @@ public class Intake extends SubsystemBase {
     }
 
     /**
-     * This method raises the Intake Arm.
+     * This method raises the Intake Arm. This is the default position and will not
+     * pick up any cargo.
      */
     public void raiseArm() {
         intakeSolenoid.set(Value.kForward);
     }
 
     /**
-     * This method lowers the Intake Arm.
+     * This method lowers the Intake Arm. Prepares to feed cargo in an open
+     * position.
      */
     public void lowerArm() {
         intakeSolenoid.set(Value.kReverse);

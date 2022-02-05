@@ -52,7 +52,7 @@ public class Kicker extends SubsystemBase {
      *
      * @return the digital input
      */
-    public boolean ballSensor() {
+    public boolean getBallSensor() {
         return ballSensor.get();
     }
 }

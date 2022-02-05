@@ -7,11 +7,13 @@ package frc.robot.subsystems.shooter;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
     private CANSparkMax ShootMotor1;
+    private PIDController pid = new PIDController(0, 0, 0);
 
     /** Creates a new Shooter. */
     public Shooter() {
@@ -60,6 +62,10 @@ public class Shooter extends SubsystemBase {
      */
     public void ejectStop() {
         ShootMotor1.set(0);
+    }
+
+    public double pidCalculate(double goalVelocity, double currentVelocity) {
+        return pid.calculate(currentVelocity, goalVelocity);
     }
 
 }

@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import com.revrobotics.ColorMatch;
-
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
 

@@ -4,4 +4,5 @@ public enum AxisKey {
     DriveSpeedX,
     DriveSpeedY,
     DriveRotation,
+    TurretSpeed
 }

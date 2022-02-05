@@ -12,6 +12,7 @@ import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
@@ -36,7 +37,7 @@ public class RobotContainer {
     private final Kicker kicker = new Kicker();
     private final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
-    private final Turret turret = new Turret();
+    private final Turret turret = new Turret(operatorController);
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     /**
@@ -93,7 +94,7 @@ public class RobotContainer {
 
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
-                .whenPressed(shooter::ejectTop);
+                .whenPressed(new ShootCargo(shooter, kicker, uptake, 1000));
 
         // runs ejectStop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
