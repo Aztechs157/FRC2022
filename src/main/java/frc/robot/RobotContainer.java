@@ -15,7 +15,7 @@ import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
-import frc.robot.subsystems.uptake.Uptake;
+import frc.robot.subsystems.uptake.Uptke;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
 
@@ -33,7 +33,7 @@ public class RobotContainer {
     private final OperatorController operatorController = new OperatorController();
 
     // The robot's subsystems and commands are defined here...
-    public final Uptake uptake = new Uptake();
+    public final Uptke uptake = new Uptke();
     public final Kicker kicker = new Kicker();
     // public final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
@@ -94,10 +94,11 @@ public class RobotContainer {
 
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, 1000));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, 1000);
     }
 
     /**
+
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
      * @return the command to run in autonomous
