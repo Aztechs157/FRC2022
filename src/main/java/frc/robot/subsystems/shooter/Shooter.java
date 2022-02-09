@@ -4,20 +4,32 @@
 
 package frc.robot.subsystems.shooter;
 
+import java.util.function.DoubleSupplier;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
     private CANSparkMax ShootMotor1;
     private PIDController pid = new PIDController(0.01, 0, 0);
+    final ShuffleboardTab tab;
+    final NetworkTableEntry velocityMotorSim;
+    final NetworkTableEntry motorPowerSim;
 
     /** Creates a new Shooter. */
     public Shooter() {
         ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
+        tab = Shuffleboard.getTab("Debug");
+        velocityMotorSim = tab.add("Shooter Speed", 0).getEntry();
+        // final DoubleSupplier driveInputScale = () -> .getDouble(0);
+        motorPowerSim = tab.add("Motor Power", 0).getEntry();
     }
 
     @Override
@@ -29,8 +41,12 @@ public class Shooter extends SubsystemBase {
      * This method will get the velocity of the motor based on the built in encoder
      * reading.
      */
-    public double measureVelocity() {
+    public double measureVelocity(Double something) {
         return ShootMotor1.getEncoder().getVelocity();
+    }
+
+    public double measureVelocity() {
+        return velocityMotorSim.getDouble(0);
     }
 
     /**
@@ -39,29 +55,33 @@ public class Shooter extends SubsystemBase {
      * @param power the power the motors are set too. Accepted Values must be
      *              between -1 and 1.
      */
-    public void setPower(double power) {
+    public void setPower(double power, double something) {
         ShootMotor1.set(power);
+    }
+
+    public void setPower(double power) {
+        motorPowerSim.setDouble(power);
     }
 
     /**
      * This method will eject the ball out the top of the shooter.
      */
     public void ejectTop() {
-        ShootMotor1.set(ShooterConstants.EJECT_SPEED);
+        setPower(ShooterConstants.EJECT_SPEED);
     }
 
     /**
      * This method will eject the ball through the robot out through the intake.
      */
     public void ejectBottom() {
-        ShootMotor1.set(-ShooterConstants.EJECT_SPEED);
+        setPower(-ShooterConstants.EJECT_SPEED);
     }
 
     /**
      * This method will stop the Shooter Motor.
      */
     public void ejectStop() {
-        ShootMotor1.set(0);
+        setPower(0);
     }
 
     public double pidCalculate(double goalVelocity, double currentVelocity) {

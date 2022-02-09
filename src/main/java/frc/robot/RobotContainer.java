@@ -61,10 +61,10 @@ public class RobotContainer {
 
         // Jame's button test code, prints out Hello when A is pressed
         driverController.button(ButtonKey.Hello)
-                .whenPressed(() -> System.out.println("Hello driver"));
+                .whenPressed(() -> System.out.println(shooter.measureVelocity()));
 
         operatorController.button(ButtonKey.Hello)
-                .whenPressed(() -> System.out.println("Hello operator"));
+                .whenPressed(() -> System.out.println(shooter.measureVelocity()));
 
         // Jame's Button code but I, Eric, Used it for my own purposes.
         // X Button runs Uptake and Kicker, this line specifically runs uptakeFeed when
@@ -98,7 +98,7 @@ public class RobotContainer {
     }
 
     /**
-     * 
+     *
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
      * @return the command to run in autonomous
