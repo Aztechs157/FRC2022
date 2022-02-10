@@ -29,7 +29,7 @@ public class EjectCargo extends CommandBase {
      */
 
     /** Creates a new EjectCargo. */
-    public EjectCargo() {
+    public EjectCargo(Intake intake, Uptake uptake, Kicker kicker, Shooter shooter) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.intake = intake;
         this.uptake = uptake;
@@ -54,7 +54,8 @@ public class EjectCargo extends CommandBase {
             intake.lowerArm();
             intake.rollerEject();
             uptake.uptakeEject();
-        } else if (kicker.getBallColor() == enemyColor) {
+        }
+        if (kicker.getBallColor() == enemyColor) {
             kicker.kickerFeed();
             shooter.ejectTop();
         }

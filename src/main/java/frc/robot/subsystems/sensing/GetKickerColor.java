@@ -27,7 +27,9 @@ public class GetKickerColor extends CommandBase {
         this.kicker = kicker;
         this.intake = intake;
         this.uptake = uptake;
-
+        intakeColor = ColorResult.NONE;
+        transitionalColor = ColorResult.NONE;
+        kickerColor = ColorResult.NONE;
     }
 
     // Called when the command is initially scheduled.

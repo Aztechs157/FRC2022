@@ -11,7 +11,10 @@ import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.sensing.EjectCargo;
+import frc.robot.subsystems.sensing.GetKickerColor;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
@@ -35,10 +38,12 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public final Uptake uptake = new Uptake();
     public final Kicker kicker = new Kicker();
-    // public final Intake intake = new Intake();
+    public final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
     private final Turret turret = new Turret(operatorController);
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+
+    private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -92,9 +97,15 @@ public class RobotContainer {
         // driverController.button(ButtonKey.IntakeRun)
         // .whenReleased(intake::rollerStop);
 
+        driverController.button(ButtonKey.IntakeRun)
+                .whileHeld(new IntakeCargo(intake, uptake, kicker));
+
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, 1000));
+
+        driverController.button(ButtonKey.EjectCargo)
+                .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
     }
 
     /**
@@ -105,5 +116,9 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         return null;
+    }
+
+    public Command getKickerColorSensorCommand() {
+        return getKickerColor;
     }
 }

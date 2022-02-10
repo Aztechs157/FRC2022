@@ -53,6 +53,7 @@ public class IntakeCargo extends CommandBase {
         } else if (intake.currentColor() == ColorResult.NONE) {
             intake.rollerFeed();
             uptake.uptakeFeed();
+            kicker.kickerStop();
         }
     }
 
