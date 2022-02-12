@@ -115,4 +115,12 @@ public class Kicker extends SubsystemBase {
                 break;
         }
     }
+
+    /**
+     * Debug print for the DebugPrints command, useful for debugging and testing at
+     * a later date.
+     */
+    public void debugPrint() {
+
+    }
 }

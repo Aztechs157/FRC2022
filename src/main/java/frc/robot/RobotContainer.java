@@ -10,14 +10,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
+import frc.robot.subsystems.DebugPrints;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
+import frc.robot.subsystems.intake.IntakeSim;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.sensing.EjectCargo;
 import frc.robot.subsystems.sensing.GetKickerColor;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.shooter.ShooterSim;
 import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.turret.TurretSim;
 import frc.robot.subsystems.uptake.Uptake;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
@@ -38,9 +42,9 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public final Uptake uptake = new Uptake();
     public final Kicker kicker = new Kicker();
-    public final Intake intake = new Intake();
-    private final Shooter shooter = new Shooter();
-    private final Turret turret = new Turret(operatorController);
+    public final Intake intake = new IntakeSim();
+    private final Shooter shooter = new ShooterSim();
+    private final Turret turret = new TurretSim(operatorController);
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
@@ -69,8 +73,8 @@ public class RobotContainer {
         driverController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println(shooter.measureVelocity()));
 
-        operatorController.button(ButtonKey.Hello)
-                .whenPressed(() -> System.out.println(shooter.measureVelocity()));
+        operatorController.button(ButtonKey.DebugPrint)
+                .whenPressed(new DebugPrints(intake, kicker, uptake, shooter, turret));
 
         // Jame's Button code but I, Eric, Used it for my own purposes.
         // X Button runs Uptake and Kicker, this line specifically runs uptakeFeed when

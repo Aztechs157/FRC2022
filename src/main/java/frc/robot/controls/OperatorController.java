@@ -2,6 +2,7 @@ package frc.robot.controls;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.lib.controls.ControllerBase;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
@@ -17,6 +18,8 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         final DoubleSupplier turretInputScale = () -> scaleEntry.getDouble(0);
 
         defaultLayout.assign(ButtonKey.Hello, logitech.a);
+        defaultLayout.assign(ButtonKey.DebugPrint, logitech.start);
         defaultLayout.assign(AxisKey.TurretSpeed, logitech.leftStickX.scaled(turretInputScale));
+        defaultLayout.assign(AxisKey.AimerSpeed, logitech.rightStickX);
     }
 }

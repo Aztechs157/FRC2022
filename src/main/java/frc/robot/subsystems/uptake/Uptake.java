@@ -57,4 +57,12 @@ public class Uptake extends SubsystemBase {
     public MotorDirection getDirection() {
         return direction;
     }
+
+    /**
+     * Debug print for the DebugPrints command, useful for debugging and testing at
+     * a later date.
+     */
+    public void debugPrint() {
+
+    }
 }

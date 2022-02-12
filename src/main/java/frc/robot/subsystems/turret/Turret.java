@@ -24,12 +24,10 @@ public class Turret extends SubsystemBase {
     private CANSparkMax aimerMotor;
     private Counter absoluteEncoder;
     private OperatorController operatorController;
-    final ShuffleboardTab tab;
-    final NetworkTableEntry turretMotorSim;
-    final NetworkTableEntry posSensorSim;
-    private int rotations;
-    private int previousPosition;
-    private int maxRotation;
+
+    private int rotations = 0;
+    private Double previousPosition;
+    private int maxRotation = 300;
 
     /** Creates a new Turret. */
     public Turret(OperatorController operatorController) {
@@ -40,10 +38,6 @@ public class Turret extends SubsystemBase {
         absoluteEncoder.setSemiPeriodMode(true);
         absoluteEncoder.setUpSource(TurretConstants.ABS_ENCODER_PORT);
         absoluteEncoder.reset();
-        tab = Shuffleboard.getTab("Debug");
-        turretMotorSim = tab.add("Turret Speed", 0).getEntry();
-        posSensorSim = tab.add("Turret Position", 0).getEntry();
-
         this.operatorController = operatorController;
         this.setDefaultCommand(new TurretSpin(operatorController, this));
     }
@@ -51,6 +45,7 @@ public class Turret extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        absEncoderUpdate();
     }
 
     /**
@@ -74,7 +69,7 @@ public class Turret extends SubsystemBase {
      * @param speed at which to turn the turret. must be between -1 and 1. -1 is
      *              counterclockwise, 1 is clockwise.
      */
-    public void turretTurn(double speed, double something) {
+    public void turretTurn(double speed) {
         if (speed > 0 && readPositionSensor() > TurretConstants.CLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
         } else if (speed < 0 && readPositionSensor() < TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
@@ -84,26 +79,11 @@ public class Turret extends SubsystemBase {
         }
     }
 
-    // temporary simulator to run the turret. Runs through shuffleboard.
-    public void turretTurn(double speed) {
-        if (speed > 0 && readPositionSensor() > TurretConstants.CLOCKWISE_BOUNDARY) {
-            turretMotorSim.setDouble(0);
-        } else if (speed < 0 && readPositionSensor() < TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
-            turretMotorSim.setDouble(0);
-        } else {
-            turretMotorSim.setDouble(speed);
-        }
-    }
-
     /**
      * This method stops the turret motor.
      */
-    public void turretStop(double something) {
-        turretMotor.set(0);
-    }
-
     public void turretStop() {
-        turretMotorSim.setDouble(0);
+        turretMotor.set(0);
     }
 
     /**
@@ -111,12 +91,8 @@ public class Turret extends SubsystemBase {
      *
      * @return the position of the turret according to the sensor.
      */
-    public int readPositionSensor(double something) {
-        return positionSensor.getValue();
-    }
-
     public int readPositionSensor() {
-        return (int) Math.round(posSensorSim.getDouble(0));
+        return positionSensor.getValue();
     }
 
     /**
@@ -129,12 +105,16 @@ public class Turret extends SubsystemBase {
                                                                      // seconds.
     }
 
+    public double getActualPosition() {
+        return getAimerPosition() + (360 * rotations);
+    }
+
     /**
      * This method moves the aimer in a upwards direction. Decreasing the aimer
      * angle.
      */
     public void aimerUp() {
-
+        runAimer(TurretConstants.AIMER_SPEED);
     }
 
     /**
@@ -142,22 +122,48 @@ public class Turret extends SubsystemBase {
      * angle.
      */
     public void aimerDown() {
-
+        runAimer(-TurretConstants.AIMER_SPEED);
     }
 
     /**
      * This method will run the aimer either up or down.
-     * 
+     *
      * @param speed
      */
     public void runAimer(double speed) {
-
+        if (speed > 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY) {
+            aimerMotor.set(0);
+        } else if (speed < 0 && getActualPosition() < TurretConstants.AIMER_LOWER_BOUNDARY) {
+            aimerMotor.set(0);
+        } else {
+            aimerMotor.set(speed);
+        }
     }
 
     /**
      * This method will stop the aimer from moving.
      */
     public void stopAimer() {
+        runAimer(0);
+    }
+
+    protected void absEncoderUpdate() {
+        double absEncoder = getAimerPosition();
+        if (previousPosition != null && Math.abs(absEncoder - previousPosition) > maxRotation) {
+            if (absEncoder < previousPosition) {
+                rotations++;
+            } else if (absEncoder > previousPosition) {
+                rotations--;
+            }
+        }
+        previousPosition = absEncoder;
+    }
+
+    /**
+     * Debug print for the DebugPrints command, useful for debugging and testing at
+     * a later date.
+     */
+    public void debugPrint() {
 
     }
 }

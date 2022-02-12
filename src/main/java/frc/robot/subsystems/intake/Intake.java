@@ -30,10 +30,6 @@ public class Intake extends SubsystemBase {
     private CANSparkMax intakeConveyorMotor;
     private DoubleSolenoid intakeSolenoid;
     private final ColorMatch colorMatcher;
-    final ShuffleboardTab tab;
-    final NetworkTableEntry intakeMotorSim;
-    final NetworkTableEntry intakeSolenoidSim;
-    SendableChooser<ColorResult> colorSensorSim;
 
     /** Creates a new Intake. */
     public Intake() {
@@ -46,14 +42,6 @@ public class Intake extends SubsystemBase {
         colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
-        tab = Shuffleboard.getTab("Debug");
-        intakeMotorSim = tab.add("Intake Speed", 0).getEntry();
-        intakeSolenoidSim = tab.add("pneumatic on_off", false).getEntry();
-        colorSensorSim = new SendableChooser<>();
-        colorSensorSim.addOption("red", ColorResult.RED);
-        colorSensorSim.addOption("blue", ColorResult.BLUE);
-        colorSensorSim.setDefaultOption("null", ColorResult.NONE);
-        tab.add("color sensor color", colorSensorSim);
     }
 
     @Override
@@ -65,72 +53,37 @@ public class Intake extends SubsystemBase {
      * This method raises the Intake Arm. This is the default position and will not
      * pick up any cargo.
      */
-    public void raiseArm(double something) {
-        intakeSolenoid.set(Value.kForward);
-    }
-
-    /**
-     * Temporary simulator code to raise the arm of the intake.
-     */
     public void raiseArm() {
-        intakeSolenoidSim.setBoolean(false);
+        intakeSolenoid.set(Value.kForward);
     }
 
     /**
      * This method lowers the Intake Arm. Prepares to feed cargo in an open
      * position.
      */
-    public void lowerArm(double something) {
-        intakeSolenoid.set(Value.kReverse);
-    }
-
-    /**
-     * Temporary simulator code to lower the arm of the intake.
-     */
     public void lowerArm() {
-        intakeSolenoidSim.setBoolean(true);
+        intakeSolenoid.set(Value.kReverse);
     }
 
     /**
      * This method rolls the rollers in the correct direction to intake a ball.
      */
-    public void rollerFeed(double something) {
-        intakeConveyorMotor.set(IntakeConstants.FEED_SPEED);
-    }
-
-    /**
-     * Temporary simulator code to run the rollers in a feeding direction.
-     */
     public void rollerFeed() {
-        intakeMotorSim.setDouble(IntakeConstants.FEED_SPEED);
+        intakeConveyorMotor.set(IntakeConstants.FEED_SPEED);
     }
 
     /**
      * This method rolls the rollers in the correct direction to expel a ball.
      */
-    public void rollerEject(double something) {
-        intakeConveyorMotor.set(IntakeConstants.EJECT_SPEED);
-    }
-
-    /**
-     * Temporary simulator code to run the rollers in an ejecting direction.
-     */
     public void rollerEject() {
-        intakeMotorSim.setDouble(IntakeConstants.EJECT_SPEED);
+        intakeConveyorMotor.set(IntakeConstants.EJECT_SPEED);
     }
 
     /**
      * This method Stops the Intake Rollers.
      */
-    public void rollerStop(double something) {
-        intakeConveyorMotor.set(0);
-    }
-
-    /**
-     * Temporary simulator code to stop the rollers from spinning.
-     */
     public void rollerStop() {
-        intakeMotorSim.setDouble(0);
+        intakeConveyorMotor.set(0);
     }
 
     /**
@@ -139,7 +92,7 @@ public class Intake extends SubsystemBase {
      * @return the color that the ball is or {@link ColorResult#NONE} if there is no
      *         ball.
      */
-    public ColorResult currentColor(double something) {
+    public ColorResult currentColor() {
         final var detectedColor = entryColor.getColor();
         final var match = colorMatcher.matchClosestColor(detectedColor);
 
@@ -153,20 +106,18 @@ public class Intake extends SubsystemBase {
     }
 
     /**
-     * Temporary simulator code to get the current color of the cargo that is stored
-     * within the intake/uptake
-     *
-     * @return color of the cargo.
-     */
-    public ColorResult currentColor() {
-        return colorSensorSim.getSelected();
-    }
-
-    /**
-     *
+     * This method prints the raw color of the the color sensor.
      */
     public void rawColor() {
         System.out.println(
                 "ed: " + entryColor.getRed() + "\ngreen: " + entryColor.getGreen() + "\nblue: " + entryColor.getBlue());
+    }
+
+    /**
+     * Debug print for the DebugPrints command, useful for debugging and testing at
+     * a later date.
+     */
+    public void debugPrint() {
+        System.out.println("anything");
     }
 }
