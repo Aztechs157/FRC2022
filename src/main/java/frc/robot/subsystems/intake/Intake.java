@@ -69,6 +69,9 @@ public class Intake extends SubsystemBase {
         intakeSolenoid.set(Value.kForward);
     }
 
+    /**
+     * Temporary simulator code to raise the arm of the intake.
+     */
     public void raiseArm() {
         intakeSolenoidSim.setBoolean(false);
     }
@@ -81,6 +84,9 @@ public class Intake extends SubsystemBase {
         intakeSolenoid.set(Value.kReverse);
     }
 
+    /**
+     * Temporary simulator code to lower the arm of the intake.
+     */
     public void lowerArm() {
         intakeSolenoidSim.setBoolean(true);
     }
@@ -92,6 +98,9 @@ public class Intake extends SubsystemBase {
         intakeConveyorMotor.set(IntakeConstants.FEED_SPEED);
     }
 
+    /**
+     * Temporary simulator code to run the rollers in a feeding direction.
+     */
     public void rollerFeed() {
         intakeMotorSim.setDouble(IntakeConstants.FEED_SPEED);
     }
@@ -103,6 +112,9 @@ public class Intake extends SubsystemBase {
         intakeConveyorMotor.set(IntakeConstants.EJECT_SPEED);
     }
 
+    /**
+     * Temporary simulator code to run the rollers in an ejecting direction.
+     */
     public void rollerEject() {
         intakeMotorSim.setDouble(IntakeConstants.EJECT_SPEED);
     }
@@ -114,6 +126,9 @@ public class Intake extends SubsystemBase {
         intakeConveyorMotor.set(0);
     }
 
+    /**
+     * Temporary simulator code to stop the rollers from spinning.
+     */
     public void rollerStop() {
         intakeMotorSim.setDouble(0);
     }
@@ -137,10 +152,19 @@ public class Intake extends SubsystemBase {
         }
     }
 
+    /**
+     * Temporary simulator code to get the current color of the cargo that is stored
+     * within the intake/uptake
+     *
+     * @return color of the cargo.
+     */
     public ColorResult currentColor() {
         return colorSensorSim.getSelected();
     }
 
+    /**
+     *
+     */
     public void rawColor() {
         System.out.println(
                 "ed: " + entryColor.getRed() + "\ngreen: " + entryColor.getGreen() + "\nblue: " + entryColor.getBlue());

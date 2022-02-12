@@ -58,7 +58,13 @@ public final class Constants {
         // connected to.
         public static final int POSITION_SENSOR_ID = 0;
         // The servo ID for the Aimer mechanism.
-        public static final int AIMER_SERVO_ID = 0;
+        public static final int AIMER_MOTOR_ID = 0;
+        // The upwards boundary for the aimer
+        public static final double AIMER_HIGHER_BOUNDARY = 0;
+        // The lower boundary for the aimer
+        public static final double AIMER_LOWER_BOUNDARY = 0;
+        // The port number for the absolute encoder.
+        public static final int ABS_ENCODER_PORT = 0;
         // The Counterclockwise Boundary for the turret
         public static final int COUNTERCLOCKWISE_BOUNDARY = 1;
         // The Clockwise Boundary for the turret

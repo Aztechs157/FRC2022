@@ -45,6 +45,12 @@ public class Shooter extends SubsystemBase {
         return ShootMotor1.getEncoder().getVelocity();
     }
 
+    /**
+     * Temporary simulator code to test getting the velocity of the shooter motor.
+     * Runs through shuffleboard.
+     *
+     * @return
+     */
     public double measureVelocity() {
         return velocityMotorSim.getDouble(0);
     }
@@ -59,6 +65,12 @@ public class Shooter extends SubsystemBase {
         ShootMotor1.set(power);
     }
 
+    /**
+     * Temporary simulator code to test setting the power for the shooter. Runs
+     * through shuffleboard.
+     *
+     * @param power
+     */
     public void setPower(double power) {
         motorPowerSim.setDouble(power);
     }
@@ -84,8 +96,15 @@ public class Shooter extends SubsystemBase {
         setPower(0);
     }
 
+    /**
+     * This method will calculate the pid for our current and our wanted velocity
+     * for the shooter motor.
+     * 
+     * @param goalVelocity
+     * @param currentVelocity
+     * @return
+     */
     public double pidCalculate(double goalVelocity, double currentVelocity) {
         return pid.calculate(currentVelocity, goalVelocity);
     }
-
 }

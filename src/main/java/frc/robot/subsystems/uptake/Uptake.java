@@ -49,6 +49,11 @@ public class Uptake extends SubsystemBase {
         direction = MotorDirection.STOPPED;
     }
 
+    /**
+     * This method gets the current direction of the running uptake motor.
+     *
+     * @return direction of motor.
+     */
     public MotorDirection getDirection() {
         return direction;
     }

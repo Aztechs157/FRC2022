@@ -7,9 +7,13 @@ package frc.robot.subsystems.turret;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Counter.Mode;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.controls.OperatorController;
@@ -17,16 +21,29 @@ import frc.robot.controls.OperatorController;
 public class Turret extends SubsystemBase {
     private CANSparkMax turretMotor;
     private AnalogInput positionSensor;
-    private Servo aimerServo;
+    private CANSparkMax aimerMotor;
+    private Counter absoluteEncoder;
     private OperatorController operatorController;
+    final ShuffleboardTab tab;
+    final NetworkTableEntry turretMotorSim;
+    final NetworkTableEntry posSensorSim;
+    private int rotations;
+    private int previousPosition;
+    private int maxRotation;
 
     /** Creates a new Turret. */
     public Turret(OperatorController operatorController) {
         turretMotor = new CANSparkMax(TurretConstants.TURRET_MOTOR_ID, MotorType.kBrushless);
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
-        aimerServo = new Servo(TurretConstants.AIMER_SERVO_ID);
-        aimerServo.setBounds(2.0, 1.8, 1.5, 1.2, 1);
-        Shuffleboard.getTab("Debug").addNumber("Turret Position", this::readPositionSensor);
+        aimerMotor = new CANSparkMax(TurretConstants.AIMER_MOTOR_ID, MotorType.kBrushless);
+        absoluteEncoder = new Counter(Mode.kSemiperiod);
+        absoluteEncoder.setSemiPeriodMode(true);
+        absoluteEncoder.setUpSource(TurretConstants.ABS_ENCODER_PORT);
+        absoluteEncoder.reset();
+        tab = Shuffleboard.getTab("Debug");
+        turretMotorSim = tab.add("Turret Speed", 0).getEntry();
+        posSensorSim = tab.add("Turret Position", 0).getEntry();
+
         this.operatorController = operatorController;
         this.setDefaultCommand(new TurretSpin(operatorController, this));
     }
@@ -57,7 +74,7 @@ public class Turret extends SubsystemBase {
      * @param speed at which to turn the turret. must be between -1 and 1. -1 is
      *              counterclockwise, 1 is clockwise.
      */
-    public void turretTurn(double speed) {
+    public void turretTurn(double speed, double something) {
         if (speed > 0 && readPositionSensor() > TurretConstants.CLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
         } else if (speed < 0 && readPositionSensor() < TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
@@ -67,11 +84,26 @@ public class Turret extends SubsystemBase {
         }
     }
 
+    // temporary simulator to run the turret. Runs through shuffleboard.
+    public void turretTurn(double speed) {
+        if (speed > 0 && readPositionSensor() > TurretConstants.CLOCKWISE_BOUNDARY) {
+            turretMotorSim.setDouble(0);
+        } else if (speed < 0 && readPositionSensor() < TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
+            turretMotorSim.setDouble(0);
+        } else {
+            turretMotorSim.setDouble(speed);
+        }
+    }
+
     /**
      * This method stops the turret motor.
      */
-    public void turretStop() {
+    public void turretStop(double something) {
         turretMotor.set(0);
+    }
+
+    public void turretStop() {
+        turretMotorSim.setDouble(0);
     }
 
     /**
@@ -79,16 +111,53 @@ public class Turret extends SubsystemBase {
      *
      * @return the position of the turret according to the sensor.
      */
-    public int readPositionSensor() {
+    public int readPositionSensor(double something) {
         return positionSensor.getValue();
     }
 
+    public int readPositionSensor() {
+        return (int) Math.round(posSensorSim.getDouble(0));
+    }
+
     /**
-     * This method sets the aimer position for more accurate shots.
+     * This method gets us the encoder position in degrees. 1024 is ticks.
      *
-     * @param position to set the aimer to. Must be between -1 and 1.
+     * @return aimer position in degrees.
      */
-    public void setAimerPosition(double position) {
-        aimerServo.setSpeed(position);
+    public double getAimerPosition() {
+        return absoluteEncoder.getPeriod() * (360 / 1024) * 1000000; // equation for degree per tick converted to
+                                                                     // seconds.
+    }
+
+    /**
+     * This method moves the aimer in a upwards direction. Decreasing the aimer
+     * angle.
+     */
+    public void aimerUp() {
+
+    }
+
+    /**
+     * This method moves the aimer in a downwards direction. Increasing the aimer
+     * angle.
+     */
+    public void aimerDown() {
+
+    }
+
+    /**
+     * This method will run the aimer either up or down.
+     * 
+     * @param speed
+     */
+    public void runAimer(double speed) {
+
+    }
+
+    /**
+     * This method will stop the aimer from moving.
+     */
+    public void stopAimer() {
+
     }
 }

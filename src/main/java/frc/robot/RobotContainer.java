@@ -64,7 +64,8 @@ public class RobotContainer {
     private void configureButtonBindings() {
         driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
 
-        // Jame's button test code, prints out Hello when A is pressed
+        // Jame's button test code, I changed the prints from simple strings of hello to
+        // measure velocity method printouts.
         driverController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println(shooter.measureVelocity()));
 
@@ -97,6 +98,8 @@ public class RobotContainer {
         // driverController.button(ButtonKey.IntakeRun)
         // .whenReleased(intake::rollerStop);
 
+        // Y button runs the intakecargo command. This will run the motors of the
+        // intake, uptake and kicker when the y button is held.
         driverController.button(ButtonKey.IntakeRun)
                 .whileHeld(new IntakeCargo(intake, uptake, kicker));
 
@@ -104,6 +107,8 @@ public class RobotContainer {
         driverController.button(ButtonKey.ShooterRun)
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, 1000));
 
+        // Right Bumper runs the Ejecting, this line runs the intake, uptake, kicker,
+        // and shooter based on logic related to color sensing and position sensing.
         driverController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
     }
@@ -118,6 +123,11 @@ public class RobotContainer {
         return null;
     }
 
+    /**
+     * This will get the kicker color sensor command
+     *
+     * @return kicker stored cargo color
+     */
     public Command getKickerColorSensorCommand() {
         return getKickerColor;
     }

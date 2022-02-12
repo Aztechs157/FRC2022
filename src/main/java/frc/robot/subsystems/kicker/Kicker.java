@@ -69,14 +69,32 @@ public class Kicker extends SubsystemBase {
         return ballSensor.get();
     }
 
+    /**
+     * Temporary getting ball sensor simulator that gives us a true or false for a
+     * ball in the kicker. Runs through shuffleboard.
+     *
+     * @return
+     */
     public boolean getBallSensor() {
         return kickerSensorSim.getBoolean(false);
     }
 
+    /**
+     * This method gets us the color of the cargo. Temporary simulator that runs
+     * through shuffleboard.
+     *
+     * @return cargo color.
+     */
     public ColorResult getBallColor() {
         return color;
     }
 
+    /**
+     * This method is for the temporary simulator code. sets the variable color to
+     * strings as so shuffleboard can use the color.
+     *
+     * @param color
+     */
     public void setBallColor(ColorResult color) {
         this.color = color;
         switch (color) {
