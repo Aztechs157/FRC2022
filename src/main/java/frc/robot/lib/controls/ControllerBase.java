@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
 
-    private SendableChooser<LayoutBase<ButtonKey, AxisKey>> layouts = new SendableChooser<>();
+    private final SendableChooser<LayoutBase<ButtonKey, AxisKey>> layouts = new SendableChooser<>();
 
     @Override
     public void initSendable(final SendableBuilder builder) {
@@ -46,7 +46,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @return The selected layout
      */
     private LayoutBase<ButtonKey, AxisKey> getSelectedLayout() {
-        var layout = layouts.getSelected();
+        final var layout = layouts.getSelected();
 
         if (layout == null) {
             throw new NoLayoutsAddedException();

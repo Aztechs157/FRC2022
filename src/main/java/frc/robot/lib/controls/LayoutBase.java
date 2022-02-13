@@ -54,7 +54,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
      * @return The associated input
      */
     public ButtonInput getButton(final ButtonKey buttonKey) {
-        var button = buttons.get(buttonKey);
+        final var button = buttons.get(buttonKey);
 
         if (button == null) {
             throw new InputNotAssignedException(name, buttonKey.toString());
@@ -83,7 +83,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
      * @return The associated input
      */
     public AxisInput getAxis(final AxisKey axisKey) {
-        var axis = axes.get(axisKey);
+        final var axis = axes.get(axisKey);
 
         if (axis == null) {
             throw new InputNotAssignedException(name, axisKey.toString());
@@ -104,7 +104,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
     @Override
     public void initSendable(final SendableBuilder builder) {
 
-        for (var entry : buttons.entrySet()) {
+        for (final var entry : buttons.entrySet()) {
             builder.addBooleanProperty(
                     entry.getKey().toString(),
                     entry.getValue()::getAsBoolean,
@@ -112,7 +112,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
                     });
         }
 
-        for (var entry : axes.entrySet()) {
+        for (final var entry : axes.entrySet()) {
             builder.addDoubleProperty(
                     entry.getKey().toString(),
                     entry.getValue()::getAsDouble,
