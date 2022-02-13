@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
@@ -15,6 +16,7 @@ import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.intake.IntakeSim;
 import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.pneumatics.Pneumatics;
 import frc.robot.subsystems.sensing.EjectCargo;
 import frc.robot.subsystems.sensing.GetKickerColor;
 import frc.robot.subsystems.shooter.ShootCargo;
@@ -40,9 +42,10 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public final Uptake uptake = new Uptake();
     public final Kicker kicker = new Kicker();
-    public final Intake intake = new IntakeSim();
-    private final Shooter shooter = new ShooterSim();
-    private final Turret turret = new TurretSim(operatorController);
+    public final Intake intake = new Intake();
+    private final Shooter shooter = new Shooter();
+    private final Turret turret = new Turret(operatorController);
+    // private final Pneumatics pneumatics = new Pneumatics();
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
@@ -107,7 +110,7 @@ public class RobotContainer {
 
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, 1000));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, 1500));
 
         // Right Bumper runs the Ejecting, this line runs the intake, uptake, kicker,
         // and shooter based on logic related to color sensing and position sensing.

@@ -21,7 +21,7 @@ public class Kicker extends SubsystemBase {
     private DigitalInput ballSensor;
     private ColorResult color;
     final ShuffleboardTab tab;
-    final NetworkTableEntry kickerSensorSim;
+    // final NetworkTableEntry kickerSensorSim;
     final NetworkTableEntry kickerColorSim;
 
     /** Creates a new Kicker. */
@@ -30,7 +30,7 @@ public class Kicker extends SubsystemBase {
         ballSensor = new DigitalInput(KickerConstants.KICKER_SENSOR_ID);
         color = ColorResult.NONE;
         tab = Shuffleboard.getTab("Debug");
-        kickerSensorSim = tab.add("Kicker Sensor", false).getEntry();
+        // kickerSensorSim = tab.add("Kicker Sensor", false).getEntry();
         kickerColorSim = tab.add("Kicker Color", "null").getEntry();
     }
 
@@ -65,7 +65,7 @@ public class Kicker extends SubsystemBase {
      *
      * @return the digital input
      */
-    public boolean getBallSensor(double something) {
+    public boolean getBallSensor() {
         return ballSensor.get();
     }
 
@@ -75,9 +75,9 @@ public class Kicker extends SubsystemBase {
      *
      * @return
      */
-    public boolean getBallSensor() {
-        return kickerSensorSim.getBoolean(false);
-    }
+    // public boolean getBallSensor(double something) {
+    // return kickerSensorSim.getBoolean(false);
+    // }
 
     /**
      * This method gets us the color of the cargo. Temporary simulator that runs
@@ -121,6 +121,6 @@ public class Kicker extends SubsystemBase {
      * a later date.
      */
     public void debugPrint() {
-
+        System.out.println("kicker sensor: " + getBallSensor());
     }
 }

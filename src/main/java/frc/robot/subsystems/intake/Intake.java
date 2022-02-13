@@ -36,12 +36,13 @@ public class Intake extends SubsystemBase {
         colorMatcher = new ColorMatch();
         entryColor = new ColorSensorV3(IntakeConstants.COLOR_SENSOR_ID);
         intakeConveyorMotor = new CANSparkMax(IntakeConstants.INTAKE_MOTOR_ID, MotorType.kBrushless);
-        // intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH,
-        // IntakeConstants.SOLENOID_FORWARD_ID,
-        // IntakeConstants.SOLENOID_REVERSE_ID);
+        intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH,
+                IntakeConstants.SOLENOID_FORWARD_ID,
+                IntakeConstants.SOLENOID_REVERSE_ID);
         colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
+        Shuffleboard.getTab("Debug").addNumber("proximity distance", entryColor::getProximity);
     }
 
     @Override
@@ -95,12 +96,20 @@ public class Intake extends SubsystemBase {
     public ColorResult currentColor() {
         final var detectedColor = entryColor.getColor();
         final var match = colorMatcher.matchClosestColor(detectedColor);
-
-        if (match.color == IntakeConstants.RED_TARGET) {
-            return ColorResult.RED;
-        } else if (match.color == IntakeConstants.BLUE_TARGET) {
-            return ColorResult.BLUE;
+        if (entryColor.getProximity() > IntakeConstants.PROX_FAR
+                && entryColor.getProximity() < IntakeConstants.PROX_CLOSE) {
+            if (match.color == IntakeConstants.RED_TARGET) {
+                // System.out.println("Color: red");
+                return ColorResult.RED;
+            } else if (match.color == IntakeConstants.BLUE_TARGET) {
+                // System.out.println("Color: blue");
+                return ColorResult.BLUE;
+            } else {
+                // System.out.println("Color: none");
+                return ColorResult.NONE;
+            }
         } else {
+            // System.out.println("Not in Proximity");
             return ColorResult.NONE;
         }
     }

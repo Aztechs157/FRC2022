@@ -13,6 +13,7 @@ public class ShootCargo extends CommandBase {
     private Kicker kicker;
     private Uptake uptake;
     private double targetSpeed;
+    private double speedSum = 0;
 
     /** Creates a new SetShooterSpeed. */
     public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, double targetSpeed) {
@@ -33,6 +34,7 @@ public class ShootCargo extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        speedSum = 0;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -44,8 +46,9 @@ public class ShootCargo extends CommandBase {
          * Then it runs the uptake and kicker in order to shoot.
          */
         var currSpeed = shooter.measureVelocity();
-        shooter.setPower(shooter.pidCalculate(targetSpeed, currSpeed));
-        if (currSpeed > targetSpeed - 20 && currSpeed < targetSpeed + 20) {
+        speedSum += shooter.pidCalculate(targetSpeed, currSpeed);
+        shooter.setPower(speedSum);
+        if (currSpeed > targetSpeed - 300 && currSpeed < targetSpeed + 300) {
             kicker.kickerFeed();
             uptake.uptakeFeed();
         } else {

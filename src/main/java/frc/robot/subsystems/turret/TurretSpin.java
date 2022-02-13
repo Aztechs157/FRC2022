@@ -6,6 +6,7 @@ package frc.robot.subsystems.turret;
 
 import edu.wpi.first.wpilibj.PS4Controller.Axis;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.TurretConstants;
 import frc.robot.controls.AxisKey;
 import frc.robot.controls.OperatorController;
 
@@ -31,9 +32,9 @@ public class TurretSpin extends CommandBase {
     public void execute() {
         // rotates the turret based on joystick input
         final var turretRotation = operatorController.getAxis(AxisKey.TurretSpeed);
-        turret.turretTurn(turretRotation);
+        turret.turretTurn(turretRotation * TurretConstants.TURRET_SPEED);
         final var aimerRotation = operatorController.getAxis(AxisKey.AimerSpeed);
-        turret.runAimer(aimerRotation);
+        turret.runAimer(aimerRotation * TurretConstants.AIMER_SPEED);
     }
 
     // Called once the command ends or is interrupted.

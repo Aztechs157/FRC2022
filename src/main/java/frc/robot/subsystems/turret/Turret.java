@@ -70,9 +70,9 @@ public class Turret extends SubsystemBase {
      *              counterclockwise, 1 is clockwise.
      */
     public void turretTurn(double speed) {
-        if (speed > 0 && readPositionSensor() > TurretConstants.CLOCKWISE_BOUNDARY) {
+        if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
-        } else if (speed < 0 && readPositionSensor() < TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
+        } else if (speed < 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
         } else {
             turretMotor.set(speed);
@@ -101,8 +101,8 @@ public class Turret extends SubsystemBase {
      * @return aimer position in degrees.
      */
     public double getAimerPosition() {
-        return absoluteEncoder.getPeriod() * (360 / 1024) * 1000000; // equation for degree per tick converted to
-                                                                     // seconds.
+        return absoluteEncoder.getPeriod() * (360.0 / 1024.0) * 1000000; // equation for degree per tick converted to
+        // seconds.
     }
 
     public double getActualPosition() {
@@ -131,9 +131,9 @@ public class Turret extends SubsystemBase {
      * @param speed
      */
     public void runAimer(double speed) {
-        if (speed > 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY) {
+        if (speed < 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY) {
             aimerMotor.set(0);
-        } else if (speed < 0 && getActualPosition() < TurretConstants.AIMER_LOWER_BOUNDARY) {
+        } else if (speed > 0 && getActualPosition() < TurretConstants.AIMER_LOWER_BOUNDARY) {
             aimerMotor.set(0);
         } else {
             aimerMotor.set(speed);
@@ -164,6 +164,7 @@ public class Turret extends SubsystemBase {
      * a later date.
      */
     public void debugPrint() {
-
+        System.out.println("Aimer Position: " + getActualPosition());
+        System.out.println("Turret Position: " + readPositionSensor());
     }
 }

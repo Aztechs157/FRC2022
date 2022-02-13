@@ -8,16 +8,19 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
     private CANSparkMax ShootMotor1;
-    private PIDController pid = new PIDController(0.01, 0, 0);
+    private PIDController pid = new PIDController(0.00001, 0, 0.000003);
 
     /** Creates a new Shooter. */
     public Shooter() {
         ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
+        ShootMotor1.setInverted(true);
+        Shuffleboard.getTab("Debug").addNumber("shooter speed", this::measureVelocity);
         // final DoubleSupplier driveInputScale = () -> .getDouble(0);
     }
 
