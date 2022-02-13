@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
+import frc.robot.vision.VisionSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -23,6 +24,8 @@ import frc.robot.controls.OperatorController;
 public class RobotContainer {
     private final DriverController driverController = new DriverController();
     private final OperatorController operatorController = new OperatorController();
+
+    private final VisionSubsystem visionSubsystem = new VisionSubsystem();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
