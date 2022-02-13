@@ -3,7 +3,6 @@ package frc.robot.lib.controls;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj2.command.button.Button;
 
 /**
  * Object that manages layouts. A layout can be selected from Shuffleboard that
@@ -20,33 +19,24 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
     }
 
     /**
-     * Get a proper WPI {@link Button} from the currently selected layout. This
-     * allows you to setup commands to run.
+     * Get a button from the currently selected layout. This acts both as a
+     * {@link ButtonInput} and a proper WPI {@link Button} to allow for command
+     * running.
      *
      * @param buttonKey Which button to retrieve
-     * @return A WPI {@link Button} representing the input
+     * @return A {@link ButtonInput} and {@link Button} representing the input
      */
     public Button button(final ButtonKey buttonKey) {
-        return new Button(getButton(buttonKey));
+        return new Button(getSelectedLayout().getButton(buttonKey));
     }
 
     /**
-     * Get a button from the currently selected layout
-     *
-     * @param buttonKey Which button to retrieve
-     * @return The boolean representing the input
-     */
-    public ButtonInput getButton(final ButtonKey buttonKey) {
-        return getSelectedLayout().getButton(buttonKey);
-    }
-
-    /**
-     * Get a axis from the currently selected layout
+     * Get a axis from the currently selected layout.
      *
      * @param axisKey Which axis to retrieve
-     * @return The number representing the input
+     * @return A {@link AxisInput} representing the input
      */
-    public AxisInput getAxis(final AxisKey axisKey) {
+    public AxisInput axis(final AxisKey axisKey) {
         return getSelectedLayout().getAxis(axisKey);
     }
 
