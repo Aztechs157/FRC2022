@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.Button;
-import frc.robot.controls.DriverController;
-import frc.robot.controls.OperatorController;
+import frc.robot.controls.DriverControls;
+import frc.robot.controls.OperatorControls;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
 
@@ -23,8 +23,8 @@ import frc.robot.drive.TeleopDrive;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    private final DriverController driverController = new DriverController();
-    private final OperatorController operatorController = new OperatorController();
+    private final DriverControls driverControls = new DriverControls();
+    private final OperatorControls operatorControls = new OperatorControls();
 
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
@@ -46,12 +46,12 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         driveSubsystem.setDefaultCommand(
-                new TeleopDrive(driverController, driveSubsystem));
+                new TeleopDrive(driverControls, driveSubsystem));
 
-        driverController.button(Button.Hello)
+        driverControls.button(Button.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
-        operatorController.button(Button.Hello)
+        operatorControls.button(Button.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
     }
 

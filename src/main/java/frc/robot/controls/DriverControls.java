@@ -4,13 +4,13 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.lib.DoubleRange;
-import frc.robot.lib.controls.Controller;
+import frc.robot.lib.controls.LayoutChooser;
 import frc.robot.lib.controls.models.LogitechExtreme3D;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
 
-public class DriverController extends Controller {
+public class DriverControls extends LayoutChooser {
 
-    public DriverController() {
+    public DriverControls() {
         final var tab = Shuffleboard.getTab("Debug");
 
         final var scaleEntry = tab.add("Drive Input Scale", 0).getEntry();

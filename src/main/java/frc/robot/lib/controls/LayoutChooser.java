@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * can then be used by the robot. It maps the inputs of a controller to the
  * desired functions of the robot.
  */
-public class Controller implements Sendable {
+public class LayoutChooser implements Sendable {
 
     private final SendableChooser<Layout> layouts = new SendableChooser<>();
 
@@ -70,7 +70,7 @@ public class Controller implements Sendable {
      * Add a Layout to this Controller. This allows the Controller to display and
      * swap to it using Shuffleboard. If no layouts have been added yet, this will
      * implicitly also set the new one as the default. To manually overwrite the
-     * default later, use {@link Controller#addAndSetDefault(Layout)}.
+     * default later, use {@link LayoutChooser#addAndSetDefault(Layout)}.
      *
      * @param layout The Layout to add
      */
@@ -85,7 +85,7 @@ public class Controller implements Sendable {
     /**
      * Manually set a layout as the default. This will additionally add it if it
      * wasn't added already. Normally this isn't necessary, as
-     * {@link Controller#add(Layout)} will automatically set the first
+     * {@link LayoutChooser#add(Layout)} will automatically set the first
      * layout as default.
      *
      * @param layout The Layout to add
