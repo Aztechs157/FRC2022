@@ -26,7 +26,7 @@ public class ModelBase {
      * @return The modeled {@link ButtonInput}
      */
     public ButtonInput button(final int buttonId) {
-        return () -> DriverStation.getStickButton(deviceId, buttonId);
+        return new ButtonInput(() -> DriverStation.getStickButton(deviceId, buttonId));
     }
 
     /**

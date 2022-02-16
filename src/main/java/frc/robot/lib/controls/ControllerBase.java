@@ -26,18 +26,8 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @param buttonKey Which button to retrieve
      * @return A {@link ButtonInput} and {@link Button} representing the input
      */
-    public Button button(final ButtonKey buttonKey) {
-        return new Button(() -> getButton(buttonKey));
-    }
-
-    /**
-     * Get a button from the currently selected layout
-     *
-     * @param buttonKey Which button to retrieve
-     * @return The boolean representing the input
-     */
-    public boolean getButton(final ButtonKey buttonKey) {
-        return getSelectedLayout().getButton(buttonKey).getAsBoolean();
+    public ButtonInput button(final ButtonKey buttonKey) {
+        return new ButtonInput(() -> getSelectedLayout().getButton(buttonKey).getAsBoolean());
     }
 
     /**

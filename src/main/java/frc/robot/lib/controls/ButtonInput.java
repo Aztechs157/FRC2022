@@ -2,22 +2,17 @@ package frc.robot.lib.controls;
 
 import java.util.function.BooleanSupplier;
 
+import edu.wpi.first.wpilibj2.command.button.Button;
+
 /**
  * Interface for getting input from a button. This class has methods and static
  * methods to modify and compose {@link ButtonInput}s into a new
  * {@link ButtonInput}.
  */
-@FunctionalInterface
-public interface ButtonInput extends BooleanSupplier {
+public class ButtonInput extends Button {
 
-    /**
-     * Create a {@link ButtonInput} using a {@link BooleanSupplier}
-     *
-     * @param supplier The input as a BooleanSupplier
-     * @return The input as a ButtonInput
-     */
-    public static ButtonInput wrap(final BooleanSupplier supplier) {
-        return supplier::getAsBoolean;
+    public ButtonInput(final BooleanSupplier isPressed) {
+        super(isPressed);
     }
 
     /**
@@ -25,8 +20,8 @@ public interface ButtonInput extends BooleanSupplier {
      *
      * @return A new inverted input
      */
-    public default ButtonInput inverted() {
-        return () -> !getAsBoolean();
+    public ButtonInput inverted() {
+        return new ButtonInput(() -> !get());
     }
 
     /**
@@ -37,24 +32,24 @@ public interface ButtonInput extends BooleanSupplier {
      * @return A new input that is only true when all of the passed inputs are true
      */
     public static ButtonInput all(final ButtonInput first, final ButtonInput... rest) {
-        return () -> {
+        return new ButtonInput(() -> {
             // Check each input individually
             // As soon as one input is false, return false
             // The first argument is explicit to prevent being given empty arrays
 
-            if (first.getAsBoolean() == false) {
+            if (first.get() == false) {
                 return false;
             }
 
             for (final var input : rest) {
-                if (input.getAsBoolean() == false) {
+                if (input.get() == false) {
                     return false;
                 }
             }
 
             // All inputs are true at this point, so return true
             return true;
-        };
+        });
     }
 
     /**
@@ -65,23 +60,23 @@ public interface ButtonInput extends BooleanSupplier {
      * @return A new input that is true when any of the passed inputs are true
      */
     public static ButtonInput any(final ButtonInput first, final ButtonInput... rest) {
-        return () -> {
+        return new ButtonInput(() -> {
             // Check each input individually
             // As soon as one input is true, return true
             // The first argument is explicit to prevent being given empty arrays
 
-            if (first.getAsBoolean()) {
+            if (first.get()) {
                 return true;
             }
 
             for (final var input : rest) {
-                if (input.getAsBoolean()) {
+                if (input.get()) {
                     return true;
                 }
             }
 
             // All inputs are false at this point, so return false
             return false;
-        };
+        });
     }
 }
