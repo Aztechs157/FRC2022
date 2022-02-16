@@ -36,6 +36,6 @@ public class ModelBase {
      * @return The modeled {@link AxisInput}
      */
     public AxisInput axis(final int axisId) {
-        return () -> DriverStation.getStickAxis(deviceId, axisId);
+        return new AxisInput(() -> DriverStation.getStickAxis(deviceId, axisId));
     }
 }

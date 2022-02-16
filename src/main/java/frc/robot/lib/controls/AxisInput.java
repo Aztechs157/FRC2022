@@ -9,17 +9,20 @@ import static frc.robot.lib.DoubleRange.scale;
  * methods to modify and compose {@link AxisInput}s into a new
  * {@link AxisInput}.
  */
-@FunctionalInterface
-public interface AxisInput extends DoubleSupplier {
+public class AxisInput implements DoubleSupplier {
+    private final DoubleSupplier value;
 
-    /**
-     * Create a {@link AxisInput} using a {@link DoubleSupplier}
-     *
-     * @param supplier The input as a DoubleSupplier
-     * @return The input as a AxisInput
-     */
-    public static AxisInput wrap(final DoubleSupplier supplier) {
-        return supplier::getAsDouble;
+    public AxisInput(final DoubleSupplier value) {
+        this.value = value;
+    }
+
+    @Override
+    public double getAsDouble() {
+        return value.getAsDouble();
+    }
+
+    public double get() {
+        return value.getAsDouble();
     }
 
     /**
@@ -27,8 +30,8 @@ public interface AxisInput extends DoubleSupplier {
      *
      * @return A new inverted input
      */
-    public default AxisInput inverted() {
-        return () -> -getAsDouble();
+    public AxisInput inverted() {
+        return new AxisInput(() -> -getAsDouble());
     }
 
     /**
@@ -37,8 +40,8 @@ public interface AxisInput extends DoubleSupplier {
      * @param scale The value to scale by
      * @return A new input with the scale applied
      */
-    public default AxisInput scaled(final double scale) {
-        return () -> getAsDouble() * scale;
+    public AxisInput scaled(final double scale) {
+        return new AxisInput(() -> getAsDouble() * scale);
     }
 
     /**
@@ -47,8 +50,8 @@ public interface AxisInput extends DoubleSupplier {
      * @param scale The input to retrieve the scale from
      * @return A new input with the scale applied
      */
-    public default AxisInput scaled(final DoubleSupplier scale) {
-        return () -> getAsDouble() * scale.getAsDouble();
+    public AxisInput scaled(final DoubleSupplier scale) {
+        return new AxisInput(() -> getAsDouble() * scale.getAsDouble());
     }
 
     /**
@@ -57,8 +60,8 @@ public interface AxisInput extends DoubleSupplier {
      * @param range The range to clamp to
      * @return A new input with clamp applied
      */
-    public default AxisInput clamp(final DoubleRange range) {
-        return () -> range.applyClamp(getAsDouble());
+    public AxisInput clamp(final DoubleRange range) {
+        return new AxisInput(() -> range.applyClamp(getAsDouble()));
     }
 
     /**
@@ -71,12 +74,12 @@ public interface AxisInput extends DoubleSupplier {
      * @param deadzone The range of the deadzone
      * @return A new input with the deadzone applied
      */
-    public default AxisInput deadzone(final DoubleRange deadzone) {
+    public AxisInput deadzone(final DoubleRange deadzone) {
         final var fullRange = new DoubleRange(-1, 1);
         final var leftRange = new DoubleRange(fullRange.low, deadzone.low);
         final var rightRange = new DoubleRange(deadzone.high, fullRange.high);
 
-        return () -> {
+        return new AxisInput(() -> {
             final var value = getAsDouble();
 
             if (deadzone.contains(value)) {
@@ -89,6 +92,6 @@ public interface AxisInput extends DoubleSupplier {
 
             throw new Error("Attempted to apply deadzone to axis value outside of full range "
                     + fullRange.low + " to " + fullRange.high);
-        };
+        });
     }
 }

@@ -36,8 +36,8 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @param axisKey Which axis to retrieve
      * @return A {@link AxisInput} representing the input
      */
-    public double getAxis(final AxisKey axisKey) {
-        return getSelectedLayout().getAxis(axisKey).getAsDouble();
+    public AxisInput axis(final AxisKey axisKey) {
+        return new AxisInput(() -> getSelectedLayout().getAxis(axisKey).getAsDouble());
     }
 
     /**

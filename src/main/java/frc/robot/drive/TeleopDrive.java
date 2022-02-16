@@ -22,9 +22,9 @@ public class TeleopDrive extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        final var speedY = driverController.getAxis(AxisKey.DriveSpeedY);
-        final var speedX = driverController.getAxis(AxisKey.DriveSpeedX);
-        final var rotation = driverController.getAxis(AxisKey.DriveRotation);
+        final var speedY = driverController.axis(AxisKey.DriveSpeedY).get();
+        final var speedX = driverController.axis(AxisKey.DriveSpeedX).get();
+        final var rotation = driverController.axis(AxisKey.DriveRotation).get();
 
         driveSubsystem.driveCartesian(speedY, speedX, rotation);
     }
