@@ -31,7 +31,7 @@ public class AxisInput implements DoubleSupplier {
      * @return A new inverted input
      */
     public AxisInput inverted() {
-        return new AxisInput(() -> -getAsDouble());
+        return new AxisInput(() -> -get());
     }
 
     /**
@@ -41,7 +41,7 @@ public class AxisInput implements DoubleSupplier {
      * @return A new input with the scale applied
      */
     public AxisInput scaled(final double scale) {
-        return new AxisInput(() -> getAsDouble() * scale);
+        return new AxisInput(() -> get() * scale);
     }
 
     /**
@@ -51,7 +51,7 @@ public class AxisInput implements DoubleSupplier {
      * @return A new input with the scale applied
      */
     public AxisInput scaled(final DoubleSupplier scale) {
-        return new AxisInput(() -> getAsDouble() * scale.getAsDouble());
+        return new AxisInput(() -> get() * scale.getAsDouble());
     }
 
     /**
@@ -61,7 +61,7 @@ public class AxisInput implements DoubleSupplier {
      * @return A new input with clamp applied
      */
     public AxisInput clamp(final DoubleRange range) {
-        return new AxisInput(() -> range.applyClamp(getAsDouble()));
+        return new AxisInput(() -> range.applyClamp(get()));
     }
 
     /**
@@ -80,7 +80,7 @@ public class AxisInput implements DoubleSupplier {
         final var rightRange = new DoubleRange(deadzone.high, fullRange.high);
 
         return new AxisInput(() -> {
-            final var value = getAsDouble();
+            final var value = get();
 
             if (deadzone.contains(value)) {
                 return 0;

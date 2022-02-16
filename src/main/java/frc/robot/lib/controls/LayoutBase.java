@@ -12,7 +12,7 @@ import edu.wpi.first.util.sendable.SendableBuilder;
  * {@link ControllerBase} to allow hot-swapping of various control
  * configurations, otherwise known as "layouts."
  */
-public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
+public class LayoutBase implements Sendable {
 
     private final String name;
 
@@ -43,7 +43,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
      * @param buttonKey The key to assign with
      * @param input     The input being assigned
      */
-    public void assign(final ButtonKey buttonKey, final ButtonInput input) {
+    public void assignButton(final ButtonKey buttonKey, final ButtonInput input) {
         buttons.put(buttonKey, input);
     }
 
@@ -53,7 +53,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
      * @param buttonKey They key a input was assigned with
      * @return The associated input
      */
-    public ButtonInput getButton(final ButtonKey buttonKey) {
+    public ButtonInput assign(final ButtonKey buttonKey) {
         final var button = buttons.get(buttonKey);
 
         if (button == null) {
@@ -107,7 +107,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
         for (final var entry : buttons.entrySet()) {
             builder.addBooleanProperty(
                     entry.getKey().toString(),
-                    entry.getValue()::getAsBoolean,
+                    entry.getValue()::get,
                     (_value) -> {
                     });
         }
@@ -115,7 +115,7 @@ public class LayoutBase<ButtonKey, AxisKey> implements Sendable {
         for (final var entry : axes.entrySet()) {
             builder.addDoubleProperty(
                     entry.getKey().toString(),
-                    entry.getValue()::getAsDouble,
+                    entry.getValue()::get,
                     (_value) -> {
                     });
         }

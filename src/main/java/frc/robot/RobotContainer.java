@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.controls.ButtonKey;
+import frc.robot.controls.Button;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
 import frc.robot.drive.DriveSubsystem;
@@ -26,7 +26,7 @@ public class RobotContainer {
     private final DriverController driverController = new DriverController();
     private final OperatorController operatorController = new OperatorController();
 
-    private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+    // private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -45,12 +45,13 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
+        // driveSubsystem.setDefaultCommand(new TeleopDrive(driverController,
+        // driveSubsystem));
 
-        driverController.button(ButtonKey.Hello)
+        driverController.button(Button.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
-        operatorController.button(ButtonKey.Hello)
+        operatorController.button(Button.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
     }
 

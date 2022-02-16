@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * can then be used by the robot. It maps the inputs of a controller to the
  * desired functions of the robot.
  */
-public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
+public class ControllerBase implements Sendable {
 
-    private final SendableChooser<LayoutBase<ButtonKey, AxisKey>> layouts = new SendableChooser<>();
+    private final SendableChooser<LayoutBase> layouts = new SendableChooser<>();
 
     @Override
     public void initSendable(final SendableBuilder builder) {
@@ -27,7 +27,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      * @return A {@link ButtonInput} and {@link Button} representing the input
      */
     public ButtonInput button(final ButtonKey buttonKey) {
-        return new ButtonInput(() -> getSelectedLayout().getButton(buttonKey).getAsBoolean());
+        return new ButtonInput(() -> getSelectedLayout().assign(buttonKey).getAsBoolean());
     }
 
     /**
@@ -45,7 +45,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      *
      * @return The selected layout
      */
-    private LayoutBase<ButtonKey, AxisKey> getSelectedLayout() {
+    private LayoutBase getSelectedLayout() {
         final var layout = layouts.getSelected();
 
         if (layout == null) {
@@ -74,7 +74,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      *
      * @param layout The Layout to add
      */
-    public void add(final LayoutBase<ButtonKey, AxisKey> layout) {
+    public void add(final LayoutBase layout) {
         if (hasDefault) {
             layouts.addOption(layout.getName(), layout);
         } else {
@@ -90,7 +90,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      *
      * @param layout The Layout to add
      */
-    public void addAndSetDefault(final LayoutBase<ButtonKey, AxisKey> layout) {
+    public void addAndSetDefault(final LayoutBase layout) {
         layouts.setDefaultOption(layout.getName(), layout);
         hasDefault = true;
     }
@@ -105,9 +105,9 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      *
      * <pre>
      *
-     * class Controller extends ControllerBase<ButtonKey, AxisKey> {
+     * class Controller extends ControllerBase {
      *     // Before
-     *     var layout = new LayoutBase<ButtonKey, AxisKey>("Layout");
+     *     var layout = new LayoutBase("Layout");
      *     addDefault(layout);
      *
      *     // After
@@ -116,7 +116,7 @@ public class ControllerBase<ButtonKey, AxisKey> implements Sendable {
      *
      * </pre>
      */
-    public class Layout extends LayoutBase<ButtonKey, AxisKey> {
+    public class Layout extends LayoutBase {
         public Layout(final String name) {
             super(name);
             add(this);

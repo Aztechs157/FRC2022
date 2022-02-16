@@ -8,7 +8,7 @@ import frc.robot.lib.controls.ControllerBase;
 import frc.robot.lib.controls.models.LogitechExtreme3D;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
 
-public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
+public class DriverController extends ControllerBase {
 
     public DriverController() {
         final var tab = Shuffleboard.getTab("Debug");
@@ -19,24 +19,24 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         final var defaultLayout = new Layout("Default");
         final var logitech = new LogitechGamepadF310(0);
 
-        defaultLayout.assign(AxisKey.DriveSpeedX,
+        defaultLayout.assign(Axis.DriveSpeedX,
                 logitech.leftStickX.scaled(driveInputScale));
-        defaultLayout.assign(AxisKey.DriveSpeedY,
+        defaultLayout.assign(Axis.DriveSpeedY,
                 logitech.leftStickY.scaled(driveInputScale).inverted());
-        defaultLayout.assign(AxisKey.DriveRotation,
+        defaultLayout.assign(Axis.DriveRotation,
                 logitech.rightStickX.scaled(driveInputScale));
 
-        defaultLayout.assign(ButtonKey.Hello, logitech.a);
+        defaultLayout.assignButton(Button.Hello, logitech.a);
 
         final var flightLayout = new Layout("Flight Stick");
         final var flight = new LogitechExtreme3D(1);
 
-        flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
-        flightLayout.assign(AxisKey.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
-        flightLayout.assign(AxisKey.DriveRotation,
+        flightLayout.assign(Axis.DriveSpeedX, flight.stickX.scaled(driveInputScale));
+        flightLayout.assign(Axis.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
+        flightLayout.assign(Axis.DriveRotation,
                 flight.stickRotate.deadzone(new DoubleRange(0, 0.15)).scaled(driveInputScale));
 
-        flightLayout.assign(ButtonKey.Hello, flight.thumbButton);
+        flightLayout.assignButton(Button.Hello, flight.thumbButton);
 
         tab.add("Drive", this);
         tab.add("Default Layout", defaultLayout);
