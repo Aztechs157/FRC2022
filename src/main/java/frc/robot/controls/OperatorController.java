@@ -1,14 +1,14 @@
 package frc.robot.controls;
 
-import frc.robot.lib.controls.ControllerBase;
+import frc.robot.lib.controls.Controller;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
 
-public class OperatorController extends ControllerBase {
+public class OperatorController extends Controller {
 
     public OperatorController() {
-        final var defaultLayout = new Layout("Default");
+        final var defaultLayout = createLayout("Default");
         final var logitech = new LogitechGamepadF310(0);
 
-        defaultLayout.assignButton(Button.Hello, logitech.a);
+        defaultLayout.assign(Button.Hello, logitech.a);
     }
 }

@@ -4,11 +4,11 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.lib.DoubleRange;
-import frc.robot.lib.controls.ControllerBase;
+import frc.robot.lib.controls.Controller;
 import frc.robot.lib.controls.models.LogitechExtreme3D;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
 
-public class DriverController extends ControllerBase {
+public class DriverController extends Controller {
 
     public DriverController() {
         final var tab = Shuffleboard.getTab("Debug");
@@ -16,7 +16,7 @@ public class DriverController extends ControllerBase {
         final var scaleEntry = tab.add("Drive Input Scale", 0).getEntry();
         final DoubleSupplier driveInputScale = () -> scaleEntry.getDouble(0);
 
-        final var defaultLayout = new Layout("Default");
+        final var defaultLayout = createLayout("Default");
         final var logitech = new LogitechGamepadF310(0);
 
         defaultLayout.assign(Axis.DriveSpeedX,
@@ -26,9 +26,9 @@ public class DriverController extends ControllerBase {
         defaultLayout.assign(Axis.DriveRotation,
                 logitech.rightStickX.scaled(driveInputScale));
 
-        defaultLayout.assignButton(Button.Hello, logitech.a);
+        defaultLayout.assign(Button.Hello, logitech.a);
 
-        final var flightLayout = new Layout("Flight Stick");
+        final var flightLayout = createLayout("Flight Stick");
         final var flight = new LogitechExtreme3D(1);
 
         flightLayout.assign(Axis.DriveSpeedX, flight.stickX.scaled(driveInputScale));
@@ -36,7 +36,7 @@ public class DriverController extends ControllerBase {
         flightLayout.assign(Axis.DriveRotation,
                 flight.stickRotate.deadzone(new DoubleRange(0, 0.15)).scaled(driveInputScale));
 
-        flightLayout.assignButton(Button.Hello, flight.thumbButton);
+        flightLayout.assign(Button.Hello, flight.thumbButton);
 
         tab.add("Drive", this);
         tab.add("Default Layout", defaultLayout);

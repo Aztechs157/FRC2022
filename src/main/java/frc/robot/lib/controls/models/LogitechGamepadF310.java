@@ -1,10 +1,10 @@
 package frc.robot.lib.controls.models;
 
 import frc.robot.lib.controls.ButtonInput;
-import frc.robot.lib.controls.ModelBase;
+import frc.robot.lib.controls.Model;
 import frc.robot.lib.controls.AxisInput;
 
-public class LogitechGamepadF310 extends ModelBase {
+public class LogitechGamepadF310 extends Model {
 
     public LogitechGamepadF310(final int joystickId) {
         super(joystickId);

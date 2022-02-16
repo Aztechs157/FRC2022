@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation;
  * Models map physical buttons/axises to {@link ButtonInput} or
  * {@link AxisInput}.
  */
-public class ModelBase {
+public class Model {
 
     private final int deviceId;
 
@@ -15,7 +15,7 @@ public class ModelBase {
      *
      * @param deviceId The id of the device
      */
-    public ModelBase(final int deviceId) {
+    public Model(final int deviceId) {
         this.deviceId = deviceId;
     }
 

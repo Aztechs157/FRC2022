@@ -2,9 +2,9 @@ package frc.robot.lib.controls.models;
 
 import frc.robot.lib.controls.AxisInput;
 import frc.robot.lib.controls.ButtonInput;
-import frc.robot.lib.controls.ModelBase;
+import frc.robot.lib.controls.Model;
 
-public class LogitechAttack extends ModelBase {
+public class LogitechAttack extends Model {
 
     public LogitechAttack(final int joystickId) {
         super(joystickId);

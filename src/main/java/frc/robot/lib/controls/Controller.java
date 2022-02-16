@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * can then be used by the robot. It maps the inputs of a controller to the
  * desired functions of the robot.
  */
-public class ControllerBase implements Sendable {
+public class Controller implements Sendable {
 
-    private final SendableChooser<LayoutBase> layouts = new SendableChooser<>();
+    private final SendableChooser<Layout> layouts = new SendableChooser<>();
 
     @Override
     public void initSendable(final SendableBuilder builder) {
@@ -27,7 +27,7 @@ public class ControllerBase implements Sendable {
      * @return A {@link ButtonInput} and {@link Button} representing the input
      */
     public ButtonInput button(final ButtonKey buttonKey) {
-        return new ButtonInput(() -> getSelectedLayout().assign(buttonKey).getAsBoolean());
+        return new ButtonInput(() -> getSelectedLayout().getButton(buttonKey).getAsBoolean());
     }
 
     /**
@@ -45,7 +45,7 @@ public class ControllerBase implements Sendable {
      *
      * @return The selected layout
      */
-    private LayoutBase getSelectedLayout() {
+    private Layout getSelectedLayout() {
         final var layout = layouts.getSelected();
 
         if (layout == null) {
@@ -70,11 +70,11 @@ public class ControllerBase implements Sendable {
      * Add a Layout to this Controller. This allows the Controller to display and
      * swap to it using Shuffleboard. If no layouts have been added yet, this will
      * implicitly also set the new one as the default. To manually overwrite the
-     * default later, use {@link ControllerBase#addAndSetDefault(LayoutBase)}.
+     * default later, use {@link Controller#addAndSetDefault(Layout)}.
      *
      * @param layout The Layout to add
      */
-    public void add(final LayoutBase layout) {
+    public void add(final Layout layout) {
         if (hasDefault) {
             layouts.addOption(layout.getName(), layout);
         } else {
@@ -85,41 +85,19 @@ public class ControllerBase implements Sendable {
     /**
      * Manually set a layout as the default. This will additionally add it if it
      * wasn't added already. Normally this isn't necessary, as
-     * {@link ControllerBase#add(LayoutBase)} will automatically set the first
+     * {@link Controller#add(Layout)} will automatically set the first
      * layout as default.
      *
      * @param layout The Layout to add
      */
-    public void addAndSetDefault(final LayoutBase layout) {
+    public void addAndSetDefault(final Layout layout) {
         layouts.setDefaultOption(layout.getName(), layout);
         hasDefault = true;
     }
 
-    /**
-     * Convenience class to avoid having to restate the `ButtonKey` and `AxisKey`
-     * type parameters for `LayoutBase`, as we can just use the ones passed to
-     * `ControllerBase`. Additionally, this will automatically call
-     * {@link ControllerBase#add(LayoutBase)} with the newly created layout.
-     *
-     * Example:
-     *
-     * <pre>
-     *
-     * class Controller extends ControllerBase {
-     *     // Before
-     *     var layout = new LayoutBase("Layout");
-     *     addDefault(layout);
-     *
-     *     // After
-     *     var layout = new Layout("Layout");
-     * }
-     *
-     * </pre>
-     */
-    public class Layout extends LayoutBase {
-        public Layout(final String name) {
-            super(name);
-            add(this);
-        }
+    public Layout createLayout(final String name) {
+        var layout = new Layout(name);
+        add(layout);
+        return layout;
     }
 }

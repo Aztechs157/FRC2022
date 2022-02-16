@@ -9,10 +9,10 @@ import edu.wpi.first.util.sendable.SendableBuilder;
 /**
  * A simple structure that stores the mapping between Button/AxisKeys and
  * Button/AxisInputs respectively. These are meant to be used with
- * {@link ControllerBase} to allow hot-swapping of various control
+ * {@link Controller} to allow hot-swapping of various control
  * configurations, otherwise known as "layouts."
  */
-public class LayoutBase implements Sendable {
+public class Layout implements Sendable {
 
     private final String name;
 
@@ -21,7 +21,7 @@ public class LayoutBase implements Sendable {
      *
      * @param name The name this Layout will display as in Shuffleboard
      */
-    public LayoutBase(final String name) {
+    public Layout(final String name) {
         this.name = name;
     }
 
@@ -43,7 +43,7 @@ public class LayoutBase implements Sendable {
      * @param buttonKey The key to assign with
      * @param input     The input being assigned
      */
-    public void assignButton(final ButtonKey buttonKey, final ButtonInput input) {
+    public void assign(final ButtonKey buttonKey, final ButtonInput input) {
         buttons.put(buttonKey, input);
     }
 
@@ -53,7 +53,7 @@ public class LayoutBase implements Sendable {
      * @param buttonKey They key a input was assigned with
      * @return The associated input
      */
-    public ButtonInput assign(final ButtonKey buttonKey) {
+    public ButtonInput getButton(final ButtonKey buttonKey) {
         final var button = buttons.get(buttonKey);
 
         if (button == null) {
