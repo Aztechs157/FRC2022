@@ -6,16 +6,16 @@ import static frc.robot.lib.DoubleRange.scale;
 
 /**
  * Interface for getting input from a axis. This class has methods and static
- * methods to modify and compose {@link AxisInput}s into a new
- * {@link AxisInput}.
+ * methods to modify and compose {@link Axis}s into a new
+ * {@link Axis}.
  */
-public class AxisInput implements DoubleSupplier {
+public class Axis implements DoubleSupplier {
     public interface Key {
     }
 
     private final DoubleSupplier value;
 
-    public AxisInput(final DoubleSupplier value) {
+    public Axis(final DoubleSupplier value) {
         this.value = value;
     }
 
@@ -33,8 +33,8 @@ public class AxisInput implements DoubleSupplier {
      *
      * @return A new inverted input
      */
-    public AxisInput inverted() {
-        return new AxisInput(() -> -get());
+    public Axis inverted() {
+        return new Axis(() -> -get());
     }
 
     /**
@@ -43,8 +43,8 @@ public class AxisInput implements DoubleSupplier {
      * @param scale The value to scale by
      * @return A new input with the scale applied
      */
-    public AxisInput scaled(final double scale) {
-        return new AxisInput(() -> get() * scale);
+    public Axis scaled(final double scale) {
+        return new Axis(() -> get() * scale);
     }
 
     /**
@@ -53,8 +53,8 @@ public class AxisInput implements DoubleSupplier {
      * @param scale The input to retrieve the scale from
      * @return A new input with the scale applied
      */
-    public AxisInput scaled(final DoubleSupplier scale) {
-        return new AxisInput(() -> get() * scale.getAsDouble());
+    public Axis scaled(final DoubleSupplier scale) {
+        return new Axis(() -> get() * scale.getAsDouble());
     }
 
     /**
@@ -63,8 +63,8 @@ public class AxisInput implements DoubleSupplier {
      * @param range The range to clamp to
      * @return A new input with clamp applied
      */
-    public AxisInput clamp(final DoubleRange range) {
-        return new AxisInput(() -> range.applyClamp(get()));
+    public Axis clamp(final DoubleRange range) {
+        return new Axis(() -> range.applyClamp(get()));
     }
 
     /**
@@ -77,12 +77,12 @@ public class AxisInput implements DoubleSupplier {
      * @param deadzone The range of the deadzone
      * @return A new input with the deadzone applied
      */
-    public AxisInput deadzone(final DoubleRange deadzone) {
+    public Axis deadzone(final DoubleRange deadzone) {
         final var fullRange = new DoubleRange(-1, 1);
         final var leftRange = new DoubleRange(fullRange.low, deadzone.low);
         final var rightRange = new DoubleRange(deadzone.high, fullRange.high);
 
-        return new AxisInput(() -> {
+        return new Axis(() -> {
             final var value = get();
 
             if (deadzone.contains(value)) {

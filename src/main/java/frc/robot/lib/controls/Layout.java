@@ -34,7 +34,7 @@ public class Layout implements Sendable {
         return name;
     }
 
-    private final Map<ButtonInput.Key, ButtonInput> buttons = new HashMap<>();
+    private final Map<Button.Key, Button> buttons = new HashMap<>();
 
     /**
      * For this Layout, assign a ButtonInput.Key to a ButtonInput. Calling this
@@ -45,7 +45,7 @@ public class Layout implements Sendable {
      * @param buttonKey The key to assign with
      * @param input     The input being assigned
      */
-    public void assign(final ButtonInput.Key buttonKey, final ButtonInput input) {
+    public void assign(final Button.Key buttonKey, final Button input) {
         buttons.put(buttonKey, input);
     }
 
@@ -55,7 +55,7 @@ public class Layout implements Sendable {
      * @param buttonKey They key a input was assigned with
      * @return The associated input
      */
-    public ButtonInput getButton(final ButtonInput.Key buttonKey) {
+    public Button button(final Button.Key buttonKey) {
         final var button = buttons.get(buttonKey);
 
         if (button == null) {
@@ -65,7 +65,7 @@ public class Layout implements Sendable {
         return button;
     }
 
-    private final Map<AxisInput.Key, AxisInput> axes = new HashMap<>();
+    private final Map<Axis.Key, Axis> axes = new HashMap<>();
 
     /**
      * For this Layout, assign a AxisInput.Key to a AxisInput. Calling this method
@@ -75,7 +75,7 @@ public class Layout implements Sendable {
      * @param axisKey The key to assign with
      * @param input   The input being assigned
      */
-    public void assign(final AxisInput.Key axisKey, final AxisInput input) {
+    public void assign(final Axis.Key axisKey, final Axis input) {
         axes.put(axisKey, input);
     }
 
@@ -85,7 +85,7 @@ public class Layout implements Sendable {
      * @param axisKey They key a input was assigned with
      * @return The associated input
      */
-    public AxisInput getAxis(final AxisInput.Key axisKey) {
+    public Axis axis(final Axis.Key axisKey) {
         final var axis = axes.get(axisKey);
 
         if (axis == null) {

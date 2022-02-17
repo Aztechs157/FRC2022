@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.controls.Button;
+import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverControls;
 import frc.robot.controls.OperatorControls;
 import frc.robot.drive.DriveSubsystem;
@@ -48,10 +48,10 @@ public class RobotContainer {
         driveSubsystem.setDefaultCommand(
                 new TeleopDrive(driverControls, driveSubsystem));
 
-        driverControls.button(Button.Hello)
+        driverControls.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
-        operatorControls.button(Button.Hello)
+        operatorControls.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
     }
 

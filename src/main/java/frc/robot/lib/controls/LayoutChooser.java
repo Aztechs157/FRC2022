@@ -20,24 +20,24 @@ public class LayoutChooser implements Sendable {
 
     /**
      * Get a button from the currently selected layout. This acts both as a
-     * {@link ButtonInput} and a proper WPI {@link Button} to allow for command
+     * {@link Button} and a proper WPI {@link ButtonKey} to allow for command
      * running.
      *
      * @param buttonKey Which button to retrieve
-     * @return A {@link ButtonInput} and {@link Button} representing the input
+     * @return A {@link Button} and {@link ButtonKey} representing the input
      */
-    public ButtonInput button(final ButtonInput.Key buttonKey) {
-        return new ButtonInput(() -> getSelectedLayout().getButton(buttonKey).getAsBoolean());
+    public Button button(final Button.Key buttonKey) {
+        return new Button(() -> getSelectedLayout().button(buttonKey).getAsBoolean());
     }
 
     /**
      * Get a axis from the currently selected layout
      *
      * @param axisKey Which axis to retrieve
-     * @return A {@link AxisInput} representing the input
+     * @return A {@link Axis} representing the input
      */
-    public AxisInput axis(final AxisInput.Key axisKey) {
-        return new AxisInput(() -> getSelectedLayout().getAxis(axisKey).getAsDouble());
+    public Axis axis(final Axis.Key axisKey) {
+        return new Axis(() -> getSelectedLayout().axis(axisKey).getAsDouble());
     }
 
     /**

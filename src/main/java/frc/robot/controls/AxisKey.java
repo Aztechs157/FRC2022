@@ -1,8 +1,8 @@
 package frc.robot.controls;
 
-import frc.robot.lib.controls.AxisInput;
+import frc.robot.lib.controls.Axis;
 
-public enum Axis implements AxisInput.Key {
+public enum AxisKey implements Axis.Key {
     DriveSpeedX,
     DriveSpeedY,
     DriveRotation,

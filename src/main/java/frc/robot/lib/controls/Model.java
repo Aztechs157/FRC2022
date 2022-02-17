@@ -3,8 +3,8 @@ package frc.robot.lib.controls;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**
- * Models map physical buttons/axises to {@link ButtonInput} or
- * {@link AxisInput}.
+ * Models map physical buttons/axises to {@link Button} or
+ * {@link Axis}.
  */
 public class Model {
 
@@ -20,22 +20,22 @@ public class Model {
     }
 
     /**
-     * Create a {@link ButtonInput} that models a physical button
+     * Create a {@link Button} that models a physical button
      *
      * @param buttonId The button to model
-     * @return The modeled {@link ButtonInput}
+     * @return The modeled {@link Button}
      */
-    public ButtonInput button(final int buttonId) {
-        return new ButtonInput(() -> DriverStation.getStickButton(deviceId, buttonId));
+    public Button button(final int buttonId) {
+        return new Button(() -> DriverStation.getStickButton(deviceId, buttonId));
     }
 
     /**
-     * Create a {@link AxisInput} that models a physical axis
+     * Create a {@link Axis} that models a physical axis
      *
      * @param buttonId The axis to model
-     * @return The modeled {@link AxisInput}
+     * @return The modeled {@link Axis}
      */
-    public AxisInput axis(final int axisId) {
-        return new AxisInput(() -> DriverStation.getStickAxis(deviceId, axisId));
+    public Axis axis(final int axisId) {
+        return new Axis(() -> DriverStation.getStickAxis(deviceId, axisId));
     }
 }

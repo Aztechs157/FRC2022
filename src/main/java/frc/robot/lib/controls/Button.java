@@ -2,18 +2,16 @@ package frc.robot.lib.controls;
 
 import java.util.function.BooleanSupplier;
 
-import edu.wpi.first.wpilibj2.command.button.Button;
-
 /**
  * Interface for getting input from a button. This class has methods and static
- * methods to modify and compose {@link ButtonInput}s into a new
- * {@link ButtonInput}.
+ * methods to modify and compose {@link Button}s into a new
+ * {@link Button}.
  */
-public class ButtonInput extends Button {
+public class Button extends edu.wpi.first.wpilibj2.command.button.Button {
     public interface Key {
     }
 
-    public ButtonInput(final BooleanSupplier isPressed) {
+    public Button(final BooleanSupplier isPressed) {
         super(isPressed);
     }
 
@@ -22,8 +20,8 @@ public class ButtonInput extends Button {
      *
      * @return A new inverted input
      */
-    public ButtonInput inverted() {
-        return new ButtonInput(() -> !get());
+    public Button inverted() {
+        return new Button(() -> !get());
     }
 
     /**
@@ -33,8 +31,8 @@ public class ButtonInput extends Button {
      * @param rest  The rest of the inputs
      * @return A new input that is only true when all of the passed inputs are true
      */
-    public static ButtonInput all(final ButtonInput first, final ButtonInput... rest) {
-        return new ButtonInput(() -> {
+    public static Button all(final Button first, final Button... rest) {
+        return new Button(() -> {
             // Check each input individually
             // As soon as one input is false, return false
             // The first argument is explicit to prevent being given empty arrays
@@ -61,8 +59,8 @@ public class ButtonInput extends Button {
      * @param rest  The rest of the inputs
      * @return A new input that is true when any of the passed inputs are true
      */
-    public static ButtonInput any(final ButtonInput first, final ButtonInput... rest) {
-        return new ButtonInput(() -> {
+    public static Button any(final Button first, final Button... rest) {
+        return new Button(() -> {
             // Check each input individually
             // As soon as one input is true, return true
             // The first argument is explicit to prevent being given empty arrays

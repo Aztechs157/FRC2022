@@ -19,24 +19,24 @@ public class DriverControls extends LayoutChooser {
         final var defaultLayout = createLayout("Default");
         final var logitech = new LogitechGamepadF310(0);
 
-        defaultLayout.assign(Axis.DriveSpeedX,
+        defaultLayout.assign(AxisKey.DriveSpeedX,
                 logitech.leftStickX.scaled(driveInputScale));
-        defaultLayout.assign(Axis.DriveSpeedY,
+        defaultLayout.assign(AxisKey.DriveSpeedY,
                 logitech.leftStickY.scaled(driveInputScale).inverted());
-        defaultLayout.assign(Axis.DriveRotation,
+        defaultLayout.assign(AxisKey.DriveRotation,
                 logitech.rightStickX.scaled(driveInputScale));
 
-        defaultLayout.assign(Button.Hello, logitech.a);
+        defaultLayout.assign(ButtonKey.Hello, logitech.a);
 
         final var flightLayout = createLayout("Flight Stick");
         final var flight = new LogitechExtreme3D(1);
 
-        flightLayout.assign(Axis.DriveSpeedX, flight.stickX.scaled(driveInputScale));
-        flightLayout.assign(Axis.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
-        flightLayout.assign(Axis.DriveRotation,
+        flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
+        flightLayout.assign(AxisKey.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
+        flightLayout.assign(AxisKey.DriveRotation,
                 flight.stickRotate.deadzone(new DoubleRange(0, 0.15)).scaled(driveInputScale));
 
-        flightLayout.assign(Button.Hello, flight.thumbButton);
+        flightLayout.assign(ButtonKey.Hello, flight.thumbButton);
 
         tab.add("Drive", this);
         tab.add("Default Layout", defaultLayout);

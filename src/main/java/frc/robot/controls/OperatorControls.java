@@ -9,6 +9,6 @@ public class OperatorControls extends LayoutChooser {
         final var defaultLayout = createLayout("Default");
         final var logitech = new LogitechGamepadF310(0);
 
-        defaultLayout.assign(Button.Hello, logitech.a);
+        defaultLayout.assign(ButtonKey.Hello, logitech.a);
     }
 }

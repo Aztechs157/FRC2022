@@ -5,7 +5,7 @@
 package frc.robot.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.controls.Axis;
+import frc.robot.controls.AxisKey;
 import frc.robot.controls.DriverControls;
 
 public class TeleopDrive extends CommandBase {
@@ -22,9 +22,9 @@ public class TeleopDrive extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        final var speedY = driverControls.axis(Axis.DriveSpeedY).get();
-        final var speedX = driverControls.axis(Axis.DriveSpeedX).get();
-        final var rotation = driverControls.axis(Axis.DriveRotation).get();
+        final var speedY = driverControls.axis(AxisKey.DriveSpeedY).get();
+        final var speedX = driverControls.axis(AxisKey.DriveSpeedX).get();
+        final var rotation = driverControls.axis(AxisKey.DriveRotation).get();
 
         driveSubsystem.driveCartesian(speedY, speedX, rotation);
     }
