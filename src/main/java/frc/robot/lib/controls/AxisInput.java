@@ -10,6 +10,9 @@ import static frc.robot.lib.DoubleRange.scale;
  * {@link AxisInput}.
  */
 public class AxisInput implements DoubleSupplier {
+    public interface Key {
+    }
+
     private final DoubleSupplier value;
 
     public AxisInput(final DoubleSupplier value) {

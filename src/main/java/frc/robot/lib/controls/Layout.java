@@ -7,7 +7,7 @@ import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 
 /**
- * A simple structure that stores the mapping between Button/AxisKeys and
+ * A simple structure that stores the mapping between Button/AxisInput.Keys and
  * Button/AxisInputs respectively. These are meant to be used with
  * {@link LayoutChooser} to allow hot-swapping of various control
  * configurations, otherwise known as "layouts."
@@ -34,16 +34,18 @@ public class Layout implements Sendable {
         return name;
     }
 
-    private final Map<ButtonKey, ButtonInput> buttons = new HashMap<>();
+    private final Map<ButtonInput.Key, ButtonInput> buttons = new HashMap<>();
 
     /**
-     * For this Layout, assign a ButtonKey to a ButtonInput. Calling this method
-     * multiple times with the same ButtonKey will override the previous assignment.
+     * For this Layout, assign a ButtonInput.Key to a ButtonInput. Calling this
+     * method
+     * multiple times with the same ButtonInput.Key will override the previous
+     * assignment.
      *
      * @param buttonKey The key to assign with
      * @param input     The input being assigned
      */
-    public void assign(final ButtonKey buttonKey, final ButtonInput input) {
+    public void assign(final ButtonInput.Key buttonKey, final ButtonInput input) {
         buttons.put(buttonKey, input);
     }
 
@@ -53,7 +55,7 @@ public class Layout implements Sendable {
      * @param buttonKey They key a input was assigned with
      * @return The associated input
      */
-    public ButtonInput getButton(final ButtonKey buttonKey) {
+    public ButtonInput getButton(final ButtonInput.Key buttonKey) {
         final var button = buttons.get(buttonKey);
 
         if (button == null) {
@@ -63,16 +65,17 @@ public class Layout implements Sendable {
         return button;
     }
 
-    private final Map<AxisKey, AxisInput> axes = new HashMap<>();
+    private final Map<AxisInput.Key, AxisInput> axes = new HashMap<>();
 
     /**
-     * For this Layout, assign a AxisKey to a AxisInput. Calling this method
-     * multiple times with the same AxisKey will override the previous assignment.
+     * For this Layout, assign a AxisInput.Key to a AxisInput. Calling this method
+     * multiple times with the same AxisInput.Key will override the previous
+     * assignment.
      *
      * @param axisKey The key to assign with
      * @param input   The input being assigned
      */
-    public void assign(final AxisKey axisKey, final AxisInput input) {
+    public void assign(final AxisInput.Key axisKey, final AxisInput input) {
         axes.put(axisKey, input);
     }
 
@@ -82,7 +85,7 @@ public class Layout implements Sendable {
      * @param axisKey They key a input was assigned with
      * @return The associated input
      */
-    public AxisInput getAxis(final AxisKey axisKey) {
+    public AxisInput getAxis(final AxisInput.Key axisKey) {
         final var axis = axes.get(axisKey);
 
         if (axis == null) {

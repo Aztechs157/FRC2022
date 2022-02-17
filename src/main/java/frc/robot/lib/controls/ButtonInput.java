@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  * {@link ButtonInput}.
  */
 public class ButtonInput extends Button {
+    public interface Key {
+    }
 
     public ButtonInput(final BooleanSupplier isPressed) {
         super(isPressed);

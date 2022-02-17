@@ -26,7 +26,7 @@ public class LayoutChooser implements Sendable {
      * @param buttonKey Which button to retrieve
      * @return A {@link ButtonInput} and {@link Button} representing the input
      */
-    public ButtonInput button(final ButtonKey buttonKey) {
+    public ButtonInput button(final ButtonInput.Key buttonKey) {
         return new ButtonInput(() -> getSelectedLayout().getButton(buttonKey).getAsBoolean());
     }
 
@@ -36,7 +36,7 @@ public class LayoutChooser implements Sendable {
      * @param axisKey Which axis to retrieve
      * @return A {@link AxisInput} representing the input
      */
-    public AxisInput axis(final AxisKey axisKey) {
+    public AxisInput axis(final AxisInput.Key axisKey) {
         return new AxisInput(() -> getSelectedLayout().getAxis(axisKey).getAsDouble());
     }
 
