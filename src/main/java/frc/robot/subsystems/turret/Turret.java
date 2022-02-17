@@ -26,7 +26,7 @@ public class Turret extends SubsystemBase {
     private OperatorController operatorController;
 
     private int rotations = 0;
-    private Double previousPosition;
+    private Double previousPosition = null;
     private int maxRotation = 300;
 
     /** Creates a new Turret. */

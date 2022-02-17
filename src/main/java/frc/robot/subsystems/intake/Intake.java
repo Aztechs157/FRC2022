@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CompressorConstants;
 import frc.robot.Constants.IntakeConstants;
+import edu.wpi.first.wpilibj.PneumaticHub;
 
 public class Intake extends SubsystemBase {
     public enum ColorResult {
@@ -36,13 +38,19 @@ public class Intake extends SubsystemBase {
         colorMatcher = new ColorMatch();
         entryColor = new ColorSensorV3(IntakeConstants.COLOR_SENSOR_ID);
         intakeConveyorMotor = new CANSparkMax(IntakeConstants.INTAKE_MOTOR_ID, MotorType.kBrushless);
-        intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH,
+        intakeConveyorMotor.setInverted(true);
+        intakeSolenoid = new DoubleSolenoid(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH,
                 IntakeConstants.SOLENOID_FORWARD_ID,
                 IntakeConstants.SOLENOID_REVERSE_ID);
         colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
-        Shuffleboard.getTab("Debug").addNumber("proximity distance", entryColor::getProximity);
+        var tab = Shuffleboard.getTab("Debug");
+        // tab.addNumber("proximity distance", entryColor::getProximity);
+        // tab.addString("intake color", () -> currentColor().toString());
+        tab.addNumber("isRed", () -> currentColor() == ColorResult.RED ? 1.0 : 0.0);
+        tab.addNumber("isBlue", () -> currentColor() == ColorResult.BLUE ? 1.0 : 0.0);
+
     }
 
     @Override

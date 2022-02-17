@@ -11,10 +11,11 @@ import frc.robot.Constants.CompressorConstants;
 
 public class Pneumatics extends SubsystemBase {
 
-    public Compressor compressor = new Compressor(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
+    public Compressor compressor;
 
     /** Creates a new Compressor. */
     public Pneumatics() {
+        compressor = new Compressor(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
         compressor.enableDigital();
     }
 

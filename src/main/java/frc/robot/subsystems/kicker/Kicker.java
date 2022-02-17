@@ -32,6 +32,7 @@ public class Kicker extends SubsystemBase {
         tab = Shuffleboard.getTab("Debug");
         // kickerSensorSim = tab.add("Kicker Sensor", false).getEntry();
         kickerColorSim = tab.add("Kicker Color", "null").getEntry();
+        // tab.addBoolean("Kicker Sensor", this::getBallSensor);
     }
 
     @Override

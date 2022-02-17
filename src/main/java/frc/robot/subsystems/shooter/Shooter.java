@@ -20,7 +20,8 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
         ShootMotor1.setInverted(true);
-        Shuffleboard.getTab("Debug").addNumber("shooter speed", this::measureVelocity);
+        // Shuffleboard.getTab("Debug").addNumber("shooter speed",
+        // this::measureVelocity);
         // final DoubleSupplier driveInputScale = () -> .getDouble(0);
     }
 

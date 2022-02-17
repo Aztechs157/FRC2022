@@ -45,7 +45,7 @@ public class RobotContainer {
     public final Intake intake = new Intake();
     private final Shooter shooter = new Shooter();
     private final Turret turret = new Turret(operatorController);
-    // private final Pneumatics pneumatics = new Pneumatics();
+    private final Pneumatics pneumatics = new Pneumatics();
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
@@ -103,6 +103,12 @@ public class RobotContainer {
         // driverController.button(ButtonKey.IntakeRun)
         // .whenReleased(intake::rollerStop);
 
+        operatorController.button(ButtonKey.runSolenoids)
+                .whenPressed(intake::lowerArm, intake);
+
+        operatorController.button(ButtonKey.runSolenoids)
+                .whenReleased(intake::raiseArm, intake);
+
         // Y button runs the intakecargo command. This will run the motors of the
         // intake, uptake and kicker when the y button is held.
         driverController.button(ButtonKey.IntakeRun)
@@ -110,7 +116,7 @@ public class RobotContainer {
 
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, 1500));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, 2500));
 
         // Right Bumper runs the Ejecting, this line runs the intake, uptake, kicker,
         // and shooter based on logic related to color sensing and position sensing.
