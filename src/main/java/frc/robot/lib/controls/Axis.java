@@ -1,6 +1,8 @@
 package frc.robot.lib.controls;
 
 import java.util.function.DoubleSupplier;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.lib.DoubleRange;
 import static frc.robot.lib.DoubleRange.scale;
 
@@ -14,6 +16,10 @@ public class Axis implements DoubleSupplier {
     }
 
     private final DoubleSupplier value;
+
+    public Axis(final int deviceId, final int axisId) {
+        this(() -> DriverStation.getStickAxis(deviceId, axisId));
+    }
 
     public Axis(final DoubleSupplier value) {
         this.value = value;

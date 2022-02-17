@@ -2,6 +2,8 @@ package frc.robot.lib.controls;
 
 import java.util.function.BooleanSupplier;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  * Interface for getting input from a button. This class has methods and static
  * methods to modify and compose {@link Button}s into a new
@@ -9,6 +11,10 @@ import java.util.function.BooleanSupplier;
  */
 public class Button extends edu.wpi.first.wpilibj2.command.button.Button {
     public interface Key {
+    }
+
+    public Button(final int deviceId, final int buttonId) {
+        this(() -> DriverStation.getStickButton(deviceId, buttonId));
     }
 
     public Button(final BooleanSupplier isPressed) {

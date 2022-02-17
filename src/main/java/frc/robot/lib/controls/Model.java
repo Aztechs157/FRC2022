@@ -1,7 +1,5 @@
 package frc.robot.lib.controls;
 
-import edu.wpi.first.wpilibj.DriverStation;
-
 /**
  * Models map physical buttons/axises to {@link Button} or
  * {@link Axis}.
@@ -26,7 +24,7 @@ public class Model {
      * @return The modeled {@link Button}
      */
     public Button button(final int buttonId) {
-        return new Button(() -> DriverStation.getStickButton(deviceId, buttonId));
+        return new Button(deviceId, buttonId);
     }
 
     /**
@@ -36,6 +34,6 @@ public class Model {
      * @return The modeled {@link Axis}
      */
     public Axis axis(final int axisId) {
-        return new Axis(() -> DriverStation.getStickAxis(deviceId, axisId));
+        return new Axis(deviceId, axisId);
     }
 }
