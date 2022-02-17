@@ -7,6 +7,7 @@ package frc.robot.vision;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.lib.vision.LimeLight;
+import frc.robot.lib.vision.LimeLight.LightMode;
 
 public class VisionSubsystem extends SubsystemBase {
     private final LimeLight limeLight = new LimeLight();
@@ -15,6 +16,18 @@ public class VisionSubsystem extends SubsystemBase {
     public VisionSubsystem() {
         final var tab = Shuffleboard.getTab("Debug");
         tab.addNumber("Diagonal", this::getDiagonal);
+    }
+
+    public boolean hasTarget() {
+        return limeLight.hasValidTargets();
+    }
+
+    public void setLED(final boolean status) {
+        limeLight.setLightMode(status ? LightMode.ForceOn : LightMode.ForceOff);
+    }
+
+    public double getHubX() {
+        return limeLight.getXAxis();
     }
 
     public double getDiagonal() {
