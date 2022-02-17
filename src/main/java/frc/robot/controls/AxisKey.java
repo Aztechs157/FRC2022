@@ -1,5 +1,10 @@
 package frc.robot.controls;
 
 public enum AxisKey {
-    TurnTurret
+    TurnTurret,
+    DriveSpeedX,
+    DriveSpeedY,
+    DriveRotation,
+    TurretSpeed,
+    AimerSpeed
 }

@@ -41,9 +41,13 @@
     "cSpell.words": [
         "deadzone",
         "endregion",
-        "teleop",
         "teleoperated",
         "unsign",
+        "Gamepad",
+        "Mecanum",
+        "teleop",
+        "teleoperated",
+        "uncomplete",
         "wpilib"
     ]
 }

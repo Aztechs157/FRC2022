@@ -1,19 +1,24 @@
 package frc.robot.lib.controls;
 
+import java.util.function.BooleanSupplier;
+
 /**
  * Interface for getting input from a button. This class has methods and static
  * methods to modify and compose {@link ButtonInput}s into a new
  * {@link ButtonInput}.
  */
 @FunctionalInterface
-public interface ButtonInput {
+public interface ButtonInput extends BooleanSupplier {
 
     /**
-     * Get a input from this {@link ButtonInput}
+     * Create a {@link ButtonInput} using a {@link BooleanSupplier}
      *
-     * @return A boolean representing the input
+     * @param supplier The input as a BooleanSupplier
+     * @return The input as a ButtonInput
      */
-    public boolean get();
+    public static ButtonInput wrap(final BooleanSupplier supplier) {
+        return supplier::getAsBoolean;
+    }
 
     /**
      * Inverts the input; similar to a boolean `!`
@@ -21,7 +26,7 @@ public interface ButtonInput {
      * @return A new inverted input
      */
     public default ButtonInput inverted() {
-        return () -> !get();
+        return () -> !getAsBoolean();
     }
 
     /**
@@ -37,12 +42,12 @@ public interface ButtonInput {
             // As soon as one input is false, return false
             // The first argument is explicit to prevent being given empty arrays
 
-            if (first.get() == false) {
+            if (first.getAsBoolean() == false) {
                 return false;
             }
 
             for (final var input : rest) {
-                if (input.get() == false) {
+                if (input.getAsBoolean() == false) {
                     return false;
                 }
             }
@@ -65,12 +70,12 @@ public interface ButtonInput {
             // As soon as one input is true, return true
             // The first argument is explicit to prevent being given empty arrays
 
-            if (first.get()) {
+            if (first.getAsBoolean()) {
                 return true;
             }
 
             for (final var input : rest) {
-                if (input.get()) {
+                if (input.getAsBoolean()) {
                     return true;
                 }
             }

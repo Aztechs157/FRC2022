@@ -1,0 +1,17 @@
+1) download wpilib iso from https://github.com/wpilibsuite/allwpilib/releases/tag/v2022.1.1
+2) download ni game tools from https://www.ni.com/en-us/support/downloads/drivers/download/packaged.frc-game-tools.440024.html
+3) download rev hardware client
+4) open the downloaded ISO file
+5) run wpilibinstaller.exe
+6) press start-
+7) choose everything, and for all users (choice between all vs this user may not matter, documenting my specific steps)
+8) choose download for this computer only
+9) press next
+10) press finish
+11) open NI frc 2022 game exe
+12) accept all defaults and accept all liscences
+13) enter Serial code 
+14) wait to reboot until all installations are done
+15) run rev hardware client
+16) accept default install directory
+17) celebrate 

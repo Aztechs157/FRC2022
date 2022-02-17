@@ -1,0 +1,11 @@
+{
+  "SysId": {
+    "Analysis Type": "Drivetrain",
+    "AnalyzerJSONLocation": "C:\\Users\\Aztechs\\Desktop\\sysid_data20220128-194211.json",
+    "NetworkTables Settings": {
+      "serverTeam": "157"
+    },
+    "mode": "Client",
+    "serverTeam": "157"
+  }
+}
