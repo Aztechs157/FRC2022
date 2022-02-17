@@ -59,7 +59,7 @@ public class Layout implements Sendable {
         final var button = buttons.get(buttonKey);
 
         if (button == null) {
-            throw new InputNotAssignedException(name, buttonKey.toString());
+            throw new InputNotAssignedException(name, "button", buttonKey.toString());
         }
 
         return button;
@@ -89,7 +89,7 @@ public class Layout implements Sendable {
         final var axis = axes.get(axisKey);
 
         if (axis == null) {
-            throw new InputNotAssignedException(name, axisKey.toString());
+            throw new InputNotAssignedException(name, "axis", axisKey.toString());
         }
 
         return axis;
@@ -99,8 +99,8 @@ public class Layout implements Sendable {
      * Thrown when an input hasn't been assigned for the layout in question
      */
     public static class InputNotAssignedException extends RuntimeException {
-        private InputNotAssignedException(final String layoutName, final String inputName) {
-            super("The input " + inputName + " has not been assigned for layout " + layoutName);
+        private InputNotAssignedException(final String layoutName, final String inputType, final String inputName) {
+            super("The " + inputType + " " + inputName + " has not been assigned for layout " + layoutName);
         }
     }
 

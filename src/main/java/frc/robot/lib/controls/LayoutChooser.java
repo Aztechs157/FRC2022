@@ -60,7 +60,7 @@ public class LayoutChooser implements Sendable {
      */
     public static class NoLayoutsAddedException extends RuntimeException {
         private NoLayoutsAddedException() {
-            super("No layouts have been added to the controller");
+            super("No Layouts have been added to the LayoutChooser");
         }
     }
 
