@@ -1,8 +1,8 @@
-package frc.robot.controls;
+package frc.robot.input;
 
-import frc.robot.lib.controls.Layout;
-import frc.robot.lib.controls.LayoutChooser;
-import frc.robot.lib.controls.models.LogitechGamepadF310;
+import frc.robot.lib.input.Layout;
+import frc.robot.lib.input.LayoutChooser;
+import frc.robot.lib.input.models.LogitechGamepadF310;
 
 public class OperatorControls extends LayoutChooser {
 

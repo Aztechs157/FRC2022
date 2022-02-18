@@ -1,4 +1,4 @@
-package frc.robot.lib.controls;
+package frc.robot.lib.input;
 
 /**
  * Models map physical buttons/axises to {@link Button} or

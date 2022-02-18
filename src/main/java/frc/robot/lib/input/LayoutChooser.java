@@ -1,4 +1,4 @@
-package frc.robot.lib.controls;
+package frc.robot.lib.input;
 
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;

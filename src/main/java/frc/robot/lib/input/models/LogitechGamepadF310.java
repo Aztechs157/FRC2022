@@ -1,8 +1,8 @@
-package frc.robot.lib.controls.models;
+package frc.robot.lib.input.models;
 
-import frc.robot.lib.controls.Button;
-import frc.robot.lib.controls.Model;
-import frc.robot.lib.controls.Axis;
+import frc.robot.lib.input.Axis;
+import frc.robot.lib.input.Button;
+import frc.robot.lib.input.Model;
 
 public class LogitechGamepadF310 extends Model {
 

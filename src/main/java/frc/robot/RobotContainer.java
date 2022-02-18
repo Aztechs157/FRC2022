@@ -7,11 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.controls.ButtonKey;
-import frc.robot.controls.DriverControls;
-import frc.robot.controls.OperatorControls;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
+import frc.robot.input.ButtonKey;
+import frc.robot.input.DriverControls;
+import frc.robot.input.OperatorControls;
 
 /**
  * This class is where the bulk of the robot should be declared. Since

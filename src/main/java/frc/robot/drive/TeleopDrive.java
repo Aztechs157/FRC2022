@@ -5,8 +5,8 @@
 package frc.robot.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.controls.AxisKey;
-import frc.robot.controls.DriverControls;
+import frc.robot.input.AxisKey;
+import frc.robot.input.DriverControls;
 
 public class TeleopDrive extends CommandBase {
     private final DriveSubsystem driveSubsystem;
