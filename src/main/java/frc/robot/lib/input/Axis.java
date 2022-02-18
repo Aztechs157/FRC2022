@@ -1,10 +1,11 @@
 package frc.robot.lib.input;
 
+import static frc.robot.lib.util.DoubleRange.scale;
+
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.lib.DoubleRange;
-import static frc.robot.lib.DoubleRange.scale;
+import frc.robot.lib.util.DoubleRange;
 
 /**
  * Interface for getting input from a axis. This class has methods and static

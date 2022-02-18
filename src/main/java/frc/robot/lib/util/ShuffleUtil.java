@@ -1,4 +1,4 @@
-package frc.robot.lib;
+package frc.robot.lib.util;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
