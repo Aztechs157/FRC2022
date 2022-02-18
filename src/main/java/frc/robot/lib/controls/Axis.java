@@ -34,6 +34,10 @@ public class Axis implements DoubleSupplier {
         return value.getAsDouble();
     }
 
+    public static final double DEFAULT_VALUE = 0;
+    public static final DoubleRange DEFAULT_RANGE = new DoubleRange(-1, 1);
+    public static final Axis DEFAULT = new Axis(() -> DEFAULT_VALUE);
+
     /**
      * Inverts the input by negating the number's sign
      *
@@ -84,7 +88,7 @@ public class Axis implements DoubleSupplier {
      * @return A new input with the deadzone applied
      */
     public Axis deadzone(final DoubleRange deadzone) {
-        final var fullRange = new DoubleRange(-1, 1);
+        final var fullRange = DEFAULT_RANGE;
         final var leftRange = new DoubleRange(fullRange.low, deadzone.low);
         final var rightRange = new DoubleRange(deadzone.high, fullRange.high);
 

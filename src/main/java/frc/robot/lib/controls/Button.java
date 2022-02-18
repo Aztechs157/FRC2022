@@ -21,6 +21,9 @@ public class Button extends edu.wpi.first.wpilibj2.command.button.Button {
         super(isPressed);
     }
 
+    public static final boolean DEFAULT_VALUE = false;
+    public static final Button DEFAULT = new Button(() -> DEFAULT_VALUE);
+
     /**
      * Inverts the input; similar to a boolean `!`
      *
