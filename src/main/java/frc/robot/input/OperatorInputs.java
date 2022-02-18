@@ -4,9 +4,9 @@ import frc.robot.lib.input.Layout;
 import frc.robot.lib.input.LayoutChooser;
 import frc.robot.lib.input.models.LogitechGamepadF310;
 
-public class OperatorControls extends LayoutChooser {
+public class OperatorInputs extends LayoutChooser {
 
-    public OperatorControls() {
+    public OperatorInputs() {
         final var defaultLayout = add(new Layout("Default"));
         final var logitech = new LogitechGamepadF310(0);
 

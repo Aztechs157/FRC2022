@@ -8,9 +8,9 @@ import frc.robot.lib.input.models.LogitechGamepadF310;
 import frc.robot.lib.util.DoubleRange;
 import frc.robot.lib.util.ShuffleUtil;
 
-public class DriverControls extends LayoutChooser {
+public class DriverInputs extends LayoutChooser {
 
-    public DriverControls() {
+    public DriverInputs() {
         final var tab = Shuffleboard.getTab("Debug");
         final var driveInputScale = ShuffleUtil.numberInput(tab, "Drive Input Scale", 0);
 

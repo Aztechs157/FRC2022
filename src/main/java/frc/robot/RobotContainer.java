@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
 import frc.robot.input.ButtonKey;
-import frc.robot.input.DriverControls;
-import frc.robot.input.OperatorControls;
+import frc.robot.input.DriverInputs;
+import frc.robot.input.OperatorInputs;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -23,8 +23,8 @@ import frc.robot.input.OperatorControls;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    private final DriverControls driverControls = new DriverControls();
-    private final OperatorControls operatorControls = new OperatorControls();
+    private final DriverInputs driverInputs = new DriverInputs();
+    private final OperatorInputs operatorInputs = new OperatorInputs();
 
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
@@ -46,12 +46,12 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         driveSubsystem.setDefaultCommand(
-                new TeleopDrive(driverControls, driveSubsystem));
+                new TeleopDrive(driverInputs, driveSubsystem));
 
-        driverControls.button(ButtonKey.Hello)
+        driverInputs.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
-        operatorControls.button(ButtonKey.Hello)
+        operatorInputs.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
     }
 
