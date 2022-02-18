@@ -32,8 +32,7 @@ public class IntakeCargo extends CommandBase {
     @Override
     public void initialize() {
         // Lowers the Intake Arms and starts spinning the rollers on press
-        intake.lowerArm();
-        intake.rollerFeed();
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -49,11 +48,15 @@ public class IntakeCargo extends CommandBase {
             intake.rollerFeed();
             uptake.uptakeFeed();
             kicker.kickerFeed();
+            intake.lowerArm();
+            intake.rollerFeed();
             // else if the intake sensor isn't blocked by a ball but the kicker sensor is.
         } else if (intake.currentColor() == ColorResult.NONE) {
             intake.rollerFeed();
             uptake.uptakeFeed();
             kicker.kickerStop();
+            intake.lowerArm();
+            intake.rollerFeed();
         }
     }
 

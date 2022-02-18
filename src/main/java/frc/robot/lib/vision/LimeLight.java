@@ -8,7 +8,7 @@ public class LimeLight {
 
     // #region Get Network Values
     public boolean hasValidTargets() {
-        return table.getEntry("tv").getBoolean(false);
+        return table.getEntry("tv").getDouble(0) == 1.0 ? true : false;
     }
 
     public double getXAxis() {

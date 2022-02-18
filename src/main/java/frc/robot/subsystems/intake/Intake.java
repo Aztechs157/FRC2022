@@ -46,8 +46,8 @@ public class Intake extends SubsystemBase {
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
         var tab = Shuffleboard.getTab("Debug");
-        // tab.addNumber("proximity distance", entryColor::getProximity);
-        // tab.addString("intake color", () -> currentColor().toString());
+        tab.addNumber("proximity distance", entryColor::getProximity);
+        tab.addString("intake color", () -> currentColor().toString());
         tab.addNumber("isRed", () -> currentColor() == ColorResult.RED ? 1.0 : 0.0);
         tab.addNumber("isBlue", () -> currentColor() == ColorResult.BLUE ? 1.0 : 0.0);
 

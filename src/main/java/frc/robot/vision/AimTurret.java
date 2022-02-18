@@ -4,18 +4,34 @@
 
 package frc.robot.vision;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.TurretConstants;
+import frc.robot.lib.DoubleRange;
+import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.shooter.ShootCargo;
+import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.uptake.Uptake;
 
 public class AimTurret extends CommandBase {
     private final VisionSubsystem vision;
     private final Turret turret;
+    private final PIDController turretpid = new PIDController(0.03, 0, 0);
+    private final PIDController aimerpid = new PIDController(0.03, 0, 0);
+    private final DoubleRange visionRange = new DoubleRange(45, 90);
+    private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
+            TurretConstants.AIMER_LOWER_BOUNDARY);
+    private final ShootCargo shootCargo;
 
     /** Creates a new AimTurret. */
-    public AimTurret(final VisionSubsystem vision, final Turret turret) {
+    public AimTurret(
+            final VisionSubsystem vision,
+            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake) {
         this.vision = vision;
         this.turret = turret;
         addRequirements(vision);
+        shootCargo = new ShootCargo(shooter, kicker, uptake, 3000);
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
@@ -30,18 +46,26 @@ public class AimTurret extends CommandBase {
     public void execute() {
         if (!vision.hasTarget()) {
             turret.turretStop();
+            turret.stopAimer();
             return;
         }
 
-        var threshold = 0;
+        var turretThreshold = 10;
+        var aimerThreshold = 50;
         var hubX = vision.getHubX();
+        var hubDiagonal = vision.getDiagonal();
 
-        if (hubX > threshold) {
-            turret.turretLeft();
-        } else if (hubX < threshold) {
-            turret.turretRight();
+        var aimerPosition = turret.getActualPosition();
+        turret.turretTurn(-turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
+        var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
+        var x = aimerpid.calculate(aimerPosition, aimerTarget);
+        turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) * TurretConstants.AIMER_SPEED);
+
+        if (hubX > -turretThreshold && hubX < turretThreshold && aimerPosition > aimerTarget - aimerThreshold
+                && aimerTarget < aimerTarget + aimerThreshold) {
+            shootCargo.schedule();
         } else {
-            turret.turretStop();
+            shootCargo.cancel();
         }
     }
 
@@ -49,6 +73,9 @@ public class AimTurret extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         vision.setLED(false);
+        turret.turretStop();
+        turret.stopAimer();
+        shootCargo.cancel();
     }
 
     // Returns true when the command should end.

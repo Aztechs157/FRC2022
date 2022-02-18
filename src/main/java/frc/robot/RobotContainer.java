@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
+import frc.robot.vision.AimTurret;
 import frc.robot.vision.VisionSubsystem;
 import frc.robot.subsystems.DebugPrints;
+import frc.robot.subsystems.Dump;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.intake.IntakeSim;
@@ -97,33 +99,25 @@ public class RobotContainer {
         driverController.button(ButtonKey.KickerRun)
                 .whenReleased(kicker::kickerStop);
 
-        // Y Button runs the Intake, this line runs rollerFeed when the y button is held
-        // driverController.button(ButtonKey.IntakeRun)
-        // .whenPressed(intake::rollerFeed);
-
-        // runs rollerStop when the y button is released
-        // driverController.button(ButtonKey.IntakeRun)
-        // .whenReleased(intake::rollerStop);
-
-        operatorController.button(ButtonKey.runSolenoids)
-                .whenPressed(intake::lowerArm, intake);
-
-        operatorController.button(ButtonKey.runSolenoids)
-                .whenReleased(intake::raiseArm, intake);
-
-        // Y button runs the intakecargo command. This will run the motors of the
+        // Y button runs the intakeCargo command. This will run the motors of the
         // intake, uptake and kicker when the y button is held.
         driverController.button(ButtonKey.IntakeRun)
                 .whileHeld(new IntakeCargo(intake, uptake, kicker));
 
         // B Button runs the Shooter, this line runs ejectTop when the b button is held
         driverController.button(ButtonKey.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, 2500));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, 3000));
 
         // Right Bumper runs the Ejecting, this line runs the intake, uptake, kicker,
         // and shooter based on logic related to color sensing and position sensing.
         driverController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
+
+        operatorController.button(ButtonKey.autoAim)
+                .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake));
+
+        operatorController.button(ButtonKey.emergencyEject)
+                .whileHeld(new Dump(shooter, kicker, uptake, intake));
     }
 
     /**

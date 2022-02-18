@@ -20,6 +20,7 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.DebugPrint, logitech.start);
         defaultLayout.assign(AxisKey.TurretSpeed, logitech.leftStickX.scaled(turretInputScale));
         defaultLayout.assign(AxisKey.AimerSpeed, logitech.rightStickX);
-        defaultLayout.assign(ButtonKey.runSolenoids, logitech.leftBumper);
+        defaultLayout.assign(ButtonKey.autoAim, logitech.rightBumper);
+        defaultLayout.assign(ButtonKey.emergencyEject, logitech.back);
     }
 }

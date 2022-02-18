@@ -39,9 +39,9 @@ public final class Constants {
         // connected to.
         public static final int SOLENOID_FORWARD_ID = 2;
         // the power the Intake rollers are set to to feed a ball.
-        public static final double FEED_SPEED = 0.2;
+        public static final double FEED_SPEED = 0.3;
         // the power the Intake rollers are set to to eject a ball.
-        public static final double EJECT_SPEED = -0.2;
+        public static final double EJECT_SPEED = -0.3;
         // The red ball target color.
         public static final Color RED_TARGET = new Color(0.326, 0.464, 0.209);
         // The blue ball target color.
@@ -70,13 +70,15 @@ public final class Constants {
         // The port number for the absolute encoder.
         public static final int ABS_ENCODER_PORT = 1;
         // The speed for the aimer motor.
-        public static final double AIMER_SPEED = .2;
-        // The Counterclockwise Boundary for the turret
+        public static final double AIMER_SPEED = .25;
+        // The Counterclockwise Boundary for the turret set to 2620
         public static final int COUNTERCLOCKWISE_BOUNDARY = 2620;
-        // The Clockwise Boundary for the turret
-        public static final int CLOCKWISE_BOUNDARY = 1200;
+        // The Clockwise Boundary for the turret 1250
+        public static final int CLOCKWISE_BOUNDARY = 1800;
         // The rotational speed of the turret
-        public static final double TURRET_SPEED = .4;
+        public static final double TURRET_SPEED = .45;
+        // diagonal max 90, min 45
+
     }
 
     public static final class ShooterConstants {
@@ -84,7 +86,7 @@ public final class Constants {
         public final static int SHOOTER_MOTOR1_ID = 8;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
-        public final static double EJECT_SPEED = 0.2;
+        public final static double EJECT_SPEED = 0.3;
     }
 
     public static final class KickerConstants {
@@ -93,18 +95,18 @@ public final class Constants {
         // The Digital Input ID for the Kicker Sensor.
         public static final int KICKER_SENSOR_ID = 0;
         // The speed at which the Kicker feeds a ball into the Shooter.
-        public static final double FEED_SPEED = 0.7;
+        public static final double FEED_SPEED = 1;
         // The speed at which the Kicker ejects a ball back to the Intake.
-        public static final double EJECT_SPEED = 0.2;
+        public static final double EJECT_SPEED = 0.3;
     }
 
     public static final class UptakeConstants {
         // The CAN ID for the Uptake Motor.
         public static final int UPTAKE_MOTOR_ID = 10;
         // The speed at which the Uptake feeds a ball into the Kicker.
-        public static final double FEED_SPEED = 0.4;
+        public static final double FEED_SPEED = 0.5;
         // The speed at which the Uptake ejects a ball back through the Intake.
-        public static final double EJECT_SPEED = -0.2;
+        public static final double EJECT_SPEED = -0.3;
     }
 
     public static final class DriveConstants {
