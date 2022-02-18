@@ -27,7 +27,7 @@ public class LayoutChooser implements Sendable {
      * @return A {@link Button} and {@link ButtonKey} representing the input
      */
     public Button button(final Button.Key buttonKey) {
-        return new Button(() -> getSelectedLayout().button(buttonKey).getAsBoolean());
+        return new Button(() -> getSelected().button(buttonKey).getAsBoolean());
     }
 
     /**
@@ -37,7 +37,7 @@ public class LayoutChooser implements Sendable {
      * @return A {@link Axis} representing the input
      */
     public Axis axis(final Axis.Key axisKey) {
-        return new Axis(() -> getSelectedLayout().axis(axisKey).getAsDouble());
+        return new Axis(() -> getSelected().axis(axisKey).getAsDouble());
     }
 
     /**
@@ -45,7 +45,7 @@ public class LayoutChooser implements Sendable {
      *
      * @return The selected layout
      */
-    private Layout getSelectedLayout() {
+    private Layout getSelected() {
         final var layout = layouts.getSelected();
 
         if (layout == null) {
@@ -74,12 +74,13 @@ public class LayoutChooser implements Sendable {
      *
      * @param layout The Layout to add
      */
-    public void add(final Layout layout) {
+    public Layout add(final Layout layout) {
         if (hasDefault) {
             layouts.addOption(layout.getName(), layout);
         } else {
             addAndSetDefault(layout);
         }
+        return layout;
     }
 
     /**
@@ -90,14 +91,9 @@ public class LayoutChooser implements Sendable {
      *
      * @param layout The Layout to add
      */
-    public void addAndSetDefault(final Layout layout) {
+    public Layout addAndSetDefault(final Layout layout) {
         layouts.setDefaultOption(layout.getName(), layout);
         hasDefault = true;
-    }
-
-    public Layout createLayout(final String name) {
-        var layout = new Layout(name);
-        add(layout);
         return layout;
     }
 }

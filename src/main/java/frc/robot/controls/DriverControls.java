@@ -3,6 +3,7 @@ package frc.robot.controls;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.lib.DoubleRange;
 import frc.robot.lib.ShuffleUtil;
+import frc.robot.lib.controls.Layout;
 import frc.robot.lib.controls.LayoutChooser;
 import frc.robot.lib.controls.models.LogitechExtreme3D;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
@@ -13,7 +14,7 @@ public class DriverControls extends LayoutChooser {
         final var tab = Shuffleboard.getTab("Debug");
         final var driveInputScale = ShuffleUtil.numberInput(tab, "Drive Input Scale", 0);
 
-        final var defaultLayout = createLayout("Default");
+        final var defaultLayout = add(new Layout("Default"));
         final var logitech = new LogitechGamepadF310(0);
 
         defaultLayout.assign(AxisKey.DriveSpeedX,
@@ -25,7 +26,7 @@ public class DriverControls extends LayoutChooser {
 
         defaultLayout.assign(ButtonKey.Hello, logitech.a);
 
-        final var flightLayout = createLayout("Flight Stick");
+        final var flightLayout = add(new Layout("Flight Stick"));
         final var flight = new LogitechExtreme3D(1);
 
         flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
