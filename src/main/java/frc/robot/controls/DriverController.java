@@ -33,6 +33,8 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.ShooterRun, logitech.b);
         defaultLayout.assign(ButtonKey.EjectCargo, logitech.rightBumper);
 
+        defaultLayout.assign(ButtonKey.ResetDrivePosition, logitech.start);
+
         final var flightLayout = new Layout("Flight Stick");
         final var flight = new LogitechExtreme3D(1);
 

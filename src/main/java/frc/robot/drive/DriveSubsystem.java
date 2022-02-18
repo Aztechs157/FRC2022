@@ -5,6 +5,7 @@
 package frc.robot.drive;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -28,12 +29,43 @@ public class DriveSubsystem extends SubsystemBase {
         frontLeftMotor.setInverted(true);
         backLeftMotor.setInverted(true);
 
-        Shuffleboard.getTab("Debug").add("Mecanum Drive", mecanumDrive);
+        final var tab = Shuffleboard.getTab("Debug");
+        tab.add("Mecanum Drive", mecanumDrive);
+        tab.addNumber("Drive Position", this::getDrivePosition);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {
-        // TODO: investigate gyro-augmented mecanum drive
-        var currentGyroAngle = 0.0;
-        mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation, currentGyroAngle);
+        mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);
+    }
+
+    public double getDrivePosition() {
+        final var frontLeft = frontLeftMotor.getEncoder().getPosition();
+        final var backLeft = backLeftMotor.getEncoder().getPosition();
+        final var frontRight = frontRightMotor.getEncoder().getPosition();
+        final var backRight = backRightMotor.getEncoder().getPosition();
+
+        // Take average of all 4 drive motors
+        return (frontLeft + backLeft + frontRight + backRight) / 4;
+    }
+
+    public void resetDrivePosition() {
+        frontLeftMotor.getEncoder().setPosition(0);
+        backLeftMotor.getEncoder().setPosition(0);
+        frontRightMotor.getEncoder().setPosition(0);
+        backRightMotor.getEncoder().setPosition(0);
+    }
+
+    public void enableBrakeMode() {
+        frontLeftMotor.setIdleMode(IdleMode.kBrake);
+        backLeftMotor.setIdleMode(IdleMode.kBrake);
+        frontRightMotor.setIdleMode(IdleMode.kBrake);
+        backRightMotor.setIdleMode(IdleMode.kBrake);
+    }
+
+    public void disableBrakeMode() {
+        frontLeftMotor.setIdleMode(IdleMode.kCoast);
+        backLeftMotor.setIdleMode(IdleMode.kCoast);
+        frontRightMotor.setIdleMode(IdleMode.kCoast);
+        backRightMotor.setIdleMode(IdleMode.kCoast);
     }
 }

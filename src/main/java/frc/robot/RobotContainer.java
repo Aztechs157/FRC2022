@@ -28,7 +28,9 @@ import frc.robot.subsystems.shooter.ShooterSim;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.turret.TurretSim;
 import frc.robot.subsystems.uptake.Uptake;
+import frc.robot.drive.DriveBackwards;
 import frc.robot.drive.DriveSubsystem;
+import frc.robot.drive.ResetDrivePosition;
 import frc.robot.drive.TeleopDrive;
 
 /**
@@ -81,6 +83,8 @@ public class RobotContainer {
         operatorController.button(ButtonKey.DebugPrint)
                 .whenPressed(new DebugPrints(intake, kicker, uptake, shooter, turret));
 
+        driverController.button(ButtonKey.ResetDrivePosition).whenPressed(new ResetDrivePosition(driveSubsystem));
+
         // Jame's Button code but I, Eric, Used it for my own purposes.
         // X Button runs Uptake and Kicker, this line specifically runs uptakeFeed when
         // the x button is held
@@ -120,6 +124,14 @@ public class RobotContainer {
                 .whileHeld(new Dump(shooter, kicker, uptake, intake));
     }
 
+    public void startAutonomous() {
+        driveSubsystem.enableBrakeMode();
+    }
+
+    public void endAutonomous() {
+        driveSubsystem.disableBrakeMode();
+    }
+
     /**
      *
      * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -127,7 +139,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return null;
+        return new DriveBackwards(driveSubsystem);
     }
 
     /**

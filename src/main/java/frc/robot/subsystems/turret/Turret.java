@@ -5,6 +5,7 @@
 package frc.robot.subsystems.turret;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -32,6 +33,7 @@ public class Turret extends SubsystemBase {
     /** Creates a new Turret. */
     public Turret(OperatorController operatorController) {
         turretMotor = new CANSparkMax(TurretConstants.TURRET_MOTOR_ID, MotorType.kBrushless);
+        turretMotor.setIdleMode(IdleMode.kBrake);
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
         aimerMotor = new CANSparkMax(TurretConstants.AIMER_MOTOR_ID, MotorType.kBrushless);
         absoluteEncoder = new Counter(Mode.kSemiperiod);
