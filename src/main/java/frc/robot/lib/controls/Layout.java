@@ -35,6 +35,7 @@ public class Layout implements Sendable {
     }
 
     private final Map<Button.Key, Button> buttons = new HashMap<>();
+    private final Map<Axis.Key, Axis> axes = new HashMap<>();
 
     /**
      * For this Layout, assign a ButtonInput.Key to a ButtonInput. Calling this
@@ -47,6 +48,18 @@ public class Layout implements Sendable {
      */
     public void assign(final Button.Key buttonKey, final Button input) {
         buttons.put(buttonKey, input);
+    }
+
+    /**
+     * For this Layout, assign a AxisInput.Key to a AxisInput. Calling this method
+     * multiple times with the same AxisInput.Key will override the previous
+     * assignment.
+     *
+     * @param axisKey The key to assign with
+     * @param input   The input being assigned
+     */
+    public void assign(final Axis.Key axisKey, final Axis input) {
+        axes.put(axisKey, input);
     }
 
     /**
@@ -63,20 +76,6 @@ public class Layout implements Sendable {
         }
 
         return button;
-    }
-
-    private final Map<Axis.Key, Axis> axes = new HashMap<>();
-
-    /**
-     * For this Layout, assign a AxisInput.Key to a AxisInput. Calling this method
-     * multiple times with the same AxisInput.Key will override the previous
-     * assignment.
-     *
-     * @param axisKey The key to assign with
-     * @param input   The input being assigned
-     */
-    public void assign(final Axis.Key axisKey, final Axis input) {
-        axes.put(axisKey, input);
     }
 
     /**
@@ -102,6 +101,26 @@ public class Layout implements Sendable {
         private InputNotAssignedException(final String layoutName, final String inputType, final String inputName) {
             super("The " + inputType + " " + inputName + " has not been assigned for layout " + layoutName);
         }
+    }
+
+    public Button tryButton(final Button.Key buttonKey) {
+        final var button = buttons.get(buttonKey);
+
+        if (button == null) {
+            return Button.DEFAULT;
+        }
+
+        return button;
+    }
+
+    public Axis tryAxis(final Axis.Key axisKey) {
+        final var axis = axes.get(axisKey);
+
+        if (axis == null) {
+            return Axis.DEFAULT;
+        }
+
+        return axis;
     }
 
     @Override

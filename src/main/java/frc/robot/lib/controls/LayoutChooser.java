@@ -40,6 +40,14 @@ public class LayoutChooser implements Sendable {
         return new Axis(() -> getSelected().axis(axisKey).getAsDouble());
     }
 
+    public Button tryButton(final Button.Key buttonKey) {
+        return new Button(() -> getSelected().tryButton(buttonKey).getAsBoolean());
+    }
+
+    public Axis tryAxis(final Axis.Key axisKey) {
+        return new Axis(() -> getSelected().tryAxis(axisKey).getAsDouble());
+    }
+
     /**
      * Get the layout currently selected on Shuffleboard
      *
