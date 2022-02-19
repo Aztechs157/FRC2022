@@ -86,7 +86,7 @@ public final class Constants {
         public final static int SHOOTER_MOTOR1_ID = 8;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
-        public final static double EJECT_SPEED = 0.3;
+        public final static double EJECT_SPEED = 0.4;
     }
 
     public static final class KickerConstants {
@@ -118,7 +118,7 @@ public final class Constants {
 
     public static final class AutoConstants {
         public static final double AUTO_SPEED = 0.2;
-        public static final double AUTO_DISTANCE_TICKS = 19.72;
+        public static final double AUTO_DISTANCE_TICKS = 23.72;
     }
 
     public enum MotorDirection {
