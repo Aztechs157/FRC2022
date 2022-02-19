@@ -17,8 +17,6 @@ import frc.robot.subsystems.uptake.Uptake;
 public class AimTurret extends CommandBase {
     private final VisionSubsystem vision;
     private final Turret turret;
-    private final PIDController turretpid = new PIDController(0.03, 0, 0);
-    private final PIDController aimerpid = new PIDController(0.03, 0, 0);
     private final DoubleRange visionRange = new DoubleRange(45, 90);
     private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
             TurretConstants.AIMER_LOWER_BOUNDARY);
@@ -65,10 +63,11 @@ public class AimTurret extends CommandBase {
         var hubDiagonal = vision.getDiagonal();
 
         var aimerPosition = turret.getActualPosition();
-        turret.turretTurn(-turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
+        turret.turretTurn(-turret.turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
         var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
-        var x = aimerpid.calculate(aimerPosition, aimerTarget);
+
         if (useAimer) {
+            var x = turret.aimerpid.calculate(aimerPosition, aimerTarget);
             turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) * TurretConstants.AIMER_SPEED);
         }
         // System.out.println("aimer: " + (-(x > 1 ? 1 : x < -1 ? -1 : x) *
