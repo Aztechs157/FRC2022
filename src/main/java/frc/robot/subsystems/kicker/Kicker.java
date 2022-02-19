@@ -40,6 +40,10 @@ public class Kicker extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
+    public void runKicker(double speed) {
+        kickerMotor.set(speed);
+    }
+
     /**
      * This method feeds the ball into the shooter.
      */

@@ -47,7 +47,7 @@ public class IntakeCargo extends CommandBase {
         if (!kicker.getBallSensor()) {
             intake.rollerFeed();
             uptake.uptakeFeed();
-            kicker.kickerFeed();
+            kicker.runKicker(0.4);
             intake.lowerArm();
             intake.rollerFeed();
             // else if the intake sensor isn't blocked by a ball but the kicker sensor is.

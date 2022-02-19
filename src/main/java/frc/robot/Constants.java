@@ -104,7 +104,7 @@ public final class Constants {
         // The CAN ID for the Uptake Motor.
         public static final int UPTAKE_MOTOR_ID = 10;
         // The speed at which the Uptake feeds a ball into the Kicker.
-        public static final double FEED_SPEED = 0.5;
+        public static final double FEED_SPEED = 0.3;
         // The speed at which the Uptake ejects a ball back through the Intake.
         public static final double EJECT_SPEED = -0.3;
     }
