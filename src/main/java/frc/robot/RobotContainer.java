@@ -88,7 +88,7 @@ public class RobotContainer {
 
         // runs the intake command on the driver controller
         driverController.button(ButtonKey.IntakeRun)
-                .whileHeld(new IntakeCargo(intake, uptake, kicker));
+                .toggleWhenPressed(new IntakeCargo(intake, uptake, kicker));
 
         // runs the Shooter command on the operator controller. Currently runs to 2500
         // rpm.
@@ -96,7 +96,7 @@ public class RobotContainer {
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, 4900));
 
         // runs the Eject command on the driver controller
-        driverController.button(ButtonKey.EjectCargo)
+        driverController.button(ButtonKey.emergencyEject)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
 
         operatorController.button(ButtonKey.autoAim)

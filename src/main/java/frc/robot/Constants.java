@@ -39,7 +39,7 @@ public final class Constants {
         // connected to.
         public static final int SOLENOID_FORWARD_ID = 2;
         // the power the Intake rollers are set to to feed a ball.
-        public static final double FEED_SPEED = 0.3;
+        public static final double FEED_SPEED = .8;
         // the power the Intake rollers are set to to eject a ball.
         public static final double EJECT_SPEED = -0.3;
         // The red ball target color.
@@ -104,7 +104,7 @@ public final class Constants {
         // The CAN ID for the Uptake Motor.
         public static final int UPTAKE_MOTOR_ID = 10;
         // The speed at which the Uptake feeds a ball into the Kicker.
-        public static final double FEED_SPEED = 0.3;
+        public static final double FEED_SPEED = 0.8;
         // The speed at which the Uptake ejects a ball back through the Intake.
         public static final double EJECT_SPEED = -0.3;
     }
