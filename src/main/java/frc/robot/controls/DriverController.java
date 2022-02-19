@@ -13,8 +13,7 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
     public DriverController() {
         final var tab = Shuffleboard.getTab("Debug");
 
-        final var scaleEntry = tab.add("Drive Input Scale", 0).getEntry();
-        final DoubleSupplier driveInputScale = () -> scaleEntry.getDouble(0);
+        final double driveInputScale = .65;
 
         final var defaultLayout = new Layout("Default");
         final var logitech = new LogitechGamepadF310(0);
