@@ -97,7 +97,7 @@ public class RobotContainer {
 
         // runs the Eject command on the driver controller
         driverController.button(ButtonKey.emergencyEject)
-                .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
+                .whileHeld(new Dump(shooter, kicker, uptake, intake));
 
         operatorController.button(ButtonKey.autoAim)
                 .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake));
