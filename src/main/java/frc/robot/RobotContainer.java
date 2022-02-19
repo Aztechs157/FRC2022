@@ -93,7 +93,7 @@ public class RobotContainer {
         // runs the Shooter command on the operator controller. Currently runs to 2500
         // rpm.
         operatorController.button(ButtonKey.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, 4100));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, 4200));
 
         // runs the Eject command on the driver controller
         driverController.button(ButtonKey.emergencyEject)

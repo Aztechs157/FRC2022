@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intake.Intake.ColorResult;
 import frc.robot.subsystems.kicker.Kicker;
@@ -13,6 +14,7 @@ public class IntakeCargo extends CommandBase {
     private Intake intake;
     private Uptake uptake;
     private Kicker kicker;
+    private Command end = new RunIntake(intake, .5);
 
     /** Creates a new IntakeCargo. */
     public IntakeCargo(Intake intake, Uptake uptake, Kicker kicker) {
@@ -68,7 +70,7 @@ public class IntakeCargo extends CommandBase {
         kicker.kickerStop();
         uptake.uptakeStop();
         intake.raiseArm();
-        new RunIntake(intake, .5).schedule();
+        end.schedule();
     }
 
     // Returns true when the command should end.
