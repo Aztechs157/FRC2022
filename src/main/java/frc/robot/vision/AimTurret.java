@@ -30,8 +30,8 @@ public class AimTurret extends CommandBase {
             final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake) {
         this.vision = vision;
         this.turret = turret;
-        addRequirements(vision);
-        shootCargo = new ShootCargo(shooter, kicker, uptake, 3000);
+        addRequirements(vision, turret);
+        shootCargo = new ShootCargo(shooter, kicker, uptake, 3800);
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
@@ -60,6 +60,8 @@ public class AimTurret extends CommandBase {
         var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
         var x = aimerpid.calculate(aimerPosition, aimerTarget);
         turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) * TurretConstants.AIMER_SPEED);
+        // System.out.println("aimer: " + (-(x > 1 ? 1 : x < -1 ? -1 : x) *
+        // TurretConstants.AIMER_SPEED));
 
         if (hubX > -turretThreshold && hubX < turretThreshold && aimerPosition > aimerTarget - aimerThreshold
                 && aimerTarget < aimerTarget + aimerThreshold) {

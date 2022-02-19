@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.controls.AutoShootAndDrive;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
@@ -139,7 +140,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return new DriveBackwards(driveSubsystem);
+        return new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, driveSubsystem);
     }
 
     /**

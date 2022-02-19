@@ -31,7 +31,6 @@ public class DriveSubsystem extends SubsystemBase {
 
         final var tab = Shuffleboard.getTab("Debug");
         tab.add("Mecanum Drive", mecanumDrive);
-        tab.addNumber("Drive Position", this::getDrivePosition);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {

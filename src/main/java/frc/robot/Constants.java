@@ -74,7 +74,7 @@ public final class Constants {
         // The Counterclockwise Boundary for the turret set to 2620
         public static final int COUNTERCLOCKWISE_BOUNDARY = 2620;
         // The Clockwise Boundary for the turret 1250
-        public static final int CLOCKWISE_BOUNDARY = 1800;
+        public static final int CLOCKWISE_BOUNDARY = 1250;
         // The rotational speed of the turret
         public static final double TURRET_SPEED = .45;
         // diagonal max 90, min 45
