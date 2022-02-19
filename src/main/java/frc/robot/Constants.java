@@ -118,7 +118,7 @@ public final class Constants {
 
     public static final class AutoConstants {
         public static final double AUTO_SPEED = 0.2;
-        public static final double AUTO_DISTANCE_TICKS = 15.72;
+        public static final double AUTO_DISTANCE_TICKS = 19.72;
     }
 
     public enum MotorDirection {

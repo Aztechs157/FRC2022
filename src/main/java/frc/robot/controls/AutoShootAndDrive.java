@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.drive.DriveBackwards;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
@@ -28,7 +29,7 @@ public class AutoShootAndDrive extends SequentialCommandGroup {
             final Uptake uptake,
             final DriveSubsystem drive) {
 
-        final var autoAim = new AimTurret(vision, turret, shooter, kicker, uptake);
+        final var autoAim = new ShootCargo(shooter, kicker, uptake, 4900);
         final var driveForward = new DriveBackwards(drive);
         final var timeout = new WaitCommand(7);
 

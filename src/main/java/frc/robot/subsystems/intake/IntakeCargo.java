@@ -68,6 +68,7 @@ public class IntakeCargo extends CommandBase {
         kicker.kickerStop();
         uptake.uptakeStop();
         intake.raiseArm();
+        new RunIntake(intake, 2).schedule();
     }
 
     // Returns true when the command should end.
