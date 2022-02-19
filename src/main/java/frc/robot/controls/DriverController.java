@@ -26,31 +26,29 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(AxisKey.DriveRotation,
                 logitech.rightStickX.scaled(driveInputScale));
 
-        defaultLayout.assign(ButtonKey.Hello, logitech.a);
-        defaultLayout.assign(ButtonKey.UptakeRun, logitech.x);
-        defaultLayout.assign(ButtonKey.KickerRun, logitech.x);
-        defaultLayout.assign(ButtonKey.IntakeRun, logitech.y);
-        defaultLayout.assign(ButtonKey.ShooterRun, logitech.b);
-        defaultLayout.assign(ButtonKey.EjectCargo, logitech.rightBumper);
+        defaultLayout.assign(ButtonKey.Hello, logitech.back);
+        defaultLayout.assign(ButtonKey.IntakeRun, logitech.rightBumper);
+        defaultLayout.assign(ButtonKey.EjectCargo, logitech.start);
 
-        defaultLayout.assign(ButtonKey.ResetDrivePosition, logitech.start);
+        // final var flightLayout = new Layout("Flight Stick");
+        // final var flight = new LogitechExtreme3D(1);
 
-        final var flightLayout = new Layout("Flight Stick");
-        final var flight = new LogitechExtreme3D(1);
+        // flightLayout.assign(AxisKey.DriveSpeedX,
+        // flight.stickX.scaled(driveInputScale));
+        // flightLayout.assign(AxisKey.DriveSpeedY,
+        // flight.stickY.scaled(driveInputScale).inverted());
+        // flightLayout.assign(AxisKey.DriveRotation,
+        // flight.stickRotate.deadzone(new DoubleRange(0,
+        // 0.15)).scaled(driveInputScale));
+        // flightLayout.assign(ButtonKey.UptakeRun, flight.button3);
+        // flightLayout.assign(ButtonKey.KickerRun, flight.button3);
+        // flightLayout.assign(ButtonKey.ShooterRun, flight.button4);
+        // flightLayout.assign(ButtonKey.IntakeRun, flight.button5);
 
-        flightLayout.assign(AxisKey.DriveSpeedX, flight.stickX.scaled(driveInputScale));
-        flightLayout.assign(AxisKey.DriveSpeedY, flight.stickY.scaled(driveInputScale).inverted());
-        flightLayout.assign(AxisKey.DriveRotation,
-                flight.stickRotate.deadzone(new DoubleRange(0, 0.15)).scaled(driveInputScale));
-        flightLayout.assign(ButtonKey.UptakeRun, flight.button3);
-        flightLayout.assign(ButtonKey.KickerRun, flight.button3);
-        flightLayout.assign(ButtonKey.ShooterRun, flight.button4);
-        flightLayout.assign(ButtonKey.IntakeRun, flight.button5);
-
-        flightLayout.assign(ButtonKey.Hello, flight.thumbButton);
+        // flightLayout.assign(ButtonKey.Hello, flight.thumbButton);
 
         tab.add("Drive", this);
         tab.add("Default Layout", defaultLayout);
-        tab.add("Flight Layout", flightLayout);
+        // tab.add("Flight Layout", flightLayout);
     }
 }
