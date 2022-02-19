@@ -23,16 +23,25 @@ public class AimTurret extends CommandBase {
     private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
             TurretConstants.AIMER_LOWER_BOUNDARY);
     private final ShootCargo shootCargo;
+    private final boolean useAimer;
 
     /** Creates a new AimTurret. */
     public AimTurret(
             final VisionSubsystem vision,
-            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake) {
+            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake, boolean useAimer) {
         this.vision = vision;
         this.turret = turret;
         addRequirements(vision, turret);
         shootCargo = new ShootCargo(shooter, kicker, uptake, 3800);
+        this.useAimer = useAimer;
         // Use addRequirements() here to declare subsystem dependencies.
+    }
+
+    public AimTurret(
+            final VisionSubsystem vision,
+            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake) {
+        this(vision, turret, shooter, kicker, uptake, true);
+
     }
 
     // Called when the command is initially scheduled.
@@ -59,7 +68,9 @@ public class AimTurret extends CommandBase {
         turret.turretTurn(-turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
         var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
         var x = aimerpid.calculate(aimerPosition, aimerTarget);
-        turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) * TurretConstants.AIMER_SPEED);
+        if (useAimer) {
+            turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) * TurretConstants.AIMER_SPEED);
+        }
         // System.out.println("aimer: " + (-(x > 1 ? 1 : x < -1 ? -1 : x) *
         // TurretConstants.AIMER_SPEED));
 
