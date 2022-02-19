@@ -69,58 +69,31 @@ public class RobotContainer {
     private void configureButtonBindings() {
         driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
 
-        // Jame's button test code, I changed the prints from simple strings of hello to
+        // James' button test code, I changed the prints from simple strings of hello to
         // measure velocity method printouts.
+        // prints the velocity of the shooter
         driverController.button(ButtonKey.Hello)
                 .whenPressed(() -> System.out.println(shooter.measureVelocity()));
 
+        // prints debug messages
         operatorController.button(ButtonKey.DebugPrint)
                 .whenPressed(new DebugPrints(intake, kicker, uptake, shooter, turret));
 
-        // Jame's Button code but I, Eric, Used it for my own purposes.
-        // X Button runs Uptake and Kicker, this line specifically runs uptakeFeed when
-        // the x button is held
-        driverController.button(ButtonKey.UptakeRun)
-                .whenPressed(uptake::uptakeFeed);
-
-        // runs uptakeStop when the x button is released
-        driverController.button(ButtonKey.UptakeRun)
-                .whenReleased(uptake::uptakeStop);
-
-        // runs kickerFeed when the x button is held
-        driverController.button(ButtonKey.KickerRun)
-                .whenPressed(kicker::kickerFeed);
-
-        // runs kickerStop when the x button is released
-        driverController.button(ButtonKey.KickerRun)
-                .whenReleased(kicker::kickerStop);
-
-        // Y Button runs the Intake, this line runs rollerFeed when the y button is held
-        // driverController.button(ButtonKey.IntakeRun)
-        // .whenPressed(intake::rollerFeed);
-
-        // runs rollerStop when the y button is released
-        // driverController.button(ButtonKey.IntakeRun)
-        // .whenReleased(intake::rollerStop);
-
-        operatorController.button(ButtonKey.runSolenoids)
-                .whenPressed(intake::lowerArm, intake);
-
-        operatorController.button(ButtonKey.runSolenoids)
-                .whenReleased(intake::raiseArm, intake);
-
-        // Y button runs the intakecargo command. This will run the motors of the
-        // intake, uptake and kicker when the y button is held.
+        // runs the intake command on the driver controller
         driverController.button(ButtonKey.IntakeRun)
                 .whileHeld(new IntakeCargo(intake, uptake, kicker));
 
-        // B Button runs the Shooter, this line runs ejectTop when the b button is held
-        driverController.button(ButtonKey.ShooterRun)
+        // runs the Shooter command on the operator controller. Currently runs to 2500
+        // rpm.
+        operatorController.button(ButtonKey.ShooterRun)
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, 2500));
 
-        // Right Bumper runs the Ejecting, this line runs the intake, uptake, kicker,
-        // and shooter based on logic related to color sensing and position sensing.
+        // runs the Eject command on the driver controller
         driverController.button(ButtonKey.EjectCargo)
+                .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
+
+        // runs the Eject command on the operator controller
+        operatorController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
     }
 

@@ -17,10 +17,10 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         final var scaleEntry = tab.add("Turret Input Scale", 0).getEntry();
         final DoubleSupplier turretInputScale = () -> scaleEntry.getDouble(0);
 
-        defaultLayout.assign(ButtonKey.Hello, logitech.a);
-        defaultLayout.assign(ButtonKey.DebugPrint, logitech.start);
+        defaultLayout.assign(ButtonKey.DebugPrint, logitech.back);
         defaultLayout.assign(AxisKey.TurretSpeed, logitech.leftStickX.scaled(turretInputScale));
         defaultLayout.assign(AxisKey.AimerSpeed, logitech.rightStickX);
-        defaultLayout.assign(ButtonKey.runSolenoids, logitech.leftBumper);
+        defaultLayout.assign(ButtonKey.ShooterRun, logitech.rightBumper);
+        defaultLayout.assign(ButtonKey.EjectCargo, logitech.start);
     }
 }
