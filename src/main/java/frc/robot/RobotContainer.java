@@ -125,7 +125,7 @@ public class RobotContainer {
                 .whileHeld(new Dump(shooter, kicker, uptake, intake));
     }
 
-    public void startAutonomous() {
+    public void enableDriveBreakMode() {
         driveSubsystem.enableBrakeMode();
     }
 
