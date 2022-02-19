@@ -29,7 +29,7 @@ public class AutoShootAndDrive extends SequentialCommandGroup {
             final Uptake uptake,
             final DriveSubsystem drive) {
 
-        final var autoAim = new ShootCargo(shooter, kicker, uptake, 4300);
+        final var autoAim = new ShootCargo(shooter, kicker, uptake, 4100);
         final var driveForward = new DriveBackwards(drive);
         final var timeout = new WaitCommand(7);
 
