@@ -13,13 +13,13 @@ import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
 import frc.robot.vision.AimTurret;
 import frc.robot.vision.VisionSubsystem;
-import frc.robot.subsystems.Dump;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.pneumatics.Pneumatics;
 import frc.robot.subsystems.sensing.EjectCargo;
 import frc.robot.subsystems.sensing.GetKickerColor;
+import frc.robot.subsystems.shooter.LowShoot;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
@@ -90,14 +90,14 @@ public class RobotContainer {
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, 4200));
 
         // runs the Eject command on the driver controller
-        driverController.button(ButtonKey.emergencyEject)
-                .whileHeld(new Dump(shooter, kicker, uptake, intake));
+        driverController.button(ButtonKey.LowShoot)
+                .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
-        operatorController.button(ButtonKey.autoAim)
+        operatorController.button(ButtonKey.AutoAim)
                 .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake));
 
-        operatorController.button(ButtonKey.emergencyEject)
-                .whileHeld(new Dump(shooter, kicker, uptake, intake));
+        operatorController.button(ButtonKey.LowShoot)
+                .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
         // runs the Eject command on the operator controller
         operatorController.button(ButtonKey.EjectCargo)

@@ -2,22 +2,21 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.uptake.Uptake;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
-import frc.robot.subsystems.shooter.Shooter;
 
-public class Dump extends CommandBase {
+public class LowShoot extends CommandBase {
     private Shooter shooter;
     private Kicker kicker;
     private Uptake uptake;
     private Intake intake;
 
     /** Creates a new Dump. */
-    public Dump(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake) {
+    public LowShoot(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.shooter = shooter;
         this.kicker = kicker;
