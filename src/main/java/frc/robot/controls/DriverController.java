@@ -1,11 +1,7 @@
 package frc.robot.controls;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import frc.robot.lib.DoubleRange;
 import frc.robot.lib.controls.ControllerBase;
-import frc.robot.lib.controls.models.LogitechExtreme3D;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
 
 public class DriverController extends ControllerBase<ButtonKey, AxisKey> {

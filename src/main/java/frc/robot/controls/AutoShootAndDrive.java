@@ -5,7 +5,6 @@
 package frc.robot.controls;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.drive.DriveBackwards;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.subsystems.kicker.Kicker;
@@ -13,7 +12,6 @@ import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
-import frc.robot.vision.AimTurret;
 import frc.robot.vision.VisionSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more

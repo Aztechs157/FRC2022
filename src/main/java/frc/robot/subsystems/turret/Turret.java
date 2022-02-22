@@ -9,13 +9,9 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Counter.Mode;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.controls.OperatorController;
@@ -25,7 +21,6 @@ public class Turret extends SubsystemBase {
     private AnalogInput positionSensor;
     private CANSparkMax aimerMotor;
     private Counter absoluteEncoder;
-    private OperatorController operatorController;
 
     private int rotations = 0;
     private Double previousPosition = null;
@@ -44,7 +39,6 @@ public class Turret extends SubsystemBase {
         absoluteEncoder.setSemiPeriodMode(true);
         absoluteEncoder.setUpSource(TurretConstants.ABS_ENCODER_PORT);
         absoluteEncoder.reset();
-        this.operatorController = operatorController;
         this.setDefaultCommand(new TurretSpin(operatorController, this));
     }
 
