@@ -4,7 +4,6 @@
 
 package frc.robot.vision;
 
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.lib.vision.LimeLight;
 import frc.robot.lib.vision.LimeLight.LightMode;
@@ -14,8 +13,6 @@ public class VisionSubsystem extends SubsystemBase {
 
     /** Creates a new VisionSubsystem. */
     public VisionSubsystem() {
-        final var tab = Shuffleboard.getTab("Debug");
-        tab.addNumber("Diagonal", this::getDiagonal);
     }
 
     public boolean hasTarget() {

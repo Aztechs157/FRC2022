@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.DriveConstants.*;
@@ -28,9 +27,6 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
         frontLeftMotor.setInverted(true);
         backLeftMotor.setInverted(true);
-
-        final var tab = Shuffleboard.getTab("Debug");
-        tab.add("Mecanum Drive", mecanumDrive);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {
