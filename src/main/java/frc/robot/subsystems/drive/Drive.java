@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.drive;
+package frc.robot.subsystems.drive;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.DriveConstants.*;
 
-public class DriveSubsystem extends SubsystemBase {
+public class Drive extends SubsystemBase {
     private final CANSparkMax frontLeftMotor = new CANSparkMax(FRONT_LEFT_MOTOR_ID, MotorType.kBrushless);
     private final CANSparkMax backLeftMotor = new CANSparkMax(BACK_LEFT_MOTOR_ID, MotorType.kBrushless);
     private final CANSparkMax frontRightMotor = new CANSparkMax(FRONT_RIGHT_MOTOR_ID, MotorType.kBrushless);
@@ -24,7 +24,7 @@ public class DriveSubsystem extends SubsystemBase {
             frontRightMotor, backRightMotor);
 
     /** Creates a new Drive. */
-    public DriveSubsystem() {
+    public Drive() {
         frontLeftMotor.setInverted(true);
         backLeftMotor.setInverted(true);
     }

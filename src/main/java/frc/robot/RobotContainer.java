@@ -11,8 +11,8 @@ import frc.robot.controls.AutoShootAndDrive;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
-import frc.robot.vision.AimTurret;
-import frc.robot.vision.VisionSubsystem;
+import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.drive.TeleopDrive;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
@@ -24,8 +24,8 @@ import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
-import frc.robot.drive.DriveSubsystem;
-import frc.robot.drive.TeleopDrive;
+import frc.robot.subsystems.vision.AimTurret;
+import frc.robot.subsystems.vision.Vision;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -39,7 +39,7 @@ public class RobotContainer {
     private final OperatorController operatorController = new OperatorController();
 
     // The robot's subsystems and commands are defined here...
-    private final VisionSubsystem visionSubsystem = new VisionSubsystem();
+    private final Vision visionSubsystem = new Vision();
     public final Uptake uptake = new Uptake();
     public final Kicker kicker = new Kicker();
     public final Intake intake = new Intake();
@@ -47,7 +47,7 @@ public class RobotContainer {
     private final Turret turret = new Turret(operatorController);
     @SuppressWarnings("unused")
     private final Pneumatics pneumatics = new Pneumatics();
-    private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+    private final Drive driveSubsystem = new Drive();
 
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
 

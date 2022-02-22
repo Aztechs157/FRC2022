@@ -5,14 +5,14 @@
 package frc.robot.controls;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.drive.DriveBackwards;
-import frc.robot.drive.DriveSubsystem;
+import frc.robot.subsystems.drive.DriveBackwards;
+import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
-import frc.robot.vision.VisionSubsystem;
+import frc.robot.subsystems.vision.Vision;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,12 +20,12 @@ import frc.robot.vision.VisionSubsystem;
 public class AutoShootAndDrive extends SequentialCommandGroup {
     /** Creates a new AutoShootAndDrive. */
     public AutoShootAndDrive(
-            final VisionSubsystem vision,
+            final Vision vision,
             final Turret turret,
             final Shooter shooter,
             final Kicker kicker,
             final Uptake uptake,
-            final DriveSubsystem drive) {
+            final Drive drive) {
 
         final var autoAim = new ShootCargo(shooter, kicker, uptake, 4200);
         final var driveBackward = new DriveBackwards(drive);

@@ -2,18 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.drive;
+package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.controls.AxisKey;
 import frc.robot.controls.DriverController;
 
 public class TeleopDrive extends CommandBase {
-    private final DriveSubsystem driveSubsystem;
+    private final Drive driveSubsystem;
     private final DriverController driverController;
 
     /** Creates a new TeleopDrive. */
-    public TeleopDrive(final DriverController driverController, final DriveSubsystem driveSubsystem) {
+    public TeleopDrive(final DriverController driverController, final Drive driveSubsystem) {
         this.driverController = driverController;
         this.driveSubsystem = driveSubsystem;
         addRequirements(driveSubsystem);

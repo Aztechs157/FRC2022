@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.vision;
+package frc.robot.subsystems.vision;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.TurretConstants;
@@ -14,7 +14,7 @@ import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
 
 public class AimTurret extends CommandBase {
-    private final VisionSubsystem vision;
+    private final Vision vision;
     private final Turret turret;
     private final DoubleRange visionRange = new DoubleRange(45, 90);
     private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
@@ -24,7 +24,7 @@ public class AimTurret extends CommandBase {
 
     /** Creates a new AimTurret. */
     public AimTurret(
-            final VisionSubsystem vision,
+            final Vision vision,
             final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake, boolean useAimer) {
         this.vision = vision;
         this.turret = turret;
@@ -35,7 +35,7 @@ public class AimTurret extends CommandBase {
     }
 
     public AimTurret(
-            final VisionSubsystem vision,
+            final Vision vision,
             final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake) {
         this(vision, turret, shooter, kicker, uptake, true);
 
