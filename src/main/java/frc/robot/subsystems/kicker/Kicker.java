@@ -9,8 +9,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.KickerConstants;
 import frc.robot.subsystems.intake.Intake.ColorResult;
@@ -19,17 +17,15 @@ public class Kicker extends SubsystemBase {
     private CANSparkMax kickerMotor;
     private DigitalInput ballSensor;
     private ColorResult color;
-    final ShuffleboardTab tab;
-    // final NetworkTableEntry kickerSensorSim;
-    final NetworkTableEntry kickerColorSim;
+    final NetworkTableEntry kickerColorSim = null;
 
     /** Creates a new Kicker. */
     public Kicker() {
         kickerMotor = new CANSparkMax(KickerConstants.KICKER_MOTOR_ID, MotorType.kBrushless);
         ballSensor = new DigitalInput(KickerConstants.KICKER_SENSOR_ID);
         color = ColorResult.NONE;
-        tab = Shuffleboard.getTab("Debug");
-        kickerColorSim = tab.add("Kicker Color", "null").getEntry();
+        // tab = Shuffleboard.getTab("Debug");
+        // kickerColorSim = tab.add("Kicker Color", "null").getEntry();
     }
 
     @Override
