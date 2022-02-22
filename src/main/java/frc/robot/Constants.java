@@ -79,6 +79,8 @@ public final class Constants {
         public static final double TURRET_SPEED = .45;
         // diagonal max 90, min 45
 
+        public static final double TURRET_INPUT_SCALE = 0.5;
+
     }
 
     public static final class ShooterConstants {
@@ -87,6 +89,8 @@ public final class Constants {
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public final static double EJECT_SPEED = 0.35;
+
+        public static final double SHOOTER_RPM = 4200;
     }
 
     public static final class KickerConstants {
@@ -110,6 +114,8 @@ public final class Constants {
     }
 
     public static final class DriveConstants {
+        public static final double DRIVE_INPUT_SCALE = .75;
+
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;
         public static final int FRONT_RIGHT_MOTOR_ID = 61;

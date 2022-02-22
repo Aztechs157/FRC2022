@@ -6,6 +6,7 @@ package frc.robot.controls;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveBackwards;
+import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.ShootCargo;
@@ -27,7 +28,7 @@ public class AutoShootAndDrive extends SequentialCommandGroup {
             final Uptake uptake,
             final Drive drive) {
 
-        final var autoAim = new ShootCargo(shooter, kicker, uptake, 4200);
+        final var autoAim = new ShootCargo(shooter, kicker, uptake, SHOOTER_RPM);
         final var driveBackward = new DriveBackwards(drive);
 
         addCommands(driveBackward, autoAim);

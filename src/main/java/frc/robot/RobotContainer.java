@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 import frc.robot.controls.AutoShootAndDrive;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
@@ -84,10 +85,9 @@ public class RobotContainer {
         driverController.button(ButtonKey.IntakeRun)
                 .toggleWhenPressed(new IntakeCargo(intake, uptake, kicker));
 
-        // runs the Shooter command on the operator controller. Currently runs to 2500
-        // rpm.
+        // runs the Shooter command on the operator controller
         operatorController.button(ButtonKey.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, 4200));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, SHOOTER_RPM));
 
         // runs the Eject command on the driver controller
         driverController.button(ButtonKey.LowShoot)
