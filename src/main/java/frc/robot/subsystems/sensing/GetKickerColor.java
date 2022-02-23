@@ -62,12 +62,16 @@ public class GetKickerColor extends CommandBase {
 
         if (currentColor != ColorResult.NONE) {
             intakeColor = currentColor;
+            intake.setIntakeColor(currentColor);
         } else if (intakeColor != ColorResult.NONE) {
             if (uptake.getDirection() == MotorDirection.FEEDING) {
                 transitionalColor = intakeColor;
+                uptake.setTransitionalColor(intakeColor);
                 intakeColor = ColorResult.NONE;
+                intake.setIntakeColor(ColorResult.NONE);
             } else {
                 intakeColor = ColorResult.NONE;
+                intake.setIntakeColor(ColorResult.NONE);
             }
         }
 
@@ -75,6 +79,7 @@ public class GetKickerColor extends CommandBase {
             kickerColor = transitionalColor;
             kicker.setBallColor(kickerColor);
             transitionalColor = ColorResult.NONE;
+            uptake.setTransitionalColor(ColorResult.NONE);
         } else if (!ballSense && kickerColor != ColorResult.NONE) {
             kickerColor = ColorResult.NONE;
             kicker.setBallColor(ColorResult.NONE);

@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CompressorConstants;
 import frc.robot.Constants.IntakeConstants;
@@ -25,6 +26,7 @@ public class Intake extends SubsystemBase {
     private CANSparkMax intakeConveyorMotor;
     private DoubleSolenoid intakeSolenoid;
     private final ColorMatch colorMatcher;
+    private ColorResult intakeColor;
 
     /** Creates a new Intake. */
     public Intake() {
@@ -39,6 +41,15 @@ public class Intake extends SubsystemBase {
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
         intakeConveyorMotor.setSmartCurrentLimit(40);
+        intakeColor = ColorResult.NONE;
+    }
+
+    public ColorResult getIntakeColor() {
+        return intakeColor;
+    }
+
+    public void setIntakeColor(ColorResult intakeCargo) {
+        this.intakeColor = intakeCargo;
     }
 
     @Override

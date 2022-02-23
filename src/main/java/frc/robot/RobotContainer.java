@@ -42,9 +42,9 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final Vision visionSubsystem = new Vision();
-    public final Uptake uptake = new Uptake();
     public final Kicker kicker = new Kicker();
     public final Intake intake = new Intake();
+    public final Uptake uptake = new Uptake(kicker, intake);
     private final Shooter shooter = new Shooter();
     private final Turret turret = new Turret(operatorController);
     @SuppressWarnings("unused")

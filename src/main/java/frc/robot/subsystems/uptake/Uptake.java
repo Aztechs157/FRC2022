@@ -10,15 +10,30 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MotorDirection;
 import frc.robot.Constants.UptakeConstants;
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.Intake.ColorResult;
+import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.sensing.PositionCargo;
 
 public class Uptake extends SubsystemBase {
     private CANSparkMax uptakeMotor;
     private MotorDirection direction;
+    private ColorResult transitionalColor;
 
     /** Creates a new Uptake. */
-    public Uptake() {
+    public Uptake(Kicker kicker, Intake intake) {
         uptakeMotor = new CANSparkMax(UptakeConstants.UPTAKE_MOTOR_ID, MotorType.kBrushless);
         uptakeMotor.setSmartCurrentLimit(40);
+        transitionalColor = ColorResult.NONE;
+        setDefaultCommand(new PositionCargo(kicker, intake, this));
+    }
+
+    public ColorResult getTransitionalColor() {
+        return transitionalColor;
+    }
+
+    public void setTransitionalColor(ColorResult transitionalCargo) {
+        this.transitionalColor = transitionalCargo;
     }
 
     @Override
