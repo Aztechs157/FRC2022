@@ -14,7 +14,7 @@ public class IntakeCargo extends CommandBase {
     private Intake intake;
     private Uptake uptake;
     private Kicker kicker;
-    private Command end = new RunIntake(intake, .5);
+    private Command end;
 
     /** Creates a new IntakeCargo. */
     public IntakeCargo(Intake intake, Uptake uptake, Kicker kicker) {
@@ -27,7 +27,7 @@ public class IntakeCargo extends CommandBase {
         addRequirements(intake);
         addRequirements(uptake);
         addRequirements(kicker);
-
+        end = new RunIntake(intake, .5);
     }
 
     // Called when the command is initially scheduled.
