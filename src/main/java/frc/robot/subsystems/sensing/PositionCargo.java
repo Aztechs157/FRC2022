@@ -33,17 +33,15 @@ public class PositionCargo extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (kicker.getBallSensor()) {
+        if (!kicker.getBallSensor()) {
             if (intake.currentColor() != ColorResult.NONE || uptake.getTransitionalColor() != ColorResult.NONE) {
                 uptake.uptakeFeed();
                 kicker.runKicker(0.4);
                 intake.rollerFeed();
-                System.out.println("I made it to our continuous ball feed command");
             } else {
                 intake.rollerStop();
                 kicker.kickerStop();
                 uptake.uptakeStop();
-                System.out.println("I made it to our stopping of our continuous ball feed command");
             }
         } else {
             intake.rollerStop();

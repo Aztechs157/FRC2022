@@ -134,6 +134,6 @@ public class Intake extends SubsystemBase {
      * a later date.
      */
     public void debugPrint() {
-        System.out.println("anything");
+        System.out.println(entryColor.getProximity());
     }
 }

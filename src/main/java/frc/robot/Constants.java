@@ -50,7 +50,7 @@ public final class Constants {
         // color sensor can have
         public static final double COLOR_CONFIDENCE = 0.9;
 
-        public static final int PROX_CLOSE = 180;
+        public static final int PROX_CLOSE = 270;
 
         public static final int PROX_FAR = 120;
     }
