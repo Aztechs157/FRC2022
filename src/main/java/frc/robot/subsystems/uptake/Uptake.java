@@ -18,6 +18,7 @@ public class Uptake extends SubsystemBase {
     /** Creates a new Uptake. */
     public Uptake() {
         uptakeMotor = new CANSparkMax(UptakeConstants.UPTAKE_MOTOR_ID, MotorType.kBrushless);
+        uptakeMotor.setSmartCurrentLimit(40);
     }
 
     @Override

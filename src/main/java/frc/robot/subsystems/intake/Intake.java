@@ -38,6 +38,7 @@ public class Intake extends SubsystemBase {
         colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
+        intakeConveyorMotor.setSmartCurrentLimit(40);
     }
 
     @Override

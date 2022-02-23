@@ -27,6 +27,10 @@ public class Drive extends SubsystemBase {
     public Drive() {
         frontLeftMotor.setInverted(true);
         backLeftMotor.setInverted(true);
+        frontLeftMotor.setSmartCurrentLimit(40);
+        backLeftMotor.setSmartCurrentLimit(40);
+        frontRightMotor.setSmartCurrentLimit(40);
+        backRightMotor.setSmartCurrentLimit(40);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {
