@@ -5,7 +5,6 @@
 package frc.robot.subsystems.sensing;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.KickerConstants;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.Intake.ColorResult;
 import frc.robot.subsystems.kicker.Kicker;
