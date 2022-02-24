@@ -85,10 +85,10 @@ public final class Constants {
 
     public static final class ShooterConstants {
         // The CAN ID for the 1st Shooter Motor. (TEMP)
-        public final static int SHOOTER_MOTOR1_ID = 8;
+        public static final int SHOOTER_MOTOR1_ID = 8;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
-        public final static double EJECT_SPEED = 0.35;
+        public static final double EJECT_SPEED = 0.35;
 
         public static final double SHOOTER_RPM = 4200;
     }
@@ -120,6 +120,20 @@ public final class Constants {
         public static final int BACK_LEFT_MOTOR_ID = 19;
         public static final int FRONT_RIGHT_MOTOR_ID = 61;
         public static final int BACK_RIGHT_MOTOR_ID = 60;
+    }
+
+    public static final class HangingConstants {
+        public static final int RIGHT_ROTATE_MOTOR = 0;
+        public static final int RIGHT_EXTEND_MOTOR = 0;
+        public static final int LEFT_ROTATE_MOTOR = 0;
+        public static final int LEFT_EXTEND_MOTOR = 0;
+        public static final int TOP_LIMIT_SWITCH = 0;
+        public static final int BOTTOM_LIMIT_SWITCH = 0;
+        public static final int ABS_HANGING_ROTATION = 0;
+        public static final int SOLENOID_HANGING_FORWARD = 0;
+        public static final int SOLENOID_HANGING_BACKWARD = 0;
+        public static final double MAX_POS = 0;
+        public static final double MIN_POS = 0;
     }
 
     public static final class AutoConstants {

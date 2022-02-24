@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Counter.Mode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.controls.OperatorController;
+import frc.robot.lib.NumberUtil;
 
 public class Turret extends SubsystemBase {
     private CANSparkMax turretMotor;
@@ -101,7 +102,7 @@ public class Turret extends SubsystemBase {
      * @return aimer position in degrees.
      */
     public double getAimerPosition() {
-        return absoluteEncoder.getPeriod() * (360.0 / 1024.0) * 1000000; // equation for degree per tick converted to
+        return NumberUtil.ticksToDegs(absoluteEncoder.getPeriod()); // equation for degree per tick converted to
         // seconds.
     }
 

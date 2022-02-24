@@ -24,4 +24,8 @@ public class NumberUtil {
             return num;
         }
     }
+
+    public static double ticksToDegs(double ticks) {
+        return ticks * (360.0 / 1024.0) * 1000000;
+    }
 }
