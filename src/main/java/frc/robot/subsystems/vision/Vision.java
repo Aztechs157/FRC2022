@@ -14,7 +14,7 @@ import frc.robot.lib.vision.pixy2.Pixy2.Pixy2Block;
 
 public class Vision extends SubsystemBase {
     private final LimeLight limeLight = new LimeLight();
-    private final Pixy2 pixy = new Pixy2(Port.kMXP, VisionConstants.PIXY_PORT);
+    private final Pixy2 pixy = new Pixy2(Port.kOnboard, VisionConstants.PIXY_PORT);
 
     /** Creates a new VisionSubsystem. */
     public Vision() {

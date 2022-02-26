@@ -16,5 +16,6 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.AutoAim, logitech.leftBumper);
         defaultLayout.assign(ButtonKey.EjectCargo, logitech.start);
         defaultLayout.assign(ButtonKey.LowShoot, logitech.back);
+        defaultLayout.assign(ButtonKey.TrackCargo, logitech.a);
     }
 }

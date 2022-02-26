@@ -43,20 +43,22 @@ public class FindCargo extends CommandBase {
     public void execute() {
         x = vision.getNCargoX(ourColor);
         if (x == -1) {
-            drive.driveCartesian(0, 0, .2);
+            drive.driveCartesian(0, 0, -.1);
         } else {
-            drive.driveCartesian(0, 0, (AutoConstants.X_TARGET - x) * 0.01);
+            drive.driveCartesian(0, 0, (AutoConstants.X_TARGET - x) * -0.007);
         }
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        drive.driveCartesian(0, 0, 0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return AutoConstants.X_TARGET - x < 15;
+        return false;
+        // return AutoConstants.X_TARGET - x < 15;
     }
 }

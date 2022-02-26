@@ -25,9 +25,10 @@ public class Pixy2Response {
         {
             final var sync = unsign(header.getShort());
             if (sync != RESPONSE_SYNC) {
-                throw new Pixy2Exception(
-                        "Pixy2: Fetched response has an invalid sync (expected: " + RESPONSE_SYNC + ", got:"
-                                + sync + ")");
+                // throw new Pixy2Exception(
+                // "Pixy2: Fetched response has an invalid sync (expected: " + RESPONSE_SYNC +
+                // ", got:"
+                // + sync + ")");
             }
         }
 
@@ -35,9 +36,10 @@ public class Pixy2Response {
         {
             final var receivedType = unsign(header.get());
             if (receivedType != type.responseOpcode) {
-                throw new Pixy2Exception(
-                        "Pixy2: Fetched response type didn't match (expected: " + type.responseOpcode + ", got:"
-                                + receivedType + ")");
+                // throw new Pixy2Exception(
+                // "Pixy2: Fetched response type didn't match (expected: " + type.responseOpcode
+                // + ", got:"
+                // + receivedType + ")");
             }
         }
 

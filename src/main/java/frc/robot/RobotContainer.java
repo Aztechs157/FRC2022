@@ -15,6 +15,7 @@ import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.drive.FindCargo;
 import frc.robot.subsystems.drive.TeleopDrive;
 import frc.robot.subsystems.hanging.Hanging;
 import frc.robot.subsystems.intake.Intake;
@@ -106,6 +107,9 @@ public class RobotContainer {
         // runs the Eject command on the operator controller
         operatorController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
+
+        operatorController.button(ButtonKey.TrackCargo)
+                .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
 
         // driverController.button(ButtonKey.ClampBar)
         // .whenPressed(() -> hanging.clampSolenoid());
