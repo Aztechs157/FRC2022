@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     /** This function is called once each time the robot enters Disabled mode. */
     @Override
     public void disabledInit() {
-        m_robotContainer.enableDriveBreakMode();
+        m_robotContainer.disableBreakMode();
         m_robotContainer.getKickerColorSensorCommand().cancel();
     }
 

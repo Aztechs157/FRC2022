@@ -10,6 +10,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.LowShoot;
+import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.uptake.Uptake;
 
@@ -21,7 +22,7 @@ public class AutoLowShootDrive extends SequentialCommandGroup {
     public AutoLowShootDrive(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, Drive drive) {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
-        addCommands(race(new LowShoot(shooter, kicker, uptake, intake), new WaitCommand(7)),
+        addCommands(race(new ShootCargo(shooter, kicker, uptake, 2000), new WaitCommand(3)),
                 new DriveBackwards(drive, AutoConstants.AUTO_DISTANCE_TICKS * 2));
     }
 }

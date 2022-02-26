@@ -12,6 +12,7 @@ import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
+import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.TeleopDrive;
@@ -51,7 +52,7 @@ public class RobotContainer {
     @SuppressWarnings("unused")
     private final Pneumatics pneumatics = new Pneumatics();
     private final Drive driveSubsystem = new Drive();
-    private final Hanging hanging = new Hanging();
+    // private final Hanging hanging = new Hanging();
 
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
 
@@ -106,23 +107,23 @@ public class RobotContainer {
         operatorController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
 
-        driverController.button(ButtonKey.ClampBar)
-                .whenPressed(() -> hanging.clampSolenoid());
+        // driverController.button(ButtonKey.ClampBar)
+        // .whenPressed(() -> hanging.clampSolenoid());
 
-        driverController.button(ButtonKey.ClampBar)
-                .whenReleased(() -> hanging.unclampSolenoid());
+        // driverController.button(ButtonKey.ClampBar)
+        // .whenReleased(() -> hanging.unclampSolenoid());
 
-        driverController.button(ButtonKey.RotateRight)
-                .whileHeld(() -> hanging.rotateArms(.3));
+        // driverController.button(ButtonKey.RotateRight)
+        // .whileHeld(() -> hanging.rotateArms(.3));
 
-        driverController.button(ButtonKey.RotateLeft)
-                .whileHeld(() -> hanging.rotateArms(-.3));
+        // driverController.button(ButtonKey.RotateLeft)
+        // .whileHeld(() -> hanging.rotateArms(-.3));
 
-        driverController.button(ButtonKey.ExtendOut)
-                .whileHeld(() -> hanging.extendArms(.3));
+        // driverController.button(ButtonKey.ExtendOut)
+        // .whileHeld(() -> hanging.extendArms(.3));
 
-        driverController.button(ButtonKey.ExtendIn)
-                .whileHeld(() -> hanging.extendArms(-.3));
+        // driverController.button(ButtonKey.ExtendIn)
+        // .whileHeld(() -> hanging.extendArms(-.3));
 
     }
 
@@ -130,7 +131,7 @@ public class RobotContainer {
         driveSubsystem.enableBrakeMode();
     }
 
-    public void endAutonomous() {
+    public void disableBreakMode() {
         driveSubsystem.disableBrakeMode();
     }
 
@@ -141,7 +142,9 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, driveSubsystem);
+        // return new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker,
+        // uptake, driveSubsystem);
+        return new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem);
     }
 
     /**

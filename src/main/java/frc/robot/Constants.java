@@ -88,7 +88,7 @@ public final class Constants {
         public static final int SHOOTER_MOTOR1_ID = 8;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
-        public static final double EJECT_SPEED = 0.35;
+        public static final double EJECT_SPEED = 0.45;
 
         public static final double SHOOTER_RPM = 4200;
     }
