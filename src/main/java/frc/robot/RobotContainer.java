@@ -125,6 +125,10 @@ public class RobotContainer {
         // driverController.button(ButtonKey.ExtendIn)
         // .whileHeld(() -> hanging.extendArms(-.3));
 
+        driverController.button(ButtonKey.DebugPrint).whenPressed(visionSubsystem::pixyLEDOn);
+
+        driverController.button(ButtonKey.DebugPrint).whenReleased(visionSubsystem::pixyLEDOff);
+
     }
 
     public void enableDriveBreakMode() {

@@ -5,7 +5,7 @@ import java.awt.Color;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 
-public class Pixy2 {
+public class Pixy2 implements Pixy2Type {
     private static final int BYTES_PER_BLOCK = 14;
 
     private final I2C pixy;
@@ -42,7 +42,7 @@ public class Pixy2 {
         public final int firmwareBuild;
         public final String firmwareString;
 
-        private Pixy2Version(final Pixy2Response response) {
+        protected Pixy2Version(final Pixy2Response response) {
             this.hardwareVersion = response.readShort();
             this.firmwareVersionMajor = response.readByte();
             this.firmwareVersionMinor = response.readByte();
@@ -65,7 +65,7 @@ public class Pixy2 {
         public final int width;
         public final int height;
 
-        private Pixy2Resolution(final Pixy2Response response) {
+        protected Pixy2Resolution(final Pixy2Response response) {
             this.width = response.readShort();
             this.height = response.readShort();
         }
@@ -122,7 +122,7 @@ public class Pixy2 {
         return response.readShort();
     }
 
-    public class Pixy2Block implements Comparable<Pixy2Block> {
+    public static class Pixy2Block implements Comparable<Pixy2Block> {
         public final int colorCode;
         public final int centerXAxis;
         public final int centerYAxis;
@@ -132,7 +132,7 @@ public class Pixy2 {
         public final int trackingIndex;
         public final int age;
 
-        private Pixy2Block(final Pixy2Response response) {
+        protected Pixy2Block(final Pixy2Response response) {
             this.colorCode = response.readShort();
             this.centerXAxis = response.readShort();
             this.centerYAxis = response.readShort();

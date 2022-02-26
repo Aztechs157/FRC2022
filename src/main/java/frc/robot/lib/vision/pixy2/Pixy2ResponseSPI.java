@@ -4,22 +4,28 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
 import frc.robot.lib.vision.pixy2.Pixy2.RequestResponseType;
 
 import static frc.robot.lib.NumberUtil.unsign;
 
-public class Pixy2Response {
-    private static final int RESPONSE_HEADER_SIZE = 6;
+public class Pixy2ResponseSPI {
+    private static final int RESPONSE_HEADER_SIZE = 6 * 2;
     private static final int RESPONSE_SYNC = 0xc1af;
     private static final int MAX_UNSIGNED_SHORT = 0xffff;
 
     public final ByteBuffer buffer;
 
-    public Pixy2Response(final I2C pixy, final RequestResponseType type) {
+    public Pixy2ResponseSPI(final SPI pixy, final RequestResponseType type) {
         // Read just the header of the response
         final var header = ByteBuffer.allocate(RESPONSE_HEADER_SIZE);
         header.order(ByteOrder.LITTLE_ENDIAN);
-        pixy.readOnly(header, RESPONSE_HEADER_SIZE);
+        pixy.read(false, header, RESPONSE_HEADER_SIZE);
+
+        var temp = header.array();
+        for (byte b : temp) {
+            System.out.println(Integer.toHexString(b));
+        }
 
         // Check the sync value
         {
@@ -50,7 +56,7 @@ public class Pixy2Response {
 
         // If no payload then don't bother reading/checksum-ing
         if (length != 0) {
-            pixy.readOnly(buffer, length);
+            pixy.read(true, buffer, length);
 
             // Checksum
             var sum = 0;
@@ -69,10 +75,6 @@ public class Pixy2Response {
         }
     }
 
-    public Pixy2Response(ByteBuffer bytes) {
-        this.buffer = bytes;
-    }
-
     public int readByte() {
         return unsign(buffer.get());
     }
@@ -83,5 +85,9 @@ public class Pixy2Response {
 
     public long readInt() {
         return unsign(buffer.getInt());
+    }
+
+    public Pixy2Response toNormal() {
+        return new Pixy2Response(buffer);
     }
 }
