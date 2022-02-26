@@ -139,6 +139,11 @@ public final class Constants {
     public static final class AutoConstants {
         public static final double AUTO_SPEED = 0.2;
         public static final double AUTO_DISTANCE_TICKS = 23.72;
+        public static final int X_TARGET = 100;
+    }
+
+    public static final class VisionConstants {
+        public static final int PIXY_PORT = 0;
     }
 
     public static final class MiscConstants {
