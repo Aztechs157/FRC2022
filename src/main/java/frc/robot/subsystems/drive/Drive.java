@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MiscConstants;
 
 import static frc.robot.Constants.DriveConstants.*;
 
@@ -27,10 +28,10 @@ public class Drive extends SubsystemBase {
     public Drive() {
         frontLeftMotor.setInverted(true);
         backLeftMotor.setInverted(true);
-        frontLeftMotor.setSmartCurrentLimit(40);
-        backLeftMotor.setSmartCurrentLimit(40);
-        frontRightMotor.setSmartCurrentLimit(40);
-        backRightMotor.setSmartCurrentLimit(40);
+        frontLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        backLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        frontRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        backRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {

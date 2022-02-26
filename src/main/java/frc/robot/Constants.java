@@ -141,6 +141,10 @@ public final class Constants {
         public static final double AUTO_DISTANCE_TICKS = 23.72;
     }
 
+    public static final class MiscConstants {
+        public static final int SMART_MOTOR_LIMIT = 40;
+    }
+
     public enum MotorDirection {
         FEEDING, EJECTING, STOPPED
     }

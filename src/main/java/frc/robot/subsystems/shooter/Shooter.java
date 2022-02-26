@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
@@ -19,7 +20,7 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
         ShootMotor1.setInverted(true);
-        ShootMotor1.setSmartCurrentLimit(40);
+        ShootMotor1.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
     }
 
     @Override

@@ -20,5 +20,10 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.Hello, logitech.back);
         defaultLayout.assign(ButtonKey.IntakeRun, logitech.rightBumper);
         defaultLayout.assign(ButtonKey.LowShoot, logitech.start);
+        defaultLayout.assign(ButtonKey.RotateLeft, logitech.x);
+        defaultLayout.assign(ButtonKey.RotateRight, logitech.b);
+        defaultLayout.assign(ButtonKey.ExtendOut, logitech.y);
+        defaultLayout.assign(ButtonKey.ExtendIn, logitech.a);
+        defaultLayout.assign(ButtonKey.ClampBar, logitech.leftBumper);
     }
 }

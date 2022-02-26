@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CompressorConstants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.MiscConstants;
 
 public class Intake extends SubsystemBase {
     public enum ColorResult {
@@ -39,7 +40,7 @@ public class Intake extends SubsystemBase {
         colorMatcher.addColorMatch(IntakeConstants.RED_TARGET);
         colorMatcher.addColorMatch(IntakeConstants.BLUE_TARGET);
         colorMatcher.setConfidenceThreshold(IntakeConstants.COLOR_CONFIDENCE);
-        intakeConveyorMotor.setSmartCurrentLimit(40);
+        intakeConveyorMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         intakeColor = ColorResult.NONE;
     }
 

@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.MotorDirection;
 import frc.robot.Constants.UptakeConstants;
 import frc.robot.subsystems.intake.Intake;
@@ -23,7 +24,7 @@ public class Uptake extends SubsystemBase {
     /** Creates a new Uptake. */
     public Uptake(Kicker kicker, Intake intake) {
         uptakeMotor = new CANSparkMax(UptakeConstants.UPTAKE_MOTOR_ID, MotorType.kBrushless);
-        uptakeMotor.setSmartCurrentLimit(40);
+        uptakeMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         transitionalColor = ColorResult.NONE;
         setDefaultCommand(new PositionCargo(kicker, intake, this));
     }

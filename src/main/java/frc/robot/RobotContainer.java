@@ -15,6 +15,7 @@ import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.TeleopDrive;
+import frc.robot.subsystems.hanging.Hanging;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
@@ -50,6 +51,7 @@ public class RobotContainer {
     @SuppressWarnings("unused")
     private final Pneumatics pneumatics = new Pneumatics();
     private final Drive driveSubsystem = new Drive();
+    private final Hanging hanging = new Hanging();
 
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
 
@@ -103,6 +105,24 @@ public class RobotContainer {
         // runs the Eject command on the operator controller
         operatorController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
+
+        driverController.button(ButtonKey.ClampBar)
+                .whenPressed(() -> hanging.clampSolenoid());
+
+        driverController.button(ButtonKey.ClampBar)
+                .whenReleased(() -> hanging.unclampSolenoid());
+
+        driverController.button(ButtonKey.RotateRight)
+                .whileHeld(() -> hanging.rotateArms(.3));
+
+        driverController.button(ButtonKey.RotateLeft)
+                .whileHeld(() -> hanging.rotateArms(-.3));
+
+        driverController.button(ButtonKey.ExtendOut)
+                .whileHeld(() -> hanging.extendArms(.3));
+
+        driverController.button(ButtonKey.ExtendIn)
+                .whileHeld(() -> hanging.extendArms(-.3));
 
     }
 

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CompressorConstants;
 import frc.robot.Constants.HangingConstants;
+import frc.robot.Constants.MiscConstants;
 import frc.robot.lib.NumberUtil;
 
 public class Hanging extends SubsystemBase {
@@ -42,6 +43,10 @@ public class Hanging extends SubsystemBase {
         absHangingRotation.reset();
         hangingClamp = new DoubleSolenoid(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH,
                 HangingConstants.SOLENOID_HANGING_FORWARD, HangingConstants.SOLENOID_HANGING_BACKWARD);
+        leftRotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        rightRotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
     }
 
     @Override
