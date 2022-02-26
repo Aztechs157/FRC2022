@@ -9,11 +9,18 @@ import static frc.robot.Constants.AutoConstants.*;
 
 public class DriveBackwards extends CommandBase {
     private final Drive drive;
+    private final double distance;
 
     /** Creates a new DriveForward. */
-    public DriveBackwards(final Drive drive) {
+    public DriveBackwards(final Drive drive, double distance) {
         this.drive = drive;
         addRequirements(drive);
+        this.distance = distance;
+
+    }
+
+    public DriveBackwards(final Drive drive) {
+        this(drive, AUTO_DISTANCE_TICKS);
     }
 
     // Called when the command is initially scheduled.
