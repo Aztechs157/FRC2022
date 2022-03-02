@@ -9,14 +9,17 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
+import frc.robot.Constants.AutoConstants;
 import frc.robot.controls.ButtonKey;
 import frc.robot.controls.DriverController;
 import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.drive.DriveForwards;
 import frc.robot.subsystems.drive.FindCargo;
 import frc.robot.subsystems.drive.TeleopDrive;
+import frc.robot.subsystems.drive.Turn180;
 import frc.robot.subsystems.hanging.Hanging;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
@@ -110,6 +113,9 @@ public class RobotContainer {
 
         operatorController.button(ButtonKey.TrackCargo)
                 .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
+
+        operatorController.button(ButtonKey.autoTest)
+                .whenPressed(new Turn180(driveSubsystem, 180));
 
         // driverController.button(ButtonKey.ClampBar)
         // .whenPressed(() -> hanging.clampSolenoid());

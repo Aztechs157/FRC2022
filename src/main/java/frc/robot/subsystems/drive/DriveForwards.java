@@ -4,48 +4,31 @@
 
 package frc.robot.subsystems.drive;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.subsystems.vision.Vision;
 
-public class FindCargo extends CommandBase {
-    private final Vision vision;
-    private final Drive drive;
-    private byte ourColor;
-    private final byte red = 0b00000001;
-    private final byte blue = 0b00000010;
-    private int x = 0;
+public class DriveForwards extends CommandBase {
+    private Drive drive;
+    private double distance;
 
-    /** Creates a new FindCargo. */
-    public FindCargo(Vision vision, Drive drive) {
+    /** Creates a new DriveForwards. */
+    public DriveForwards(Drive drive, double distance) {
         // Use addRequirements() here to declare subsystem dependencies.
-        this.vision = vision;
         this.drive = drive;
-        addRequirements(vision);
         addRequirements(drive);
+        this.distance = distance;
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (DriverStation.getAlliance() == Alliance.Blue) {
-            ourColor = blue;
-        } else {
-            ourColor = red;
-        }
+        drive.resetDrivePosition();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        x = vision.getNCargoX(ourColor);
-        if (x == -1) {
-            drive.driveCartesian(0, 0, -.1);
-        } else {
-            drive.driveCartesian(0, 0, (AutoConstants.X_TARGET - x) * -0.007);
-        }
+        drive.driveCartesian(AutoConstants.AUTO_SPEED, 0, 0);
     }
 
     // Called once the command ends or is interrupted.
@@ -57,7 +40,6 @@ public class FindCargo extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
-        // return AutoConstants.X_TARGET - x < 15;
+        return drive.getDrivePosition() > distance;
     }
 }
