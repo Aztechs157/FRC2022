@@ -3,6 +3,7 @@ package frc.robot.lib.input.models;
 import frc.robot.lib.input.Axis;
 import frc.robot.lib.input.Button;
 import frc.robot.lib.input.Model;
+import frc.robot.lib.input.Pov;
 
 public class LogitechAttack extends Model {
 
@@ -25,4 +26,6 @@ public class LogitechAttack extends Model {
     public final Axis stickX = axis(0);
     public final Axis stickY = axis(1);
     public final Axis slider = axis(3);
+
+    public final Pov pov = pov(0);
 }

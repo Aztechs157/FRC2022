@@ -3,6 +3,7 @@ package frc.robot.lib.input.models;
 import frc.robot.lib.input.Axis;
 import frc.robot.lib.input.Button;
 import frc.robot.lib.input.Model;
+import frc.robot.lib.input.Pov;
 
 public class LogitechGamepadF310 extends Model {
 
@@ -27,4 +28,6 @@ public class LogitechGamepadF310 extends Model {
     public final Axis leftTriggerHeld = axis(3);
     public final Axis rightStickX = axis(4);
     public final Axis rightStickY = axis(5);
+
+    public final Pov pov = pov(0);
 }

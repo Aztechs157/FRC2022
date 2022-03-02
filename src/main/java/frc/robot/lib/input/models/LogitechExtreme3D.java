@@ -3,6 +3,7 @@ package frc.robot.lib.input.models;
 import frc.robot.lib.input.Axis;
 import frc.robot.lib.input.Button;
 import frc.robot.lib.input.Model;
+import frc.robot.lib.input.Pov;
 
 public class LogitechExtreme3D extends Model {
     public LogitechExtreme3D(final int joystickId) {
@@ -26,4 +27,6 @@ public class LogitechExtreme3D extends Model {
     public final Axis stickY = axis(1);
     public final Axis stickRotate = axis(2);
     public final Axis slider = axis(3);
+
+    public final Pov pov = pov(0);
 }

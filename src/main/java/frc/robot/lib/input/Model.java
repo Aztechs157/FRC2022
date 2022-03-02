@@ -36,4 +36,8 @@ public class Model {
     public Axis axis(final int axisId) {
         return new Axis(deviceId, axisId);
     }
+
+    public Pov pov(final int povId) {
+        return new Pov(deviceId, povId);
+    }
 }
