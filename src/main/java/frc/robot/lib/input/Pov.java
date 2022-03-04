@@ -24,26 +24,36 @@ public class Pov implements IntSupplier {
         return degrees.getAsInt();
     }
 
-    public static final int DEFAULT_VALUE = -1;
+    public static final int CENTER = -1;
+    public static final int UP = 45 * 0;
+    public static final int UP_RIGHT = 45 * 1;
+    public static final int RIGHT = 45 * 2;
+    public static final int DOWN_RIGHT = 45 * 3;
+    public static final int DOWN = 45 * 4;
+    public static final int DOWN_LEFT = 45 * 5;
+    public static final int LEFT = 45 * 6;
+    public static final int UP_LEFT = 45 * 7;
+
+    public static final int DEFAULT_VALUE = CENTER;
     public static final Pov DEFAULT = new Pov(() -> DEFAULT_VALUE);
 
     public Button matchesValue(final int degrees) {
         return new Button(() -> get() == degrees);
     }
 
-    public final Button center = matchesValue(-1);
-    public final Button up = matchesValue(45 * 0);
-    public final Button upRight = matchesValue(45 * 1);
-    public final Button right = matchesValue(45 * 2);
-    public final Button downRight = matchesValue(45 * 3);
-    public final Button down = matchesValue(45 * 4);
-    public final Button downLeft = matchesValue(45 * 5);
-    public final Button left = matchesValue(45 * 6);
-    public final Button upLeft = matchesValue(45 * 7);
+    public final Button center = matchesValue(CENTER);
+    public final Button up = matchesValue(UP);
+    public final Button upRight = matchesValue(UP_RIGHT);
+    public final Button right = matchesValue(RIGHT);
+    public final Button downRight = matchesValue(DOWN_RIGHT);
+    public final Button down = matchesValue(DOWN);
+    public final Button downLeft = matchesValue(DOWN_LEFT);
+    public final Button left = matchesValue(LEFT);
+    public final Button upLeft = matchesValue(UP_LEFT);
 
     public final Axis x = new Axis(() -> {
         final var value = get();
-        if (value == -1) {
+        if (value == CENTER) {
             return 0;
         }
         return Math.round(Math.sin(Math.toRadians(value)));
@@ -51,11 +61,9 @@ public class Pov implements IntSupplier {
 
     public final Axis y = new Axis(() -> {
         final var value = get();
-        if (value == -1) {
+        if (value == CENTER) {
             return 0;
         }
         return Math.round(Math.cos(Math.toRadians(value)));
     });
-
-    public final Axis debug = new Axis(() -> get());
 }
