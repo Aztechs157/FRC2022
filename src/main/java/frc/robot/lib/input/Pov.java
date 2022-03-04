@@ -41,6 +41,21 @@ public class Pov implements IntSupplier {
     public final Button left = matchesValue(45 * 6);
     public final Button upLeft = matchesValue(45 * 7);
 
-    public final Axis x = new Axis(() -> Math.cos(Math.toRadians(get())));
-    public final Axis y = new Axis(() -> Math.sin(Math.toRadians(get())));
+    public final Axis x = new Axis(() -> {
+        final var value = get();
+        if (value == -1) {
+            return 0;
+        }
+        return Math.round(Math.sin(Math.toRadians(value)));
+    });
+
+    public final Axis y = new Axis(() -> {
+        final var value = get();
+        if (value == -1) {
+            return 0;
+        }
+        return Math.round(Math.cos(Math.toRadians(value)));
+    });
+
+    public final Axis debug = new Axis(() -> get());
 }
