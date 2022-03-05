@@ -5,6 +5,7 @@
 package frc.robot.subsystems.hanging;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Counter;
@@ -35,18 +36,26 @@ public class Hanging extends SubsystemBase {
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
         rightRotateMotor = new CANSparkMax(HangingConstants.RIGHT_ROTATE_MOTOR, MotorType.kBrushless);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
-        topLimitSwitch = new DigitalInput(HangingConstants.TOP_LIMIT_SWITCH);
-        bottomLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LIMIT_SWITCH);
-        absHangingRotation = new Counter(Mode.kSemiperiod);
-        absHangingRotation.setSemiPeriodMode(true);
-        absHangingRotation.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
-        absHangingRotation.reset();
-        hangingClamp = new DoubleSolenoid(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH,
-                HangingConstants.SOLENOID_HANGING_FORWARD, HangingConstants.SOLENOID_HANGING_BACKWARD);
+
         leftRotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightRotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+
+        leftRotateMotor.setIdleMode(IdleMode.kBrake);
+        rightRotateMotor.setIdleMode(IdleMode.kBrake);
+        leftExtendMotor.setIdleMode(IdleMode.kBrake);
+        rightExtendMotor.setIdleMode(IdleMode.kBrake);
+
+        topLimitSwitch = new DigitalInput(HangingConstants.TOP_LIMIT_SWITCH);
+        bottomLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LIMIT_SWITCH);
+        hangingClamp = new DoubleSolenoid(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH,
+                HangingConstants.SOLENOID_HANGING_FORWARD, HangingConstants.SOLENOID_HANGING_BACKWARD);
+
+        absHangingRotation = new Counter(Mode.kSemiperiod);
+        absHangingRotation.setSemiPeriodMode(true);
+        absHangingRotation.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
+        absHangingRotation.reset();
     }
 
     @Override
