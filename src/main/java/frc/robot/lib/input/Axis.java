@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.lib.util.DoubleRange;
 
 /**
- * Interface for getting input from a axis. This class has methods and static
+ * Class for getting input from a axis. This class has methods and static
  * methods to modify and compose {@link Axis}s into a new
  * {@link Axis}.
  */

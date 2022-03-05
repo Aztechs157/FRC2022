@@ -1,8 +1,8 @@
 package frc.robot.lib.input;
 
 /**
- * Models map physical buttons/axises to {@link Button} or
- * {@link Axis}.
+ * Models map physical inputs on a input device to input classes such as
+ * {@link Button}, {@link Axis}, or {@link Pov}.
  */
 public class Model {
 
@@ -37,6 +37,12 @@ public class Model {
         return new Axis(deviceId, axisId);
     }
 
+    /**
+     * Create a {@link Pov} that modes a physical pov
+     *
+     * @param povId The pov to model
+     * @return The modeled {@link Pov}
+     */
     public Pov pov(final int povId) {
         return new Pov(deviceId, povId);
     }

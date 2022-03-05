@@ -4,6 +4,9 @@ import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
+/**
+ * Class for getting input from a pov.
+ */
 public class Pov implements IntSupplier {
     public interface Key {
     }

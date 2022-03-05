@@ -5,7 +5,7 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**
- * Interface for getting input from a button. This class has methods and static
+ * Class for getting input from a button. This class has methods and static
  * methods to modify and compose {@link Button}s into a new
  * {@link Button}.
  */

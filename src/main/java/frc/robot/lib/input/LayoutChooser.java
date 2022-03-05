@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * Object that manages layouts. A layout can be selected from Shuffleboard that
- * can then be used by the robot. It maps the inputs of a controller to the
+ * can then be used by the robot. It maps the inputs of a {@link LayoutChooser}
+ * to the
  * desired functions of the robot.
  */
 public class LayoutChooser implements Sendable {
@@ -19,29 +20,33 @@ public class LayoutChooser implements Sendable {
     }
 
     /**
-     * Get a button from the currently selected layout. This acts both as a
-     * {@link Button} and a proper WPI {@link ButtonKey} to allow for command
-     * running.
+     * Get a button from the currently selected layout.
      *
-     * @param buttonKey Which button to retrieve
+     * @param key Which button to retrieve
      * @return A {@link Button} and {@link ButtonKey} representing the input
      */
-    public Button button(final Button.Key buttonKey) {
-        return new Button(() -> getSelected().button(buttonKey).getAsBoolean());
+    public Button button(final Button.Key key) {
+        return new Button(() -> getSelected().button(key).getAsBoolean());
     }
 
     /**
-     * Get a axis from the currently selected layout
+     * Get a axis from the currently selected layout.
      *
-     * @param axisKey Which axis to retrieve
+     * @param key Which axis to retrieve
      * @return A {@link Axis} representing the input
      */
-    public Axis axis(final Axis.Key axisKey) {
-        return new Axis(() -> getSelected().axis(axisKey).getAsDouble());
+    public Axis axis(final Axis.Key key) {
+        return new Axis(() -> getSelected().axis(key).getAsDouble());
     }
 
-    public Pov pov(final Pov.Key povKey) {
-        return new Pov(() -> getSelected().pov(povKey).getAsInt());
+    /**
+     * Get a pov from the currently selected layout.
+     *
+     * @param key Which pov to retrieve
+     * @return A {@link Pov} representing the input
+     */
+    public Pov pov(final Pov.Key key) {
+        return new Pov(() -> getSelected().pov(key).getAsInt());
     }
 
     public Button tryButton(final Button.Key buttonKey) {
@@ -57,7 +62,7 @@ public class LayoutChooser implements Sendable {
     }
 
     /**
-     * Get the layout currently selected on Shuffleboard
+     * Get the {@link Layout} currently selected on Shuffleboard
      *
      * @return The selected layout
      */
@@ -72,7 +77,7 @@ public class LayoutChooser implements Sendable {
     }
 
     /**
-     * Thrown when no layouts have been added to a controller
+     * Thrown when no {@link Layout}s have been added to a {@link LayoutChooser}
      */
     public static class NoLayoutsAddedException extends RuntimeException {
         private NoLayoutsAddedException() {
@@ -83,7 +88,8 @@ public class LayoutChooser implements Sendable {
     private boolean hasDefault = false;
 
     /**
-     * Add a Layout to this Controller. This allows the Controller to display and
+     * Add a {@link Layout} to this {@link LayoutChooser}. This allows the
+     * {@link LayoutChooser} to display and
      * swap to it using Shuffleboard. If no layouts have been added yet, this will
      * implicitly also set the new one as the default. To manually overwrite the
      * default later, use {@link LayoutChooser#addAndSetDefault(Layout)}.
@@ -100,8 +106,8 @@ public class LayoutChooser implements Sendable {
     }
 
     /**
-     * Manually set a layout as the default. This will additionally add it if it
-     * wasn't added already. Normally this isn't necessary, as
+     * Manually set a {@link Layout} as the default. This will additionally add it
+     * if it wasn't added already. Normally this isn't necessary, as
      * {@link LayoutChooser#add(Layout)} will automatically set the first
      * layout as default.
      *

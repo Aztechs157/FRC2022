@@ -39,71 +39,84 @@ public class Layout implements Sendable {
     private final Map<Pov.Key, Pov> povs = new HashMap<>();
 
     /**
-     * For this Layout, assign a ButtonInput.Key to a ButtonInput. Calling this
-     * method
-     * multiple times with the same ButtonInput.Key will override the previous
+     * For this Layout, assign a {@link Button.Key} to a {@link Button}. Calling
+     * this method multiple times with the same key will override the previous
      * assignment.
      *
-     * @param buttonKey The key to assign with
-     * @param input     The input being assigned
+     * @param key    The key to assign with
+     * @param button The button being assigned
      */
-    public void assign(final Button.Key buttonKey, final Button input) {
-        buttons.put(buttonKey, input);
+    public void assign(final Button.Key key, final Button button) {
+        buttons.put(key, button);
     }
 
     /**
-     * For this Layout, assign a AxisInput.Key to a AxisInput. Calling this method
-     * multiple times with the same AxisInput.Key will override the previous
+     * For this Layout, assign a {@link Axis.Key} to a {@link Axis}. Calling this
+     * method multiple times with the same key will override the previous
      * assignment.
      *
-     * @param axisKey The key to assign with
-     * @param input   The input being assigned
+     * @param key  The key to assign with
+     * @param axis The axis being assigned
      */
-    public void assign(final Axis.Key axisKey, final Axis input) {
-        axes.put(axisKey, input);
-    }
-
-    public void assign(final Pov.Key povKey, final Pov input) {
-        povs.put(povKey, input);
+    public void assign(final Axis.Key key, final Axis axis) {
+        axes.put(key, axis);
     }
 
     /**
-     * Retrieve the ButtonInput associated with a key
+     * For this Layout, assign a {@link Pov.Key} to a {@link Pov}. Calling this
+     * method multiple times with the same key will override the previous
+     * assignment.
      *
-     * @param buttonKey They key a input was assigned with
-     * @return The associated input
+     * @param key The key to assign with
+     * @param pov The pov being assigned
      */
-    public Button button(final Button.Key buttonKey) {
-        final var button = buttons.get(buttonKey);
+    public void assign(final Pov.Key key, final Pov pov) {
+        povs.put(key, pov);
+    }
+
+    /**
+     * Retrieve the {@link Button} associated with a {@link Button.Key}
+     *
+     * @param key The key a button was assigned to
+     * @return The associated button
+     */
+    public Button button(final Button.Key key) {
+        final var button = buttons.get(key);
 
         if (button == null) {
-            throw new InputNotAssignedException(name, "button", buttonKey.toString());
+            throw new InputNotAssignedException(name, "button", key.toString());
         }
 
         return button;
     }
 
     /**
-     * Retrieve the AxisInput associated with a key
+     * Retrieve the {@link Axis} associated with a {@link Axis.Key}
      *
-     * @param axisKey They key a input was assigned with
-     * @return The associated input
+     * @param key The key an axis was assigned to
+     * @return The associated axis
      */
-    public Axis axis(final Axis.Key axisKey) {
-        final var axis = axes.get(axisKey);
+    public Axis axis(final Axis.Key key) {
+        final var axis = axes.get(key);
 
         if (axis == null) {
-            throw new InputNotAssignedException(name, "axis", axisKey.toString());
+            throw new InputNotAssignedException(name, "axis", key.toString());
         }
 
         return axis;
     }
 
-    public Pov pov(final Pov.Key povKey) {
-        final var pov = povs.get(povKey);
+    /**
+     * Retrieve the {@link Pov} associated with a {@link Pov.Key}
+     *
+     * @param key The key an pov was assigned to
+     * @return The associated pov
+     */
+    public Pov pov(final Pov.Key key) {
+        final var pov = povs.get(key);
 
         if (pov == null) {
-            throw new InputNotAssignedException(name, "pov", povKey.toString());
+            throw new InputNotAssignedException(name, "pov", key.toString());
         }
 
         return pov;
