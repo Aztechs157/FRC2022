@@ -5,6 +5,9 @@ import java.util.function.IntSupplier;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class Pov implements IntSupplier {
+    public interface Key {
+    }
+
     private final IntSupplier degrees;
 
     public Pov(final int deviceId, final int povId) {

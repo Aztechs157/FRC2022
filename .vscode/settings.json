@@ -42,6 +42,7 @@
         "deadzone",
         "Gamepad",
         "Mecanum",
+        "povs",
         "teleop",
         "teleoperated",
         "wpilib"

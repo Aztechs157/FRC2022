@@ -40,12 +40,20 @@ public class LayoutChooser implements Sendable {
         return new Axis(() -> getSelected().axis(axisKey).getAsDouble());
     }
 
+    public Pov pov(final Pov.Key povKey) {
+        return new Pov(() -> getSelected().pov(povKey).getAsInt());
+    }
+
     public Button tryButton(final Button.Key buttonKey) {
         return new Button(() -> getSelected().tryButton(buttonKey).getAsBoolean());
     }
 
     public Axis tryAxis(final Axis.Key axisKey) {
         return new Axis(() -> getSelected().tryAxis(axisKey).getAsDouble());
+    }
+
+    public Pov tryPov(final Pov.Key povKey) {
+        return new Pov(() -> getSelected().tryPov(povKey).getAsInt());
     }
 
     /**

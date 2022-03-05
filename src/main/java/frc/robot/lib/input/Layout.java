@@ -36,6 +36,7 @@ public class Layout implements Sendable {
 
     private final Map<Button.Key, Button> buttons = new HashMap<>();
     private final Map<Axis.Key, Axis> axes = new HashMap<>();
+    private final Map<Pov.Key, Pov> povs = new HashMap<>();
 
     /**
      * For this Layout, assign a ButtonInput.Key to a ButtonInput. Calling this
@@ -60,6 +61,10 @@ public class Layout implements Sendable {
      */
     public void assign(final Axis.Key axisKey, final Axis input) {
         axes.put(axisKey, input);
+    }
+
+    public void assign(final Pov.Key povKey, final Pov input) {
+        povs.put(povKey, input);
     }
 
     /**
@@ -94,6 +99,16 @@ public class Layout implements Sendable {
         return axis;
     }
 
+    public Pov pov(final Pov.Key povKey) {
+        final var pov = povs.get(povKey);
+
+        if (pov == null) {
+            throw new InputNotAssignedException(name, "pov", povKey.toString());
+        }
+
+        return pov;
+    }
+
     /**
      * Thrown when an input hasn't been assigned for the layout in question
      */
@@ -123,6 +138,16 @@ public class Layout implements Sendable {
         return axis;
     }
 
+    public Pov tryPov(final Pov.Key povKey) {
+        final var pov = povs.get(povKey);
+
+        if (pov == null) {
+            return Pov.DEFAULT;
+        }
+
+        return pov;
+    }
+
     @Override
     public void initSendable(final SendableBuilder builder) {
 
@@ -135,6 +160,14 @@ public class Layout implements Sendable {
         }
 
         for (final var entry : axes.entrySet()) {
+            builder.addDoubleProperty(
+                    entry.getKey().toString(),
+                    entry.getValue()::get,
+                    (_value) -> {
+                    });
+        }
+
+        for (final var entry : povs.entrySet()) {
             builder.addDoubleProperty(
                     entry.getKey().toString(),
                     entry.getValue()::get,
