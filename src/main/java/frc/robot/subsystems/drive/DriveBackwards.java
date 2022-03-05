@@ -16,7 +16,6 @@ public class DriveBackwards extends CommandBase {
         this.drive = drive;
         addRequirements(drive);
         this.distance = distance;
-
     }
 
     public DriveBackwards(final Drive drive) {

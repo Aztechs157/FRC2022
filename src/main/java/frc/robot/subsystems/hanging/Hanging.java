@@ -9,31 +9,24 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Counter.Mode;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CompressorConstants;
 import frc.robot.Constants.HangingConstants;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.lib.NumberUtil;
 
 public class Hanging extends SubsystemBase {
-    private CANSparkMax leftRotateMotor;
     private CANSparkMax leftExtendMotor;
-    private CANSparkMax rightRotateMotor;
+    private CANSparkMax rotateMotors;
     private CANSparkMax rightExtendMotor;
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
     private Counter absHangingRotation;
-    private DoubleSolenoid hangingClamp;
 
     /** Creates a new Hanging. */
     public Hanging() {
-        leftRotateMotor = new CANSparkMax(HangingConstants.LEFT_ROTATE_MOTOR, MotorType.kBrushless);
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
-        rightRotateMotor = new CANSparkMax(HangingConstants.RIGHT_ROTATE_MOTOR, MotorType.kBrushless);
+        rotateMotors = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
         topLimitSwitch = new DigitalInput(HangingConstants.TOP_LIMIT_SWITCH);
         bottomLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LIMIT_SWITCH);
@@ -41,10 +34,7 @@ public class Hanging extends SubsystemBase {
         absHangingRotation.setSemiPeriodMode(true);
         absHangingRotation.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
         absHangingRotation.reset();
-        hangingClamp = new DoubleSolenoid(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH,
-                HangingConstants.SOLENOID_HANGING_FORWARD, HangingConstants.SOLENOID_HANGING_BACKWARD);
-        leftRotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
-        rightRotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        rotateMotors.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
     }
@@ -61,14 +51,11 @@ public class Hanging extends SubsystemBase {
      */
     public void rotateArms(double speed) {
         if (speed > 0 && getAbsEncoder() > HangingConstants.MAX_POS) {
-            leftRotateMotor.set(0);
-            rightRotateMotor.set(0);
+            rotateMotors.set(0);
         } else if (speed < 0 && getAbsEncoder() < HangingConstants.MIN_POS) {
-            leftRotateMotor.set(0);
-            rightRotateMotor.set(0);
+            rotateMotors.set(0);
         } else {
-            leftRotateMotor.set(speed);
-            rightRotateMotor.set(speed);
+            rotateMotors.set(speed);
         }
     }
 
@@ -111,20 +98,6 @@ public class Hanging extends SubsystemBase {
     }
 
     /**
-     * This method runs the solenoids to clamp the hanging bar.
-     */
-    public void clampSolenoid() {
-        hangingClamp.set(Value.kForward);
-    }
-
-    /**
-     * This method stops running the solenoids to stop clamping to the hanging bar.
-     */
-    public void unclampSolenoid() {
-        hangingClamp.set(Value.kReverse);
-    }
-
-    /**
      * This method returns the value of the absolute encoder.
      *
      * @return absolute encoder value, position of arm rotation in degrees.
@@ -139,7 +112,6 @@ public class Hanging extends SubsystemBase {
      */
     public void resetExtensionPosition() {
         rightExtendMotor.getEncoder().setPosition(0);
-        leftExtendMotor.getEncoder().setPosition(0);
     }
 
     /**

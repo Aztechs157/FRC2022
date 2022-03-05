@@ -27,6 +27,8 @@ public class Drive extends SubsystemBase {
             frontLeftMotor, backLeftMotor,
             frontRightMotor, backRightMotor);
 
+    public final double storedAngle = getAngle();
+
     /** Creates a new Drive. */
     public Drive() {
         frontLeftMotor.setInverted(true);
