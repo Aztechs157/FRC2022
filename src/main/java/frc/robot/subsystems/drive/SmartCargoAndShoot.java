@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems.drive;
 
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.intake.Intake;
@@ -33,15 +35,19 @@ public class SmartCargoAndShoot extends SequentialCommandGroup {
             Vision vision, Intake intake) {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
+
         final var shootLow = new ShootCargo(shooter, kicker, uptake, ShooterConstants.LOW_SHOOTER_RPM);
         final var driveBackward = new DriveBackwards(drive);
-        final var turnDistance = new Turn180(drive, 150);
+        final var turnDistance = new Turn180(drive, AutoConstants.TURN_DEGREES);
         final var findCargo = new FindCargo(vision, drive);
         final var driveForward = new DriveForwards(drive, AutoConstants.AUTO_DISTANCE_TICKS);
-        final var IntakeAutomatically = new IntakeAutomatically(intake, kicker);
-        final var turnToGoal = new Turn180(drive, -150);
+        final var intakeAutomatically = new IntakeAutomatically(intake);
+        final var turnToGoal = new Turn180(drive, -AutoConstants.TURN_DEGREES);
 
-        addCommands(shootLow, driveBackward, turnDistance, findCargo, race(driveForward, IntakeAutomatically),
+        addCommands(race(shootLow, new WaitCommand(3)),
+                driveBackward,
+                turnDistance,
+                new WaitCommand(6).deadlineWith(findCargo.andThen(driveForward.alongWith(intakeAutomatically))),
                 turnToGoal);
     }
 }

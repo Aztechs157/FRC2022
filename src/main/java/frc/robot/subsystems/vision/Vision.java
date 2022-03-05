@@ -40,15 +40,15 @@ public class Vision extends SubsystemBase {
     }
 
     public int getRedCargoX() {
-        return getNCargoX((byte) 0b00000001);
+        return getNCargoX(VisionConstants.RED);
     }
 
     public int getBlueCargoX() {
-        return getNCargoX((byte) 0b00000010);
+        return getNCargoX(VisionConstants.BLUE);
     }
 
     public int getAllCargoX() {
-        return getNCargoX((byte) 0b00000011);
+        return getNCargoX((byte) (VisionConstants.RED + VisionConstants.BLUE));
     }
 
     public int getNCargoX(byte n) {

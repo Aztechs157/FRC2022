@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
@@ -19,6 +20,7 @@ import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveForwards;
 import frc.robot.subsystems.drive.FindCargo;
+import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
 import frc.robot.subsystems.drive.Turn180;
 import frc.robot.subsystems.hanging.Hanging;
@@ -66,6 +68,7 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         configureButtonBindings();
+        setupAutoChooser();
     }
 
     /**
@@ -115,7 +118,7 @@ public class RobotContainer {
                 .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
 
         operatorController.button(ButtonKey.autoTest)
-                .whenPressed(new Turn180(driveSubsystem, 180));
+                .whenPressed(new Turn180(driveSubsystem, AutoConstants.TURN_DEGREES));
 
         // driverController.button(ButtonKey.ClampBar)
         // .whenPressed(() -> hanging.clampSolenoid());
@@ -125,9 +128,6 @@ public class RobotContainer {
 
         // driverController.button(ButtonKey.RotateRight)
         // .whileHeld(() -> hanging.rotateArms(.3));
-
-        // driverController.button(ButtonKey.RotateLeft)
-        // .whileHeld(() -> hanging.rotateArms(-.3));
 
         // driverController.button(ButtonKey.ExtendOut)
         // .whileHeld(() -> hanging.extendArms(.3));
@@ -145,6 +145,17 @@ public class RobotContainer {
         driveSubsystem.disableBrakeMode();
     }
 
+    private final SendableChooser<Command> autoSelector = new SendableChooser<>();
+
+    private void setupAutoChooser() {
+        autoSelector.setDefaultOption("Shoot Low Drive Backward",
+                new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem));
+        autoSelector.addOption("Drive Backward Shoot High",
+                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, driveSubsystem));
+        autoSelector.addOption("Shoot Low Find Cargo",
+                new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake));
+    }
+
     /**
      *
      * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -152,9 +163,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        // return new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker,
-        // uptake, driveSubsystem);
-        return new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem);
+        return autoSelector.getSelected();
     }
 
     /**

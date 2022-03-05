@@ -27,7 +27,7 @@ public class Turn180 extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        drive.driveCartesian(0, 0, drive.storedAngle);
+        drive.driveCartesian(0, 0, degrees > 0 ? drive.storedAngle : -drive.storedAngle);
     }
 
     // Called once the command ends or is interrupted.
@@ -39,6 +39,6 @@ public class Turn180 extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return drive.getAngle() > degrees;
+        return degrees > 0 ? drive.getAngle() > degrees : -drive.getAngle() > -degrees;
     }
 }

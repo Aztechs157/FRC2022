@@ -8,14 +8,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.VisionConstants;
 import frc.robot.subsystems.vision.Vision;
 
 public class FindCargo extends CommandBase {
     private final Vision vision;
     private final Drive drive;
     private byte ourColor;
-    private final byte red = 0b00000001;
-    private final byte blue = 0b00000010;
     private int x = 0;
 
     /** Creates a new FindCargo. */
@@ -31,9 +30,9 @@ public class FindCargo extends CommandBase {
     @Override
     public void initialize() {
         if (DriverStation.getAlliance() == Alliance.Blue) {
-            ourColor = blue;
+            ourColor = VisionConstants.BLUE;
         } else {
-            ourColor = red;
+            ourColor = VisionConstants.RED;
         }
     }
 

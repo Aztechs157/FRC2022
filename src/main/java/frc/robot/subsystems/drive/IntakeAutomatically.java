@@ -6,19 +6,15 @@ package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.kicker.Kicker;
 
 public class IntakeAutomatically extends CommandBase {
     private Intake intake;
-    private Kicker kicker;
 
     /** Creates a new IntakeAutomatically. */
-    public IntakeAutomatically(Intake intake, Kicker kicker) {
+    public IntakeAutomatically(Intake intake) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.intake = intake;
-        this.kicker = kicker;
         addRequirements(intake);
-        addRequirements(kicker);
     }
 
     // Called when the command is initially scheduled.
