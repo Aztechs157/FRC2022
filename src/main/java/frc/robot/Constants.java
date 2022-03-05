@@ -133,6 +133,12 @@ public final class Constants {
         public static final int ABS_HANGING_ROTATION = 0;
         public static final double MAX_POS = 0;
         public static final double MIN_POS = 0;
+
+        public static final double ROTATION_SPEED = 0;
+        public static final double ROTATION_ERROR_MARGIN = 0;
+
+        public static final double EXTEND_SPEED = 0;
+        public static final double EXTEND_ERROR_MARGIN = 0;
     }
 
     public static final class AutoConstants {

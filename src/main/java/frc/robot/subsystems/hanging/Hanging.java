@@ -17,34 +17,34 @@ import frc.robot.Constants.MiscConstants;
 import frc.robot.lib.NumberUtil;
 
 public class Hanging extends SubsystemBase {
-    private CANSparkMax leftExtendMotor;
-    private CANSparkMax rotateMotors;
-    private CANSparkMax rightExtendMotor;
-    private DigitalInput topLimitSwitch;
-    private DigitalInput bottomLimitSwitch;
-    private Counter absHangingRotation;
+    private final CANSparkMax leftExtendMotor;
+    private final CANSparkMax rotateMotor;
+    private final CANSparkMax rightExtendMotor;
+    private final DigitalInput topLimitSwitch;
+    private final DigitalInput bottomLimitSwitch;
+    private final Counter rotationAbsEncoder;
 
     /** Creates a new Hanging. */
     public Hanging() {
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
-        rotateMotors = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
+        rotateMotor = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
-        rotateMotors.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
 
-        rotateMotors.setIdleMode(IdleMode.kBrake);
+        rotateMotor.setIdleMode(IdleMode.kBrake);
         leftExtendMotor.setIdleMode(IdleMode.kBrake);
         rightExtendMotor.setIdleMode(IdleMode.kBrake);
 
         topLimitSwitch = new DigitalInput(HangingConstants.TOP_LIMIT_SWITCH);
         bottomLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LIMIT_SWITCH);
 
-        absHangingRotation = new Counter(Mode.kSemiperiod);
-        absHangingRotation.setSemiPeriodMode(true);
-        absHangingRotation.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
-        absHangingRotation.reset();
+        rotationAbsEncoder = new Counter(Mode.kSemiperiod);
+        rotationAbsEncoder.setSemiPeriodMode(true);
+        rotationAbsEncoder.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
+        rotationAbsEncoder.reset();
     }
 
     @Override
@@ -57,13 +57,13 @@ public class Hanging extends SubsystemBase {
      *
      * @param speed is the rotation speed.
      */
-    public void rotateArms(double speed) {
-        if (speed > 0 && getAbsEncoder() > HangingConstants.MAX_POS) {
-            rotateMotors.set(0);
-        } else if (speed < 0 && getAbsEncoder() < HangingConstants.MIN_POS) {
-            rotateMotors.set(0);
+    public void rotateArms(final double speed) {
+        if (speed > 0 && getRotationPosition() > HangingConstants.MAX_POS) {
+            rotateMotor.set(0);
+        } else if (speed < 0 && getRotationPosition() < HangingConstants.MIN_POS) {
+            rotateMotor.set(0);
         } else {
-            rotateMotors.set(speed);
+            rotateMotor.set(speed);
         }
     }
 
@@ -72,7 +72,7 @@ public class Hanging extends SubsystemBase {
      *
      * @param speed is the speed of extension.
      */
-    public void extendArms(double speed) {
+    public void extendArms(final double speed) {
         if (speed > 0 && getTopLimit()) {
             rightExtendMotor.set(0);
             leftExtendMotor.set(0);
@@ -110,8 +110,8 @@ public class Hanging extends SubsystemBase {
      *
      * @return absolute encoder value, position of arm rotation in degrees.
      */
-    public double getAbsEncoder() {
-        return NumberUtil.ticksToDegs(absHangingRotation.getPeriod()); // equation for degree per tick converted to
+    public double getRotationPosition() {
+        return NumberUtil.ticksToDegs(rotationAbsEncoder.getPeriod()); // equation for degree per tick converted to
         // seconds.;
     }
 
