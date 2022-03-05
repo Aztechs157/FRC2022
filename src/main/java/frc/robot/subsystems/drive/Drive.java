@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MiscConstants;
@@ -20,9 +21,13 @@ public class Drive extends SubsystemBase {
     private final CANSparkMax frontRightMotor = new CANSparkMax(FRONT_RIGHT_MOTOR_ID, MotorType.kBrushless);
     private final CANSparkMax backRightMotor = new CANSparkMax(BACK_RIGHT_MOTOR_ID, MotorType.kBrushless);
 
+    ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
     private final MecanumDrive mecanumDrive = new MecanumDrive(
             frontLeftMotor, backLeftMotor,
             frontRightMotor, backRightMotor);
+
+    public final double storedAngle = getAngle();
 
     /** Creates a new Drive. */
     public Drive() {
@@ -67,5 +72,13 @@ public class Drive extends SubsystemBase {
         backLeftMotor.setIdleMode(IdleMode.kCoast);
         frontRightMotor.setIdleMode(IdleMode.kCoast);
         backRightMotor.setIdleMode(IdleMode.kCoast);
+    }
+
+    public double getAngle() {
+        return gyro.getAngle();
+    }
+
+    public void resetGyro() {
+        gyro.reset();
     }
 }

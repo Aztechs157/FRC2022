@@ -91,6 +91,8 @@ public final class Constants {
         public static final double EJECT_SPEED = 0.45;
 
         public static final double SHOOTER_RPM = 4200;
+
+        public static final double LOW_SHOOTER_RPM = 2000;
     }
 
     public static final class KickerConstants {
@@ -123,15 +125,12 @@ public final class Constants {
     }
 
     public static final class HangingConstants {
-        public static final int RIGHT_ROTATE_MOTOR = 0;
+        public static final int ROTATE_MOTOR = 0;
         public static final int RIGHT_EXTEND_MOTOR = 0;
-        public static final int LEFT_ROTATE_MOTOR = 0;
         public static final int LEFT_EXTEND_MOTOR = 0;
         public static final int TOP_LIMIT_SWITCH = 0;
         public static final int BOTTOM_LIMIT_SWITCH = 0;
         public static final int ABS_HANGING_ROTATION = 0;
-        public static final int SOLENOID_HANGING_FORWARD = 0;
-        public static final int SOLENOID_HANGING_BACKWARD = 0;
         public static final double MAX_POS = 0;
         public static final double MIN_POS = 0;
     }
@@ -139,6 +138,14 @@ public final class Constants {
     public static final class AutoConstants {
         public static final double AUTO_SPEED = 0.2;
         public static final double AUTO_DISTANCE_TICKS = 23.72;
+        public static final int X_TARGET = 157;
+        public static final double TURN_DEGREES = 150;
+    }
+
+    public static final class VisionConstants {
+        public static final int PIXY_PORT = 0x55;
+        public static final byte RED = 0b00000001;
+        public static final byte BLUE = 0b00000010;
     }
 
     public static final class MiscConstants {
