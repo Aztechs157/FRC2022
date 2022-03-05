@@ -49,9 +49,9 @@ public final class Constants {
         // The minimum confidence to be read as the right color. How much leeway the
         // color sensor can have
         public static final double COLOR_CONFIDENCE = 0.9;
-
+        // close proximity for the intake color sensor
         public static final int PROX_CLOSE = 270;
-
+        // far proximity for the intake color sensor
         public static final int PROX_FAR = 120;
     }
 
@@ -77,10 +77,9 @@ public final class Constants {
         public static final int CLOCKWISE_BOUNDARY = 1250;
         // The rotational speed of the turret
         public static final double TURRET_SPEED = .45;
-        // diagonal max 90, min 45
-
+        // turret speed scale
         public static final double TURRET_INPUT_SCALE = 0.5;
-
+        // diagonal max 90, min 45
     }
 
     public static final class ShooterConstants {
@@ -89,9 +88,9 @@ public final class Constants {
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
-
+        // shooter rpm for top hub
         public static final double SHOOTER_RPM = 4200;
-
+        // shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 2000;
     }
 
@@ -116,8 +115,9 @@ public final class Constants {
     }
 
     public static final class DriveConstants {
+        // drive speed scale
         public static final double DRIVE_INPUT_SCALE = .75;
-
+        // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;
         public static final int FRONT_RIGHT_MOTOR_ID = 61;
@@ -125,39 +125,49 @@ public final class Constants {
     }
 
     public static final class HangingConstants {
+        // ids for the hanging mechanisms
         public static final int ROTATE_MOTOR = 0;
         public static final int RIGHT_EXTEND_MOTOR = 0;
         public static final int LEFT_EXTEND_MOTOR = 0;
         public static final int TOP_LIMIT_SWITCH = 0;
         public static final int BOTTOM_LIMIT_SWITCH = 0;
         public static final int ABS_HANGING_ROTATION = 0;
+        // limit switch position limits
         public static final double MAX_POS = 0;
         public static final double MIN_POS = 0;
-
+        // arm rotation speed and margin of error
         public static final double ROTATION_SPEED = 0;
         public static final double ROTATION_ERROR_MARGIN = 0;
-
+        // arm extension speed and margin of error
         public static final double EXTEND_SPEED = 0;
         public static final double EXTEND_ERROR_MARGIN = 0;
     }
 
     public static final class AutoConstants {
+        // autonomous drive speed
         public static final double AUTO_SPEED = 0.2;
+        // autonomous drive distance
         public static final double AUTO_DISTANCE_TICKS = 23.72;
+        // find cargo x-target scalar
         public static final int X_TARGET = 157;
+        // gyro degrees for turning the robot
         public static final double TURN_DEGREES = 150;
     }
 
     public static final class VisionConstants {
+        // port for the pixy camera
         public static final int PIXY_PORT = 0x55;
+        // blue and red binary values for cargo tracking
         public static final byte RED = 0b00000001;
         public static final byte BLUE = 0b00000010;
     }
 
     public static final class MiscConstants {
+        // smart motor current limit to hopefully stop brown-outs
         public static final int SMART_MOTOR_LIMIT = 40;
     }
 
+    // motor direction enum
     public enum MotorDirection {
         FEEDING, EJECTING, STOPPED
     }

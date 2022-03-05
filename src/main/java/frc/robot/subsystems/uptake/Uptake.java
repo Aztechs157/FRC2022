@@ -29,10 +29,12 @@ public class Uptake extends SubsystemBase {
         setDefaultCommand(new PositionCargo(kicker, intake, this));
     }
 
+    // gets the color of the ball in between the two sensors
     public ColorResult getTransitionalColor() {
         return transitionalColor;
     }
 
+    // sets the color of the ball in between the two sensors
     public void setTransitionalColor(ColorResult transitionalCargo) {
         this.transitionalColor = transitionalCargo;
     }

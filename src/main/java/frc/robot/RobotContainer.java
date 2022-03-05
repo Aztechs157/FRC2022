@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -18,7 +17,6 @@ import frc.robot.controls.OperatorController;
 import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
-import frc.robot.subsystems.drive.DriveForwards;
 import frc.robot.subsystems.drive.FindCargo;
 import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
@@ -105,9 +103,11 @@ public class RobotContainer {
         driverController.button(ButtonKey.LowShoot)
                 .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
+        // while held will track the reflective tape
         operatorController.button(ButtonKey.AutoAim)
                 .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake));
 
+        // shoots cargo at the lower rpm
         operatorController.button(ButtonKey.LowShoot)
                 .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
@@ -115,23 +115,30 @@ public class RobotContainer {
         operatorController.button(ButtonKey.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
 
+        // tracks cargo while held
         operatorController.button(ButtonKey.TrackCargo)
                 .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
 
+        // will turn until degrees has been fully met
         operatorController.button(ButtonKey.autoTest)
                 .whenPressed(new Turn180(driveSubsystem, AutoConstants.TURN_DEGREES));
 
+        // will hang eventually
         driverController.button(ButtonKey.Hang).whenPressed(new Hang(hanging));
     }
 
+    // turns on break mode for the drive motors
     public void enableDriveBreakMode() {
         driveSubsystem.enableBrakeMode();
     }
 
+    // turns off break mode for drive motors
     public void disableBreakMode() {
         driveSubsystem.disableBrakeMode();
     }
 
+    // creates a sendable chooser for auto, default option is shoot low and drive
+    // backwards
     private final SendableChooser<Command> autoSelector = new SendableChooser<>();
 
     private void setupAutoChooser() {

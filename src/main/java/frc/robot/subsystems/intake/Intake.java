@@ -44,10 +44,12 @@ public class Intake extends SubsystemBase {
         intakeColor = ColorResult.NONE;
     }
 
+    // returns the color seen by the intake sensor
     public ColorResult getIntakeColor() {
         return intakeColor;
     }
 
+    // sets the intake color to said color cargo in the intake
     public void setIntakeColor(ColorResult intakeCargo) {
         this.intakeColor = intakeCargo;
     }
