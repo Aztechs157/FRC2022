@@ -7,6 +7,7 @@ package frc.robot.subsystems.drive;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
@@ -26,17 +27,21 @@ public class SmartCargoAndShoot extends SequentialCommandGroup {
      * @param targetSpeed
      * @param drive
      * @param vision
+     * @param intake
      */
     public SmartCargoAndShoot(Shooter shooter, Kicker kicker, Uptake uptake, Drive drive,
-            Vision vision) {
+            Vision vision, Intake intake) {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         final var shootLow = new ShootCargo(shooter, kicker, uptake, ShooterConstants.LOW_SHOOTER_RPM);
         final var driveBackward = new DriveBackwards(drive);
+        final var turnDistance = new Turn180(drive, 150);
         final var findCargo = new FindCargo(vision, drive);
         final var driveForward = new DriveForwards(drive, AutoConstants.AUTO_DISTANCE_TICKS);
-        final var turnToGoal = new Turn180(drive, 180);
+        final var IntakeAutomatically = new IntakeAutomatically(intake, kicker);
+        final var turnToGoal = new Turn180(drive, -150);
 
-        addCommands(shootLow, driveBackward, findCargo, driveForward, turnToGoal);
+        addCommands(shootLow, driveBackward, turnDistance, findCargo, race(driveForward, IntakeAutomatically),
+                turnToGoal);
     }
 }

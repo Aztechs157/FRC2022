@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -57,7 +58,6 @@ public class RobotContainer {
     private final Pneumatics pneumatics = new Pneumatics();
     private final Drive driveSubsystem = new Drive();
     // private final Hanging hanging = new Hanging();
-
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
 
     /**
