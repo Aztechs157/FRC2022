@@ -137,8 +137,8 @@ public final class Constants {
         public static final int LEFT_BAR_LIMIT_SWITCH = 5;
         public static final int ABS_HANGING_ROTATION = 2;
         // limit switch position limits
-        public static final double MAX_POS = 0;
-        public static final double MIN_POS = 0;
+        public static final double MAX_POS = 9999;
+        public static final double MIN_POS = -9999;
         // arm rotation speed and margin of error
         public static final double ROTATION_SPEED = .1;
         public static final double ROTATION_ERROR_MARGIN = 0;

@@ -1,0 +1,37 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems.hanging;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.controls.AxisKey;
+import frc.robot.controls.OperatorController;
+
+public class TeleopHang extends CommandBase {
+    private final OperatorController controller;
+    private final Hanging hanging;
+
+    /** Creates a new TeleopExtend. */
+    public TeleopHang(final OperatorController controller, final Hanging hanging) {
+        this.controller = controller;
+        this.hanging = hanging;
+        addRequirements(hanging);
+    }
+
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        final var extendSpeed = controller.getAxis(AxisKey.ExtendSpeed);
+        hanging.extendLeftArm(extendSpeed);
+        hanging.extendRightArm(extendSpeed);
+        final var rotateSpeed = controller.getAxis(AxisKey.RotateSpeed);
+        hanging.rotateArms(rotateSpeed);
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+}

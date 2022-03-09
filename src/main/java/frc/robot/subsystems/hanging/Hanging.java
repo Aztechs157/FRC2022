@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Counter.Mode;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.HangingConstants;
 import frc.robot.Constants.MiscConstants;
@@ -31,6 +32,7 @@ public class Hanging extends SubsystemBase {
     /** Creates a new Hanging. */
     public Hanging() {
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
+        leftExtendMotor.setInverted(false);
         rotateMotor = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
@@ -53,6 +55,16 @@ public class Hanging extends SubsystemBase {
         rotationAbsEncoder.setSemiPeriodMode(true);
         rotationAbsEncoder.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
         rotationAbsEncoder.reset();
+
+        final var tab = Shuffleboard.getTab("Hanging Debug");
+        tab.addBoolean("Top Left Limit", this::getTopLeftLimit);
+        tab.addBoolean("Top Right Limit", this::getTopRightLimit);
+        tab.addBoolean("Bottom Left Limit", this::getBottomLeftLimit);
+        tab.addBoolean("Bottom Right Limit", this::getBottomRightLimit);
+        tab.addBoolean("Bar Limits", this::getBarLimit);
+        tab.addNumber("Rotation Position", this::getRotationPosition);
+        tab.addNumber("Raw Rotation", this.rotationAbsEncoder::getPeriod);
+        tab.addNumber("test", this.rotationAbsEncoder::get);
     }
 
     @Override
@@ -66,13 +78,14 @@ public class Hanging extends SubsystemBase {
      * @param speed is the rotation speed.
      */
     public void rotateArms(final double speed) {
-        if (speed > 0 && getRotationPosition() > HangingConstants.MAX_POS) {
-            rotateMotor.set(0);
-        } else if (speed < 0 && getRotationPosition() < HangingConstants.MIN_POS) {
-            rotateMotor.set(0);
-        } else {
-            rotateMotor.set(speed);
-        }
+        // if (speed > 0 && getRotationPosition() > HangingConstants.MAX_POS) {
+        // rotateMotor.set(0);
+        // } else if (speed < 0 && getRotationPosition() < HangingConstants.MIN_POS) {
+        // rotateMotor.set(0);
+        // } else {
+        rotateMotor.set(speed);
+        // }
+
     }
 
     /**
@@ -80,16 +93,23 @@ public class Hanging extends SubsystemBase {
      *
      * @param speed is the speed of extension.
      */
-    public void extendArms(final double speed) {
-        if (speed > 0 && getTopLimit()) {
-            rightExtendMotor.set(0);
+    public void extendLeftArm(final double speed) {
+        if (speed > 0 && getTopLeftLimit()) {
             leftExtendMotor.set(0);
-        } else if (speed < 0 && getBottomLimit()) {
-            rightExtendMotor.set(0);
+        } else if (speed < 0 && getBottomLeftLimit()) {
             leftExtendMotor.set(0);
         } else {
-            rightExtendMotor.set(speed);
             leftExtendMotor.set(speed);
+        }
+    }
+
+    public void extendRightArm(final double speed) {
+        if (speed > 0 && getTopRightLimit()) {
+            rightExtendMotor.set(0);
+        } else if (speed < 0 && getBottomRightLimit()) {
+            rightExtendMotor.set(0);
+        } else {
+            rightExtendMotor.set(speed);
         }
     }
 
@@ -99,8 +119,12 @@ public class Hanging extends SubsystemBase {
      * @return top limit switch value, true if the hanger arm is at it's highest
      *         point.
      */
-    public boolean getTopLimit() {
-        return topLeftLimitSwitch.get();
+    public boolean getTopLeftLimit() {
+        return !topLeftLimitSwitch.get();
+    }
+
+    public boolean getTopRightLimit() {
+        return !topRightLimitSwitch.get();
     }
 
     /**
@@ -109,8 +133,16 @@ public class Hanging extends SubsystemBase {
      * @return bottom limit switch value, true if the hanger arm is at it's lowest
      *         point.
      */
-    public boolean getBottomLimit() {
-        return bottomLeftLimitSwitch.get();
+    public boolean getBottomLeftLimit() {
+        return !bottomLeftLimitSwitch.get();
+    }
+
+    public boolean getBottomRightLimit() {
+        return !bottomRightLimitSwitch.get();
+    }
+
+    public boolean getBarLimit() {
+        return !leftBarSwitch.get() && !rightBarSwitch.get();
     }
 
     /**

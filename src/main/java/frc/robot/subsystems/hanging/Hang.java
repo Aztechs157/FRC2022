@@ -9,6 +9,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class Hang extends SequentialCommandGroup {
     /** Creates a new Hang. */
     public Hang(final Hanging hanging) {
-        addCommands(new ExtendArms(hanging, 1234));
+        addCommands(new RotateArms(hanging, 0));
     }
 }

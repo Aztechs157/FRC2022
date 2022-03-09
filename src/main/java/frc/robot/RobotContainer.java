@@ -24,6 +24,7 @@ import frc.robot.subsystems.drive.TeleopDrive;
 import frc.robot.subsystems.drive.Turn180;
 import frc.robot.subsystems.hanging.Hang;
 import frc.robot.subsystems.hanging.Hanging;
+import frc.robot.subsystems.hanging.TeleopHang;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
@@ -82,12 +83,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
-
-        // James' button test code, I changed the prints from simple strings of hello to
-        // measure velocity method printouts.
-        // prints the velocity of the shooter
-        driverController.button(ButtonKey.Hello)
-                .whenPressed(() -> System.out.println(shooter.measureVelocity()));
+        hanging.setDefaultCommand(new TeleopHang(operatorController, hanging));
 
         // prints debug messages
         // operatorController.button(ButtonKey.DebugPrint)
