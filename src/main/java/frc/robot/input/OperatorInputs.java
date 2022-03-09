@@ -1,10 +1,10 @@
 package frc.robot.input;
 
 import frc.robot.lib.input.Layout;
-import frc.robot.lib.input.LayoutChooser;
+import frc.robot.lib.input.ShuffleLayoutChooser;
 import frc.robot.lib.input.models.LogitechGamepadF310;
 
-public class OperatorInputs extends LayoutChooser {
+public class OperatorInputs extends ShuffleLayoutChooser {
 
     public OperatorInputs() {
         final var defaultLayout = add(new Layout("Default"));

@@ -2,13 +2,13 @@ package frc.robot.input;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.lib.input.Layout;
-import frc.robot.lib.input.LayoutChooser;
+import frc.robot.lib.input.ShuffleLayoutChooser;
 import frc.robot.lib.input.models.LogitechExtreme3D;
 import frc.robot.lib.input.models.LogitechGamepadF310;
 import frc.robot.lib.util.DoubleRange;
 import frc.robot.lib.util.ShuffleUtil;
 
-public class DriverInputs extends LayoutChooser {
+public class DriverInputs extends ShuffleLayoutChooser {
 
     public DriverInputs() {
         final var tab = Shuffleboard.getTab("Debug");

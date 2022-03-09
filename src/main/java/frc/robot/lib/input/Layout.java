@@ -15,7 +15,7 @@ import frc.robot.lib.input.pov.PovKey;
 /**
  * A simple structure that stores the mapping between Button/AxisInput.Keys and
  * Button/AxisInputs respectively. These are meant to be used with
- * {@link LayoutChooser} to allow hot-swapping of various control
+ * {@link ShuffleLayoutChooser} to allow hot-swapping of various control
  * configurations, otherwise known as "layouts."
  */
 public class Layout implements Sendable {

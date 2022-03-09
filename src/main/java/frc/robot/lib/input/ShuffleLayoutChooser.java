@@ -12,11 +12,12 @@ import frc.robot.lib.input.pov.PovKey;
 
 /**
  * Object that manages layouts. A layout can be selected from Shuffleboard that
- * can then be used by the robot. It maps the inputs of a {@link LayoutChooser}
+ * can then be used by the robot. It maps the inputs of a
+ * {@link ShuffleLayoutChooser}
  * to the
  * desired functions of the robot.
  */
-public class LayoutChooser implements Sendable {
+public class ShuffleLayoutChooser implements Sendable {
 
     private final SendableChooser<Layout> layouts = new SendableChooser<>();
 
@@ -71,7 +72,8 @@ public class LayoutChooser implements Sendable {
     }
 
     /**
-     * Thrown when no {@link Layout}s have been added to a {@link LayoutChooser}
+     * Thrown when no {@link Layout}s have been added to a
+     * {@link ShuffleLayoutChooser}
      */
     public static class NoLayoutsAddedException extends RuntimeException {
         private NoLayoutsAddedException() {
@@ -82,11 +84,11 @@ public class LayoutChooser implements Sendable {
     private boolean hasDefault = false;
 
     /**
-     * Add a {@link Layout} to this {@link LayoutChooser}. This allows the
-     * {@link LayoutChooser} to display and
+     * Add a {@link Layout} to this {@link ShuffleLayoutChooser}. This allows the
+     * {@link ShuffleLayoutChooser} to display and
      * swap to it using Shuffleboard. If no layouts have been added yet, this will
      * implicitly also set the new one as the default. To manually overwrite the
-     * default later, use {@link LayoutChooser#addAndSetDefault(Layout)}.
+     * default later, use {@link ShuffleLayoutChooser#addAndSetDefault(Layout)}.
      *
      * @param layout The Layout to add
      */
@@ -102,7 +104,7 @@ public class LayoutChooser implements Sendable {
     /**
      * Manually set a {@link Layout} as the default. This will additionally add it
      * if it wasn't added already. Normally this isn't necessary, as
-     * {@link LayoutChooser#add(Layout)} will automatically set the first
+     * {@link ShuffleLayoutChooser#add(Layout)} will automatically set the first
      * layout as default.
      *
      * @param layout The Layout to add
