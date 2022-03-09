@@ -17,10 +17,6 @@ public class DriverController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(AxisKey.DriveRotation,
                 logitech.rightStickX.scaled(DRIVE_INPUT_SCALE));
 
-        defaultLayout.assign(AxisKey.DriveSpeedX, () -> 0);
-        defaultLayout.assign(AxisKey.DriveSpeedY, () -> 0);
-        defaultLayout.assign(AxisKey.DriveRotation, () -> 0);
-
         defaultLayout.assign(ButtonKey.Hello, logitech.back);
         defaultLayout.assign(ButtonKey.IntakeRun, logitech.rightBumper);
         defaultLayout.assign(ButtonKey.LowShoot, logitech.start);
