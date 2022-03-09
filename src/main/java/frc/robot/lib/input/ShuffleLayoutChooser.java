@@ -77,7 +77,7 @@ public class ShuffleLayoutChooser implements Sendable {
      */
     public static class NoLayoutsAddedException extends RuntimeException {
         private NoLayoutsAddedException() {
-            super("No Layouts have been added to the LayoutChooser");
+            super("No Layouts have been added to the ShuffleLayoutChooser");
         }
     }
 

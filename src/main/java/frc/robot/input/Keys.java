@@ -9,7 +9,7 @@ public class Keys {
     }
 
     public enum DebugButton implements ButtonKey.Optional {
-        Print
+        PrintFoo, PrintBar
     }
 
     public enum Axis implements AxisKey {

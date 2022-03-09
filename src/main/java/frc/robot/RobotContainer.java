@@ -54,8 +54,11 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
 
-        operatorInputs.button(Keys.DebugButton.Print)
-                .whenPressed(() -> System.out.println("wew"));
+        operatorInputs.button(Keys.DebugButton.PrintFoo)
+                .whenPressed(() -> System.out.println("foo"));
+
+        operatorInputs.button(Keys.DebugButton.PrintBar)
+                .whenPressed(() -> System.out.println("bar"));
     }
 
     /**
