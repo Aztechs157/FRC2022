@@ -143,7 +143,7 @@ public final class Constants {
         public static final double ROTATION_SPEED = .1;
         public static final double ROTATION_ERROR_MARGIN = 0;
         // arm extension speed and margin of error
-        public static final double EXTEND_SPEED = .1;
+        public static final double EXTEND_SPEED = 1;
         public static final double EXTEND_ERROR_MARGIN = 0;
     }
 

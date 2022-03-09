@@ -3,6 +3,7 @@ package frc.robot.controls;
 import static frc.robot.Constants.TurretConstants.TURRET_INPUT_SCALE;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import frc.robot.Constants.HangingConstants;
 import frc.robot.lib.controls.ControllerBase;
 import frc.robot.lib.controls.models.LogitechGamepadF310;
 
@@ -38,7 +39,7 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         hangingLayout.assign(ButtonKey.autoTest, logitech.b);
 
         hangingLayout.assign(AxisKey.ExtendSpeed,
-                logitech.rightStickY.scaled(1).inverted());
+                logitech.rightStickY.scaled(HangingConstants.EXTEND_SPEED).inverted());
         hangingLayout.assign(AxisKey.RotateSpeed, logitech.leftStickX.scaled(0.1));
 
         Shuffleboard.getTab("Debug").add("Opeer", this);
