@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
@@ -68,6 +69,7 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
         setupAutoChooser();
+        Shuffleboard.getTab("Debug").add(autoSelector);
     }
 
     /**

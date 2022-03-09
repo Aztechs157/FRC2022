@@ -20,8 +20,12 @@ public class Hanging extends SubsystemBase {
     private final CANSparkMax leftExtendMotor;
     private final CANSparkMax rotateMotor;
     private final CANSparkMax rightExtendMotor;
-    private final DigitalInput topLimitSwitch;
-    private final DigitalInput bottomLimitSwitch;
+    private final DigitalInput topLeftLimitSwitch;
+    private final DigitalInput bottomLeftLimitSwitch;
+    private final DigitalInput leftBarSwitch;
+    private final DigitalInput topRightLimitSwitch;
+    private final DigitalInput bottomRightLimitSwitch;
+    private final DigitalInput rightBarSwitch;
     private final Counter rotationAbsEncoder;
 
     /** Creates a new Hanging. */
@@ -38,8 +42,12 @@ public class Hanging extends SubsystemBase {
         leftExtendMotor.setIdleMode(IdleMode.kBrake);
         rightExtendMotor.setIdleMode(IdleMode.kBrake);
 
-        topLimitSwitch = new DigitalInput(HangingConstants.TOP_LIMIT_SWITCH);
-        bottomLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LIMIT_SWITCH);
+        topLeftLimitSwitch = new DigitalInput(HangingConstants.TOP_LEFT_LIMIT_SWITCH);
+        bottomLeftLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LEFT_LIMIT_SWITCH);
+        leftBarSwitch = new DigitalInput(HangingConstants.LEFT_BAR_LIMIT_SWITCH);
+        topRightLimitSwitch = new DigitalInput(HangingConstants.TOP_RIGHT_LIMIT_SWITCH);
+        bottomRightLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_RIGHT_LIMIT_SWITCH);
+        rightBarSwitch = new DigitalInput(HangingConstants.RIGHT_BAR_LIMIT_SWITCH);
 
         rotationAbsEncoder = new Counter(Mode.kSemiperiod);
         rotationAbsEncoder.setSemiPeriodMode(true);
@@ -92,7 +100,7 @@ public class Hanging extends SubsystemBase {
      *         point.
      */
     public boolean getTopLimit() {
-        return topLimitSwitch.get();
+        return topLeftLimitSwitch.get();
     }
 
     /**
@@ -102,7 +110,7 @@ public class Hanging extends SubsystemBase {
      *         point.
      */
     public boolean getBottomLimit() {
-        return bottomLimitSwitch.get();
+        return bottomLeftLimitSwitch.get();
     }
 
     /**
