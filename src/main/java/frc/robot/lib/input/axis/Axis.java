@@ -1,4 +1,4 @@
-package frc.robot.lib.input;
+package frc.robot.lib.input.axis;
 
 import static frc.robot.lib.util.DoubleRange.scale;
 
@@ -13,19 +13,6 @@ import frc.robot.lib.util.DoubleRange;
  * {@link Axis}.
  */
 public class Axis implements DoubleSupplier {
-    public interface AxisKey {
-        public default boolean optional() {
-            return false;
-        }
-
-        public interface Optional extends AxisKey {
-            @Override
-            public default boolean optional() {
-                return true;
-            }
-        }
-    }
-
     private final DoubleSupplier value;
 
     public Axis(final int deviceId, final int axisId) {

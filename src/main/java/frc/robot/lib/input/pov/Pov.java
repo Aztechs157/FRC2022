@@ -1,26 +1,15 @@
-package frc.robot.lib.input;
+package frc.robot.lib.input.pov;
 
 import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.lib.input.axis.Axis;
+import frc.robot.lib.input.button.Button;
 
 /**
  * Class for getting input from a pov.
  */
 public class Pov implements IntSupplier {
-    public interface PovKey {
-        public default boolean optional() {
-            return false;
-        }
-
-        public interface Optional extends PovKey {
-            @Override
-            public default boolean optional() {
-                return true;
-            }
-        }
-    }
-
     private final IntSupplier degrees;
 
     public Pov(final int deviceId, final int povId) {

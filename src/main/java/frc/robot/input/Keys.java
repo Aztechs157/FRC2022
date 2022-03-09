@@ -1,7 +1,7 @@
 package frc.robot.input;
 
-import frc.robot.lib.input.Axis.AxisKey;
-import frc.robot.lib.input.Button.ButtonKey;
+import frc.robot.lib.input.axis.AxisKey;
+import frc.robot.lib.input.button.ButtonKey;
 
 public class Keys {
     public enum Button implements ButtonKey {

@@ -1,5 +1,9 @@
 package frc.robot.lib.input;
 
+import frc.robot.lib.input.axis.Axis;
+import frc.robot.lib.input.button.Button;
+import frc.robot.lib.input.pov.Pov;
+
 /**
  * Models map physical inputs on a input device to input classes such as
  * {@link Button}, {@link Axis}, or {@link Pov}.

@@ -1,4 +1,4 @@
-package frc.robot.lib.input;
+package frc.robot.lib.input.button;
 
 import java.util.function.BooleanSupplier;
 
@@ -10,18 +10,6 @@ import edu.wpi.first.wpilibj.DriverStation;
  * {@link Button}.
  */
 public class Button extends edu.wpi.first.wpilibj2.command.button.Button {
-    public interface ButtonKey {
-        public default boolean optional() {
-            return false;
-        }
-
-        public interface Optional extends ButtonKey {
-            @Override
-            public default boolean optional() {
-                return true;
-            }
-        }
-    }
 
     public Button(final int deviceId, final int buttonId) {
         this(() -> DriverStation.getStickButton(deviceId, buttonId));

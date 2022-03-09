@@ -1,9 +1,9 @@
 package frc.robot.lib.input.models;
 
-import frc.robot.lib.input.Axis;
-import frc.robot.lib.input.Button;
 import frc.robot.lib.input.Model;
-import frc.robot.lib.input.Pov;
+import frc.robot.lib.input.axis.Axis;
+import frc.robot.lib.input.button.Button;
+import frc.robot.lib.input.pov.Pov;
 
 public class LogitechAttack extends Model {
 

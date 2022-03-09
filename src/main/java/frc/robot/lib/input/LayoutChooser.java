@@ -3,6 +3,12 @@ package frc.robot.lib.input;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.lib.input.axis.Axis;
+import frc.robot.lib.input.axis.AxisKey;
+import frc.robot.lib.input.button.Button;
+import frc.robot.lib.input.button.ButtonKey;
+import frc.robot.lib.input.pov.Pov;
+import frc.robot.lib.input.pov.PovKey;
 
 /**
  * Object that manages layouts. A layout can be selected from Shuffleboard that
@@ -25,7 +31,7 @@ public class LayoutChooser implements Sendable {
      * @param key Which button to retrieve
      * @return A {@link Button} and {@link ButtonKey} representing the input
      */
-    public Button button(final Button.ButtonKey key) {
+    public Button button(final ButtonKey key) {
         return new Button(() -> getSelected().button(key).get());
     }
 
@@ -35,7 +41,7 @@ public class LayoutChooser implements Sendable {
      * @param key Which axis to retrieve
      * @return A {@link Axis} representing the input
      */
-    public Axis axis(final Axis.AxisKey key) {
+    public Axis axis(final AxisKey key) {
         return new Axis(() -> getSelected().axis(key).get());
     }
 
@@ -45,7 +51,7 @@ public class LayoutChooser implements Sendable {
      * @param key Which pov to retrieve
      * @return A {@link Pov} representing the input
      */
-    public Pov pov(final Pov.PovKey key) {
+    public Pov pov(final PovKey key) {
         return new Pov(() -> getSelected().pov(key).get());
     }
 
