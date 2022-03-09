@@ -8,7 +8,17 @@ import edu.wpi.first.wpilibj.DriverStation;
  * Class for getting input from a pov.
  */
 public class Pov implements IntSupplier {
-    public interface Key {
+    public interface PovKey {
+        public default boolean optional() {
+            return false;
+        }
+
+        public interface Optional extends PovKey {
+            @Override
+            public default boolean optional() {
+                return true;
+            }
+        }
     }
 
     private final IntSupplier degrees;

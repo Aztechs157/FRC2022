@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.drive.DriveSubsystem;
 import frc.robot.drive.TeleopDrive;
-import frc.robot.input.ButtonKey;
 import frc.robot.input.DriverInputs;
+import frc.robot.input.Keys;
 import frc.robot.input.OperatorInputs;
 
 /**
@@ -48,11 +48,14 @@ public class RobotContainer {
         driveSubsystem.setDefaultCommand(
                 new TeleopDrive(driverInputs, driveSubsystem));
 
-        driverInputs.button(ButtonKey.Hello)
+        driverInputs.button(Keys.Button.Hello)
                 .whenPressed(() -> System.out.println("Hello driver"));
 
-        operatorInputs.button(ButtonKey.Hello)
+        operatorInputs.button(Keys.Button.Hello)
                 .whenPressed(() -> System.out.println("Hello operator"));
+
+        operatorInputs.button(Keys.DebugButton.Print)
+                .whenPressed(() -> System.out.println("wew"));
     }
 
     /**

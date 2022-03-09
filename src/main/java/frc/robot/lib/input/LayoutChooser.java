@@ -25,8 +25,8 @@ public class LayoutChooser implements Sendable {
      * @param key Which button to retrieve
      * @return A {@link Button} and {@link ButtonKey} representing the input
      */
-    public Button button(final Button.Key key) {
-        return new Button(() -> getSelected().button(key).getAsBoolean());
+    public Button button(final Button.ButtonKey key) {
+        return new Button(() -> getSelected().button(key).get());
     }
 
     /**
@@ -35,8 +35,8 @@ public class LayoutChooser implements Sendable {
      * @param key Which axis to retrieve
      * @return A {@link Axis} representing the input
      */
-    public Axis axis(final Axis.Key key) {
-        return new Axis(() -> getSelected().axis(key).getAsDouble());
+    public Axis axis(final Axis.AxisKey key) {
+        return new Axis(() -> getSelected().axis(key).get());
     }
 
     /**
@@ -45,20 +45,8 @@ public class LayoutChooser implements Sendable {
      * @param key Which pov to retrieve
      * @return A {@link Pov} representing the input
      */
-    public Pov pov(final Pov.Key key) {
-        return new Pov(() -> getSelected().pov(key).getAsInt());
-    }
-
-    public Button tryButton(final Button.Key buttonKey) {
-        return new Button(() -> getSelected().tryButton(buttonKey).getAsBoolean());
-    }
-
-    public Axis tryAxis(final Axis.Key axisKey) {
-        return new Axis(() -> getSelected().tryAxis(axisKey).getAsDouble());
-    }
-
-    public Pov tryPov(final Pov.Key povKey) {
-        return new Pov(() -> getSelected().tryPov(povKey).getAsInt());
+    public Pov pov(final Pov.PovKey key) {
+        return new Pov(() -> getSelected().pov(key).get());
     }
 
     /**
