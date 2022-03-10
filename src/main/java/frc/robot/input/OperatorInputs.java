@@ -14,19 +14,19 @@ public class OperatorInputs extends ShuffleLayoutChooser {
 
         defaultLayout.assign(Keys.Axis.TurretSpeed,
                 logitech.leftStickX.scaled(TURRET_INPUT_SCALE));
-        defaultLayout.assign(Keys.Axis.AimerSpeed, logitech.rightStickX);
+        defaultLayout.assign(Keys.Axis.AimerSpeed, logitech.leftStickY);
 
         defaultLayout.assign(Keys.Button.ShooterRun, logitech.rightBumper);
         defaultLayout.assign(Keys.Button.AutoAim, logitech.leftBumper);
-        defaultLayout.assign(Keys.Button.EjectCargo, logitech.start);
         defaultLayout.assign(Keys.Button.LowShoot, logitech.back);
         defaultLayout.assign(Keys.Button.TrackCargo, logitech.a);
-        defaultLayout.assign(Keys.Button.autoTest, logitech.b);
 
-        defaultLayout.assign(Keys.Button.ExtendHanger, logitech.y);
-        defaultLayout.assign(Keys.Button.RetractHanger, logitech.x);
+        defaultLayout.assign(Keys.Button.ExtendHanger, logitech.pov.up);
+        defaultLayout.assign(Keys.Button.RetractHanger, logitech.pov.down);
+        defaultLayout.assign(Keys.Button.RotateHangLeft, logitech.x);
+        defaultLayout.assign(Keys.Button.RotateHangRight, logitech.b);
 
         defaultLayout.assign(Keys.Axis.ExtendSpeed, Axis.DEFAULT);
-        defaultLayout.assign(Keys.Axis.RotateSpeed, Axis.DEFAULT);
+        defaultLayout.assign(Keys.Axis.RotateSpeed, logitech.rightStickX);
     }
 }

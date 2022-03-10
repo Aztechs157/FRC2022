@@ -64,7 +64,7 @@ public final class Constants {
         // The servo ID for the Aimer mechanism.
         public static final int AIMER_MOTOR_ID = 7;
         // The upwards boundary for the aimer
-        public static final double AIMER_HIGHER_BOUNDARY = 500;
+        public static final double AIMER_HIGHER_BOUNDARY = 480;
         // The lower boundary for the aimer
         public static final double AIMER_LOWER_BOUNDARY = 65;
         // The port number for the absolute encoder.

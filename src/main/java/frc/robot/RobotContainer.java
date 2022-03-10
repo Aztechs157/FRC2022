@@ -111,23 +111,14 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.LowShoot)
                 .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
-        // runs the Eject command on the operator controller
-        operatorInputs.button(Keys.Button.EjectCargo)
-                .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
-
         // tracks cargo while held
         operatorInputs.button(Keys.Button.TrackCargo)
                 .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
 
-        // will turn until degrees has been fully met
-        operatorInputs.button(Keys.Button.autoTest)
-                .whenPressed(new Turn180(driveSubsystem, AutoConstants.TURN_DEGREES));
-
-        // will hang eventually
-        driverInputs.button(Keys.Button.Hang).whenPressed(new Hang(hanging));
-
         operatorInputs.button(Keys.Button.ExtendHanger).whileHeld(new ExtendArms(hanging));
         operatorInputs.button(Keys.Button.RetractHanger).whileHeld(new RetractArms(hanging));
+        operatorInputs.button(Keys.Button.RotateHangLeft).whileHeld(() -> hanging.rotateArms(-1), hanging);
+        operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
     }
 
     // turns on break mode for the drive motors

@@ -16,7 +16,7 @@ public class Pneumatics extends SubsystemBase {
     /** Creates a new Compressor. */
     public Pneumatics() {
         compressor = new Compressor(CompressorConstants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
-        // compressor.enableDigital();
+        compressor.enableDigital();
     }
 
     @Override
