@@ -7,33 +7,25 @@ package frc.robot.subsystems.hanging;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.HangingConstants;
 
-public class RotateArms extends CommandBase {
+public class RetractArms extends CommandBase {
     private final Hanging hanging;
-    private final double targetRotation;
 
-    /** Creates a new RotateArms. */
-    public RotateArms(final Hanging hanging, final double targetRotation) {
+    /** Creates a new ExtendArms. */
+    public RetractArms(final Hanging hanging) {
         this.hanging = hanging;
-        this.targetRotation = targetRotation;
         addRequirements(hanging);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        hanging.rotateArms(HangingConstants.ROTATION_SPEED);
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(final boolean interrupted) {
-        hanging.rotateArms(0);
+        hanging.extendLeftArm(HangingConstants.RETRACT_SPEED);
+        hanging.extendRightArm(HangingConstants.RETRACT_SPEED);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        final var difference = targetRotation - hanging.getRotationPosition();
-        return Math.abs(difference) < HangingConstants.ROTATION_ERROR_MARGIN;
+        return hanging.getBottomLeftLimit() && hanging.getBottomRightLimit();
     }
 }

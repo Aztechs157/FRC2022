@@ -137,19 +137,19 @@ public final class Constants {
         public static final int LEFT_BAR_LIMIT_SWITCH = 5;
         public static final int ABS_HANGING_ROTATION = 2;
         // limit switch position limits
-        public static final double MAX_POS = 9999;
-        public static final double MIN_POS = -9999;
+        public static final double MAX_POS = 161.7;
+        public static final double MIN_POS = 88.2;
         // arm rotation speed and margin of error
         public static final double ROTATION_SPEED = .1;
-        public static final double ROTATION_ERROR_MARGIN = 0;
         // arm extension speed and margin of error
-        public static final double EXTEND_SPEED = 1;
-        public static final double EXTEND_ERROR_MARGIN = 0;
+        public static final double EXTEND_SPEED = .50;
+        public static final double RETRACT_SPEED = -1;
     }
 
     public static final class AutoConstants {
         // autonomous drive speed
         public static final double AUTO_SPEED = 0.20;
+
         // autonomous drive distance
         public static final double AUTO_DISTANCE_TICKS = 23.72;
         // find cargo x-target scalar

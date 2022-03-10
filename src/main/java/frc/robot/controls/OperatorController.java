@@ -23,6 +23,9 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         defaultLayout.assign(ButtonKey.TrackCargo, logitech.a);
         defaultLayout.assign(ButtonKey.autoTest, logitech.b);
 
+        defaultLayout.assign(ButtonKey.ExtendHanger, logitech.y);
+        defaultLayout.assign(ButtonKey.RetractHanger, logitech.x);
+
         defaultLayout.assign(AxisKey.ExtendSpeed, () -> 0);
         defaultLayout.assign(AxisKey.RotateSpeed, () -> 0);
 
@@ -38,10 +41,14 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
         hangingLayout.assign(ButtonKey.TrackCargo, logitech.a);
         hangingLayout.assign(ButtonKey.autoTest, logitech.b);
 
+        hangingLayout.assign(ButtonKey.ExtendHanger, logitech.y);
+        hangingLayout.assign(ButtonKey.RetractHanger, logitech.x);
+
         hangingLayout.assign(AxisKey.ExtendSpeed,
                 logitech.rightStickY.scaled(HangingConstants.EXTEND_SPEED).inverted());
         hangingLayout.assign(AxisKey.RotateSpeed, logitech.leftStickX.scaled(0.1));
 
         Shuffleboard.getTab("Debug").add("Opeer", this);
+        Shuffleboard.getTab("Hanging Debug").add("help us", hangingLayout);
     }
 }

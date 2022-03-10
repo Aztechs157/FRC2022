@@ -34,6 +34,7 @@ public class Hanging extends SubsystemBase {
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
         leftExtendMotor.setInverted(false);
         rotateMotor = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
+        rotateMotor.setInverted(true);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
         rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
@@ -78,14 +79,13 @@ public class Hanging extends SubsystemBase {
      * @param speed is the rotation speed.
      */
     public void rotateArms(final double speed) {
-        // if (speed > 0 && getRotationPosition() > HangingConstants.MAX_POS) {
-        // rotateMotor.set(0);
-        // } else if (speed < 0 && getRotationPosition() < HangingConstants.MIN_POS) {
-        // rotateMotor.set(0);
-        // } else {
-        rotateMotor.set(speed);
-        // }
-
+        if (speed > 0 && getRotationPosition() > HangingConstants.MAX_POS) {
+            rotateMotor.set(0);
+        } else if (speed < 0 && getRotationPosition() < HangingConstants.MIN_POS) {
+            rotateMotor.set(0);
+        } else {
+            rotateMotor.set(speed);
+        }
     }
 
     /**

@@ -22,8 +22,10 @@ import frc.robot.subsystems.drive.FindCargo;
 import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
 import frc.robot.subsystems.drive.Turn180;
+import frc.robot.subsystems.hanging.ExtendArms;
 import frc.robot.subsystems.hanging.Hang;
 import frc.robot.subsystems.hanging.Hanging;
+import frc.robot.subsystems.hanging.RetractArms;
 import frc.robot.subsystems.hanging.TeleopHang;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
@@ -123,6 +125,9 @@ public class RobotContainer {
 
         // will hang eventually
         driverController.button(ButtonKey.Hang).whenPressed(new Hang(hanging));
+
+        operatorController.button(ButtonKey.ExtendHanger).whenPressed(new ExtendArms(hanging));
+        operatorController.button(ButtonKey.RetractHanger).whenPressed(new RetractArms(hanging));
     }
 
     // turns on break mode for the drive motors

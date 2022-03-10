@@ -2,5 +2,6 @@ package frc.robot.controls;
 
 public enum ButtonKey {
     Hello, UptakeRun, KickerRun, IntakeRun, ShooterRun, EjectCargo, DebugPrint,
-    AutoAim, LowShoot, ResetDrivePosition, TrackCargo, autoTest, Hang
+    AutoAim, LowShoot, ResetDrivePosition, TrackCargo, autoTest, Hang,
+    ExtendHanger, RetractHanger
 }

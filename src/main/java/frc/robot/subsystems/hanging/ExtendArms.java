@@ -9,33 +9,23 @@ import frc.robot.Constants.HangingConstants;
 
 public class ExtendArms extends CommandBase {
     private final Hanging hanging;
-    private final double targetDistance;
 
     /** Creates a new ExtendArms. */
-    public ExtendArms(final Hanging hanging, final double targetDistance) {
+    public ExtendArms(final Hanging hanging) {
         this.hanging = hanging;
-        this.targetDistance = targetDistance;
         addRequirements(hanging);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        hanging.extendLeftArm(HangingConstants.EXTEND_ERROR_MARGIN);
-        hanging.extendRightArm(HangingConstants.EXTEND_ERROR_MARGIN);
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(final boolean interrupted) {
-        hanging.extendLeftArm(0);
-        hanging.extendRightArm(0);
+        hanging.extendLeftArm(HangingConstants.EXTEND_SPEED);
+        hanging.extendRightArm(HangingConstants.EXTEND_SPEED);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        final var difference = targetDistance - hanging.getExtensionPosition();
-        return Math.abs(difference) < HangingConstants.EXTEND_ERROR_MARGIN;
+        return hanging.getTopLeftLimit() && hanging.getTopRightLimit();
     }
 }
