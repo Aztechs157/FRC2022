@@ -140,7 +140,7 @@ public final class Constants {
         public static final double MAX_POS = 161.7;
         public static final double MIN_POS = 88.2;
         // arm rotation speed and margin of error
-        public static final double ROTATION_SPEED = .1;
+        public static final double ROTATION_SPEED = 1;
         // arm extension speed and margin of error
         public static final double EXTEND_SPEED = .50;
         public static final double RETRACT_SPEED = -1;

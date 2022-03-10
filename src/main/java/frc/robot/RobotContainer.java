@@ -126,8 +126,8 @@ public class RobotContainer {
         // will hang eventually
         driverController.button(ButtonKey.Hang).whenPressed(new Hang(hanging));
 
-        operatorController.button(ButtonKey.ExtendHanger).whenPressed(new ExtendArms(hanging));
-        operatorController.button(ButtonKey.RetractHanger).whenPressed(new RetractArms(hanging));
+        operatorController.button(ButtonKey.ExtendHanger).whileHeld(new ExtendArms(hanging));
+        operatorController.button(ButtonKey.RetractHanger).whileHeld(new RetractArms(hanging));
     }
 
     // turns on break mode for the drive motors

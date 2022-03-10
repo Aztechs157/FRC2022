@@ -46,7 +46,7 @@ public class OperatorController extends ControllerBase<ButtonKey, AxisKey> {
 
         hangingLayout.assign(AxisKey.ExtendSpeed,
                 logitech.rightStickY.scaled(HangingConstants.EXTEND_SPEED).inverted());
-        hangingLayout.assign(AxisKey.RotateSpeed, logitech.leftStickX.scaled(0.1));
+        hangingLayout.assign(AxisKey.RotateSpeed, logitech.leftStickX.scaled(HangingConstants.ROTATION_SPEED));
 
         Shuffleboard.getTab("Debug").add("Opeer", this);
         Shuffleboard.getTab("Hanging Debug").add("help us", hangingLayout);
