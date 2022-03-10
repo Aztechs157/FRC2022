@@ -6,15 +6,15 @@ package frc.robot.subsystems.turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.TurretConstants;
-import frc.robot.controls.AxisKey;
-import frc.robot.controls.OperatorController;
+import frc.robot.input.Keys;
+import frc.robot.input.OperatorInputs;
 
 public class TurretSpin extends CommandBase {
     private Turret turret;
-    private OperatorController operatorController;
+    private OperatorInputs operatorController;
 
     /** Creates a new TurretSpin. */
-    public TurretSpin(OperatorController operatorController, Turret turret) {
+    public TurretSpin(OperatorInputs operatorController, Turret turret) {
         // Use addRequirements() here to declare subsystem dependencies.
         this.operatorController = operatorController;
         this.turret = turret;
@@ -30,9 +30,9 @@ public class TurretSpin extends CommandBase {
     @Override
     public void execute() {
         // rotates the turret based on joystick input
-        final var turretRotation = operatorController.getAxis(AxisKey.TurretSpeed);
+        final var turretRotation = operatorController.axis(Keys.Axis.TurretSpeed).get();
         turret.turretTurn(turretRotation * TurretConstants.TURRET_SPEED);
-        final var aimerRotation = operatorController.getAxis(AxisKey.AimerSpeed);
+        final var aimerRotation = operatorController.axis(Keys.Axis.AimerSpeed).get();
         turret.runAimer(aimerRotation * TurretConstants.AIMER_SPEED);
     }
 

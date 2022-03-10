@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Counter.Mode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TurretConstants;
-import frc.robot.controls.OperatorController;
+import frc.robot.input.OperatorInputs;
 import frc.robot.lib.NumberUtil;
 
 public class Turret extends SubsystemBase {
@@ -31,7 +31,7 @@ public class Turret extends SubsystemBase {
     public final PIDController aimerpid = new PIDController(0.03, 0, 0);
 
     /** Creates a new Turret. */
-    public Turret(OperatorController operatorController) {
+    public Turret(OperatorInputs operatorController) {
         turretMotor = new CANSparkMax(TurretConstants.TURRET_MOTOR_ID, MotorType.kBrushless);
         turretMotor.setIdleMode(IdleMode.kBrake);
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);

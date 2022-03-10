@@ -1,4 +1,4 @@
-package frc.robot.lib;
+package frc.robot.lib.util;
 
 public class DoubleRange {
     public final double low;
@@ -62,16 +62,16 @@ public class DoubleRange {
      */
     public static double scale(final DoubleRange inputRange, final double inputValue, final DoubleRange outputRange) {
         // Scale between output and input ranges
-        var scale = outputRange.length() / inputRange.length();
+        final var scale = outputRange.length() / inputRange.length();
 
         // Shift to zero based input range
-        var basedInput = inputValue - inputRange.low;
+        final var basedInput = inputValue - inputRange.low;
 
         // Scale the zero based input
-        var scaled = basedInput * scale;
+        final var scaled = basedInput * scale;
 
         // Shift from zero based to output range
-        var outputValue = scaled + outputRange.low;
+        final var outputValue = scaled + outputRange.low;
 
         return outputValue;
     }

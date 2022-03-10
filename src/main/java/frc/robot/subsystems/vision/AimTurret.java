@@ -6,7 +6,7 @@ package frc.robot.subsystems.vision;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.TurretConstants;
-import frc.robot.lib.DoubleRange;
+import frc.robot.lib.util.DoubleRange;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;

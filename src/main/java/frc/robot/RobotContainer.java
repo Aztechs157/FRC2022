@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
 import frc.robot.Constants.AutoConstants;
-import frc.robot.controls.ButtonKey;
-import frc.robot.controls.DriverController;
-import frc.robot.controls.OperatorController;
+import frc.robot.input.DriverInputs;
+import frc.robot.input.Keys;
+import frc.robot.input.OperatorInputs;
 import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
@@ -49,8 +49,8 @@ import frc.robot.subsystems.vision.Vision;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    private final DriverController driverController = new DriverController();
-    private final OperatorController operatorController = new OperatorController();
+    private final DriverInputs driverInputs = new DriverInputs();
+    private final OperatorInputs operatorInputs = new OperatorInputs();
 
     // The robot's subsystems and commands are defined here...
     private final Vision visionSubsystem = new Vision();
@@ -58,7 +58,7 @@ public class RobotContainer {
     public final Intake intake = new Intake();
     public final Uptake uptake = new Uptake(kicker, intake);
     private final Shooter shooter = new Shooter();
-    private final Turret turret = new Turret(operatorController);
+    private final Turret turret = new Turret(operatorInputs);
     @SuppressWarnings("unused")
     private final Pneumatics pneumatics = new Pneumatics();
     private final Drive driveSubsystem = new Drive();
@@ -84,50 +84,50 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        driveSubsystem.setDefaultCommand(new TeleopDrive(driverController, driveSubsystem));
-        hanging.setDefaultCommand(new TeleopHang(operatorController, hanging));
+        driveSubsystem.setDefaultCommand(new TeleopDrive(driverInputs, driveSubsystem));
+        hanging.setDefaultCommand(new TeleopHang(operatorInputs, hanging));
 
         // prints debug messages
-        // operatorController.button(ButtonKey.DebugPrint)
+        // operatorInputs.button(Keys.Button.DebugPrint)
         // .whenPressed(new DebugPrints(intake, kicker, uptake, shooter, turret));
 
         // runs the intake command on the driver controller
-        driverController.button(ButtonKey.IntakeRun)
+        driverInputs.button(Keys.Button.IntakeRun)
                 .toggleWhenPressed(new IntakeCargo(intake, uptake, kicker));
 
         // runs the Shooter command on the operator controller
-        operatorController.button(ButtonKey.ShooterRun)
+        operatorInputs.button(Keys.Button.ShooterRun)
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, SHOOTER_RPM));
 
         // runs the Eject command on the driver controller
-        driverController.button(ButtonKey.LowShoot)
+        driverInputs.button(Keys.Button.LowShoot)
                 .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
         // while held will track the reflective tape
-        operatorController.button(ButtonKey.AutoAim)
+        operatorInputs.button(Keys.Button.AutoAim)
                 .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake));
 
         // shoots cargo at the lower rpm
-        operatorController.button(ButtonKey.LowShoot)
+        operatorInputs.button(Keys.Button.LowShoot)
                 .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
 
         // runs the Eject command on the operator controller
-        operatorController.button(ButtonKey.EjectCargo)
+        operatorInputs.button(Keys.Button.EjectCargo)
                 .whileHeld(new EjectCargo(intake, uptake, kicker, shooter));
 
         // tracks cargo while held
-        operatorController.button(ButtonKey.TrackCargo)
+        operatorInputs.button(Keys.Button.TrackCargo)
                 .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
 
         // will turn until degrees has been fully met
-        operatorController.button(ButtonKey.autoTest)
+        operatorInputs.button(Keys.Button.autoTest)
                 .whenPressed(new Turn180(driveSubsystem, AutoConstants.TURN_DEGREES));
 
         // will hang eventually
-        driverController.button(ButtonKey.Hang).whenPressed(new Hang(hanging));
+        driverInputs.button(Keys.Button.Hang).whenPressed(new Hang(hanging));
 
-        operatorController.button(ButtonKey.ExtendHanger).whileHeld(new ExtendArms(hanging));
-        operatorController.button(ButtonKey.RetractHanger).whileHeld(new RetractArms(hanging));
+        operatorInputs.button(Keys.Button.ExtendHanger).whileHeld(new ExtendArms(hanging));
+        operatorInputs.button(Keys.Button.RetractHanger).whileHeld(new RetractArms(hanging));
     }
 
     // turns on break mode for the drive motors

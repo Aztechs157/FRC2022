@@ -8,7 +8,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants.TurretConstants;
-import frc.robot.controls.OperatorController;
+import frc.robot.input.OperatorInputs;
 
 public class TurretSim extends Turret {
     final ShuffleboardTab tab;
@@ -20,7 +20,7 @@ public class TurretSim extends Turret {
     final NetworkTableEntry updateEncoderSim;
 
     /** Creates a new TurretSim. */
-    public TurretSim(OperatorController operatorController) {
+    public TurretSim(OperatorInputs operatorController) {
         super(operatorController);
         tab = Shuffleboard.getTab("Debug");
         turretMotorSim = tab.add("Turret Speed", 0).getEntry();
