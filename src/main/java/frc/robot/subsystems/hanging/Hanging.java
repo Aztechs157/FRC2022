@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.HangingConstants;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.lib.NumberUtil;
+import frc.robot.subsystems.turret.Turret;
 
 public class Hanging extends SubsystemBase {
     private final CANSparkMax leftExtendMotor;
@@ -28,9 +29,11 @@ public class Hanging extends SubsystemBase {
     private final DigitalInput bottomRightLimitSwitch;
     private final DigitalInput rightBarSwitch;
     private final Counter rotationAbsEncoder;
+    private final Turret turret;
 
     /** Creates a new Hanging. */
-    public Hanging() {
+    public Hanging(final Turret turret) {
+        this.turret = turret;
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
         leftExtendMotor.setInverted(false);
         rotateMotor = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
@@ -73,15 +76,21 @@ public class Hanging extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
+    public boolean isTurretSafeToMove() {
+        return getRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS;
+    }
+
     /**
      * This method rotates the hanger arms either direction.
      *
      * @param speed is the rotation speed.
      */
     public void rotateArms(final double speed) {
-        if (speed > 0 && getRotationPosition() > HangingConstants.MAX_POS) {
+        if (!turret.isCentered()) {
             rotateMotor.set(0);
-        } else if (speed < 0 && getRotationPosition() < HangingConstants.MIN_POS) {
+        } else if (speed > 0 && getRotationPosition() > HangingConstants.ROTATE_MAX_POS) {
+            rotateMotor.set(0);
+        } else if (speed < 0 && getRotationPosition() < HangingConstants.ROTATE_MIN_POS) {
             rotateMotor.set(0);
         } else {
             rotateMotor.set(speed);

@@ -23,6 +23,12 @@ public class ExtendArms extends CommandBase {
         hanging.extendRightArm(HangingConstants.EXTEND_SPEED);
     }
 
+    @Override
+    public void end(boolean interrupted) {
+        hanging.extendLeftArm(0);
+        hanging.extendRightArm(0);
+    }
+
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {

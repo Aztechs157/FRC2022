@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.KickerConstants;
+import frc.robot.Constants.MiscConstants;
 import frc.robot.subsystems.intake.Intake.ColorResult;
 
 public class Kicker extends SubsystemBase {
@@ -23,6 +24,7 @@ public class Kicker extends SubsystemBase {
     /** Creates a new Kicker. */
     public Kicker() {
         kickerMotor = new CANSparkMax(KickerConstants.KICKER_MOTOR_ID, MotorType.kBrushless);
+        kickerMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
         ballSensor = new DigitalInput(KickerConstants.KICKER_SENSOR_ID);
         color = ColorResult.NONE;
         var tab = Shuffleboard.getTab("Debug");

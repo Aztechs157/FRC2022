@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.lib.util.DoubleRange;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -80,6 +81,8 @@ public final class Constants {
         // turret speed scale
         public static final double TURRET_INPUT_SCALE = 0.5;
         // diagonal max 90, min 45
+
+        public static final DoubleRange TURRET_CENTER_POS = new DoubleRange(1920, 2020);
     }
 
     public static final class ShooterConstants {
@@ -137,13 +140,15 @@ public final class Constants {
         public static final int LEFT_BAR_LIMIT_SWITCH = 5;
         public static final int ABS_HANGING_ROTATION = 2;
         // limit switch position limits
-        public static final double MAX_POS = 161.7;
-        public static final double MIN_POS = 88.2;
-        // arm rotation speed and margin of error
+        public static final double ROTATE_MAX_POS = 161.7;
+        public static final double ROTATE_MIN_POS = 88.2;
+        // arm rotation speed
         public static final double ROTATION_SPEED = 1;
-        // arm extension speed and margin of error
+        // arm extension speed
         public static final double EXTEND_SPEED = .50;
         public static final double RETRACT_SPEED = -1;
+        // how far the rotate arms have to be to allow the turret to move
+        public static final double ROTATE_TURRET_SAFE_POS = 150;
     }
 
     public static final class AutoConstants {
@@ -169,6 +174,7 @@ public final class Constants {
     public static final class MiscConstants {
         // smart motor current limit to hopefully stop brown-outs
         public static final int SMART_MOTOR_LIMIT = 40;
+        public static final int REDUCED_MOTOR_LIMIT = 30;
     }
 
     // motor direction enum

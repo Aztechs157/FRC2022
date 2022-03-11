@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
-import frc.robot.Constants.AutoConstants;
 import frc.robot.input.DriverInputs;
 import frc.robot.input.Keys;
 import frc.robot.input.OperatorInputs;
@@ -21,9 +20,7 @@ import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.FindCargo;
 import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
-import frc.robot.subsystems.drive.Turn180;
 import frc.robot.subsystems.hanging.ExtendArms;
-import frc.robot.subsystems.hanging.Hang;
 import frc.robot.subsystems.hanging.Hanging;
 import frc.robot.subsystems.hanging.RetractArms;
 import frc.robot.subsystems.hanging.TeleopHang;
@@ -31,12 +28,12 @@ import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.pneumatics.Pneumatics;
-import frc.robot.subsystems.sensing.EjectCargo;
 import frc.robot.subsystems.sensing.GetKickerColor;
 import frc.robot.subsystems.shooter.LowShoot;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.turret.TurretCenter;
 import frc.robot.subsystems.uptake.Uptake;
 import frc.robot.subsystems.vision.AimTurret;
 import frc.robot.subsystems.vision.Vision;
@@ -62,13 +59,14 @@ public class RobotContainer {
     @SuppressWarnings("unused")
     private final Pneumatics pneumatics = new Pneumatics();
     private final Drive driveSubsystem = new Drive();
-    private final Hanging hanging = new Hanging();
+    private final Hanging hanging = new Hanging(turret);
     private Command getKickerColor = new GetKickerColor(kicker, intake, uptake);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
+        turret.isTurretSafeToMove = hanging::isTurretSafeToMove;
         // Configure the button bindings
         configureButtonBindings();
         setupAutoChooser();
@@ -119,6 +117,8 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.RetractHanger).whileHeld(new RetractArms(hanging));
         operatorInputs.button(Keys.Button.RotateHangLeft).whileHeld(() -> hanging.rotateArms(-1), hanging);
         operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
+
+        operatorInputs.button(Keys.DebugButton.CenterTurret).whenHeld(new TurretCenter(turret));
     }
 
     // turns on break mode for the drive motors

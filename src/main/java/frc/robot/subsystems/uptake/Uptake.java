@@ -24,7 +24,7 @@ public class Uptake extends SubsystemBase {
     /** Creates a new Uptake. */
     public Uptake(Kicker kicker, Intake intake) {
         uptakeMotor = new CANSparkMax(UptakeConstants.UPTAKE_MOTOR_ID, MotorType.kBrushless);
-        uptakeMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        uptakeMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
         transitionalColor = ColorResult.NONE;
         setDefaultCommand(new PositionCargo(kicker, intake, this));
     }

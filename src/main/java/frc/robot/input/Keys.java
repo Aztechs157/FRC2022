@@ -11,7 +11,7 @@ public class Keys {
     }
 
     public enum DebugButton implements ButtonKey.Optional {
-        PrintFoo, PrintBar
+        PrintFoo, PrintBar, CenterTurret
     }
 
     public enum Axis implements AxisKey {

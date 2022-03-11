@@ -22,9 +22,6 @@ public class TeleopHang extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        final var extendSpeed = controller.axis(Keys.Axis.ExtendSpeed).get();
-        hanging.extendLeftArm(extendSpeed);
-        hanging.extendRightArm(extendSpeed);
         final var rotateSpeed = controller.axis(Keys.Axis.RotateSpeed).get();
         hanging.rotateArms(rotateSpeed);
     }

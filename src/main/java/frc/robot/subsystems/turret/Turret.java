@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems.turret;
 
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -12,7 +14,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Counter.Mode;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.input.OperatorInputs;
 import frc.robot.lib.NumberUtil;
@@ -29,24 +33,34 @@ public class Turret extends SubsystemBase {
 
     public final PIDController turretpid = new PIDController(0.03, 0, 0);
     public final PIDController aimerpid = new PIDController(0.03, 0, 0);
+    public BooleanSupplier isTurretSafeToMove;
 
     /** Creates a new Turret. */
     public Turret(OperatorInputs operatorController) {
         turretMotor = new CANSparkMax(TurretConstants.TURRET_MOTOR_ID, MotorType.kBrushless);
         turretMotor.setIdleMode(IdleMode.kBrake);
+        turretMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
         aimerMotor = new CANSparkMax(TurretConstants.AIMER_MOTOR_ID, MotorType.kBrushless);
+        aimerMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
         absoluteEncoder = new Counter(Mode.kSemiperiod);
         absoluteEncoder.setSemiPeriodMode(true);
         absoluteEncoder.setUpSource(TurretConstants.ABS_ENCODER_PORT);
         absoluteEncoder.reset();
         this.setDefaultCommand(new TurretSpin(operatorController, this));
+
+        Shuffleboard.getTab("Debug").addNumber("Turret Encoder", this::readPositionSensor);
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
         absEncoderUpdate();
+    }
+
+    public boolean isCentered() {
+        final var pos = readPositionSensor();
+        return TurretConstants.TURRET_CENTER_POS.contains(pos);
     }
 
     /**
@@ -71,7 +85,9 @@ public class Turret extends SubsystemBase {
      *              counterclockwise, 1 is clockwise.
      */
     public void turretTurn(double speed) {
-        if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
+        if (!isTurretSafeToMove.getAsBoolean()) {
+            turretMotor.set(0);
+        } else if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
         } else if (speed < 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
