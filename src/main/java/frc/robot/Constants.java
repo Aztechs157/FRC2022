@@ -145,7 +145,7 @@ public final class Constants {
         // arm rotation speed
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
-        public static final double EXTEND_SPEED = .50;
+        public static final double EXTEND_SPEED = .65;
         public static final double RETRACT_SPEED = -1;
         // how far the rotate arms have to be to allow the turret to move
         public static final double ROTATE_TURRET_SAFE_POS = 150;
