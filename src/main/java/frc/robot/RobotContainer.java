@@ -118,7 +118,7 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.RotateHangLeft).whileHeld(() -> hanging.rotateArms(-1), hanging);
         operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
 
-        operatorInputs.button(Keys.DebugButton.CenterTurret).whenHeld(new TurretCenter(turret));
+        operatorInputs.button(Keys.Button.CenterTurret).whenHeld(new TurretCenter(turret));
     }
 
     // turns on break mode for the drive motors

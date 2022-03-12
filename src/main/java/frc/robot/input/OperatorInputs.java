@@ -26,7 +26,7 @@ public class OperatorInputs extends ShuffleLayoutChooser {
         defaultLayout.assign(Keys.Button.RotateHangLeft, logitech.x);
         defaultLayout.assign(Keys.Button.RotateHangRight, logitech.b);
 
-        defaultLayout.assign(Keys.DebugButton.CenterTurret, logitech.pov.right);
+        defaultLayout.assign(Keys.Button.CenterTurret, logitech.pov.right);
 
         defaultLayout.assign(Keys.Axis.ExtendSpeed, Axis.DEFAULT);
         defaultLayout.assign(Keys.Axis.RotateSpeed, logitech.rightStickX);

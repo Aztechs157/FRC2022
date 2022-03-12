@@ -97,6 +97,21 @@ public class Turret extends SubsystemBase {
     }
 
     /**
+     * SAFTEY: Must not be used to turn into rotation arms
+     *
+     * @param speed
+     */
+    public void unsafeTurretTurn(final double speed) {
+        if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
+            turretMotor.set(0);
+        } else if (speed < 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
+            turretMotor.set(0);
+        } else {
+            turretMotor.set(speed);
+        }
+    }
+
+    /**
      * This method stops the turret motor.
      */
     public void turretStop() {

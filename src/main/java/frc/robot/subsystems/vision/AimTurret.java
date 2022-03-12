@@ -18,7 +18,7 @@ public class AimTurret extends CommandBase {
     private final Turret turret;
     private final DoubleRange visionRange = new DoubleRange(45, 90);
     private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
-            TurretConstants.AIMER_LOWER_BOUNDARY);
+            TurretConstants.AIMER_LOWER_BOUNDARY + 100);
     private final ShootCargo shootCargo;
     private final boolean useAimer;
 
