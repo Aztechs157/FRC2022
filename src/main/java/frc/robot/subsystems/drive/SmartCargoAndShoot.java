@@ -35,7 +35,7 @@ public class SmartCargoAndShoot extends SequentialCommandGroup {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
 
-        final var shootLow = new ShootCargo(shooter, kicker, uptake, ShooterConstants.LOW_SHOOTER_RPM);
+        final var shootLow = new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM);
         final var driveBackward = new DriveBackwards(drive);
         final var turnDistance = new Turn180(drive, AutoConstants.TURN_DEGREES);
         final var findCargo = new FindCargo(vision, drive);

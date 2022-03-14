@@ -44,7 +44,7 @@ public class Hanging extends SubsystemBase {
         rotateMotor.setInverted(true);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
-        rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        // rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
 

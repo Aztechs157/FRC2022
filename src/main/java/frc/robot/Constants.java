@@ -119,7 +119,7 @@ public final class Constants {
 
     public static final class DriveConstants {
         // drive speed scale
-        public static final double DRIVE_INPUT_SCALE = .75;
+        public static final double DRIVE_INPUT_SCALE = 1.0;
         // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;

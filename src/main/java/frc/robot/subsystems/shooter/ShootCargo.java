@@ -5,6 +5,7 @@
 package frc.robot.subsystems.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.uptake.Uptake;
 
@@ -12,11 +13,12 @@ public class ShootCargo extends CommandBase {
     private Shooter shooter;
     private Kicker kicker;
     private Uptake uptake;
+    private Intake intake;
     private double targetSpeed;
     private double speedSum = 0;
 
     /** Creates a new SetShooterSpeed. */
-    public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, double targetSpeed) {
+    public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, double targetSpeed) {
         // Use addRequirements() here to declare subsystem dependencies.
         /**
          * Adds Shooter, Kicker, and Uptake as requirements and stops other systems from
@@ -25,10 +27,12 @@ public class ShootCargo extends CommandBase {
         this.shooter = shooter;
         this.kicker = kicker;
         this.uptake = uptake;
+        this.intake = intake;
         this.targetSpeed = targetSpeed;
         addRequirements(shooter);
         addRequirements(kicker);
         addRequirements(uptake);
+        addRequirements(intake);
     }
 
     // Called when the command is initially scheduled.
@@ -48,12 +52,14 @@ public class ShootCargo extends CommandBase {
         var currSpeed = shooter.measureVelocity();
         speedSum += shooter.pidCalculate(targetSpeed, currSpeed);
         shooter.setPower(speedSum);
-        if (currSpeed > targetSpeed - 300 && currSpeed < targetSpeed + 300) {
+        if (currSpeed > targetSpeed - 100 && currSpeed < targetSpeed + 200) {
             kicker.kickerFeed();
             uptake.uptakeFeed();
+            intake.rollerFeed();
         } else {
             kicker.kickerStop();
             uptake.uptakeStop();
+            intake.rollerStop();
         }
     }
 
@@ -64,6 +70,7 @@ public class ShootCargo extends CommandBase {
         shooter.setPower(0);
         kicker.kickerStop();
         uptake.uptakeStop();
+        intake.rollerStop();
     }
 
     // Returns true when the command should end.
