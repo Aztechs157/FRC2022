@@ -5,6 +5,8 @@
 package frc.robot.subsystems.turret;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.TurretConstants;
+
 import static frc.robot.Constants.TurretConstants.TURRET_CENTER_POS;
 
 public class TurretCenter extends CommandBase {
@@ -22,9 +24,11 @@ public class TurretCenter extends CommandBase {
         final var pos = turret.readPositionSensor();
 
         if (pos > TURRET_CENTER_POS.high) {
-            turret.turretRight();
+            // Right
+            turret.unsafeTurretTurn(TurretConstants.TURRET_SPEED);
         } else if (pos < TURRET_CENTER_POS.low) {
-            turret.turretLeft();
+            // Left
+            turret.unsafeTurretTurn(-TurretConstants.TURRET_SPEED);
         }
     }
 

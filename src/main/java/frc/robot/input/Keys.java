@@ -7,11 +7,11 @@ public class Keys {
     public enum Button implements ButtonKey {
         Hello, UptakeRun, KickerRun, IntakeRun, ShooterRun, EjectCargo, DebugPrint,
         AutoAim, LowShoot, ResetDrivePosition, TrackCargo, autoTest, Hang,
-        ExtendHanger, RetractHanger, RotateHangLeft, RotateHangRight
+        ExtendHanger, RetractHanger, RotateHangLeft, RotateHangRight, CenterTurret
     }
 
     public enum DebugButton implements ButtonKey.Optional {
-        PrintFoo, PrintBar, CenterTurret
+        PrintFoo, PrintBar
     }
 
     public enum Axis implements AxisKey {

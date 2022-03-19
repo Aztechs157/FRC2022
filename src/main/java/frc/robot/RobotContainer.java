@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.input.DriverInputs;
 import frc.robot.input.Keys;
 import frc.robot.input.OperatorInputs;
@@ -29,7 +30,6 @@ import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.pneumatics.Pneumatics;
 import frc.robot.subsystems.sensing.GetKickerColor;
-import frc.robot.subsystems.shooter.LowShoot;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
@@ -95,19 +95,19 @@ public class RobotContainer {
 
         // runs the Shooter command on the operator controller
         operatorInputs.button(Keys.Button.ShooterRun)
-                .whileHeld(new ShootCargo(shooter, kicker, uptake, SHOOTER_RPM));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, intake, SHOOTER_RPM));
 
         // runs the Eject command on the driver controller
         driverInputs.button(Keys.Button.LowShoot)
-                .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM));
 
         // while held will track the reflective tape
         operatorInputs.button(Keys.Button.AutoAim)
-                .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake));
+                .whileHeld(new AimTurret(visionSubsystem, turret, shooter, kicker, uptake, intake));
 
         // shoots cargo at the lower rpm
         operatorInputs.button(Keys.Button.LowShoot)
-                .whileHeld(new LowShoot(shooter, kicker, uptake, intake));
+                .whileHeld(new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM));
 
         // tracks cargo while held
         operatorInputs.button(Keys.Button.TrackCargo)
@@ -118,7 +118,7 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.RotateHangLeft).whileHeld(() -> hanging.rotateArms(-1), hanging);
         operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
 
-        operatorInputs.button(Keys.DebugButton.CenterTurret).whenHeld(new TurretCenter(turret));
+        operatorInputs.button(Keys.Button.CenterTurret).whenHeld(new TurretCenter(turret));
     }
 
     // turns on break mode for the drive motors
@@ -139,9 +139,9 @@ public class RobotContainer {
         autoSelector.setDefaultOption("Shoot Low Drive Backward",
                 new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem));
         autoSelector.addOption("Drive Backward Shoot High",
-                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, driveSubsystem));
+                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, intake, driveSubsystem));
         autoSelector.addOption("Shoot Low Find Cargo",
-                new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake));
+                new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
     }
 
     /**

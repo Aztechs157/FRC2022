@@ -22,7 +22,9 @@ public class AutoLowShootDrive extends SequentialCommandGroup {
     public AutoLowShootDrive(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, Drive drive) {
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
-        addCommands(race(new ShootCargo(shooter, kicker, uptake, ShooterConstants.LOW_SHOOTER_RPM), new WaitCommand(3)),
+        addCommands(
+                race(new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM),
+                        new WaitCommand(3)),
                 new DriveBackwards(drive, AutoConstants.AUTO_DISTANCE_TICKS * 2));
     }
 }

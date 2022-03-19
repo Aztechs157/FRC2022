@@ -7,6 +7,7 @@ package frc.robot.subsystems.vision;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.lib.util.DoubleRange;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
@@ -18,26 +19,26 @@ public class AimTurret extends CommandBase {
     private final Turret turret;
     private final DoubleRange visionRange = new DoubleRange(45, 90);
     private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
-            TurretConstants.AIMER_LOWER_BOUNDARY);
+            TurretConstants.AIMER_LOWER_BOUNDARY + 100);
     private final ShootCargo shootCargo;
     private final boolean useAimer;
 
     /** Creates a new AimTurret. */
     public AimTurret(
             final Vision vision,
-            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake, boolean useAimer) {
+            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, boolean useAimer) {
         this.vision = vision;
         this.turret = turret;
         addRequirements(vision, turret);
-        shootCargo = new ShootCargo(shooter, kicker, uptake, 3800);
+        shootCargo = new ShootCargo(shooter, kicker, uptake, intake, 3800);
         this.useAimer = useAimer;
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
     public AimTurret(
             final Vision vision,
-            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake) {
-        this(vision, turret, shooter, kicker, uptake, true);
+            final Turret turret, Shooter shooter, Kicker kicker, Uptake uptake, Intake intake) {
+        this(vision, turret, shooter, kicker, uptake, intake, true);
 
     }
 

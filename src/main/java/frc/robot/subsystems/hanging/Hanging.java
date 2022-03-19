@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Counter.Mode;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.HangingConstants;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.lib.NumberUtil;
 import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.turret.TurretCenter;
 
 public class Hanging extends SubsystemBase {
     private final CANSparkMax leftExtendMotor;
@@ -30,17 +32,19 @@ public class Hanging extends SubsystemBase {
     private final DigitalInput rightBarSwitch;
     private final Counter rotationAbsEncoder;
     private final Turret turret;
+    private final Command centerTurretCommand;
 
     /** Creates a new Hanging. */
     public Hanging(final Turret turret) {
         this.turret = turret;
+        centerTurretCommand = new TurretCenter(turret);
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
         leftExtendMotor.setInverted(false);
         rotateMotor = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
         rotateMotor.setInverted(true);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
-        rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
+        // rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
 
@@ -88,6 +92,9 @@ public class Hanging extends SubsystemBase {
     public void rotateArms(final double speed) {
         if (!turret.isCentered()) {
             rotateMotor.set(0);
+            if (Math.abs(speed) > .5) {
+                centerTurretCommand.schedule();
+            }
         } else if (speed > 0 && getRotationPosition() > HangingConstants.ROTATE_MAX_POS) {
             rotateMotor.set(0);
         } else if (speed < 0 && getRotationPosition() < HangingConstants.ROTATE_MIN_POS) {
