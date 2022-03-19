@@ -132,23 +132,25 @@ public final class Constants {
         public static final int ROTATE_MOTOR = 4;
         public static final int RIGHT_EXTEND_MOTOR = 5;
         public static final int LEFT_EXTEND_MOTOR = 17;
-        public static final int TOP_LEFT_LIMIT_SWITCH = 9;
-        public static final int BOTTOM_LEFT_LIMIT_SWITCH = 8;
+
+        public static final int TOP_LEFT_LIMIT_SWITCH = 8;
+        public static final int BOTTOM_LEFT_LIMIT_SWITCH = 9;
         public static final int TOP_RIGHT_LIMIT_SWITCH = 7;
         public static final int BOTTOM_RIGHT_LIMIT_SWITCH = 6;
         public static final int RIGHT_BAR_LIMIT_SWITCH = 4;
         public static final int LEFT_BAR_LIMIT_SWITCH = 5;
+
         public static final int ABS_HANGING_ROTATION = 2;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS = 161.7;
-        public static final double ROTATE_MIN_POS = 88.2;
+        public static final double ROTATE_MAX_POS = 148.9;
+        public static final double ROTATE_MIN_POS = 59.5;
         // arm rotation speed
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
         public static final double EXTEND_SPEED = .65;
         public static final double RETRACT_SPEED = -1;
         // how far the rotate arms have to be to allow the turret to move
-        public static final double ROTATE_TURRET_SAFE_POS = 150;
+        public static final double ROTATE_TURRET_SAFE_POS = 119.4;
     }
 
     public static final class AutoConstants {
