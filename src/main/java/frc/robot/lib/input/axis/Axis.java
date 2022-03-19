@@ -65,6 +65,14 @@ public class Axis implements DoubleSupplier {
         return new Axis(() -> get() * scale.getAsDouble());
     }
 
+    public Axis offset(final double offset) {
+        return new Axis(() -> get() + offset);
+    }
+
+    public Axis offset(final DoubleSupplier offset) {
+        return new Axis(() -> get() + offset.getAsDouble());
+    }
+
     /**
      * Clamp the input to a number within the provided range.
      *
@@ -86,19 +94,27 @@ public class Axis implements DoubleSupplier {
      * @return A new input with the deadzone applied
      */
     public Axis deadzone(final DoubleRange deadzone) {
-        final var fullRange = DEFAULT_RANGE;
-        final var leftRange = new DoubleRange(fullRange.low, deadzone.low);
-        final var rightRange = new DoubleRange(deadzone.high, fullRange.high);
+        return deadzone(deadzone, DEFAULT_RANGE, DEFAULT_VALUE);
+    }
+
+    public Axis deadzone(final DoubleRange deadzone, final DoubleRange fullRange, final double center) {
+        final var leftFullRange = new DoubleRange(fullRange.low, center);
+        final var rightFullRange = new DoubleRange(center, fullRange.high);
+
+        final var leftDeadzoneRange = new DoubleRange(fullRange.low, deadzone.low);
+        final var rightDeadzoneRange = new DoubleRange(deadzone.high, fullRange.high);
 
         return new Axis(() -> {
             final var value = get();
 
             if (deadzone.contains(value)) {
                 return 0;
-            } else if (leftRange.contains(value)) {
-                return scale(new DoubleRange(-1, deadzone.low), value, new DoubleRange(-1, 0));
-            } else if (rightRange.contains(value)) {
-                return scale(new DoubleRange(deadzone.high, 1), value, new DoubleRange(0, 1));
+
+            } else if (leftDeadzoneRange.contains(value)) {
+                return scale(leftDeadzoneRange, value, leftFullRange);
+
+            } else if (rightDeadzoneRange.contains(value)) {
+                return scale(rightDeadzoneRange, value, rightFullRange);
             }
 
             throw new Error("Attempted to apply deadzone to axis value outside of full range "
