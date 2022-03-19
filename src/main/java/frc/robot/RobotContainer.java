@@ -30,7 +30,6 @@ import frc.robot.subsystems.intake.IntakeCargo;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.pneumatics.Pneumatics;
 import frc.robot.subsystems.sensing.GetKickerColor;
-import frc.robot.subsystems.shooter.LowShoot;
 import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
@@ -142,7 +141,7 @@ public class RobotContainer {
         autoSelector.addOption("Drive Backward Shoot High",
                 new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, intake, driveSubsystem));
         autoSelector.addOption("Shoot Low Find Cargo",
-                new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake));
+                new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
     }
 
     /**
