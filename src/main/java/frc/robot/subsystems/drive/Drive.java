@@ -33,6 +33,8 @@ public class Drive extends SubsystemBase {
     public Drive() {
         frontLeftMotor.setInverted(true);
         backLeftMotor.setInverted(true);
+        frontRightMotor.setInverted(false);
+        backRightMotor.setInverted(false);
         frontLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         backLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         frontRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
