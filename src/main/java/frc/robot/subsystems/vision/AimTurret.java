@@ -5,6 +5,7 @@
 package frc.robot.subsystems.vision;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.lib.util.DoubleRange;
 import frc.robot.subsystems.intake.Intake;
@@ -30,7 +31,7 @@ public class AimTurret extends CommandBase {
         this.vision = vision;
         this.turret = turret;
         addRequirements(vision, turret);
-        shootCargo = new ShootCargo(shooter, kicker, uptake, intake, 3800);
+        shootCargo = new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.SHOOTER_RPM);
         this.useAimer = useAimer;
         // Use addRequirements() here to declare subsystem dependencies.
     }
@@ -58,7 +59,7 @@ public class AimTurret extends CommandBase {
         }
 
         var turretThreshold = 10;
-        var aimerThreshold = 50;
+        var aimerThreshold = 30;
         var hubX = vision.getHubX();
         var hubDiagonal = vision.getDiagonal();
 
