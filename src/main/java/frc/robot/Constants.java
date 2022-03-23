@@ -92,7 +92,7 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 3980;
+        public static final double SHOOTER_RPM = 3970;
         // shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 2000;
     }
@@ -142,8 +142,8 @@ public final class Constants {
 
         public static final int ABS_HANGING_ROTATION = 2;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS = 148.9;
-        public static final double ROTATE_MIN_POS = 59.5;
+        public static final double ROTATE_MAX_POS = 95.5;
+        public static final double ROTATE_MIN_POS = 12;
         // arm rotation speed
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
