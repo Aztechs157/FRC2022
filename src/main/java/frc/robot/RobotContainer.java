@@ -50,7 +50,7 @@ public class RobotContainer {
     private final OperatorInputs operatorInputs = new OperatorInputs();
 
     // The robot's subsystems and commands are defined here...
-    private final Vision visionSubsystem = new Vision();
+    public final Vision visionSubsystem = new Vision();
     public final Kicker kicker = new Kicker();
     public final Intake intake = new Intake();
     public final Uptake uptake = new Uptake(kicker, intake);

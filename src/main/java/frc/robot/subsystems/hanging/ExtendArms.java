@@ -19,8 +19,8 @@ public class ExtendArms extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        hanging.extendLeftArm(HangingConstants.EXTEND_SPEED);
-        hanging.extendRightArm(HangingConstants.EXTEND_SPEED);
+        hanging.extendLeftArm(HangingConstants.EXTEND_SPEED_LEFT);
+        hanging.extendRightArm(HangingConstants.EXTEND_SPEED_RIGHT);
     }
 
     @Override
