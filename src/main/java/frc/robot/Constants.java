@@ -92,7 +92,7 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 3970;
+        public static final double SHOOTER_RPM = 3940;
         // shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 2000;
     }
@@ -119,7 +119,7 @@ public final class Constants {
 
     public static final class DriveConstants {
         // drive speed scale
-        public static final double DRIVE_INPUT_SCALE = 1.0;
+        public static final double DRIVE_INPUT_SCALE = 0.75;
         // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;

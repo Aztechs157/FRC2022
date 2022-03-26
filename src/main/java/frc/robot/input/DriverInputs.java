@@ -13,7 +13,7 @@ public class DriverInputs extends ShuffleLayoutChooser {
 
         defaultLayout.assign(
                 Keys.Axis.DriveSpeedX,
-                logitech.leftStickX.scaled(DRIVE_INPUT_SCALE).inverted());
+                logitech.leftStickX.scaled(DRIVE_INPUT_SCALE));
         defaultLayout.assign(
                 Keys.Axis.DriveSpeedY,
                 logitech.leftStickY.scaled(DRIVE_INPUT_SCALE).inverted());
