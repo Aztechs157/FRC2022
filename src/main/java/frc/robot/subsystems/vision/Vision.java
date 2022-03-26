@@ -14,7 +14,7 @@ import frc.robot.lib.vision.pixy2.Pixy2;
 import frc.robot.lib.vision.pixy2.Pixy2.Pixy2Block;
 
 public class Vision extends SubsystemBase {
-    private final LimeLight limeLight = new LimeLight();
+    public final LimeLight limeLight = new LimeLight();
     private final Pixy2 pixy = new Pixy2(Port.kOnboard, VisionConstants.PIXY_PORT);
 
     /** Creates a new VisionSubsystem. */
@@ -27,7 +27,7 @@ public class Vision extends SubsystemBase {
         return limeLight.hasValidTargets();
     }
 
-    // sets the limelight's light to be off when not being used
+    // sets the limelight's light to be on or off
     public void setLED(final boolean status) {
         limeLight.setLightMode(status ? LightMode.ForceOn : LightMode.ForceOff);
     }

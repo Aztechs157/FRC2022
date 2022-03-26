@@ -30,5 +30,7 @@ public class OperatorInputs extends ShuffleLayoutChooser {
 
         defaultLayout.assign(Keys.Axis.ExtendSpeed, Axis.DEFAULT);
         defaultLayout.assign(Keys.Axis.RotateSpeed, logitech.rightStickX);
+
+        defaultLayout.assign(Keys.Button.ToggleLimelight, logitech.y);
     }
 }

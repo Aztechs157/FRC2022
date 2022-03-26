@@ -36,6 +36,7 @@ import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.turret.TurretCenter;
 import frc.robot.subsystems.uptake.Uptake;
 import frc.robot.subsystems.vision.AimTurret;
+import frc.robot.subsystems.vision.ToggleLight;
 import frc.robot.subsystems.vision.Vision;
 
 /**
@@ -71,6 +72,7 @@ public class RobotContainer {
         configureButtonBindings();
         setupAutoChooser();
         Shuffleboard.getTab("Debug").add(autoSelector);
+        visionSubsystem.setLED(false);
     }
 
     /**
@@ -119,6 +121,8 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
 
         operatorInputs.button(Keys.Button.CenterTurret).whenHeld(new TurretCenter(turret));
+
+        operatorInputs.button(Keys.Button.ToggleLimelight).whenPressed(new ToggleLight(visionSubsystem));
     }
 
     // turns on break mode for the drive motors
