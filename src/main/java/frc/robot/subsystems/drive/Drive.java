@@ -35,10 +35,10 @@ public class Drive extends SubsystemBase {
         backLeftMotor.setInverted(true);
         frontRightMotor.setInverted(false);
         backRightMotor.setInverted(false);
-        frontLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 40);
-        backLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 40);
-        frontRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 40);
-        backRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 40);
+        frontLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        backLeftMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        frontRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        backRightMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
     }
 
     public void driveCartesian(final double ySpeed, final double xSpeed, final double zRotation) {

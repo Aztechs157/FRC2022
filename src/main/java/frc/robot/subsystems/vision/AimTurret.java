@@ -63,7 +63,7 @@ public class AimTurret extends CommandBase {
         var hubX = vision.getHubX();
         var hubDiagonal = vision.getDiagonal();
 
-        var aimerPosition = turret.getActualPosition();
+        var aimerPosition = turret.getAimerPosition();
         turret.turretTurn(-turret.turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
         var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
 

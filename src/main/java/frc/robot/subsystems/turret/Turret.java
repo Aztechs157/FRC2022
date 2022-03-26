@@ -50,6 +50,7 @@ public class Turret extends SubsystemBase {
         this.setDefaultCommand(new TurretSpin(operatorController, this));
 
         Shuffleboard.getTab("Debug").addNumber("Turret Encoder", this::readPositionSensor);
+        Shuffleboard.getTab("Debug").addNumber("Aimer Encoder", this::getAimerPosition);
     }
 
     @Override
