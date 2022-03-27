@@ -27,6 +27,7 @@ import frc.robot.subsystems.hanging.RetractArms;
 import frc.robot.subsystems.hanging.TeleopHang;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
+import frc.robot.subsystems.intake.ReverseCargo;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.pneumatics.Pneumatics;
 import frc.robot.subsystems.sensing.GetKickerColor;
@@ -112,8 +113,8 @@ public class RobotContainer {
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM));
 
         // tracks cargo while held
-        operatorInputs.button(Keys.Button.TrackCargo)
-                .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
+        operatorInputs.button(Keys.Button.reverseCargo)
+                .whileHeld(new ReverseCargo(uptake, kicker, shooter));
 
         operatorInputs.button(Keys.Button.ExtendHanger).whileHeld(new ExtendArms(hanging));
         operatorInputs.button(Keys.Button.RetractHanger).whileHeld(new RetractArms(hanging));

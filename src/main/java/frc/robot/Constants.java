@@ -71,7 +71,7 @@ public final class Constants {
         // The port number for the absolute encoder.
         public static final int ABS_ENCODER_PORT = 1;
         // The speed for the aimer motor.
-        public static final double AIMER_SPEED = .25;
+        public static final double AIMER_SPEED = .3;
         // The Counterclockwise Boundary for the turret set to 2620
         public static final int COUNTERCLOCKWISE_BOUNDARY = 2620;
         // The Clockwise Boundary for the turret 1250
@@ -105,7 +105,7 @@ public final class Constants {
         // The speed at which the Kicker feeds a ball into the Shooter.
         public static final double FEED_SPEED = 1;
         // The speed at which the Kicker ejects a ball back to the Intake.
-        public static final double EJECT_SPEED = 0.3;
+        public static final double EJECT_SPEED = -0.3;
     }
 
     public static final class UptakeConstants {
@@ -119,12 +119,14 @@ public final class Constants {
 
     public static final class DriveConstants {
         // drive speed scale
-        public static final double DRIVE_INPUT_SCALE = 0.75;
+        public static final double DRIVE_INPUT_SCALE = 0.7;
         // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;
         public static final int FRONT_RIGHT_MOTOR_ID = 61;
         public static final int BACK_RIGHT_MOTOR_ID = 60;
+
+        public static final DoubleRange DRIVE_DEADZONE = new DoubleRange(-0.05, 0.05);
     }
 
     public static final class HangingConstants {
@@ -147,8 +149,9 @@ public final class Constants {
         // arm rotation speed
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
-        public static final double EXTEND_SPEED_LEFT = .53;
-        public static final double EXTEND_SPEED_RIGHT = .65;
+        // make faster
+        public static final double EXTEND_SPEED_LEFT = .70;
+        public static final double EXTEND_SPEED_RIGHT = .82;
         public static final double RETRACT_SPEED = -1;
         // how far the rotate arms have to be to allow the turret to move
         public static final double ROTATE_TURRET_SAFE_POS = 102.3;

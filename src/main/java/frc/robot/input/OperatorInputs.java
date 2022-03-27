@@ -19,7 +19,7 @@ public class OperatorInputs extends ShuffleLayoutChooser {
         defaultLayout.assign(Keys.Button.ShooterRun, logitech.rightBumper);
         defaultLayout.assign(Keys.Button.AutoAim, logitech.leftBumper);
         defaultLayout.assign(Keys.Button.LowShoot, logitech.back);
-        defaultLayout.assign(Keys.Button.TrackCargo, logitech.a);
+        defaultLayout.assign(Keys.Button.reverseCargo, logitech.a);
 
         defaultLayout.assign(Keys.Button.ExtendHanger, logitech.pov.up);
         defaultLayout.assign(Keys.Button.RetractHanger, logitech.pov.down);
