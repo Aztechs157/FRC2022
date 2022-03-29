@@ -92,7 +92,7 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 3940;
+        public static final double SHOOTER_RPM = 3920;
         // shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 2000;
     }
@@ -159,7 +159,7 @@ public final class Constants {
 
     public static final class AutoConstants {
         // autonomous drive speed
-        public static final double AUTO_SPEED = 0.20;
+        public static final double AUTO_SPEED = 0.60;
 
         // autonomous drive distance
         public static final double AUTO_DISTANCE_TICKS = 23.72;

@@ -41,16 +41,30 @@ public class SmartCargoAndShoot extends SequentialCommandGroup {
         final var driveBackward = new DriveBackwards(drive);
         final var turnDistance = new Turn180(drive, AutoConstants.TURN_DEGREES);
         final var findCargo = new FindCargo(vision, drive);
-        final var driveForward = new DriveForwards(drive, AutoConstants.AUTO_DISTANCE_TICKS);
+        final var findCargo2 = new FindCargo(vision, drive);
+        final var driveForward = new DriveForwards(drive, AutoConstants.AUTO_DISTANCE_TICKS * 2);
+        final var driveForward2 = new DriveForwards(drive, AutoConstants.AUTO_DISTANCE_TICKS * 2);
         final var intakeAutomatically = new IntakeAutomatically(intake);
+        final var intakeAutomatically2 = new IntakeAutomatically(intake);
         final var turnToGoal = new Turn180(drive, -AutoConstants.TURN_DEGREES);
+        final var turnToGoal2 = new Turn180(drive, -AutoConstants.TURN_DEGREES);
         final var shootHigh = new AimTurret(vision, turret, shooter, kicker, uptake, intake);
+        final var shootHigh2 = new AimTurret(vision, turret, shooter, kicker, uptake, intake);
 
-        addCommands(race(shootLow, new WaitCommand(3)),
-                driveBackward,
-                turnDistance,
-                new WaitCommand(6).deadlineWith(findCargo.andThen(driveForward.alongWith(intakeAutomatically))),
+        // addCommands(driveBackward,
+        // race(shootHigh, new WaitCommand(5)),
+        // turnDistance,
+        // new
+        // WaitCommand(6).deadlineWith(findCargo.andThen(driveForward.alongWith(intakeAutomatically))),
+        // turnToGoal,
+        // shootHigh.raceWith(new WaitCommand(5)));
+        // }
+
+        addCommands(new WaitCommand(4).deadlineWith(findCargo.andThen(driveForward.alongWith(intakeAutomatically))),
                 turnToGoal,
-                shootHigh.raceWith(new WaitCommand(5)));
+                shootHigh.raceWith(new WaitCommand(4)),
+                new WaitCommand(4).deadlineWith(findCargo2.andThen(driveForward2.alongWith(intakeAutomatically2))),
+                turnToGoal2,
+                shootHigh2.raceWith(new WaitCommand(3)));
     }
 }

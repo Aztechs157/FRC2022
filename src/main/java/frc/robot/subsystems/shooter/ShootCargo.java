@@ -52,7 +52,7 @@ public class ShootCargo extends CommandBase {
         var currSpeed = shooter.measureVelocity();
         speedSum += shooter.pidCalculate(targetSpeed, currSpeed);
         shooter.setPower(speedSum);
-        if (currSpeed > targetSpeed - 100 && currSpeed < targetSpeed + 150) {
+        if (currSpeed > targetSpeed - 30 && currSpeed < targetSpeed + 30) {
             kicker.kickerFeed();
             uptake.uptakeFeed();
             intake.rollerFeed();

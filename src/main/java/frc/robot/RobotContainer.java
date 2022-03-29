@@ -143,8 +143,9 @@ public class RobotContainer {
     private void setupAutoChooser() {
         autoSelector.setDefaultOption("Shoot Low Drive Backward",
                 new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem));
-        autoSelector.addOption("Drive Backward Shoot High",
-                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, intake, driveSubsystem));
+        // autoSelector.addOption("Drive Backward Shoot High",
+        // new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake,
+        // intake, driveSubsystem));
         autoSelector.addOption("Shoot Low Find Cargo",
                 new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
     }

@@ -7,6 +7,7 @@ package frc.robot.subsystems.vision;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.lib.vision.LimeLight;
 import frc.robot.lib.vision.LimeLight.LightMode;
@@ -20,6 +21,7 @@ public class Vision extends SubsystemBase {
     /** Creates a new VisionSubsystem. */
     public Vision() {
         CameraServer.startAutomaticCapture();
+        Shuffleboard.getTab("Debug").addString("Pixy Version", () -> pixy.getVersion().firmwareString);
     }
 
     // returns if the limelight has a valid target, IE. reflective tape.
