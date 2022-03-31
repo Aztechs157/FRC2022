@@ -19,8 +19,10 @@ import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.FindCargo;
+import frc.robot.subsystems.drive.MultiBallAuto;
 import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
+import frc.robot.subsystems.drive.TwoballAuto;
 import frc.robot.subsystems.hanging.ExtendArms;
 import frc.robot.subsystems.hanging.Hanging;
 import frc.robot.subsystems.hanging.RetractArms;
@@ -120,10 +122,10 @@ public class RobotContainer {
         operatorInputs.button(Keys.Button.RetractHanger).whileHeld(new RetractArms(hanging));
         operatorInputs.button(Keys.Button.RotateHangLeft).whileHeld(() -> hanging.rotateArms(-1), hanging);
         operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
-
         operatorInputs.button(Keys.Button.CenterTurret).whenHeld(new TurretCenter(turret));
-
         operatorInputs.button(Keys.Button.ToggleLimelight).whenPressed(new ToggleLight(visionSubsystem));
+
+        driverInputs.button(Keys.Button.TrackCargo).whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
     }
 
     // turns on break mode for the drive motors
@@ -143,11 +145,15 @@ public class RobotContainer {
     private void setupAutoChooser() {
         autoSelector.setDefaultOption("Shoot Low Drive Backward",
                 new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem));
-        // autoSelector.addOption("Drive Backward Shoot High",
-        // new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake,
-        // intake, driveSubsystem));
+        autoSelector.addOption("Drive Backward Shoot High",
+                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake,
+                        intake, driveSubsystem));
         autoSelector.addOption("Shoot Low Find Cargo",
                 new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
+        autoSelector.addOption("Multi Ball Auto",
+                new MultiBallAuto(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
+        autoSelector.addOption("Two Ball Left Tarmac Auto",
+                new TwoballAuto(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
     }
 
     /**

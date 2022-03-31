@@ -26,6 +26,7 @@ public class DriverInputs extends ShuffleLayoutChooser {
         defaultLayout.assign(Keys.Button.Hello, logitech.start);
         defaultLayout.assign(Keys.Button.IntakeRun, logitech.rightBumper);
         defaultLayout.assign(Keys.Button.LowShoot, logitech.back);
+        defaultLayout.assign(Keys.Button.TrackCargo, logitech.a);
         // defaultLayout.assign(Keys.Button.Hang, logitech.b);
     }
 }

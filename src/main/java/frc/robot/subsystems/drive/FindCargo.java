@@ -39,12 +39,12 @@ public class FindCargo extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        x = vision.getNCargoX(ourColor);
-        if (x == -1) {
-            drive.driveCartesian(0, 0, -.1);
-        } else {
-            drive.driveCartesian(0, 0, (AutoConstants.X_TARGET - x) * -0.007);
-        }
+        // x = vision.getNCargoX(ourColor);
+        // if (x == -1) {
+        // drive.driveCartesian(0, 0, -.1);
+        // } else {
+        // drive.driveCartesian(0, 0, (AutoConstants.X_TARGET - x) * -0.007);
+        // }
     }
 
     // Called once the command ends or is interrupted.

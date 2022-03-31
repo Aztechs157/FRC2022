@@ -5,6 +5,7 @@
 package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
@@ -34,6 +35,6 @@ public class AutoShootAndDrive extends SequentialCommandGroup {
         final var autoAim = new AimTurret(vision, turret, shooter, kicker, uptake, intake);
         final var driveBackward = new DriveBackwards(drive);
 
-        // addCommands(driveBackward, race(autoAim, new WaitCommand(7)));
+        addCommands(driveBackward, race(autoAim, new WaitCommand(7)));
     }
 }
