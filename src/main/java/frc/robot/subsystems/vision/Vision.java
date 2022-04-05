@@ -16,13 +16,12 @@ import frc.robot.lib.vision.pixy2.Pixy2.Pixy2Block;
 
 public class Vision extends SubsystemBase {
     public final LimeLight limeLight = new LimeLight();
-    // private final Pixy2 pixy = new Pixy2(Port.kMXP, VisionConstants.PIXY_PORT);
+    private final Pixy2 pixy = new Pixy2(Port.kMXP, VisionConstants.PIXY_PORT);
 
     /** Creates a new VisionSubsystem. */
     public Vision() {
         CameraServer.startAutomaticCapture();
-        // Shuffleboard.getTab("Debug").addString("Pixy Version", () ->
-        // pixy.getVersion().firmwareString);
+        Shuffleboard.getTab("Debug").addString("Pixy Version", () -> pixy.getVersion().firmwareString);
     }
 
     // returns if the limelight has a valid target, IE. reflective tape.
@@ -49,39 +48,39 @@ public class Vision extends SubsystemBase {
     }
 
     // gets the red byte color for the pixy
-    // public int getRedCargoX() {
-    // return getNCargoX(VisionConstants.RED);
-    // }
+    public int getRedCargoX() {
+        return getNCargoX(VisionConstants.RED);
+    }
 
-    // // gets the blue byte color for the pixy
+    // gets the blue byte color for the pixy
 
-    // public int getBlueCargoX() {
-    // return getNCargoX(VisionConstants.BLUE);
-    // }
+    public int getBlueCargoX() {
+        return getNCargoX(VisionConstants.BLUE);
+    }
 
-    // // adds the byte values for both blue and red so we can collect both if
+    // adds the byte values for both blue and red so we can collect both if
     // wanted
-    // public int getAllCargoX() {
-    // return getNCargoX((byte) (VisionConstants.RED + VisionConstants.BLUE));
-    // }
+    public int getAllCargoX() {
+        return getNCargoX((byte) (VisionConstants.RED + VisionConstants.BLUE));
+    }
 
     // logic to find cargo, split them up into blocks, and choose the closest block
     // (cargo with correct color)
-    // public int getNCargoX(byte n) {
-    // var blocks = pixy.getBlocks(n, (byte) 10);
-    // if (blocks.length > 0) {
-    // Pixy2Block largestBlock = null;
-    // var largestArea = 0;
-    // for (Pixy2Block block : blocks) {
-    // var blockArea = block.width * block.height;
-    // if (blockArea > largestArea) {
-    // largestBlock = block;
-    // largestArea = blockArea;
-    // }
-    // }
-    // return largestBlock.centerXAxis;
-    // } else {
-    // return -1;
-    // }
-    // }
+    public int getNCargoX(byte n) {
+        var blocks = pixy.getBlocks(n, (byte) 10);
+        if (blocks.length > 0) {
+            Pixy2Block largestBlock = null;
+            var largestArea = 0;
+            for (Pixy2Block block : blocks) {
+                var blockArea = block.width * block.height;
+                if (blockArea > largestArea) {
+                    largestBlock = block;
+                    largestArea = blockArea;
+                }
+            }
+            return largestBlock.centerXAxis;
+        } else {
+            return -1;
+        }
+    }
 }
