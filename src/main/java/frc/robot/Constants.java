@@ -64,9 +64,9 @@ public final class Constants {
         public static final int POSITION_SENSOR_ID = 0;
         // The servo ID for the Aimer mechanism.
         public static final int AIMER_MOTOR_ID = 7;
-        // The upwards boundary for the aimer 297
+        // The upwards boundary for the aimer, old = 297
         public static final double AIMER_HIGHER_BOUNDARY = 307;
-        // The lower boundary for the aimer 10
+        // The lower boundary for the aimer, old = 10
         public static final double AIMER_LOWER_BOUNDARY = 47;
         // The port number for the absolute encoder.
         public static final int ABS_ENCODER_PORT = 1;
@@ -92,7 +92,7 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 3970;
+        public static final double SHOOTER_RPM = 3940;
         // shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 2000;
     }
