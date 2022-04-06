@@ -86,7 +86,7 @@ public class Hanging extends SubsystemBase {
     }
 
     public boolean isTurretSafeToMove() {
-        return getRightRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS_RIGHT
+        return getRightRotationPosition() < HangingConstants.ROTATE_TURRET_SAFE_POS_RIGHT
                 && getLeftRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS_LEFT;
     }
 
@@ -103,7 +103,7 @@ public class Hanging extends SubsystemBase {
                 centerTurretCommand.schedule();
             }
         } else if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
-                && getLeftRotationPosition() > HangingConstants.ROTATE_MAX_POS_LEFT) {
+                && getLeftRotationPosition() < HangingConstants.ROTATE_MAX_POS_LEFT) {
             rotateMotorRight.set(0);
             rotateMotorLeft.set(0);
         } else if (speed < 0 && getRightRotationPosition() < HangingConstants.ROTATE_MIN_POS_RIGHT
@@ -111,7 +111,7 @@ public class Hanging extends SubsystemBase {
             rotateMotorRight.set(0);
             rotateMotorLeft.set(0);
         } else {
-            rotateMotorRight.set(speed);
+            rotateMotorRight.set(-speed);
             rotateMotorLeft.set(-speed);
         }
     }

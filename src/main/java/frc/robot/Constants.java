@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.lib.util.DoubleRange;
@@ -68,8 +69,8 @@ public final class Constants {
         public static final double AIMER_HIGHER_BOUNDARY = 307;
         // The lower boundary for the aimer, old = 10
         public static final double AIMER_LOWER_BOUNDARY = 47;
-        // The port number for the absolute encoder.
-        public static final int ABS_ENCODER_PORT = 1;
+        // The port number for the 3 turn pot encoder.
+        public static final int AIMER_ENCODER_PORT = 1;
         // The speed for the aimer motor.
         public static final double AIMER_SPEED = .3;
         // The Counterclockwise Boundary for the turret set to 2620
@@ -144,20 +145,20 @@ public final class Constants {
         public static final int ABS_HANGING_ROTATION_LEFT = 2;
         public static final int ABS_HANGING_ROTATION_RIGHT = 3;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS_RIGHT = 116.5;
-        public static final double ROTATE_MIN_POS_RIGHT = 26.3;
-        public static final double ROTATE_MAX_POS_LEFT = 116.5;
-        public static final double ROTATE_MIN_POS_LEFT = 26.3;
-        // arm rotation speed
+        public static final double ROTATE_MAX_POS_RIGHT = 208;
+        public static final double ROTATE_MIN_POS_RIGHT = 90;
+        public static final double ROTATE_MAX_POS_LEFT = 150;
+        public static final double ROTATE_MIN_POS_LEFT = 248;
+        // arm rotation speed (NOT USED)
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
         // make faster
-        public static final double EXTEND_SPEED_LEFT = .70;
-        public static final double EXTEND_SPEED_RIGHT = .82;
+        public static final double EXTEND_SPEED_LEFT = .90;
+        public static final double EXTEND_SPEED_RIGHT = .88;
         public static final double RETRACT_SPEED = -1;
         // how far the rotate arms have to be to allow the turret to move
-        public static final double ROTATE_TURRET_SAFE_POS_RIGHT = 102.3;
-        public static final double ROTATE_TURRET_SAFE_POS_LEFT = 102.3;
+        public static final double ROTATE_TURRET_SAFE_POS_RIGHT = 50;
+        public static final double ROTATE_TURRET_SAFE_POS_LEFT = 280;
     }
 
     public static final class AutoConstants {

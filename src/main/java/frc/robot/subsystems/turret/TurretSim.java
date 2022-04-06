@@ -34,7 +34,7 @@ public class TurretSim extends Turret {
     @Override
     public void periodic() {
         if (updateEncoderSim.getBoolean(true)) {
-            absEncoderUpdate();
+            // absEncoderUpdate();
         }
         actualValueSim.setDouble(getActualPosition());
     }

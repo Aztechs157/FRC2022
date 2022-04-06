@@ -25,7 +25,8 @@ public class Turret extends SubsystemBase {
     private CANSparkMax turretMotor;
     private AnalogInput positionSensor;
     private CANSparkMax aimerMotor;
-    private Counter absoluteEncoder;
+    // private Counter aimerEncoder;
+    private AnalogInput aimerPosition;
 
     private int rotations = 0;
     private Double previousPosition = null;
@@ -43,10 +44,11 @@ public class Turret extends SubsystemBase {
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
         aimerMotor = new CANSparkMax(TurretConstants.AIMER_MOTOR_ID, MotorType.kBrushless);
         aimerMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
-        absoluteEncoder = new Counter(Mode.kSemiperiod);
-        absoluteEncoder.setSemiPeriodMode(true);
-        absoluteEncoder.setUpSource(TurretConstants.ABS_ENCODER_PORT);
-        absoluteEncoder.reset();
+        aimerPosition = new AnalogInput(TurretConstants.AIMER_ENCODER_PORT);
+        // aimerEncoder = new Counter(Mode.kSemiperiod);
+        // aimerEncoder.setSemiPeriodMode(true);
+        // aimerEncoder.setUpSource(TurretConstants.AIMER_ENCODER_PORT);
+        // aimerEncoder.reset();
         this.setDefaultCommand(new TurretSpin(operatorController, this));
 
         Shuffleboard.getTab("Debug").addNumber("Turret Encoder", this::readPositionSensor);
@@ -56,7 +58,7 @@ public class Turret extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        absEncoderUpdate();
+        // absEncoderUpdate();
     }
 
     public boolean isCentered() {
@@ -134,8 +136,9 @@ public class Turret extends SubsystemBase {
      * @return aimer position in degrees.
      */
     public double getAimerPosition() {
-        return NumberUtil.ticksToDegs(absoluteEncoder.getPeriod()); // equation for degree per tick converted to
-        // seconds.
+        return aimerPosition.getValue();
+        // return NumberUtil.ticksToDegs(aimerEncoder.getPeriod()); // equation for
+        // degree per tick converted to seconds.
     }
 
     public double getActualPosition() {
@@ -180,24 +183,25 @@ public class Turret extends SubsystemBase {
         runAimer(0);
     }
 
-    protected void absEncoderUpdate() {
-        double absEncoder = getAimerPosition();
-        if (previousPosition != null && Math.abs(absEncoder - previousPosition) > maxRotation) {
-            if (absEncoder < previousPosition) {
-                rotations++;
-            } else if (absEncoder > previousPosition) {
-                rotations--;
-            }
-        }
-        previousPosition = absEncoder;
-    }
+    // protected void absEncoderUpdate() {
+    // double absEncoder = getAimerPosition();
+    // if (previousPosition != null && Math.abs(absEncoder - previousPosition) >
+    // maxRotation) {
+    // if (absEncoder < previousPosition) {
+    // rotations++;
+    // } else if (absEncoder > previousPosition) {
+    // rotations--;
+    // }
+    // }
+    // previousPosition = absEncoder;
+    // }
 
     /**
      * Debug print for the DebugPrints command, useful for debugging and testing at
      * a later date.
      */
     public void debugPrint() {
-        System.out.println("Aimer Position: " + getActualPosition());
+        // System.out.println("Aimer Position: " + getActualPosition());
         System.out.println("Turret Position: " + readPositionSensor());
     }
 }
