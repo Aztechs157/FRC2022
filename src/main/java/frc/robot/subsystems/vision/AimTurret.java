@@ -21,6 +21,8 @@ public class AimTurret extends CommandBase {
     private final DoubleRange visionRange = new DoubleRange(45, 90);
     private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
             TurretConstants.AIMER_LOWER_BOUNDARY + 100);
+    private final DoubleRange rpmRange = new DoubleRange(ShooterConstants.SHOOTER_RPM * 0.375,
+            ShooterConstants.SHOOTER_RPM);
     private final ShootCargo shootCargo;
     private final boolean useAimer;
 
@@ -66,6 +68,7 @@ public class AimTurret extends CommandBase {
         var aimerPosition = turret.getAimerPosition();
         turret.turretTurn(-turret.turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
         var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
+        var rpmTarget = DoubleRange.scale(visionRange, hubDiagonal, rpmRange);
 
         if (useAimer) {
             var x = turret.aimerpid.calculate(aimerPosition, aimerTarget);
@@ -77,6 +80,7 @@ public class AimTurret extends CommandBase {
         if (hubX > -turretThreshold && hubX < turretThreshold && aimerPosition > aimerTarget - aimerThreshold
                 && aimerTarget < aimerTarget + aimerThreshold) {
             shootCargo.schedule();
+            shootCargo.SetShooterSpeed(rpmTarget);
         } else {
             shootCargo.cancel();
         }

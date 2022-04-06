@@ -78,4 +78,8 @@ public class ShootCargo extends CommandBase {
     public boolean isFinished() {
         return false;
     }
+
+    public void SetShooterSpeed(double speed) {
+        this.targetSpeed = speed;
+    }
 }
