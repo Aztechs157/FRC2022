@@ -7,6 +7,7 @@ package frc.robot.subsystems.vision;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.lib.vision.LimeLight;
 import frc.robot.lib.vision.LimeLight.LightMode;
@@ -14,12 +15,13 @@ import frc.robot.lib.vision.pixy2.Pixy2;
 import frc.robot.lib.vision.pixy2.Pixy2.Pixy2Block;
 
 public class Vision extends SubsystemBase {
-    private final LimeLight limeLight = new LimeLight();
-    private final Pixy2 pixy = new Pixy2(Port.kOnboard, VisionConstants.PIXY_PORT);
+    public final LimeLight limeLight = new LimeLight();
+    private final Pixy2 pixy = new Pixy2(Port.kMXP, VisionConstants.PIXY_PORT);
 
     /** Creates a new VisionSubsystem. */
     public Vision() {
         CameraServer.startAutomaticCapture();
+        Shuffleboard.getTab("Debug").addString("Pixy Version", () -> pixy.getVersion().firmwareString);
     }
 
     // returns if the limelight has a valid target, IE. reflective tape.
@@ -27,7 +29,7 @@ public class Vision extends SubsystemBase {
         return limeLight.hasValidTargets();
     }
 
-    // sets the limelight's light to be off when not being used
+    // sets the limelight's light to be on or off
     public void setLED(final boolean status) {
         limeLight.setLightMode(status ? LightMode.ForceOn : LightMode.ForceOff);
     }
@@ -56,7 +58,8 @@ public class Vision extends SubsystemBase {
         return getNCargoX(VisionConstants.BLUE);
     }
 
-    // adds the byte values for both blue and red so we can collect both if wanted
+    // adds the byte values for both blue and red so we can collect both if
+    // wanted
     public int getAllCargoX() {
         return getNCargoX((byte) (VisionConstants.RED + VisionConstants.BLUE));
     }

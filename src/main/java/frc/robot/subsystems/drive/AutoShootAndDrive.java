@@ -5,6 +5,7 @@
 package frc.robot.subsystems.drive;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
 
@@ -14,6 +15,7 @@ import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;
+import frc.robot.subsystems.vision.AimTurret;
 import frc.robot.subsystems.vision.Vision;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -30,9 +32,9 @@ public class AutoShootAndDrive extends SequentialCommandGroup {
             final Intake intake,
             final Drive drive) {
 
-        final var autoAim = new ShootCargo(shooter, kicker, uptake, intake, SHOOTER_RPM);
+        final var autoAim = new AimTurret(vision, turret, shooter, kicker, uptake, intake);
         final var driveBackward = new DriveBackwards(drive);
 
-        addCommands(driveBackward, autoAim);
+        addCommands(driveBackward, race(autoAim, new WaitCommand(7)));
     }
 }

@@ -22,15 +22,15 @@ import frc.robot.subsystems.turret.TurretCenter;
 
 public class Hanging extends SubsystemBase {
     private final CANSparkMax leftExtendMotor;
-    private final CANSparkMax rotateMotor;
+    private final CANSparkMax rotateMotorRight;
+    private final CANSparkMax rotateMotorLeft;
     private final CANSparkMax rightExtendMotor;
     private final DigitalInput topLeftLimitSwitch;
     private final DigitalInput bottomLeftLimitSwitch;
-    private final DigitalInput leftBarSwitch;
     private final DigitalInput topRightLimitSwitch;
     private final DigitalInput bottomRightLimitSwitch;
-    private final DigitalInput rightBarSwitch;
-    private final Counter rotationAbsEncoder;
+    private final Counter rotationAbsEncoderRight;
+    private final Counter rotationAbsEncoderLeft;
     private final Turret turret;
     private final Command centerTurretCommand;
 
@@ -40,39 +40,44 @@ public class Hanging extends SubsystemBase {
         centerTurretCommand = new TurretCenter(turret);
         leftExtendMotor = new CANSparkMax(HangingConstants.LEFT_EXTEND_MOTOR, MotorType.kBrushless);
         leftExtendMotor.setInverted(false);
-        rotateMotor = new CANSparkMax(HangingConstants.ROTATE_MOTOR, MotorType.kBrushless);
-        rotateMotor.setInverted(true);
+        rotateMotorRight = new CANSparkMax(HangingConstants.ROTATE_MOTOR_RIGHT, MotorType.kBrushless);
+        rotateMotorLeft = new CANSparkMax(HangingConstants.ROTATE_MOTOR_LEFT, MotorType.kBrushless);
+        rotateMotorRight.setInverted(true);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
         // rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         leftExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
         rightExtendMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
 
-        rotateMotor.setIdleMode(IdleMode.kBrake);
+        rotateMotorRight.setIdleMode(IdleMode.kBrake);
+        rotateMotorLeft.setIdleMode(IdleMode.kBrake);
         leftExtendMotor.setIdleMode(IdleMode.kBrake);
         rightExtendMotor.setIdleMode(IdleMode.kBrake);
 
         topLeftLimitSwitch = new DigitalInput(HangingConstants.TOP_LEFT_LIMIT_SWITCH);
         bottomLeftLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_LEFT_LIMIT_SWITCH);
-        leftBarSwitch = new DigitalInput(HangingConstants.LEFT_BAR_LIMIT_SWITCH);
         topRightLimitSwitch = new DigitalInput(HangingConstants.TOP_RIGHT_LIMIT_SWITCH);
         bottomRightLimitSwitch = new DigitalInput(HangingConstants.BOTTOM_RIGHT_LIMIT_SWITCH);
-        rightBarSwitch = new DigitalInput(HangingConstants.RIGHT_BAR_LIMIT_SWITCH);
 
-        rotationAbsEncoder = new Counter(Mode.kSemiperiod);
-        rotationAbsEncoder.setSemiPeriodMode(true);
-        rotationAbsEncoder.setUpSource(HangingConstants.ABS_HANGING_ROTATION);
-        rotationAbsEncoder.reset();
+        rotationAbsEncoderRight = new Counter(Mode.kSemiperiod);
+        rotationAbsEncoderRight.setSemiPeriodMode(true);
+        rotationAbsEncoderRight.setUpSource(HangingConstants.ABS_HANGING_ROTATION_RIGHT);
+        rotationAbsEncoderRight.reset();
+
+        rotationAbsEncoderLeft = new Counter(Mode.kSemiperiod);
+        rotationAbsEncoderLeft.setSemiPeriodMode(true);
+        rotationAbsEncoderLeft.setUpSource(HangingConstants.ABS_HANGING_ROTATION_LEFT);
+        rotationAbsEncoderLeft.reset();
 
         final var tab = Shuffleboard.getTab("Hanging Debug");
         tab.addBoolean("Top Left Limit", this::getTopLeftLimit);
         tab.addBoolean("Top Right Limit", this::getTopRightLimit);
         tab.addBoolean("Bottom Left Limit", this::getBottomLeftLimit);
         tab.addBoolean("Bottom Right Limit", this::getBottomRightLimit);
-        tab.addBoolean("Bar Limits", this::getBarLimit);
-        tab.addNumber("Rotation Position", this::getRotationPosition);
-        tab.addNumber("Raw Rotation", this.rotationAbsEncoder::getPeriod);
-        tab.addNumber("test", this.rotationAbsEncoder::get);
+        tab.addNumber("Right Rotation Position", this::getRightRotationPosition);
+        tab.addNumber("Left Rotation Position", this::getLeftRotationPosition);
+        tab.addNumber("Right Raw Rotation", this.rotationAbsEncoderRight::getPeriod);
+        tab.addNumber("Left Raw Rotation", this.rotationAbsEncoderLeft::getPeriod);
     }
 
     @Override
@@ -81,7 +86,8 @@ public class Hanging extends SubsystemBase {
     }
 
     public boolean isTurretSafeToMove() {
-        return getRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS;
+        return getRightRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS_RIGHT
+                && getLeftRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS_LEFT;
     }
 
     /**
@@ -91,16 +97,22 @@ public class Hanging extends SubsystemBase {
      */
     public void rotateArms(final double speed) {
         if (!turret.isCentered()) {
-            rotateMotor.set(0);
+            rotateMotorRight.set(0);
+            rotateMotorLeft.set(0);
             if (Math.abs(speed) > .5) {
                 centerTurretCommand.schedule();
             }
-        } else if (speed > 0 && getRotationPosition() > HangingConstants.ROTATE_MAX_POS) {
-            rotateMotor.set(0);
-        } else if (speed < 0 && getRotationPosition() < HangingConstants.ROTATE_MIN_POS) {
-            rotateMotor.set(0);
+        } else if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
+                && getLeftRotationPosition() > HangingConstants.ROTATE_MAX_POS_LEFT) {
+            rotateMotorRight.set(0);
+            rotateMotorLeft.set(0);
+        } else if (speed < 0 && getRightRotationPosition() < HangingConstants.ROTATE_MIN_POS_RIGHT
+                && getLeftRotationPosition() > HangingConstants.ROTATE_MIN_POS_LEFT) {
+            rotateMotorRight.set(0);
+            rotateMotorLeft.set(0);
         } else {
-            rotateMotor.set(speed);
+            rotateMotorRight.set(speed);
+            rotateMotorLeft.set(-speed);
         }
     }
 
@@ -157,17 +169,18 @@ public class Hanging extends SubsystemBase {
         return !bottomRightLimitSwitch.get();
     }
 
-    public boolean getBarLimit() {
-        return !leftBarSwitch.get() && !rightBarSwitch.get();
-    }
-
     /**
      * This method returns the value of the absolute encoder.
      *
      * @return absolute encoder value, position of arm rotation in degrees.
      */
-    public double getRotationPosition() {
-        return NumberUtil.ticksToDegs(rotationAbsEncoder.getPeriod()); // equation for degree per tick converted to
+    public double getRightRotationPosition() {
+        return NumberUtil.ticksToDegs(rotationAbsEncoderRight.getPeriod()); // equation for degree per tick converted to
+        // seconds.;
+    }
+
+    public double getLeftRotationPosition() {
+        return NumberUtil.ticksToDegs(rotationAbsEncoderLeft.getPeriod()); // equation for degree per tick converted to
         // seconds.;
     }
 

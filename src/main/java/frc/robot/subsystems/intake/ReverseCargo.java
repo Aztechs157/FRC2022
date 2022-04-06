@@ -2,31 +2,27 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.shooter;
+package frc.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.uptake.Uptake;
-import frc.robot.Constants.ShooterConstants;
-import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
+import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.uptake.Uptake;
 
-public class LowShoot extends CommandBase {
+public class ReverseCargo extends CommandBase {
     private Shooter shooter;
-    private Kicker kicker;
     private Uptake uptake;
-    private Intake intake;
+    private Kicker kicker;
 
-    /** Creates a new Dump. */
-    public LowShoot(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake) {
+    /** Creates a new ReverseCargo. */
+    public ReverseCargo(Uptake uptake, Kicker kicker, Shooter shooter) {
         // Use addRequirements() here to declare subsystem dependencies.
-        this.shooter = shooter;
-        this.kicker = kicker;
         this.uptake = uptake;
-        this.intake = intake;
+        this.kicker = kicker;
+        this.shooter = shooter;
+        addRequirements(uptake);
         addRequirements(shooter);
         addRequirements(kicker);
-        addRequirements(uptake);
-        addRequirements(intake);
     }
 
     // Called when the command is initially scheduled.
@@ -37,19 +33,17 @@ public class LowShoot extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM);
-        intake.rollerFeed();
-        kicker.kickerFeed();
-        uptake.uptakeFeed();
+        uptake.uptakeEject();
+        shooter.ejectBottom();
+        kicker.kickerEject();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        shooter.setPower(0);
-        intake.rollerStop();
-        kicker.kickerStop();
         uptake.uptakeStop();
+        kicker.kickerStop();
+        shooter.ejectStop();
     }
 
     // Returns true when the command should end.

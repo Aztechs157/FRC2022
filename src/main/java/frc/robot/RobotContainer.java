@@ -19,14 +19,17 @@ import frc.robot.subsystems.drive.AutoLowShootDrive;
 import frc.robot.subsystems.drive.AutoShootAndDrive;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.FindCargo;
+import frc.robot.subsystems.drive.MultiBallAuto;
 import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
+import frc.robot.subsystems.drive.TwoballAuto;
 import frc.robot.subsystems.hanging.ExtendArms;
 import frc.robot.subsystems.hanging.Hanging;
 import frc.robot.subsystems.hanging.RetractArms;
 import frc.robot.subsystems.hanging.TeleopHang;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeCargo;
+import frc.robot.subsystems.intake.ReverseCargo;
 import frc.robot.subsystems.kicker.Kicker;
 import frc.robot.subsystems.pneumatics.Pneumatics;
 import frc.robot.subsystems.sensing.GetKickerColor;
@@ -36,6 +39,7 @@ import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.turret.TurretCenter;
 import frc.robot.subsystems.uptake.Uptake;
 import frc.robot.subsystems.vision.AimTurret;
+import frc.robot.subsystems.vision.ToggleLight;
 import frc.robot.subsystems.vision.Vision;
 
 /**
@@ -71,6 +75,7 @@ public class RobotContainer {
         configureButtonBindings();
         setupAutoChooser();
         Shuffleboard.getTab("Debug").add(autoSelector);
+        visionSubsystem.setLED(false);
     }
 
     /**
@@ -110,15 +115,17 @@ public class RobotContainer {
                 .whileHeld(new ShootCargo(shooter, kicker, uptake, intake, ShooterConstants.LOW_SHOOTER_RPM));
 
         // tracks cargo while held
-        operatorInputs.button(Keys.Button.TrackCargo)
-                .whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
+        operatorInputs.button(Keys.Button.reverseCargo)
+                .whileHeld(new ReverseCargo(uptake, kicker, shooter));
 
         operatorInputs.button(Keys.Button.ExtendHanger).whileHeld(new ExtendArms(hanging));
         operatorInputs.button(Keys.Button.RetractHanger).whileHeld(new RetractArms(hanging));
         operatorInputs.button(Keys.Button.RotateHangLeft).whileHeld(() -> hanging.rotateArms(-1), hanging);
         operatorInputs.button(Keys.Button.RotateHangRight).whileHeld(() -> hanging.rotateArms(1), hanging);
-
         operatorInputs.button(Keys.Button.CenterTurret).whenHeld(new TurretCenter(turret));
+        operatorInputs.button(Keys.Button.ToggleLimelight).whenPressed(new ToggleLight(visionSubsystem));
+
+        driverInputs.button(Keys.Button.TrackCargo).whileHeld(new FindCargo(visionSubsystem, driveSubsystem));
     }
 
     // turns on break mode for the drive motors
@@ -139,9 +146,14 @@ public class RobotContainer {
         autoSelector.setDefaultOption("Shoot Low Drive Backward",
                 new AutoLowShootDrive(shooter, kicker, uptake, intake, driveSubsystem));
         autoSelector.addOption("Drive Backward Shoot High",
-                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake, intake, driveSubsystem));
+                new AutoShootAndDrive(visionSubsystem, turret, shooter, kicker, uptake,
+                        intake, driveSubsystem));
         autoSelector.addOption("Shoot Low Find Cargo",
                 new SmartCargoAndShoot(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
+        autoSelector.addOption("Multi Ball Auto",
+                new MultiBallAuto(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
+        autoSelector.addOption("Two Ball Left Tarmac Auto",
+                new TwoballAuto(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
     }
 
     /**

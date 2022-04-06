@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
     /** This function is called once each time the robot enters Disabled mode. */
     @Override
     public void disabledInit() {
+        m_robotContainer.visionSubsystem.setLED(false);
         m_robotContainer.disableBreakMode();
         m_robotContainer.getKickerColorSensorCommand().cancel();
     }
@@ -76,6 +77,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        m_robotContainer.visionSubsystem.setLED(false);
         m_robotContainer.enableDriveBreakMode();
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -92,6 +94,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        m_robotContainer.visionSubsystem.setLED(false);
         m_robotContainer.enableDriveBreakMode();
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -110,6 +113,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void testInit() {
+        m_robotContainer.visionSubsystem.setLED(false);
         m_robotContainer.enableDriveBreakMode();
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
