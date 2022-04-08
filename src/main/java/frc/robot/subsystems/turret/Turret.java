@@ -88,9 +88,7 @@ public class Turret extends SubsystemBase {
      *              counterclockwise, 1 is clockwise.
      */
     public void turretTurn(double speed) {
-        if (!isTurretSafeToMove.getAsBoolean()) {
-            turretMotor.set(0);
-        } else if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
+        if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
         } else if (speed < 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
