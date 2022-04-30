@@ -64,17 +64,17 @@ public final class Constants {
         // connected to.
         public static final int POSITION_SENSOR_ID = 0;
         // The servo ID for the Aimer mechanism.
-        public static final int AIMER_MOTOR_ID = 7;
+        // public static final int AIMER_MOTOR_ID = 7;
         // The upwards boundary for the aimer, old = 297
-        public static final double AIMER_HIGHER_BOUNDARY = 2975;
+        // public static final double AIMER_HIGHER_BOUNDARY = 2975;
         // original value for absolute encoder: 307;
         // The lower boundary for the aimer, old = 10
-        public static final double AIMER_LOWER_BOUNDARY = 1695;
+        // public static final double AIMER_LOWER_BOUNDARY = 1695;
         // original value for absolute encoder: 47;
         // The port number for the 3 turn pot encoder.
-        public static final int AIMER_ENCODER_PORT = 1;
+        // public static final int AIMER_ENCODER_PORT = 1;
         // The speed for the aimer motor.
-        public static final double AIMER_SPEED = .3;
+        // public static final double AIMER_SPEED = .3;
         // The Counterclockwise Boundary for the turret set to 2620
         public static final int COUNTERCLOCKWISE_BOUNDARY = 2620;
         // The Clockwise Boundary for the turret 1250
@@ -91,6 +91,7 @@ public final class Constants {
     public static final class ShooterConstants {
         // The CAN ID for the 1st Shooter Motor. (TEMP)
         public static final int SHOOTER_MOTOR1_ID = 8;
+        public static final int SHOOTER_MOTOR2_ID = 7;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;

@@ -36,7 +36,7 @@ public class TurretSim extends Turret {
         if (updateEncoderSim.getBoolean(true)) {
             // absEncoderUpdate();
         }
-        actualValueSim.setDouble(getActualPosition());
+        // actualValueSim.setDouble(getActualPosition());
     }
 
     // simulates running the turret. Runs through shuffleboard.
@@ -74,24 +74,26 @@ public class TurretSim extends Turret {
      *
      * @return the absolute encoder position
      */
-    @Override
-    public double getAimerPosition() {
-        return absEncoderSim.getDouble(0);
-    }
+    // @Override
+    // public double getAimerPosition() {
+    // return absEncoderSim.getDouble(0);
+    // }
 
     /**
      * This method is the logic that allows the aimer to simulate movement.
      *
      * @param speed aimer should run at.
      */
-    @Override
-    public void runAimer(double speed) {
-        if (speed > 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY) {
-            aimerMotorSim.setDouble(0);
-        } else if (speed < 0 && getActualPosition() < TurretConstants.AIMER_LOWER_BOUNDARY) {
-            aimerMotorSim.setDouble(0);
-        } else {
-            aimerMotorSim.setDouble(speed);
-        }
-    }
+    // @Override
+    // public void runAimer(double speed) {
+    // if (speed > 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY)
+    // {
+    // aimerMotorSim.setDouble(0);
+    // } else if (speed < 0 && getActualPosition() <
+    // TurretConstants.AIMER_LOWER_BOUNDARY) {
+    // aimerMotorSim.setDouble(0);
+    // } else {
+    // aimerMotorSim.setDouble(speed);
+    // }
+    // }
 }

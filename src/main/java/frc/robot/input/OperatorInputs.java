@@ -14,7 +14,7 @@ public class OperatorInputs extends ShuffleLayoutChooser {
 
         defaultLayout.assign(Keys.Axis.TurretSpeed,
                 logitech.leftStickX.scaled(TURRET_INPUT_SCALE));
-        defaultLayout.assign(Keys.Axis.AimerSpeed, logitech.leftStickY);
+        // defaultLayout.assign(Keys.Axis.AimerSpeed, logitech.leftStickY);
 
         defaultLayout.assign(Keys.Button.ShooterRun, logitech.rightBumper);
         defaultLayout.assign(Keys.Button.AutoAim, logitech.leftBumper);

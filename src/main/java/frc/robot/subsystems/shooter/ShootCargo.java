@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems.shooter;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
@@ -14,11 +17,14 @@ public class ShootCargo extends CommandBase {
     private Kicker kicker;
     private Uptake uptake;
     private Intake intake;
-    private double targetSpeed;
-    private double speedSum = 0;
+    private double targetSpeedFront;
+    private double speedSumFront = 0;
+    private double speedSumBack = 0;
+    private double targetSpeedBack;
 
     /** Creates a new SetShooterSpeed. */
-    public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, double targetSpeed) {
+    public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, double targetSpeed,
+            double rearRatio) {
         // Use addRequirements() here to declare subsystem dependencies.
         /**
          * Adds Shooter, Kicker, and Uptake as requirements and stops other systems from
@@ -28,17 +34,22 @@ public class ShootCargo extends CommandBase {
         this.kicker = kicker;
         this.uptake = uptake;
         this.intake = intake;
-        this.targetSpeed = targetSpeed;
+        this.targetSpeedFront = targetSpeed;
+        this.targetSpeedBack = targetSpeed * rearRatio * .8;
         addRequirements(shooter);
         addRequirements(kicker);
         addRequirements(uptake);
         addRequirements(intake);
     }
 
+    public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, double targetSpeed) {
+        this(shooter, kicker, uptake, intake, targetSpeed, 1);
+    }
+
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        speedSum = 0;
+        speedSumFront = 0;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -49,10 +60,14 @@ public class ShootCargo extends CommandBase {
          * NOTE: tolerance not correct.
          * Then it runs the uptake and kicker in order to shoot.
          */
-        var currSpeed = shooter.measureVelocity();
-        speedSum += shooter.pidCalculate(targetSpeed, currSpeed);
-        shooter.setPower(speedSum);
-        if (currSpeed > targetSpeed - 30 && currSpeed < targetSpeed + 30) {
+        var currSpeedFront = shooter.measureFrontVelocity();
+        var currSpeedBack = shooter.measureBackVelocity();
+        speedSumFront += shooter.pidFrontCalculate(targetSpeedFront, currSpeedFront);
+        speedSumBack += shooter.pidBackCalculate(targetSpeedBack, currSpeedBack);
+        shooter.setFrontPower(speedSumFront);
+        shooter.setBackPower(speedSumBack);
+        if (currSpeedFront > targetSpeedFront - 30 && currSpeedFront < targetSpeedFront + 30
+                && currSpeedBack > targetSpeedBack - 30 && currSpeedBack < targetSpeedBack + 30) {
             kicker.kickerFeed();
             uptake.uptakeFeed();
             intake.rollerFeed();
@@ -61,13 +76,14 @@ public class ShootCargo extends CommandBase {
             uptake.uptakeStop();
             intake.rollerStop();
         }
+        shooter.backMotorVelocity.setDouble(currSpeedBack);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         // Stops all the motors from spinning
-        shooter.setPower(0);
+        shooter.setBothPower(0);
         kicker.kickerStop();
         uptake.uptakeStop();
         intake.rollerStop();
@@ -80,6 +96,6 @@ public class ShootCargo extends CommandBase {
     }
 
     public void SetShooterSpeed(double speed) {
-        this.targetSpeed = speed;
+        this.targetSpeedFront = speed;
     }
 }
