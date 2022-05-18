@@ -166,7 +166,7 @@ public final class Constants {
 
     public static final class AutoConstants {
         // autonomous drive speed
-        public static final double AUTO_SPEED = 0.60;
+        public static final double AUTO_SPEED = 0.20;
 
         // autonomous drive distance
         public static final double AUTO_DISTANCE_TICKS = 23.72;
