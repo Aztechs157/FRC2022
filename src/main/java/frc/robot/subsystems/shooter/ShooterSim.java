@@ -32,7 +32,7 @@ public class ShooterSim extends Shooter {
      * @return
      */
     @Override
-    public double measureVelocity() {
+    public double measureFrontVelocity() {
         return velocityMotorSim.getDouble(0);
     }
 
@@ -43,7 +43,7 @@ public class ShooterSim extends Shooter {
      * @param power
      */
     @Override
-    public void setPower(double power) {
+    public void setBothPower(double power) {
         motorPowerSim.setDouble(power);
     }
 }

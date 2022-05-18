@@ -5,22 +5,37 @@
 package frc.robot.subsystems.shooter;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
-    private CANSparkMax ShootMotor1;
-    private PIDController pid = new PIDController(0.00001, 0, 0.000003);
+    private CANSparkMax ShootFrontMotor;
+    private CANSparkMax ShootBackMotor;
+    private PIDController ShooterFrontPID = new PIDController(0.00001, 0, 0.000003);
+    private PIDController ShooterBackPID = new PIDController(0.00001, 0, 0.000003);
+    public ShuffleboardTab tab;
+    public NetworkTableEntry backMotorVelocity;
 
     /** Creates a new Shooter. */
     public Shooter() {
-        ShootMotor1 = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
-        ShootMotor1.setInverted(true);
-        ShootMotor1.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        ShootFrontMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
+        ShootFrontMotor.setInverted(true);
+        ShootFrontMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        ShootFrontMotor.setIdleMode(IdleMode.kCoast);
+        ShootBackMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID, MotorType.kBrushless);
+        ShootBackMotor.setInverted(true);
+        ShootBackMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        ShootBackMotor.setIdleMode(IdleMode.kCoast);
+        tab = Shuffleboard.getTab("Debug");
+        backMotorVelocity = tab.add("Rear Shooter Speed", 0).getEntry();
     }
 
     @Override
@@ -32,8 +47,12 @@ public class Shooter extends SubsystemBase {
      * This method will get the velocity of the motor based on the built in encoder
      * reading.
      */
-    public double measureVelocity() {
-        return ShootMotor1.getEncoder().getVelocity();
+    public double measureFrontVelocity() {
+        return ShootFrontMotor.getEncoder().getVelocity();
+    }
+
+    public double measureBackVelocity() {
+        return ShootBackMotor.getEncoder().getVelocity();
     }
 
     /**
@@ -42,29 +61,38 @@ public class Shooter extends SubsystemBase {
      * @param power the power the motors are set too. Accepted Values must be
      *              between -1 and 1.
      */
-    public void setPower(double power) {
-        ShootMotor1.set(power);
+    public void setBothPower(double power) {
+        setFrontPower(power);
+        setBackPower(power);
+    }
+
+    public void setFrontPower(double power) {
+        ShootFrontMotor.set(power);
+    }
+
+    public void setBackPower(double power) {
+        ShootBackMotor.set(power);
     }
 
     /**
      * This method will eject the ball out the top of the shooter.
      */
     public void ejectTop() {
-        setPower(ShooterConstants.EJECT_SPEED);
+        setBothPower(ShooterConstants.EJECT_SPEED);
     }
 
     /**
      * This method will eject the ball through the robot out through the intake.
      */
     public void ejectBottom() {
-        setPower(-ShooterConstants.EJECT_SPEED);
+        setBothPower(-ShooterConstants.EJECT_SPEED);
     }
 
     /**
      * This method will stop the Shooter Motor.
      */
     public void ejectStop() {
-        setPower(0);
+        setBothPower(0);
     }
 
     /**
@@ -75,8 +103,12 @@ public class Shooter extends SubsystemBase {
      * @param currentVelocity
      * @return
      */
-    public double pidCalculate(double goalVelocity, double currentVelocity) {
-        return pid.calculate(currentVelocity, goalVelocity);
+    public double pidFrontCalculate(double goalVelocity, double currentVelocity) {
+        return ShooterFrontPID.calculate(currentVelocity, goalVelocity);
+    }
+
+    public double pidBackCalculate(double goalVelocity, double currentVelocity) {
+        return ShooterBackPID.calculate(currentVelocity, goalVelocity);
     }
 
     /**

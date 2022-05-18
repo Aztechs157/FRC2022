@@ -46,7 +46,7 @@ public class LowShoot extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        shooter.setPower(0);
+        shooter.setBothPower(0);
         intake.rollerStop();
         kicker.kickerStop();
         uptake.uptakeStop();

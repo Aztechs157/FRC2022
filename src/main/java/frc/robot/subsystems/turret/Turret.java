@@ -24,16 +24,16 @@ import frc.robot.lib.NumberUtil;
 public class Turret extends SubsystemBase {
     private CANSparkMax turretMotor;
     private AnalogInput positionSensor;
-    private CANSparkMax aimerMotor;
+    // private CANSparkMax aimerMotor;
     // private Counter aimerEncoder;
-    private AnalogInput aimerPosition;
+    // private AnalogInput aimerPosition;
 
-    private int rotations = 0;
-    private Double previousPosition = null;
-    private int maxRotation = 300;
+    // private int rotations = 0;
+    // private Double previousPosition = null;
+    // private int maxRotation = 300;
 
     public final PIDController turretpid = new PIDController(0.03, 0, 0);
-    public final PIDController aimerpid = new PIDController(0.03, 0, 0);
+    // public final PIDController aimerpid = new PIDController(0.03, 0, 0);
     public BooleanSupplier isTurretSafeToMove;
 
     /** Creates a new Turret. */
@@ -42,9 +42,10 @@ public class Turret extends SubsystemBase {
         turretMotor.setIdleMode(IdleMode.kBrake);
         turretMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
         positionSensor = new AnalogInput(TurretConstants.POSITION_SENSOR_ID);
-        aimerMotor = new CANSparkMax(TurretConstants.AIMER_MOTOR_ID, MotorType.kBrushless);
-        aimerMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
-        aimerPosition = new AnalogInput(TurretConstants.AIMER_ENCODER_PORT);
+        // aimerMotor = new CANSparkMax(TurretConstants.AIMER_MOTOR_ID,
+        // MotorType.kBrushless);
+        // aimerMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
+        // aimerPosition = new AnalogInput(TurretConstants.AIMER_ENCODER_PORT);
         // aimerEncoder = new Counter(Mode.kSemiperiod);
         // aimerEncoder.setSemiPeriodMode(true);
         // aimerEncoder.setUpSource(TurretConstants.AIMER_ENCODER_PORT);
@@ -52,7 +53,8 @@ public class Turret extends SubsystemBase {
         this.setDefaultCommand(new TurretSpin(operatorController, this));
 
         Shuffleboard.getTab("Debug").addNumber("Turret Encoder", this::readPositionSensor);
-        Shuffleboard.getTab("Debug").addNumber("Aimer Encoder", this::getAimerPosition);
+        // Shuffleboard.getTab("Debug").addNumber("Aimer Encoder",
+        // this::getAimerPosition);
     }
 
     @Override
@@ -133,53 +135,56 @@ public class Turret extends SubsystemBase {
      *
      * @return aimer position in degrees.
      */
-    public double getAimerPosition() {
-        return aimerPosition.getValue();
-        // return NumberUtil.ticksToDegs(aimerEncoder.getPeriod()); // equation for
-        // degree per tick converted to seconds.
-    }
+    // public double getAimerPosition() {
+    // return 4095 - aimerPosition.getValue(); // inverting the value for the
+    // potentiometer
+    // return NumberUtil.ticksToDegs(aimerEncoder.getPeriod()); // equation for
+    // degree per tick converted to seconds.
+    // }
 
-    public double getActualPosition() {
-        return getAimerPosition() + (360 * rotations);
-    }
+    // public double getActualPosition() {
+    // return getAimerPosition() + (360 * rotations);
+    // }
 
     /**
      * This method moves the aimer in a upwards direction. Decreasing the aimer
      * angle.
      */
-    public void aimerUp() {
-        runAimer(TurretConstants.AIMER_SPEED);
-    }
+    // public void aimerUp() {
+    // runAimer(TurretConstants.AIMER_SPEED);
+    // }
 
     /**
      * This method moves the aimer in a downwards direction. Increasing the aimer
      * angle.
      */
-    public void aimerDown() {
-        runAimer(-TurretConstants.AIMER_SPEED);
-    }
+    // public void aimerDown() {
+    // runAimer(-TurretConstants.AIMER_SPEED);
+    // }
 
     /**
      * This method will run the aimer either up or down.
      *
      * @param speed
      */
-    public void runAimer(double speed) {
-        if (speed < 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY) {
-            aimerMotor.set(0);
-        } else if (speed > 0 && getActualPosition() < TurretConstants.AIMER_LOWER_BOUNDARY) {
-            aimerMotor.set(0);
-        } else {
-            aimerMotor.set(speed);
-        }
-    }
+    // public void runAimer(double speed) {
+    // if (speed < 0 && getActualPosition() > TurretConstants.AIMER_HIGHER_BOUNDARY)
+    // {
+    // aimerMotor.set(0);
+    // } else if (speed > 0 && getActualPosition() <
+    // TurretConstants.AIMER_LOWER_BOUNDARY) {
+    // aimerMotor.set(0);
+    // } else {
+    // aimerMotor.set(speed);
+    // }
+    // }
 
     /**
      * This method will stop the aimer from moving.
      */
-    public void stopAimer() {
-        runAimer(0);
-    }
+    // public void stopAimer() {
+    // runAimer(0);
+    // }
 
     // protected void absEncoderUpdate() {
     // double absEncoder = getAimerPosition();

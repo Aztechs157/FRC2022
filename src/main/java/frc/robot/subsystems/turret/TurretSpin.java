@@ -32,8 +32,9 @@ public class TurretSpin extends CommandBase {
         // rotates the turret based on joystick input
         final var turretRotation = operatorController.axis(Keys.Axis.TurretSpeed).get();
         turret.turretTurn(turretRotation * TurretConstants.TURRET_SPEED);
-        final var aimerRotation = operatorController.axis(Keys.Axis.AimerSpeed).get();
-        turret.runAimer(aimerRotation * TurretConstants.AIMER_SPEED);
+        // final var aimerRotation =
+        // operatorController.axis(Keys.Axis.AimerSpeed).get();
+        // turret.runAimer(aimerRotation * TurretConstants.AIMER_SPEED);
     }
 
     // Called once the command ends or is interrupted.

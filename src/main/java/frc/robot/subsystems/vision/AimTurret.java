@@ -19,8 +19,9 @@ public class AimTurret extends CommandBase {
     private final Vision vision;
     private final Turret turret;
     private final DoubleRange visionRange = new DoubleRange(45, 90);
-    private final DoubleRange aimerRange = new DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
-            TurretConstants.AIMER_LOWER_BOUNDARY + 100);
+    // private final DoubleRange aimerRange = new
+    // DoubleRange(TurretConstants.AIMER_HIGHER_BOUNDARY,
+    // TurretConstants.AIMER_LOWER_BOUNDARY + 100);
     private final DoubleRange rpmRange = new DoubleRange(ShooterConstants.SHOOTER_RPM * 0.375,
             ShooterConstants.SHOOTER_RPM);
     private final ShootCargo shootCargo;
@@ -56,29 +57,30 @@ public class AimTurret extends CommandBase {
     public void execute() {
         if (!vision.hasTarget()) {
             turret.turretStop();
-            turret.stopAimer();
+            // turret.stopAimer();
             return;
         }
 
         var turretThreshold = 10;
-        var aimerThreshold = 30;
+        // var aimerThreshold = 30;
         var hubX = vision.getHubX();
         var hubDiagonal = vision.getDiagonal();
 
-        var aimerPosition = turret.getAimerPosition();
+        // var aimerPosition = turret.getAimerPosition();
         turret.turretTurn(-turret.turretpid.calculate(hubX, 0) * TurretConstants.TURRET_SPEED);
-        var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
+        // var aimerTarget = DoubleRange.scale(visionRange, hubDiagonal, aimerRange);
         var rpmTarget = DoubleRange.scale(visionRange, hubDiagonal, rpmRange);
 
-        if (useAimer) {
-            var x = turret.aimerpid.calculate(aimerPosition, aimerTarget);
-            turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) * TurretConstants.AIMER_SPEED);
-        }
+        // if (useAimer) {
+        // var x = turret.aimerpid.calculate(aimerPosition, aimerTarget);
+        // turret.runAimer(-(x > 1 ? 1 : x < -1 ? -1 : x) *
+        // TurretConstants.AIMER_SPEED);
+        // }
         // System.out.println("aimer: " + (-(x > 1 ? 1 : x < -1 ? -1 : x) *
         // TurretConstants.AIMER_SPEED));
-
-        if (hubX > -turretThreshold && hubX < turretThreshold && aimerPosition > aimerTarget - aimerThreshold
-                && aimerTarget < aimerTarget + aimerThreshold) {
+        // aimerPosition > aimerTarget - aimerThreshold && aimerTarget < aimerTarget +
+        // aimerThreshold
+        if (hubX > -turretThreshold && hubX < turretThreshold) {
             shootCargo.schedule();
             // shootCargo.SetShooterSpeed(rpmTarget);
         } else {
@@ -91,7 +93,7 @@ public class AimTurret extends CommandBase {
     public void end(boolean interrupted) {
         vision.setLED(false);
         turret.turretStop();
-        turret.stopAimer();
+        // turret.stopAimer();
         shootCargo.cancel();
     }
 

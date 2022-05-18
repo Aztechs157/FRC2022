@@ -22,6 +22,7 @@ import frc.robot.subsystems.drive.FindCargo;
 import frc.robot.subsystems.drive.MultiBallAuto;
 import frc.robot.subsystems.drive.SmartCargoAndShoot;
 import frc.robot.subsystems.drive.TeleopDrive;
+import frc.robot.subsystems.drive.TestAuto;
 import frc.robot.subsystems.drive.TwoballAuto;
 import frc.robot.subsystems.hanging.ExtendArms;
 import frc.robot.subsystems.hanging.Hanging;
@@ -154,6 +155,9 @@ public class RobotContainer {
                 new MultiBallAuto(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
         autoSelector.addOption("Two Ball Left Tarmac Auto",
                 new TwoballAuto(shooter, kicker, uptake, driveSubsystem, visionSubsystem, intake, turret));
+        autoSelector.addOption("Ayden's auto",
+                new TestAuto(visionSubsystem, turret, shooter, kicker, uptake, intake, driveSubsystem));
+
     }
 
     /**
