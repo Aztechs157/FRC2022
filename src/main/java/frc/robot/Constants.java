@@ -66,19 +66,19 @@ public final class Constants {
         // The servo ID for the Aimer mechanism.
         public static final int AIMER_MOTOR_ID = 7;
         // The upwards boundary for the aimer, old = 297
-        public static final double AIMER_HIGHER_BOUNDARY = 3100;
+        public static final double AIMER_HIGHER_BOUNDARY = 2880;
         // original value for absolute encoder: 307;
         // The lower boundary for the aimer, old = 10
-        public static final double AIMER_LOWER_BOUNDARY = 1540;
+        public static final double AIMER_LOWER_BOUNDARY = 1879;
         // original value for absolute encoder: 47;
         // The port number for the 3 turn pot encoder.
         public static final int AIMER_ENCODER_PORT = 1;
         // The speed for the aimer motor.
         public static final double AIMER_SPEED = .3;
         // The Counterclockwise Boundary for the turret set to 2620
-        public static final int COUNTERCLOCKWISE_BOUNDARY = 2620;
+        public static final int COUNTERCLOCKWISE_BOUNDARY = 3070;
         // The Clockwise Boundary for the turret 1250
-        public static final int CLOCKWISE_BOUNDARY = 1250;
+        public static final int CLOCKWISE_BOUNDARY = 1690;
         // The rotational speed of the turret
         public static final double TURRET_SPEED = .45;
         // turret speed scale
@@ -95,9 +95,11 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 3920;
-        // shooter rpm for bottom hub
-        public static final double LOW_SHOOTER_RPM = 2000;
+        public static final double SHOOTER_RPM = 3700;
+        // slower shooter rpm for bottom hub
+        public static final double LOW_SHOOTER_RPM = 1750;
+        // faster shooter rpm for bottom hub
+        // public static final double LOW_AUTO_SHOOTER_RPM = 2000;
     }
 
     public static final class KickerConstants {
@@ -115,7 +117,7 @@ public final class Constants {
         // The CAN ID for the Uptake Motor.
         public static final int UPTAKE_MOTOR_ID = 10;
         // The speed at which the Uptake feeds a ball into the Kicker.
-        public static final double FEED_SPEED = 0.8;
+        public static final double FEED_SPEED = 1;
         // The speed at which the Uptake ejects a ball back through the Intake.
         public static final double EJECT_SPEED = -0.3;
     }
@@ -147,10 +149,10 @@ public final class Constants {
         public static final int ABS_HANGING_ROTATION_LEFT = 2;
         public static final int ABS_HANGING_ROTATION_RIGHT = 3;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS_RIGHT = 208;
-        public static final double ROTATE_MIN_POS_RIGHT = 90;
-        public static final double ROTATE_MAX_POS_LEFT = 150;
-        public static final double ROTATE_MIN_POS_LEFT = 248;
+        public static final double ROTATE_MAX_POS_RIGHT = 239;
+        public static final double ROTATE_MIN_POS_RIGHT = 93;
+        public static final double ROTATE_MAX_POS_LEFT = 97;
+        public static final double ROTATE_MIN_POS_LEFT = 250;
         // arm rotation speed (NOT USED)
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
@@ -165,7 +167,7 @@ public final class Constants {
 
     public static final class AutoConstants {
         // autonomous drive speed
-        public static final double AUTO_SPEED = 0.60;
+        public static final double AUTO_SPEED = 0.40;
 
         // autonomous drive distance
         public static final double AUTO_DISTANCE_TICKS = 23.72;

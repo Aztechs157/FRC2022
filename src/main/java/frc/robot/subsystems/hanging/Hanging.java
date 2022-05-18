@@ -96,13 +96,14 @@ public class Hanging extends SubsystemBase {
      * @param speed is the rotation speed.
      */
     public void rotateArms(final double speed) {
-        if (!turret.isCentered()) {
-            rotateMotorRight.set(0);
-            rotateMotorLeft.set(0);
-            if (Math.abs(speed) > .5) {
-                centerTurretCommand.schedule();
-            }
-        } else if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
+        // if (!turret.isCentered()) {
+        //     rotateMotorRight.set(0);
+        //     rotateMotorLeft.set(0);
+        //     if (Math.abs(speed) > .5) {
+        //         centerTurretCommand.schedule();
+        //     }
+        // } else
+        if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
                 && getLeftRotationPosition() < HangingConstants.ROTATE_MAX_POS_LEFT) {
             rotateMotorRight.set(0);
             rotateMotorLeft.set(0);

@@ -134,7 +134,7 @@ public class Turret extends SubsystemBase {
      * @return aimer position in degrees.
      */
     public double getAimerPosition() {
-        return 4095 - aimerPosition.getValue(); // inverting the value for the potentiometer
+        return aimerPosition.getValue();
         // return NumberUtil.ticksToDegs(aimerEncoder.getPeriod()); // equation for
         // degree per tick converted to seconds.
     }

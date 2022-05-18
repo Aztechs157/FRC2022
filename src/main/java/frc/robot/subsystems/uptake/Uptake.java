@@ -26,7 +26,7 @@ public class Uptake extends SubsystemBase {
         uptakeMotor = new CANSparkMax(UptakeConstants.UPTAKE_MOTOR_ID, MotorType.kBrushless);
         uptakeMotor.setSmartCurrentLimit(MiscConstants.REDUCED_MOTOR_LIMIT);
         transitionalColor = ColorResult.NONE;
-        setDefaultCommand(new PositionCargo(kicker, intake, this));
+        // setDefaultCommand(new PositionCargo(kicker, intake, this));
     }
 
     // gets the color of the ball in between the two sensors

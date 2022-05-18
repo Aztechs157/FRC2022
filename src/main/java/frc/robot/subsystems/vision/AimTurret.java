@@ -80,7 +80,7 @@ public class AimTurret extends CommandBase {
         if (hubX > -turretThreshold && hubX < turretThreshold && aimerPosition > aimerTarget - aimerThreshold
                 && aimerTarget < aimerTarget + aimerThreshold) {
             shootCargo.schedule();
-            shootCargo.SetShooterSpeed(rpmTarget);
+            // shootCargo.SetShooterSpeed(rpmTarget);
         } else {
             shootCargo.cancel();
         }

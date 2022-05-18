@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         m_robotContainer.visionSubsystem.setLED(false);
         m_robotContainer.disableBreakMode();
-        m_robotContainer.getKickerColorSensorCommand().cancel();
+        // m_robotContainer.getKickerColorSensorCommand().cancel();
     }
 
     @Override
@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
-        m_robotContainer.getKickerColorSensorCommand().schedule();
+        // m_robotContainer.getKickerColorSensorCommand().schedule();
     }
 
     /** This function is called periodically during operator control. */

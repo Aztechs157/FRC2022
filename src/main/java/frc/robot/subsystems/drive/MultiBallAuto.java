@@ -37,13 +37,13 @@ public class MultiBallAuto extends SequentialCommandGroup {
         final var shootHigh2 = new AimTurret(vision, turret, shooter, kicker, uptake, intake);
 
         addCommands(
-                driveForwardToBall.alongWith(intakeAutomatically),
+                driveForwardToBall.alongWith(intakeAutomatically).raceWith(new WaitCommand(2.5)),
                 turnToGoal,
-                shootHigh.raceWith(new WaitCommand(4)),
+                shootHigh.raceWith(new WaitCommand(3.5)),
                 turnToTerminal,
-                driveForwardToTerminal.alongWith(intakeAutomatically2),
+                driveForwardToTerminal.alongWith(intakeAutomatically2).raceWith(new WaitCommand(4.5)),
                 turnToGoal2,
                 driveForwardToGoal,
-                shootHigh2.raceWith(new WaitCommand(4)));
+                shootHigh2.raceWith(new WaitCommand(3.5)));
     }
 }
