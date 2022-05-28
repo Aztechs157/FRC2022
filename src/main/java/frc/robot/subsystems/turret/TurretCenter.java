@@ -25,10 +25,10 @@ public class TurretCenter extends CommandBase {
 
         if (pos > TURRET_CENTER_POS.high) {
             // Right
-            turret.unsafeTurretTurn(TurretConstants.TURRET_SPEED);
+            turret.unsafeTurretTurn(-TurretConstants.TURRET_SPEED / 5);
         } else if (pos < TURRET_CENTER_POS.low) {
             // Left
-            turret.unsafeTurretTurn(-TurretConstants.TURRET_SPEED);
+            turret.unsafeTurretTurn(TurretConstants.TURRET_SPEED / 5);
         }
     }
 

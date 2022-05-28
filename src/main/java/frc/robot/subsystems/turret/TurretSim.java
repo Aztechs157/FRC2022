@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.input.OperatorInputs;
+import frc.robot.subsystems.hanging.Hanging;
 
 public class TurretSim extends Turret {
     final ShuffleboardTab tab;

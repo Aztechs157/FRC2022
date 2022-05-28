@@ -71,12 +71,13 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-        turret.isTurretSafeToMove = hanging::isTurretSafeToMove;
+        // turret.isTurretSafeToMove = hanging::isTurretSafeToMove;
         // Configure the button bindings
         configureButtonBindings();
         setupAutoChooser();
         Shuffleboard.getTab("Debug").add(autoSelector);
         visionSubsystem.setLED(false);
+        turret.setHanger(hanging);
     }
 
     /**

@@ -20,10 +20,12 @@ import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.input.OperatorInputs;
 import frc.robot.lib.NumberUtil;
+import frc.robot.subsystems.hanging.Hanging;
 
 public class Turret extends SubsystemBase {
     private CANSparkMax turretMotor;
     private AnalogInput positionSensor;
+    private Hanging hanging;
     // private CANSparkMax aimerMotor;
     // private Counter aimerEncoder;
     // private AnalogInput aimerPosition;
@@ -55,6 +57,10 @@ public class Turret extends SubsystemBase {
         Shuffleboard.getTab("Debug").addNumber("Turret Encoder", this::readPositionSensor);
         // Shuffleboard.getTab("Debug").addNumber("Aimer Encoder",
         // this::getAimerPosition);
+    }
+
+    public void setHanger(Hanging hanging) {
+        this.hanging = hanging;
     }
 
     @Override
@@ -90,12 +96,16 @@ public class Turret extends SubsystemBase {
      *              counterclockwise, 1 is clockwise.
      */
     public void turretTurn(double speed) {
-        if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
-            turretMotor.set(0);
-        } else if (speed < 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
-            turretMotor.set(0);
+        if (hanging.isTurretSafeToMove()) {
+            if (speed < 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
+                turretMotor.set(0);
+            } else if (speed > 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
+                turretMotor.set(0);
+            } else {
+                turretMotor.set(speed);
+            }
         } else {
-            turretMotor.set(speed);
+            turretMotor.set(0);
         }
     }
 
@@ -105,9 +115,9 @@ public class Turret extends SubsystemBase {
      * @param speed
      */
     public void unsafeTurretTurn(final double speed) {
-        if (speed > 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
+        if (speed < 0 && readPositionSensor() < TurretConstants.CLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
-        } else if (speed < 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
+        } else if (speed > 0 && readPositionSensor() > TurretConstants.COUNTERCLOCKWISE_BOUNDARY) {
             turretMotor.set(0);
         } else {
             turretMotor.set(speed);

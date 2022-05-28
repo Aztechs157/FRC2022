@@ -66,26 +66,26 @@ public final class Constants {
         // The servo ID for the Aimer mechanism.
         // public static final int AIMER_MOTOR_ID = 7;
         // The upwards boundary for the aimer, old = 297
-        public static final double AIMER_HIGHER_BOUNDARY = 2880;
+        // public static final double AIMER_HIGHER_BOUNDARY = 2700;
         // original value for absolute encoder: 307;
         // The lower boundary for the aimer, old = 10
-        public static final double AIMER_LOWER_BOUNDARY = 1879;
+        // public static final double AIMER_LOWER_BOUNDARY = 1530;
         // original value for absolute encoder: 47;
         // The port number for the 3 turn pot encoder.
         // public static final int AIMER_ENCODER_PORT = 1;
         // The speed for the aimer motor.
         // public static final double AIMER_SPEED = .3;
         // The Counterclockwise Boundary for the turret set to 2620
-        public static final int COUNTERCLOCKWISE_BOUNDARY = 3070;
+        public static final int COUNTERCLOCKWISE_BOUNDARY = 2700;
         // The Clockwise Boundary for the turret 1250
-        public static final int CLOCKWISE_BOUNDARY = 1690;
+        public static final int CLOCKWISE_BOUNDARY = 1530;
         // The rotational speed of the turret
         public static final double TURRET_SPEED = .45;
         // turret speed scale
         public static final double TURRET_INPUT_SCALE = 0.5;
         // diagonal max 90, min 45
 
-        public static final DoubleRange TURRET_CENTER_POS = new DoubleRange(1920, 2020);
+        public static final DoubleRange TURRET_CENTER_POS = new DoubleRange(2100, 2160);
     }
 
     public static final class ShooterConstants {
@@ -96,7 +96,7 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 3700;
+        public static final double SHOOTER_RPM = 2700;
         // slower shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 1750;
         // faster shooter rpm for bottom hub
@@ -150,10 +150,10 @@ public final class Constants {
         public static final int ABS_HANGING_ROTATION_LEFT = 2;
         public static final int ABS_HANGING_ROTATION_RIGHT = 3;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS_RIGHT = 239;
-        public static final double ROTATE_MIN_POS_RIGHT = 93;
-        public static final double ROTATE_MAX_POS_LEFT = 97;
-        public static final double ROTATE_MIN_POS_LEFT = 250;
+        public static final double ROTATE_MAX_POS_RIGHT = 340;
+        public static final double ROTATE_MIN_POS_RIGHT = 224;
+        public static final double ROTATE_MAX_POS_LEFT = 14;
+        public static final double ROTATE_MIN_POS_LEFT = 135;
         // arm rotation speed (NOT USED)
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
@@ -162,8 +162,8 @@ public final class Constants {
         public static final double EXTEND_SPEED_RIGHT = .88;
         public static final double RETRACT_SPEED = -1;
         // how far the rotate arms have to be to allow the turret to move
-        public static final double ROTATE_TURRET_SAFE_POS_RIGHT = 50;
-        public static final double ROTATE_TURRET_SAFE_POS_LEFT = 280;
+        public static final double ROTATE_TURRET_SAFE_POS_RIGHT = 323;
+        public static final double ROTATE_TURRET_SAFE_POS_LEFT = 30;
     }
 
     public static final class AutoConstants {

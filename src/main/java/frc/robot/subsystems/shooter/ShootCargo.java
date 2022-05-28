@@ -66,8 +66,8 @@ public class ShootCargo extends CommandBase {
         speedSumBack += shooter.pidBackCalculate(targetSpeedBack, currSpeedBack);
         shooter.setFrontPower(speedSumFront);
         shooter.setBackPower(speedSumBack);
-        if (currSpeedFront > targetSpeedFront - 30 && currSpeedFront < targetSpeedFront + 30
-                && currSpeedBack > targetSpeedBack - 30 && currSpeedBack < targetSpeedBack + 30) {
+        if (currSpeedFront > targetSpeedFront - 300 && currSpeedFront < targetSpeedFront + 300
+                && currSpeedBack > targetSpeedBack - 300 && currSpeedBack < targetSpeedBack + 300) {
             kicker.kickerFeed();
             uptake.uptakeFeed();
             intake.rollerFeed();

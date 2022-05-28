@@ -43,6 +43,7 @@ public class Hanging extends SubsystemBase {
         rotateMotorRight = new CANSparkMax(HangingConstants.ROTATE_MOTOR_RIGHT, MotorType.kBrushless);
         rotateMotorLeft = new CANSparkMax(HangingConstants.ROTATE_MOTOR_LEFT, MotorType.kBrushless);
         rotateMotorRight.setInverted(true);
+        rotateMotorLeft.setInverted(false);
         rightExtendMotor = new CANSparkMax(HangingConstants.RIGHT_EXTEND_MOTOR, MotorType.kBrushless);
 
         // rotateMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT);
@@ -86,8 +87,8 @@ public class Hanging extends SubsystemBase {
     }
 
     public boolean isTurretSafeToMove() {
-        return getRightRotationPosition() < HangingConstants.ROTATE_TURRET_SAFE_POS_RIGHT
-                && getLeftRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS_LEFT;
+        return getRightRotationPosition() > HangingConstants.ROTATE_TURRET_SAFE_POS_RIGHT
+                && getLeftRotationPosition() < HangingConstants.ROTATE_TURRET_SAFE_POS_LEFT;
     }
 
     /**
@@ -96,14 +97,13 @@ public class Hanging extends SubsystemBase {
      * @param speed is the rotation speed.
      */
     public void rotateArms(final double speed) {
-        // if (!turret.isCentered()) {
-        //     rotateMotorRight.set(0);
-        //     rotateMotorLeft.set(0);
-        //     if (Math.abs(speed) > .5) {
-        //         centerTurretCommand.schedule();
-        //     }
-        // } else
-        if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
+        if (!turret.isCentered()) {
+            rotateMotorRight.set(0);
+            rotateMotorLeft.set(0);
+            if (Math.abs(speed) > .5) {
+                centerTurretCommand.schedule();
+            }
+        } else if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
                 && getLeftRotationPosition() < HangingConstants.ROTATE_MAX_POS_LEFT) {
             rotateMotorRight.set(0);
             rotateMotorLeft.set(0);
