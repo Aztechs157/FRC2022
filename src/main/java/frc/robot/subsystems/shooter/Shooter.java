@@ -28,11 +28,11 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         ShootFrontMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR1_ID, MotorType.kBrushless);
         ShootFrontMotor.setInverted(true);
-        ShootFrontMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        ShootFrontMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 20);
         ShootFrontMotor.setIdleMode(IdleMode.kCoast);
         ShootBackMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID, MotorType.kBrushless);
         ShootBackMotor.setInverted(true);
-        ShootBackMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 15);
+        ShootBackMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 20);
         ShootBackMotor.setIdleMode(IdleMode.kCoast);
         tab = Shuffleboard.getTab("Debug");
         backMotorVelocity = tab.add("Rear Shooter Speed", 0).getEntry();

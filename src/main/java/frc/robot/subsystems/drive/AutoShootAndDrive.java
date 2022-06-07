@@ -35,6 +35,6 @@ public class AutoShootAndDrive extends SequentialCommandGroup {
         final var autoAim = new AimTurret(vision, turret, shooter, kicker, uptake, intake);
         final var driveBackward = new DriveBackwards(drive);
 
-        addCommands(driveBackward, race(autoAim, new WaitCommand(7)));
+        addCommands(race(autoAim, new WaitCommand(5)), driveBackward);
     }
 }

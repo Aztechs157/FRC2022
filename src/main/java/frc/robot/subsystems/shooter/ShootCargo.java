@@ -21,6 +21,7 @@ public class ShootCargo extends CommandBase {
     private double speedSumFront = 0;
     private double speedSumBack = 0;
     private double targetSpeedBack;
+    private long count = 0;
 
     /** Creates a new SetShooterSpeed. */
     public ShootCargo(Shooter shooter, Kicker kicker, Uptake uptake, Intake intake, double targetSpeed,
@@ -35,7 +36,7 @@ public class ShootCargo extends CommandBase {
         this.uptake = uptake;
         this.intake = intake;
         this.targetSpeedFront = targetSpeed;
-        this.targetSpeedBack = targetSpeed * rearRatio * 0.91;
+        this.targetSpeedBack = targetSpeed * rearRatio * 1.4; // 1.4
         addRequirements(shooter);
         addRequirements(kicker);
         addRequirements(uptake);
@@ -50,6 +51,8 @@ public class ShootCargo extends CommandBase {
     @Override
     public void initialize() {
         speedSumFront = 0;
+        speedSumBack = 0;
+        count = 0;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -66,17 +69,28 @@ public class ShootCargo extends CommandBase {
         speedSumBack += shooter.pidBackCalculate(targetSpeedBack, currSpeedBack);
         shooter.setFrontPower(speedSumFront);
         shooter.setBackPower(speedSumBack);
-        if (currSpeedFront > targetSpeedFront - 300 && currSpeedFront < targetSpeedFront + 300
-                && currSpeedBack > targetSpeedBack - 300 && currSpeedBack < targetSpeedBack + 300) {
-            kicker.kickerFeed();
-            uptake.uptakeFeed();
-            intake.rollerFeed();
-        } else
-
-        {
+        if (currSpeedFront > targetSpeedFront - 50 && currSpeedFront < targetSpeedFront + 50
+                && currSpeedBack > targetSpeedBack - 50 && currSpeedBack < targetSpeedBack + 50) {
+            count++;
+            // kicker.kickerFeed();
+            // uptake.uptakeFeed();
+            // intake.rollerFeed();
+        } else {
+            count = 0;
             // kicker.kickerStop();
             // uptake.uptakeStop();
             // intake.rollerStop();
+        }
+
+        if (count >= 5) {
+            kicker.kickerFeed();
+            uptake.uptakeFeed();
+            intake.rollerFeed();
+        } else {
+            // count = 0;
+            kicker.kickerStop();
+            uptake.uptakeStop();
+            intake.rollerStop();
         }
         shooter.backMotorVelocity.setDouble(currSpeedBack);
     }
@@ -89,6 +103,7 @@ public class ShootCargo extends CommandBase {
         kicker.kickerStop();
         uptake.uptakeStop();
         intake.rollerStop();
+        count = 0;
     }
 
     // Returns true when the command should end.

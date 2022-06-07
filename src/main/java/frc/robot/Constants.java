@@ -96,9 +96,9 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 2700;
+        public static final double SHOOTER_RPM = 2200 / 1.12; // 2200
         // slower shooter rpm for bottom hub
-        public static final double LOW_SHOOTER_RPM = 1750;
+        public static final double LOW_SHOOTER_RPM = 725;
         // faster shooter rpm for bottom hub
         // public static final double LOW_AUTO_SHOOTER_RPM = 2000;
     }
@@ -125,7 +125,7 @@ public final class Constants {
 
     public static final class DriveConstants {
         // drive speed scale
-        public static final double DRIVE_INPUT_SCALE = 0.7;
+        public static final double DRIVE_INPUT_SCALE = 0.85;
         // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;
@@ -150,10 +150,10 @@ public final class Constants {
         public static final int ABS_HANGING_ROTATION_LEFT = 2;
         public static final int ABS_HANGING_ROTATION_RIGHT = 3;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS_RIGHT = 340;
-        public static final double ROTATE_MIN_POS_RIGHT = 224;
-        public static final double ROTATE_MAX_POS_LEFT = 14;
-        public static final double ROTATE_MIN_POS_LEFT = 135;
+        public static final double ROTATE_MAX_POS_RIGHT = 330;
+        public static final double ROTATE_MIN_POS_RIGHT = 190;
+        public static final double ROTATE_MAX_POS_LEFT = 81;
+        public static final double ROTATE_MIN_POS_LEFT = 206;
         // arm rotation speed (NOT USED)
         public static final double ROTATION_SPEED = 1;
         // arm extension speed
@@ -162,8 +162,8 @@ public final class Constants {
         public static final double EXTEND_SPEED_RIGHT = .88;
         public static final double RETRACT_SPEED = -1;
         // how far the rotate arms have to be to allow the turret to move
-        public static final double ROTATE_TURRET_SAFE_POS_RIGHT = 323;
-        public static final double ROTATE_TURRET_SAFE_POS_LEFT = 30;
+        public static final double ROTATE_TURRET_SAFE_POS_RIGHT = 282;
+        public static final double ROTATE_TURRET_SAFE_POS_LEFT = 88;
     }
 
     public static final class AutoConstants {
