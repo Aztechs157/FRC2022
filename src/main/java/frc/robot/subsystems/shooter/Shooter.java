@@ -30,7 +30,8 @@ public class Shooter extends SubsystemBase {
         ShootFrontMotor.setInverted(true);
         ShootFrontMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 20);
         ShootFrontMotor.setIdleMode(IdleMode.kCoast);
-        ShootBackMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID, MotorType.kBrushless);
+        // ShootBackMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID,
+        // MotorType.kBrushless);
         ShootBackMotor.setInverted(true);
         ShootBackMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 20);
         ShootBackMotor.setIdleMode(IdleMode.kCoast);
