@@ -91,12 +91,12 @@ public final class Constants {
     public static final class ShooterConstants {
         // The CAN ID for the 1st Shooter Motor. (TEMP)
         public static final int SHOOTER_MOTOR1_ID = 8;
-        public static final int SHOOTER_MOTOR2_ID = 7;
+        // public static final int SHOOTER_MOTOR2_ID = 7;
         // The motor speed to eject a ball through the shooting mechanism. (specifically
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 2200 / 1.12; // 2200
+        public static final double SHOOTER_RPM = 1250; // 2200 1750 wyatt
         // slower shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 725;
         // faster shooter rpm for bottom hub
@@ -125,7 +125,7 @@ public final class Constants {
 
     public static final class DriveConstants {
         // drive speed scale
-        public static final double DRIVE_INPUT_SCALE = 0.85;
+        public static final double DRIVE_INPUT_SCALE = 0.40;
         // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;

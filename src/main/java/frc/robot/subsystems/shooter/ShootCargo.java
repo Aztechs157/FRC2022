@@ -36,7 +36,7 @@ public class ShootCargo extends CommandBase {
         this.uptake = uptake;
         this.intake = intake;
         this.targetSpeedFront = targetSpeed;
-        this.targetSpeedBack = targetSpeed * rearRatio * 1.4; // 1.4
+        this.targetSpeedBack = targetSpeed * rearRatio * 0; // 1.4
         addRequirements(shooter);
         addRequirements(kicker);
         addRequirements(uptake);

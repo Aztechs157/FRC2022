@@ -63,7 +63,7 @@ public class Shooter extends SubsystemBase {
      */
     public void setBothPower(double power) {
         setFrontPower(power);
-        setBackPower(power);
+        setBackPower(0);
     }
 
     public void setFrontPower(double power) {
@@ -71,7 +71,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setBackPower(double power) {
-        ShootBackMotor.set(power);
+        ShootBackMotor.set(0);
     }
 
     /**
