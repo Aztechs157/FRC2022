@@ -5,14 +5,9 @@
 package frc.robot.subsystems.vision;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import frc.robot.Constants.VisionConstants;
 import frc.robot.lib.vision.LimeLight;
 import frc.robot.lib.vision.LimeLight.LightMode;
-import frc.robot.lib.vision.pixy2.Pixy2;
-import frc.robot.lib.vision.pixy2.Pixy2.Pixy2Block;
 
 public class Vision extends SubsystemBase {
     public final LimeLight limeLight = new LimeLight();

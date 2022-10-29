@@ -7,11 +7,8 @@ package frc.robot.subsystems.drive;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import static frc.robot.Constants.ShooterConstants.SHOOTER_RPM;
-
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.kicker.Kicker;
-import frc.robot.subsystems.shooter.ShootCargo;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.uptake.Uptake;

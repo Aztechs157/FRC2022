@@ -19,7 +19,6 @@ import frc.robot.subsystems.vision.Vision;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TestAuto extends SequentialCommandGroup {
-    private Turret turret;
 
     /** Creates a new TestAuto. */
     public TestAuto(final Vision vision,
@@ -29,7 +28,6 @@ public class TestAuto extends SequentialCommandGroup {
             final Uptake uptake,
             final Intake intake,
             final Drive drive) {
-        this.turret = turret;
         // Add your commands in the addCommands() call, e.g.
         // addCommands(new FooCommand(), new BarCommand());
         addCommands(

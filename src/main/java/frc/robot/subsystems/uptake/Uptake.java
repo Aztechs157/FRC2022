@@ -14,7 +14,6 @@ import frc.robot.Constants.UptakeConstants;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.Intake.ColorResult;
 import frc.robot.subsystems.kicker.Kicker;
-import frc.robot.subsystems.sensing.PositionCargo;
 
 public class Uptake extends SubsystemBase {
     private CANSparkMax uptakeMotor;

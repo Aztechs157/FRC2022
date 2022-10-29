@@ -12,14 +12,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.Counter.Mode;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MiscConstants;
 import frc.robot.Constants.TurretConstants;
 import frc.robot.input.OperatorInputs;
-import frc.robot.lib.NumberUtil;
 import frc.robot.subsystems.hanging.Hanging;
 
 public class Turret extends SubsystemBase {
