@@ -9,9 +9,11 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CompressorConstants;
 import frc.robot.Constants.IntakeConstants;
@@ -57,6 +59,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        // currentColor();
     }
 
     /**
@@ -96,6 +99,8 @@ public class Intake extends SubsystemBase {
         intakeConveyorMotor.set(0);
     }
 
+    private NetworkTableEntry kickerColor = Shuffleboard.getTab("Debug").add("Kicker Color", "none").getEntry();
+
     /**
      * This method senses the current ball color and if there is a ball.
      *
@@ -108,17 +113,17 @@ public class Intake extends SubsystemBase {
         if (entryColor.getProximity() > IntakeConstants.PROX_FAR
                 && entryColor.getProximity() < IntakeConstants.PROX_CLOSE) {
             if (match.color == IntakeConstants.RED_TARGET) {
-                // System.out.println("Color: red");
+                kickerColor.setString("red");
                 return ColorResult.RED;
             } else if (match.color == IntakeConstants.BLUE_TARGET) {
-                // System.out.println("Color: blue");
+                kickerColor.setString("blue");
                 return ColorResult.BLUE;
             } else {
-                // System.out.println("Color: none");
+                kickerColor.setString("none");
                 return ColorResult.NONE;
             }
         } else {
-            // System.out.println("Not in Proximity");
+            kickerColor.setString("Not in Proximity");
             return ColorResult.NONE;
         }
     }

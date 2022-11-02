@@ -18,7 +18,7 @@ import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
     private CANSparkMax ShootFrontMotor;
-    private CANSparkMax ShootBackMotor;
+    // private CANSparkMax ShootBackMotor;
     private PIDController ShooterFrontPID = new PIDController(0.00001, 0, 0.000003);
     private PIDController ShooterBackPID = new PIDController(0.00001, 0, 0.000003);
     public ShuffleboardTab tab;
@@ -32,9 +32,9 @@ public class Shooter extends SubsystemBase {
         ShootFrontMotor.setIdleMode(IdleMode.kCoast);
         // ShootBackMotor = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR2_ID,
         // MotorType.kBrushless);
-        ShootBackMotor.setInverted(true);
-        ShootBackMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 20);
-        ShootBackMotor.setIdleMode(IdleMode.kCoast);
+        // ShootBackMotor.setInverted(true);
+        // ShootBackMotor.setSmartCurrentLimit(MiscConstants.SMART_MOTOR_LIMIT + 20);
+        // ShootBackMotor.setIdleMode(IdleMode.kCoast);
         tab = Shuffleboard.getTab("Debug");
         backMotorVelocity = tab.add("Rear Shooter Speed", 0).getEntry();
     }
@@ -52,9 +52,9 @@ public class Shooter extends SubsystemBase {
         return ShootFrontMotor.getEncoder().getVelocity();
     }
 
-    public double measureBackVelocity() {
-        return ShootBackMotor.getEncoder().getVelocity();
-    }
+    // public double measureBackVelocity() {
+    // return ShootBackMotor.getEncoder().getVelocity();
+    // }
 
     /**
      * This method will set the power of the shooter motor.
@@ -64,16 +64,16 @@ public class Shooter extends SubsystemBase {
      */
     public void setBothPower(double power) {
         setFrontPower(power);
-        setBackPower(0);
+        // setBackPower(0);
     }
 
     public void setFrontPower(double power) {
         ShootFrontMotor.set(power);
     }
 
-    public void setBackPower(double power) {
-        ShootBackMotor.set(0);
-    }
+    // public void setBackPower(double power) {
+    // ShootBackMotor.set(0);
+    // }
 
     /**
      * This method will eject the ball out the top of the shooter.

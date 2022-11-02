@@ -61,18 +61,22 @@ public class ShootCargo extends CommandBase {
          * Then it runs the uptake and kicker in order to shoot.
          */
         var currSpeedFront = shooter.measureFrontVelocity();
-        var currSpeedBack = shooter.measureBackVelocity();
+        // var currSpeedBack = shooter.measureBackVelocity();
         speedSumFront += shooter.pidFrontCalculate(targetSpeedFront, currSpeedFront);
-        speedSumBack += shooter.pidBackCalculate(targetSpeedBack, currSpeedBack);
+        // speedSumBack += shooter.pidBackCalculate(targetSpeedBack, currSpeedBack);
         shooter.setFrontPower(speedSumFront);
-        shooter.setBackPower(speedSumBack);
+        // shooter.setBackPower(speedSumBack);
         if (currSpeedFront > targetSpeedFront - 50 && currSpeedFront < targetSpeedFront + 50
-                && currSpeedBack > targetSpeedBack - 50 && currSpeedBack < targetSpeedBack + 50) {
+        // && currSpeedBack > targetSpeedBack - 50 && currSpeedBack < targetSpeedBack +
+        // 50) {
+        ) {
             count++;
             // kicker.kickerFeed();
             // uptake.uptakeFeed();
             // intake.rollerFeed();
-        } else {
+        } else
+
+        {
             count = 0;
             // kicker.kickerStop();
             // uptake.uptakeStop();
@@ -89,7 +93,7 @@ public class ShootCargo extends CommandBase {
             uptake.uptakeStop();
             intake.rollerStop();
         }
-        shooter.backMotorVelocity.setDouble(currSpeedBack);
+        // shooter.backMotorVelocity.setDouble(currSpeedBack);
     }
 
     // Called once the command ends or is interrupted.

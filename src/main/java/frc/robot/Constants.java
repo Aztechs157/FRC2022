@@ -95,7 +95,7 @@ public final class Constants {
         // dispelling, not shooting at a high speed!)
         public static final double EJECT_SPEED = 0.45;
         // shooter rpm for top hub
-        public static final double SHOOTER_RPM = 1250; // 2200 1750 wyatt
+        public static final double SHOOTER_RPM = 1750; // 2200 1750 wyatt
         // slower shooter rpm for bottom hub
         public static final double LOW_SHOOTER_RPM = 725;
         // faster shooter rpm for bottom hub
@@ -124,7 +124,7 @@ public final class Constants {
 
     public static final class DriveConstants {
         // drive speed scale
-        public static final double DRIVE_INPUT_SCALE = 0.40;
+        public static final double DRIVE_INPUT_SCALE = 1;
         // ids for the drive motors
         public static final int FRONT_LEFT_MOTOR_ID = 18;
         public static final int BACK_LEFT_MOTOR_ID = 19;
