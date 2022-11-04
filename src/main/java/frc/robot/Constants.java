@@ -149,10 +149,10 @@ public final class Constants {
         public static final int ABS_HANGING_ROTATION_LEFT = 2;
         public static final int ABS_HANGING_ROTATION_RIGHT = 3;
         // limit switch position limits
-        public static final double ROTATE_MAX_POS_RIGHT = 330;
-        public static final double ROTATE_MIN_POS_RIGHT = 190;
-        public static final double ROTATE_MAX_POS_LEFT = 81;
-        public static final double ROTATE_MIN_POS_LEFT = 206;
+        public static final double ROTATE_MAX_POS_RIGHT = 171; // 90 degrees, 101
+        public static final double ROTATE_MIN_POS_RIGHT = 273; // 45 degrees, 343
+        public static final double ROTATE_MAX_POS_LEFT = 109; // 90 degrees, 64
+        public static final double ROTATE_MIN_POS_LEFT = 158; // 45 degrees, 193
         // arm rotation speed (NOT USED)
         public static final double ROTATION_SPEED = 1;
         // arm extension speed

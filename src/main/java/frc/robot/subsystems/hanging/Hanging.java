@@ -105,6 +105,7 @@ public class Hanging extends SubsystemBase {
             }
         } else if (speed > 0 && getRightRotationPosition() > HangingConstants.ROTATE_MAX_POS_RIGHT
                 && getLeftRotationPosition() < HangingConstants.ROTATE_MAX_POS_LEFT) {
+            System.out.println("max pos being run");
             rotateMotorRight.set(0);
             rotateMotorLeft.set(0);
         } else if (speed < 0 && getRightRotationPosition() < HangingConstants.ROTATE_MIN_POS_RIGHT
